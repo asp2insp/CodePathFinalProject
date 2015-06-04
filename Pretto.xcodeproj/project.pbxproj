@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F7946A7BA670F383BAB40980 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94BE76FA7DC3B5E1419C76CE /* libPods.a */; };
+		FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */; };
+		FE45EE401B1FE5DF00F39BF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE3F1B1FE5DF00F39BF8 /* ViewController.swift */; };
+		FE45EE431B1FE5DF00F39BF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE411B1FE5DF00F39BF8 /* Main.storyboard */; };
+		FE45EE451B1FE5DF00F39BF8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */; };
+		FE45EE481B1FE5DF00F39BF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE461B1FE5DF00F39BF8 /* LaunchScreen.xib */; };
+		FE45EE541B1FE5DF00F39BF8 /* PrettoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE531B1FE5DF00F39BF8 /* PrettoTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FE45EE4E1B1FE5DF00F39BF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE45EE301B1FE5DF00F39BF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE45EE371B1FE5DF00F39BF8;
+			remoteInfo = Pretto;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6680AB9C507B239DAD236C85 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		94BE76FA7DC3B5E1419C76CE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC282821306927B51E4EE715 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FE45EE381B1FE5DF00F39BF8 /* Pretto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pretto.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE45EE3C1B1FE5DF00F39BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FE45EE3F1B1FE5DF00F39BF8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FE45EE421B1FE5DF00F39BF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FE45EE471B1FE5DF00F39BF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		FE45EE4D1B1FE5DF00F39BF8 /* PrettoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrettoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE45EE521B1FE5DF00F39BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE45EE531B1FE5DF00F39BF8 /* PrettoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettoTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FE45EE351B1FE5DF00F39BF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7946A7BA670F383BAB40980 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE45EE4A1B1FE5DF00F39BF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		35D30FEEDFCFBC4EE1C87B8C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				94BE76FA7DC3B5E1419C76CE /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7BBF68BC4B2FB862CB519969 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CC282821306927B51E4EE715 /* Pods.debug.xcconfig */,
+				6680AB9C507B239DAD236C85 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FE45EE2F1B1FE5DF00F39BF8 = {
+			isa = PBXGroup;
+			children = (
+				FE45EE3A1B1FE5DF00F39BF8 /* Pretto */,
+				FE45EE501B1FE5DF00F39BF8 /* PrettoTests */,
+				FE45EE391B1FE5DF00F39BF8 /* Products */,
+				7BBF68BC4B2FB862CB519969 /* Pods */,
+				35D30FEEDFCFBC4EE1C87B8C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FE45EE391B1FE5DF00F39BF8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE45EE381B1FE5DF00F39BF8 /* Pretto.app */,
+				FE45EE4D1B1FE5DF00F39BF8 /* PrettoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE45EE3A1B1FE5DF00F39BF8 /* Pretto */ = {
+			isa = PBXGroup;
+			children = (
+				FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */,
+				FE45EE3F1B1FE5DF00F39BF8 /* ViewController.swift */,
+				FE45EE411B1FE5DF00F39BF8 /* Main.storyboard */,
+				FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */,
+				FE45EE461B1FE5DF00F39BF8 /* LaunchScreen.xib */,
+				FE45EE3B1B1FE5DF00F39BF8 /* Supporting Files */,
+			);
+			path = Pretto;
+			sourceTree = "<group>";
+		};
+		FE45EE3B1B1FE5DF00F39BF8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FE45EE3C1B1FE5DF00F39BF8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FE45EE501B1FE5DF00F39BF8 /* PrettoTests */ = {
+			isa = PBXGroup;
+			children = (
+				FE45EE531B1FE5DF00F39BF8 /* PrettoTests.swift */,
+				FE45EE511B1FE5DF00F39BF8 /* Supporting Files */,
+			);
+			path = PrettoTests;
+			sourceTree = "<group>";
+		};
+		FE45EE511B1FE5DF00F39BF8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FE45EE521B1FE5DF00F39BF8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FE45EE371B1FE5DF00F39BF8 /* Pretto */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE45EE571B1FE5DF00F39BF8 /* Build configuration list for PBXNativeTarget "Pretto" */;
+			buildPhases = (
+				A3C36375A7DE1E51A0D2FC12 /* Check Pods Manifest.lock */,
+				FE45EE341B1FE5DF00F39BF8 /* Sources */,
+				FE45EE351B1FE5DF00F39BF8 /* Frameworks */,
+				FE45EE361B1FE5DF00F39BF8 /* Resources */,
+				FBF9FB4C1DD899043FD5687C /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pretto;
+			productName = Pretto;
+			productReference = FE45EE381B1FE5DF00F39BF8 /* Pretto.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FE45EE4C1B1FE5DF00F39BF8 /* PrettoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE45EE5A1B1FE5DF00F39BF8 /* Build configuration list for PBXNativeTarget "PrettoTests" */;
+			buildPhases = (
+				FE45EE491B1FE5DF00F39BF8 /* Sources */,
+				FE45EE4A1B1FE5DF00F39BF8 /* Frameworks */,
+				FE45EE4B1B1FE5DF00F39BF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE45EE4F1B1FE5DF00F39BF8 /* PBXTargetDependency */,
+			);
+			name = PrettoTests;
+			productName = PrettoTests;
+			productReference = FE45EE4D1B1FE5DF00F39BF8 /* PrettoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE45EE301B1FE5DF00F39BF8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = Pretto;
+				TargetAttributes = {
+					FE45EE371B1FE5DF00F39BF8 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					FE45EE4C1B1FE5DF00F39BF8 = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = FE45EE371B1FE5DF00F39BF8;
+					};
+				};
+			};
+			buildConfigurationList = FE45EE331B1FE5DF00F39BF8 /* Build configuration list for PBXProject "Pretto" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FE45EE2F1B1FE5DF00F39BF8;
+			productRefGroup = FE45EE391B1FE5DF00F39BF8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FE45EE371B1FE5DF00F39BF8 /* Pretto */,
+				FE45EE4C1B1FE5DF00F39BF8 /* PrettoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FE45EE361B1FE5DF00F39BF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE45EE431B1FE5DF00F39BF8 /* Main.storyboard in Resources */,
+				FE45EE481B1FE5DF00F39BF8 /* LaunchScreen.xib in Resources */,
+				FE45EE451B1FE5DF00F39BF8 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE45EE4B1B1FE5DF00F39BF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A3C36375A7DE1E51A0D2FC12 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FBF9FB4C1DD899043FD5687C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE45EE341B1FE5DF00F39BF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE45EE401B1FE5DF00F39BF8 /* ViewController.swift in Sources */,
+				FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE45EE491B1FE5DF00F39BF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE45EE541B1FE5DF00F39BF8 /* PrettoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FE45EE4F1B1FE5DF00F39BF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE45EE371B1FE5DF00F39BF8 /* Pretto */;
+			targetProxy = FE45EE4E1B1FE5DF00F39BF8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FE45EE411B1FE5DF00F39BF8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE45EE421B1FE5DF00F39BF8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FE45EE461B1FE5DF00F39BF8 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE45EE471B1FE5DF00F39BF8 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FE45EE551B1FE5DF00F39BF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FE45EE561B1FE5DF00F39BF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FE45EE581B1FE5DF00F39BF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC282821306927B51E4EE715 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Pretto/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FE45EE591B1FE5DF00F39BF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6680AB9C507B239DAD236C85 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Pretto/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		FE45EE5B1B1FE5DF00F39BF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PrettoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pretto.app/Pretto";
+			};
+			name = Debug;
+		};
+		FE45EE5C1B1FE5DF00F39BF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PrettoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pretto.app/Pretto";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FE45EE331B1FE5DF00F39BF8 /* Build configuration list for PBXProject "Pretto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE45EE551B1FE5DF00F39BF8 /* Debug */,
+				FE45EE561B1FE5DF00F39BF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE45EE571B1FE5DF00F39BF8 /* Build configuration list for PBXNativeTarget "Pretto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE45EE581B1FE5DF00F39BF8 /* Debug */,
+				FE45EE591B1FE5DF00F39BF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE45EE5A1B1FE5DF00F39BF8 /* Build configuration list for PBXNativeTarget "PrettoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE45EE5B1B1FE5DF00F39BF8 /* Debug */,
+				FE45EE5C1B1FE5DF00F39BF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FE45EE301B1FE5DF00F39BF8 /* Project object */;
+}
