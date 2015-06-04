@@ -40,6 +40,7 @@
 		FE45EE4D1B1FE5DF00F39BF8 /* PrettoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrettoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE45EE521B1FE5DF00F39BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE45EE531B1FE5DF00F39BF8 /* PrettoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettoTests.swift; sourceTree = "<group>"; };
+		FE45EE5D1B1FE6FE00F39BF8 /* Pretto-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pretto-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +108,7 @@
 				FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */,
 				FE45EE461B1FE5DF00F39BF8 /* LaunchScreen.xib */,
 				FE45EE3B1B1FE5DF00F39BF8 /* Supporting Files */,
+				FE45EE5D1B1FE6FE00F39BF8 /* Pretto-Bridging-Header.h */,
 			);
 			path = Pretto;
 			sourceTree = "<group>";
@@ -400,9 +402,12 @@
 			baseConfigurationReference = CC282821306927B51E4EE715 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Pretto/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pretto/Pretto-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -411,9 +416,11 @@
 			baseConfigurationReference = 6680AB9C507B239DAD236C85 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Pretto/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pretto/Pretto-Bridging-Header.h";
 			};
 			name = Release;
 		};
