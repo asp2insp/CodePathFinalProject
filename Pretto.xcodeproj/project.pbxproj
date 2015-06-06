@@ -14,6 +14,12 @@
 		FE45EE451B1FE5DF00F39BF8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */; };
 		FE45EE481B1FE5DF00F39BF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE461B1FE5DF00F39BF8 /* LaunchScreen.xib */; };
 		FE45EE541B1FE5DF00F39BF8 /* PrettoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE531B1FE5DF00F39BF8 /* PrettoTests.swift */; };
+		FE45EE9D1B23A54000F39BF8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE9C1B23A54000F39BF8 /* Photo.swift */; };
+		FE45EE9F1B23A57000F39BF8 /* BackendObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE9E1B23A57000F39BF8 /* BackendObject.swift */; };
+		FE45EEA11B23A57900F39BF8 /* BackendFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEA01B23A57900F39BF8 /* BackendFile.swift */; };
+		FE45EEA31B23AB9300F39BF8 /* BackendACL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEA21B23AB9300F39BF8 /* BackendACL.swift */; };
+		FE45EEA51B23AC3A00F39BF8 /* BackendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEA41B23AC3A00F39BF8 /* BackendUser.swift */; };
+		FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEA61B23B56300F39BF8 /* Event.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +47,12 @@
 		FE45EE521B1FE5DF00F39BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE45EE531B1FE5DF00F39BF8 /* PrettoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettoTests.swift; sourceTree = "<group>"; };
 		FE45EE5D1B1FE6FE00F39BF8 /* Pretto-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pretto-Bridging-Header.h"; sourceTree = "<group>"; };
+		FE45EE9C1B23A54000F39BF8 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		FE45EE9E1B23A57000F39BF8 /* BackendObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendObject.swift; sourceTree = "<group>"; };
+		FE45EEA01B23A57900F39BF8 /* BackendFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendFile.swift; sourceTree = "<group>"; };
+		FE45EEA21B23AB9300F39BF8 /* BackendACL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendACL.swift; sourceTree = "<group>"; };
+		FE45EEA41B23AC3A00F39BF8 /* BackendUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendUser.swift; sourceTree = "<group>"; };
+		FE45EEA61B23B56300F39BF8 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +114,7 @@
 		FE45EE3A1B1FE5DF00F39BF8 /* Pretto */ = {
 			isa = PBXGroup;
 			children = (
+				FE45EE9B1B23A52D00F39BF8 /* Data Models */,
 				FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */,
 				FE45EE3F1B1FE5DF00F39BF8 /* ViewController.swift */,
 				FE45EE411B1FE5DF00F39BF8 /* Main.storyboard */,
@@ -136,6 +149,19 @@
 				FE45EE521B1FE5DF00F39BF8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FE45EE9B1B23A52D00F39BF8 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				FE45EE9C1B23A54000F39BF8 /* Photo.swift */,
+				FE45EEA61B23B56300F39BF8 /* Event.swift */,
+				FE45EE9E1B23A57000F39BF8 /* BackendObject.swift */,
+				FE45EEA01B23A57900F39BF8 /* BackendFile.swift */,
+				FE45EEA21B23AB9300F39BF8 /* BackendACL.swift */,
+				FE45EEA41B23AC3A00F39BF8 /* BackendUser.swift */,
+			);
+			name = "Data Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +299,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */,
+				FE45EE9D1B23A54000F39BF8 /* Photo.swift in Sources */,
+				FE45EEA51B23AC3A00F39BF8 /* BackendUser.swift in Sources */,
+				FE45EEA31B23AB9300F39BF8 /* BackendACL.swift in Sources */,
+				FE45EEA11B23A57900F39BF8 /* BackendFile.swift in Sources */,
+				FE45EE9F1B23A57000F39BF8 /* BackendObject.swift in Sources */,
 				FE45EE401B1FE5DF00F39BF8 /* ViewController.swift in Sources */,
 				FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */,
 			);
