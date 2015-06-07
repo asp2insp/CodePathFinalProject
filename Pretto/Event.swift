@@ -7,21 +7,23 @@
 //
 
 import Foundation
+
+private let kClassName = "Event"
 private let kNameKey = "name"
 private let kOwnerKey = "owner"
 
-class Event {
-    private static let kClassName = "Event"
-
-    private var storage : BackendObject = BackendObject(className: kClassName)
+class Event : BackendObject {
+    override init() {
+        super.init(className: kClassName)
+    }
     
     var name : String? {
-        set { storage.setValue(name, forKey: kNameKey) }
-        get { return storage[kNameKey] as? String ?? nil }
+        set { setValue(name, forKey: kNameKey) }
+        get { return self[kNameKey] as? String ?? nil }
     }
     
     var owner : BackendUser? {
-        set { storage.setValue(owner, forKey: kOwnerKey) }
-        get { return storage[kOwnerKey] as? BackendUser ?? nil }
+        set { setValue(owner, forKey: kOwnerKey) }
+        get { return self[kOwnerKey] as? BackendUser ?? nil }
     }
 }
