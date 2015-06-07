@@ -23,9 +23,10 @@ class ViewController: UIViewController {
 
     
     @IBAction func didTapLogIn(sender: UIButton) {
+        let permissions = ["public_profile", "email", "user_friends"]
         switch sender {
         case logInWithFacebookButton:
-            PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) {
+            PFFacebookUtils.logInWithPermissions(permissions) {
                 (user: PFUser?, error: NSError?) -> Void in
                 if let user = user {
                     if user.isNew {

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize Parse.
         Parse.setApplicationId("EwtAHVSdrZseylxvkalCaMQ3aTWknFUgnhJRcozx",
             clientKey: "kA7v5dqEEndRpZgcOsL2G4jitdGuPzj63xmYm7xZ")
-        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        PFFacebookUtils.initializeFacebook()
         
         return true
     }

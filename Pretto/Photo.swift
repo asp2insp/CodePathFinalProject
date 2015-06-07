@@ -8,32 +8,43 @@
 
 import Foundation
 
+private let kThumbnailKey = "thumbnail"
+private let kFullsizeKey = "fullsize"
+private let kUserKey = "user"
+private let kEventsKey = "events"
+private let kLocalPathKey = "localPath"
+
 class Photo {
     private static let kClassName = "Photo"
-    private static let kThumbnailKey = "thumbnail"
-    private static let kFullsizeKey = "fullsize"
-    private static let kUserKey = "user"
-    private static let kEventsKey = "events"
-    
     private var storage : BackendObject = BackendObject(className: kClassName)
     
     var thumbnailFile : BackendFile? {
-        set { storage.setValue(thumbnailFile, forKey: Photo.kThumbnailKey) }
-        get { return storage[Photo.kThumbnailKey] as? BackendFile ?? nil }
+        set { storage.setValue(thumbnailFile, forKey: kThumbnailKey) }
+        get { return storage[kThumbnailKey] as? BackendFile ?? nil }
     }
     
     var fullsizeFile : BackendFile? {
-        set { storage.setValue(fullsizeFile, forKey: Photo.kFullsizeKey) }
-        get { return storage[Photo.kFullsizeKey] as? BackendFile ?? nil }
+        set { storage.setValue(fullsizeFile, forKey: kFullsizeKey) }
+        get { return storage[kFullsizeKey] as? BackendFile ?? nil }
     }
     
     var user : BackendUser? {
-        set { storage.setValue(user, forKey: Photo.kUserKey) }
-        get { return storage[Photo.kUserKey] as? BackendUser ?? nil }
+        set { storage.setValue(user, forKey: kUserKey) }
+        get { return storage[kUserKey] as? BackendUser ?? nil }
     }
     
     var events : [Event]? {
-        set { storage.setValue(events, forKey: Photo.kEventsKey) }
-        get { return storage[Photo.kEventsKey] as? [Event] ?? nil }
+        set { storage.setValue(events, forKey: kEventsKey) }
+        get { return storage[kEventsKey] as? [Event] ?? nil }
+    }
+    
+    var acl : BackendACL? {
+        set { storage.ACL = acl }
+        get { return storage.ACL as? BackendACL ?? nil }
+    }
+    
+    var localPath : String? {
+        set { storage.setValue(localPath, forKey: kLocalPathKey) }
+        get { return storage[kLocalPathKey] as? String ?? nil }
     }
 }

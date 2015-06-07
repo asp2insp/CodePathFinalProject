@@ -7,32 +7,21 @@
 //
 
 import Foundation
+private let kNameKey = "name"
+private let kOwnerKey = "owner"
 
 class Event {
     private static let kClassName = "Event"
-    private static let kThumbnailKey = "thumbnail"
-    private static let kFullsizeKey = "fullsize"
-    private static let kUserKey = "user"
-    
+
     private var storage : BackendObject = BackendObject(className: kClassName)
     
-    var thumbnailFile : BackendFile? {
-        set { storage.setValue(thumbnailFile, forKey: Photo.kThumbnailKey) }
-        get { return storage[Photo.kThumbnailKey] as? BackendFile ?? nil }
+    var name : String? {
+        set { storage.setValue(name, forKey: kNameKey) }
+        get { return storage[kNameKey] as? String ?? nil }
     }
     
-    var fullsizeFile : BackendFile? {
-        set { storage.setValue(fullsizeFile, forKey: Photo.kFullsizeKey) }
-        get { return storage[Photo.kFullsizeKey] as? BackendFile ?? nil }
-    }
-    
-    var user : BackendUser? {
-        set { storage.setValue(user, forKey: Photo.kUserKey) }
-        get { return storage[Photo.kUserKey] as? BackendUser ?? nil }
-    }
-    
-    var event : Event? {
-        set { storage.setValue(event, forKey: Photo.kEventKey) }
-        get { return storage[Photo.kEventKey] as? Event ?? nil }
+    var owner : BackendUser? {
+        set { storage.setValue(owner, forKey: kOwnerKey) }
+        get { return storage[kOwnerKey] as? BackendUser ?? nil }
     }
 }
