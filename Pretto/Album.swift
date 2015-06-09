@@ -27,4 +27,13 @@ class Album : BackendObject {
         self.photos = p
         self.saveEventually(nil)
     }
+    
+    func addPhotos(photos: [ThumbnailPhoto]) {
+        var p = self.photos
+        for photo in photos {
+            p.append(photo)
+        }
+        self.photos = p
+        self.saveEventually(nil)
+    }
 }
