@@ -40,4 +40,31 @@ class FullsizePhoto : BackendObject {
         set { setValue(owner, forKey: kOwnerKey) }
         get { return self[kOwnerKey] as? BackendUser ?? nil }
     }
+    
+    func getThumbnail() -> ThumbnailPhoto {
+        if thumbnailPhoto == nil {
+            let photo = ThumbnailPhoto()
+            photo.fullsizePhoto = self
+            
+            let fullSizeImage = UIImage(contentsOfFile: self.localPath!)!
+            
+            let size = CGSizeApplyAffineTransform(fullSizeImage.size, CGAffineTransformMakeScale(0.5, 0.5))
+            let hasAlpha = false
+            let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+            
+            UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+            fullSizeImage.drawInRect(CGRect(origin: CGPointZero, size: size))
+            let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            let thumbnailFile = BackendFile(data: UIImageJPEGRepresentation(scaledImage, 0.8))
+            thumbnailFile.saveInBackgroundWithBlock(nil)
+            
+            photo.file = thumbnailFile
+            photo.saveInBackgroundWithBlock(nil)
+            self.thumbnailPhoto = photo
+            self.saveInBackgroundWithBlock(nil)
+        }
+        return self.thumbnailPhoto!
+    }
 }

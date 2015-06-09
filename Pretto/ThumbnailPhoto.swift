@@ -28,8 +28,8 @@ class ThumbnailPhoto : BackendObject {
         get { return self[kFullsizeKey] as? FullsizePhoto ?? nil }
     }
     
-    var events : [Event]? {
+    var events : [Event] {
         set { setValue(events, forKey: kEventsKey) }
-        get { return self[kEventsKey] as? [Event] ?? nil }
+        get { return self[kEventsKey] as? [Event] ?? [] }
     }
 }
