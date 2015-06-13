@@ -21,10 +21,12 @@ private let kAdminsKey = "admins"
 private let kGuestsKey = "guests"
 private let kAlbumsKey = "albums"
 
-public let kDateFormatString = "yyyy-MM-dd 'at' HH:mm"
 class Event : BackendObject {
+    static let sDateFormatter = NSDateFormatter()
+
     override init() {
         super.init(className: kClassName)
+        
         // TODO - support more than one album
         let album = Album()
         album.saveEventually(nil)
@@ -48,14 +50,32 @@ class Event : BackendObject {
         get { return self[kPinKey] as? String ?? nil }
     }
     
-    var startDateTime : String? {
-        set { setValue(startDateTime, forKey: kStartDateTimeKey) }
-        get { return self[kStartDateTimeKey] as? String ?? nil }
+    var startDateTime : NSDate! {
+        set {
+            let encodedDate = Event.sDateFormatter.stringFromDate(startDateTime)
+            setValue(encodedDate, forKey: kStartDateTimeKey)
+        }
+        get {
+            if let encodedDate = self[kStartDateTimeKey] as? String {
+                return Event.sDateFormatter.dateFromString(encodedDate)
+            } else {
+                return nil
+            }
+        }
     }
     
-    var endDateTime : String? {
-        set { setValue(endDateTime, forKey: kEndDateTimeKey) }
-        get { return self[kEndDateTimeKey] as? String ?? nil }
+    var endDateTime : NSDate! {
+        set {
+            let encodedDate = Event.sDateFormatter.stringFromDate(endDateTime)
+            setValue(encodedDate, forKey: kEndDateTimeKey)
+        }
+        get {
+            if let encodedDate = self[kEndDateTimeKey] as? String {
+                return Event.sDateFormatter.dateFromString(encodedDate)
+            } else {
+                return nil
+            }
+        }
     }
     
     var latitude : Double? {
@@ -90,6 +110,29 @@ class Event : BackendObject {
         get { return self[kAlbumsKey] as? [Album] ?? [] }
     }
     
+    var isLive : Bool {
+        let now = NSDate()
+        let afterStart = startDateTime.compare(now) == NSComparisonResult.OrderedAscending
+        let beforeEnd = now.compare(endDateTime) == NSComparisonResult.OrderedAscending
+        return afterStart && beforeEnd
+    }
+
     
-    
+    func getAllPhotosInEvent(orderedBy: String?) -> [ThumbnailPhoto] {
+        var photos : [ThumbnailPhoto] = []
+        for album in self.albums {
+            album.fetchIfNeeded()
+            for p in album.photos {
+                photos.append(p)
+            }
+        }
+        
+        let order = orderedBy ?? ""
+        switch order {
+        case "Date Descending":
+            return photos // TODO - order by date
+        default:
+            return photos
+        }
+    }
 }
