@@ -20,6 +20,7 @@ class ZoomableCollectionViewController: UIViewController {
     // Long press handling
     var selectionStart : NSIndexPath!
     var previousRange : [NSIndexPath]?
+    var previousIndex : NSIndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,36 +67,47 @@ class ZoomableCollectionViewController: UIViewController {
                     selectItemAtIndexPathIfNecessary(selectionStart)
                     return
                 }
-                let itemsToSelect = getIndexRange(start: selectionStart, end: currentIndex!)
-                let itemsToDeselect = difference(previousRange, minus: itemsToSelect)
-                for path in itemsToDeselect {
-                    collectionView.deselectItemAtIndexPath(path, animated: true)
-                    deselectItemAtIndexPathIfNecessary(path)
+                // Change detection
+                if currentIndex != previousIndex {
+                    let itemsToSelect = getIndexRange(start: selectionStart, end: currentIndex!)
+                    let itemsToDeselect = difference(previousRange, minus: itemsToSelect)
+                    for path in itemsToDeselect {
+                        collectionView.deselectItemAtIndexPath(path, animated: true)
+                        deselectItemAtIndexPathIfNecessary(path)
+                    }
+                    for path in itemsToSelect {
+                        selectItemAtIndexPathIfNecessary(path)
+                    }
+                    previousRange = itemsToSelect
+                    previousIndex = currentIndex
                 }
-                for path in itemsToSelect {
-                    selectItemAtIndexPathIfNecessary(path)
-                }
-                previousRange = itemsToSelect
             }
         case .Cancelled, .Ended:
             selectionStart = nil
             previousRange = nil
+            previousIndex = nil
         default:
             return
         }
     }
     
     func selectItemAtIndexPathIfNecessary(path: NSIndexPath) {
-        if !(collectionView.cellForItemAtIndexPath(path)?.selected ?? false) {
-            collectionView.selectItemAtIndexPath(path, animated: true, scrollPosition: UICollectionViewScrollPosition.None)
-            (collectionView.cellForItemAtIndexPath(path) as? SelectableImageCell)?.checkbox.checkState = M13CheckboxStateChecked
+        if let cell = collectionView.cellForItemAtIndexPath(path) as? SelectableImageCell {
+            if !cell.selected {
+                collectionView.selectItemAtIndexPath(path, animated: true, scrollPosition: UICollectionViewScrollPosition.None)
+            }
+            cell.checkbox.checkState = M13CheckboxStateChecked
+            cell.animateStateChange()
         }
     }
     
     func deselectItemAtIndexPathIfNecessary(path: NSIndexPath) {
-        if (collectionView.cellForItemAtIndexPath(path)?.selected ?? true) {
-            collectionView.deselectItemAtIndexPath(path, animated: true)
-            (collectionView.cellForItemAtIndexPath(path) as? SelectableImageCell)?.checkbox.checkState = M13CheckboxStateUnchecked
+        if let cell = collectionView.cellForItemAtIndexPath(path) as? SelectableImageCell {
+            if (cell.selected) {
+                collectionView.deselectItemAtIndexPath(path, animated: true)
+            }
+            cell.checkbox.checkState = M13CheckboxStateUnchecked
+            cell.animateStateChange()
         }
     }
     
@@ -163,5 +175,14 @@ class SelectableImageCell : UICollectionViewCell {
         self.addSubview(checkbox)
     }
     
+    func animateStateChange() {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.checkbox.transform = CGAffineTransformMakeScale(2, 2)
+            self.checkbox.transform = CGAffineTransformMakeScale(1, 1)
+        })
+    }
     
+    func updateCheckState() {
+        checkbox.checkState = selected ? M13CheckboxStateChecked : M13CheckboxStateUnchecked
+    }
 }

@@ -10,7 +10,9 @@ import Foundation
 
 class HomeScreenViewController : ZoomableCollectionViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
 
 // UICollectionViewDataSource Extension
@@ -18,6 +20,7 @@ extension HomeScreenViewController {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("imageCell", forIndexPath: indexPath) as! SelectableImageCell
         cell.backgroundColor = UIColor.blueColor()
+        cell.updateCheckState()
         return cell
     }
     
@@ -29,10 +32,10 @@ extension HomeScreenViewController {
 // UICollectionViewDelegate Extension
 extension HomeScreenViewController {
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-       
+        deselectItemAtIndexPathIfNecessary(indexPath)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
+        selectItemAtIndexPathIfNecessary(indexPath)
     }
 }
