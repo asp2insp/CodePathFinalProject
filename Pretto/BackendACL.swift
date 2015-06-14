@@ -13,8 +13,14 @@ class BackendACL : PFACL {
     // persisted to the backend. If/when we move away from Parse,
     // this class should be changed to inherit from the new backend
     // implementation.
+    
+    init(user: BackendUser) {
+        super.init()
+        setReadAccess(true, forUser: user)
+        setWriteAccess(true, forUser: user)
+    }
 
     required init(coder aDecoder: NSCoder) {
-        super.init()
+        super.init(coder: aDecoder)
     }
 }
