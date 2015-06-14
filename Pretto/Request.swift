@@ -29,43 +29,22 @@ class Request : PFObject, PFSubclassing {
     }
     
     init(photo: ThumbnailPhoto) {
-        super.init(className: kClassName)
+        super.init()
         self.status = "pending"
         self.photo = photo
-        self.requester = PFUser.currentUser()
+        self.requester = PFUser.currentUser()!
     }
     
-    var photo : ThumbnailPhoto? {
-        set(newValue) { setValue(newValue, forKey: kPhotoKey) }
-        get { return self[kPhotoKey] as? ThumbnailPhoto ?? nil }
-    }
-    
-    var requester : PFUser? {
-        set(oldValueOrNil) {
-            setValue(oldValueOrNil, forKey: kRequesterKey)
-            if let oldValue = oldValueOrNil {
-                self.ACL?.setWriteAccess(false, forUser: oldValue)
-            }
-            if let newValue = requester {
-                self.ACL?.setWriteAccess(true, forUser: newValue)
-            }
-        }
-        get { return self[kRequesterKey] as? PFUser ?? nil }
-    }
-    
-    var status : String? {
-        set(newValue) { setValue(newValue, forKey: kRequestStatusKey) }
-        get { return self[kRequestStatusKey] as? String ?? nil }
-    }
+    @NSManaged var photo : ThumbnailPhoto
+    @NSManaged var requester : PFUser
+    @NSManaged var status : String
     
     func acceptRequest() {
-        if let desiredPhoto = self.photo?.fullsizePhoto?.fetchIfNeeded() {
-            if self.requester != nil {
-                desiredPhoto.ACL?.setReadAccess(true, forUser: self.requester!)
-                self.status = "accepted"
-                desiredPhoto.saveInBackgroundWithBlock(nil)
-                self.saveInBackgroundWithBlock(nil)
-            }
+        if let desiredPhoto = self.photo.fullsizePhoto.fetchIfNeeded() {
+            desiredPhoto.ACL?.setReadAccess(true, forUser: self.requester)
+            self.status = "accepted"
+            desiredPhoto.saveInBackgroundWithBlock(nil)
+            self.saveInBackgroundWithBlock(nil)
         }
     }
     

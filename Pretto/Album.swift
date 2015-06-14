@@ -11,7 +11,7 @@ import Foundation
 private let kClassName = "Album"
 private let kPhotosKey = "photos"
 
-class Album : PFObject {
+class Album : PFObject, PFSubclassing {
     override class func initialize() {
         struct Static {
             static var onceToken : dispatch_once_t = 0;
@@ -25,14 +25,7 @@ class Album : PFObject {
         return kClassName
     }
     
-    override init() {
-        super.init(className: kClassName)
-    }
-    
-    var photos : [ThumbnailPhoto] {
-        set(newValue) { setValue(newValue, forKey: kPhotosKey) }
-        get { return self[kPhotosKey] as? [ThumbnailPhoto] ?? [] }
-    }
+    @NSManaged var photos : [ThumbnailPhoto]
     
     func addPhoto(photo: ThumbnailPhoto) {
         var p = self.photos

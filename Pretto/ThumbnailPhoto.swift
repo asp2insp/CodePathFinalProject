@@ -13,7 +13,7 @@ private let kFullsizeKey = "fullsize"
 private let kEventsKey = "events"
 private let kClassName = "Photo"
 
-class ThumbnailPhoto : PFObject {
+class ThumbnailPhoto : PFObject, PFSubclassing {
     override class func initialize() {
         struct Static {
             static var onceToken : dispatch_once_t = 0;
@@ -27,22 +27,7 @@ class ThumbnailPhoto : PFObject {
         return kClassName
     }
     
-    override init() {
-        super.init(className: kClassName)
-    }
-    
-    var file : PFFile? {
-        set(newValue) { setValue(newValue, forKey: kFileKey) }
-        get { return self[kFileKey] as? PFFile ?? nil }
-    }
-    
-    var fullsizePhoto : FullsizePhoto? {
-        set(newValue) { setValue(newValue, forKey: kFullsizeKey) }
-        get { return self[kFullsizeKey] as? FullsizePhoto ?? nil }
-    }
-    
-    var events : [Event] {
-        set(newValue) { setValue(newValue, forKey: kEventsKey) }
-        get { return self[kEventsKey] as? [Event] ?? [] }
-    }
+    @NSManaged var file : PFFile
+    @NSManaged var fullsizePhoto : FullsizePhoto
+    @NSManaged var events : [Event]
 }
