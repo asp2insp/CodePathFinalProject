@@ -14,6 +14,8 @@ class HomeScreenViewController : ZoomableCollectionViewController, UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        flowLayout.sectionInset = UIEdgeInsetsMake(10, 0, 0, 0)
+        flowLayout.headerReferenceSize = CGSizeMake(0, 100)
         refreshData()
     }
     
@@ -35,11 +37,23 @@ extension HomeScreenViewController {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return liveEvents[section].getAllPhotosInEvent(nil).count
+        //return liveEvents[section].getAllPhotosInEvent(nil).count
+        return 10
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return liveEvents.count
+        //return liveEvents.count
+        return 3
+    }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "sectionheader", forIndexPath: indexPath) as! EventHeader
+        
+        let ev = Event()
+        ev.name = "Event \(indexPath.row)"
+        header.event = ev
+        
+        return header
     }
 }
 
@@ -51,5 +65,24 @@ extension HomeScreenViewController {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         selectItemAtIndexPathIfNecessary(indexPath)
+    }
+}
+
+class EventHeader : UICollectionReusableView {
+    @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var label: UILabel!
+    
+    var event : Event? {
+        didSet {
+            label.text = event?.name ?? "Unknown"
+        }
+    }
+    
+    @IBAction func didTapPause(sender: AnyObject) {
+        if pauseButton.currentTitle == "Pause" {
+            pauseButton.setTitle("Continue", forState: UIControlState.Normal)
+        } else {
+            pauseButton.setTitle("Pause", forState: UIControlState.Normal)
+        }
     }
 }

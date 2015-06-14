@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if let user = BackendUser.currentUser() {
+        if let user = PFUser.currentUser() {
             println("Current User: \(user.description)")
         } else {
             println("No logged in user")

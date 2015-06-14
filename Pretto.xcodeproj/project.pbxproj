@@ -15,17 +15,12 @@
 		FE45EE481B1FE5DF00F39BF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE461B1FE5DF00F39BF8 /* LaunchScreen.xib */; };
 		FE45EE541B1FE5DF00F39BF8 /* PrettoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE531B1FE5DF00F39BF8 /* PrettoTests.swift */; };
 		FE45EE9D1B23A54000F39BF8 /* ThumbnailPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE9C1B23A54000F39BF8 /* ThumbnailPhoto.swift */; };
-		FE45EE9F1B23A57000F39BF8 /* BackendObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE9E1B23A57000F39BF8 /* BackendObject.swift */; };
-		FE45EEA11B23A57900F39BF8 /* BackendFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEA01B23A57900F39BF8 /* BackendFile.swift */; };
-		FE45EEA31B23AB9300F39BF8 /* BackendACL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEA21B23AB9300F39BF8 /* BackendACL.swift */; };
-		FE45EEA51B23AC3A00F39BF8 /* BackendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEA41B23AC3A00F39BF8 /* BackendUser.swift */; };
 		FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEA61B23B56300F39BF8 /* Event.swift */; };
 		FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAA1B23C6CA00F39BF8 /* Request.swift */; };
 		FE45EEAE1B23CEC900F39BF8 /* FullsizePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */; };
 		FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAF1B2682AF00F39BF8 /* Album.swift */; };
 		FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */; };
 		FE45EEB91B2DFD5C00F39BF8 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */; };
-		FE45EEBD1B2E0D6E00F39BF8 /* BackendQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEBC1B2E0D6E00F39BF8 /* BackendQuery.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,17 +49,12 @@
 		FE45EE531B1FE5DF00F39BF8 /* PrettoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettoTests.swift; sourceTree = "<group>"; };
 		FE45EE5D1B1FE6FE00F39BF8 /* Pretto-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pretto-Bridging-Header.h"; sourceTree = "<group>"; };
 		FE45EE9C1B23A54000F39BF8 /* ThumbnailPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPhoto.swift; sourceTree = "<group>"; };
-		FE45EE9E1B23A57000F39BF8 /* BackendObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendObject.swift; sourceTree = "<group>"; };
-		FE45EEA01B23A57900F39BF8 /* BackendFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendFile.swift; sourceTree = "<group>"; };
-		FE45EEA21B23AB9300F39BF8 /* BackendACL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendACL.swift; sourceTree = "<group>"; };
-		FE45EEA41B23AC3A00F39BF8 /* BackendUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendUser.swift; sourceTree = "<group>"; };
 		FE45EEA61B23B56300F39BF8 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		FE45EEAA1B23C6CA00F39BF8 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullsizePhoto.swift; sourceTree = "<group>"; };
 		FE45EEAF1B2682AF00F39BF8 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableCollectionView.swift; sourceTree = "<group>"; };
 		FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
-		FE45EEBC1B2E0D6E00F39BF8 /* BackendQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendQuery.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +158,6 @@
 		FE45EE9B1B23A52D00F39BF8 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
-				FE45EEAC1B23C6E000F39BF8 /* Backend Implementation */,
 				FE45EEAA1B23C6CA00F39BF8 /* Request.swift */,
 				FE45EE9C1B23A54000F39BF8 /* ThumbnailPhoto.swift */,
 				FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */,
@@ -176,18 +165,6 @@
 				FE45EEAF1B2682AF00F39BF8 /* Album.swift */,
 			);
 			name = "Data Models";
-			sourceTree = "<group>";
-		};
-		FE45EEAC1B23C6E000F39BF8 /* Backend Implementation */ = {
-			isa = PBXGroup;
-			children = (
-				FE45EE9E1B23A57000F39BF8 /* BackendObject.swift */,
-				FE45EEA01B23A57900F39BF8 /* BackendFile.swift */,
-				FE45EEA21B23AB9300F39BF8 /* BackendACL.swift */,
-				FE45EEA41B23AC3A00F39BF8 /* BackendUser.swift */,
-				FE45EEBC1B2E0D6E00F39BF8 /* BackendQuery.swift */,
-			);
-			name = "Backend Implementation";
 			sourceTree = "<group>";
 		};
 		FE45EEB31B2DEF0300F39BF8 /* Views */ = {
@@ -339,14 +316,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE45EEAE1B23CEC900F39BF8 /* FullsizePhoto.swift in Sources */,
-				FE45EEBD1B2E0D6E00F39BF8 /* BackendQuery.swift in Sources */,
 				FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */,
 				FE45EE9D1B23A54000F39BF8 /* ThumbnailPhoto.swift in Sources */,
-				FE45EEA51B23AC3A00F39BF8 /* BackendUser.swift in Sources */,
 				FE45EEB91B2DFD5C00F39BF8 /* HomeScreenViewController.swift in Sources */,
-				FE45EEA31B23AB9300F39BF8 /* BackendACL.swift in Sources */,
-				FE45EEA11B23A57900F39BF8 /* BackendFile.swift in Sources */,
-				FE45EE9F1B23A57000F39BF8 /* BackendObject.swift in Sources */,
 				FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */,
 				FE45EE401B1FE5DF00F39BF8 /* LoginViewController.swift in Sources */,
 				FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */,

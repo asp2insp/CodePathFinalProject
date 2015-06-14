@@ -13,22 +13,36 @@ private let kPhotoKey = "photo"
 private let kRequesterKey = "requester"
 private let kRequestStatusKey = "status"
 
-class Request : BackendObject {
+class Request : PFObject, PFSubclassing {
+    
+    override class func initialize() {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
+            self.registerSubclass()
+        }
+    }
+    
+    static func parseClassName() -> String {
+        return kClassName
+    }
+    
     init(photo: ThumbnailPhoto) {
         super.init(className: kClassName)
         self.status = "pending"
         self.photo = photo
-        self.requester = BackendUser.currentUser()
+        self.requester = PFUser.currentUser()
     }
     
     var photo : ThumbnailPhoto? {
-        set { setValue(photo, forKey: kPhotoKey) }
+        set(newValue) { setValue(newValue, forKey: kPhotoKey) }
         get { return self[kPhotoKey] as? ThumbnailPhoto ?? nil }
     }
     
-    var requester : BackendUser? {
+    var requester : PFUser? {
         set(oldValueOrNil) {
-            setValue(requester, forKey: kRequesterKey)
+            setValue(oldValueOrNil, forKey: kRequesterKey)
             if let oldValue = oldValueOrNil {
                 self.ACL?.setWriteAccess(false, forUser: oldValue)
             }
@@ -36,11 +50,11 @@ class Request : BackendObject {
                 self.ACL?.setWriteAccess(true, forUser: newValue)
             }
         }
-        get { return self[kRequesterKey] as? BackendUser ?? nil }
+        get { return self[kRequesterKey] as? PFUser ?? nil }
     }
     
     var status : String? {
-        set { setValue(status, forKey: kRequestStatusKey) }
+        set(newValue) { setValue(newValue, forKey: kRequestStatusKey) }
         get { return self[kRequestStatusKey] as? String ?? nil }
     }
     

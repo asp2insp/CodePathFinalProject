@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Sin-eM-ad7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -57,7 +58,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GkL-ek-jFd">
                                     <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
@@ -72,6 +73,37 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="sectionheader" id="M89-1M-t1q" customClass="EventHeader" customModule="Pretto" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPe-Wx-uNO">
+                                            <rect key="frame" x="546" y="10" width="43" height="30"/>
+                                            <state key="normal" title="Pause">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="didTapPause:" destination="M89-1M-t1q" eventType="touchUpInside" id="Evk-DL-dl3"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name -- Start Date -- End Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T27-PA-Z0M">
+                                            <rect key="frame" x="8" y="14" width="288" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="T27-PA-Z0M" firstAttribute="leading" secondItem="M89-1M-t1q" secondAttribute="leadingMargin" id="3uU-IO-Bsg"/>
+                                        <constraint firstAttribute="centerY" secondItem="nPe-Wx-uNO" secondAttribute="centerY" id="DeM-5h-J5c"/>
+                                        <constraint firstAttribute="centerY" secondItem="T27-PA-Z0M" secondAttribute="centerY" constant="0.5" id="kKH-Jq-Hcd"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="nPe-Wx-uNO" secondAttribute="trailing" constant="3" id="vzi-99-BUe"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="label" destination="T27-PA-Z0M" id="2dI-1Q-uyL"/>
+                                        <outlet property="pauseButton" destination="nPe-Wx-uNO" id="mTZ-Fa-Eqe"/>
+                                    </connections>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="Hy1-1N-qk0" id="rTN-n6-S5M"/>
                                     <outlet property="delegate" destination="Hy1-1N-qk0" id="68w-Ms-5At"/>

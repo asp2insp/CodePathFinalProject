@@ -14,31 +14,43 @@ private let kLocalPathKey = "localPath"
 private let kFileKey = "file"
 private let kOwnerKey = "owner"
 
-class FullsizePhoto : BackendObject {
+class FullsizePhoto : PFObject {
+    override class func initialize() {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
+            self.registerSubclass()
+        }
+    }
+    
+    static func parseClassName() -> String {
+        return kClassName
+    }
 
     override init() {
         super.init(className: kClassName)
-        self.ACL = BackendACL(user: BackendUser.currentUser()!)
+        self.ACL = PFACL(user: PFUser.currentUser()!)
     }
     
     var thumbnailPhoto : ThumbnailPhoto? {
-        set { setValue(thumbnailPhoto, forKey: kThumbnailKey) }
+        set(newValue) { setValue(newValue, forKey: kThumbnailKey) }
         get { return self[kThumbnailKey] as? ThumbnailPhoto ?? nil }
     }
     
-    var file : BackendFile? {
-        set { setValue(file, forKey: kFileKey) }
-        get { return self[kFileKey] as? BackendFile ?? nil }
+    var file : PFFile? {
+        set(newValue) { setValue(newValue, forKey: kFileKey) }
+        get { return self[kFileKey] as? PFFile ?? nil }
     }
     
     var localPath : String? {
-        set { setValue(localPath, forKey: kLocalPathKey) }
+        set(newValue) { setValue(newValue, forKey: kLocalPathKey) }
         get { return self[kLocalPathKey] as? String ?? nil }
     }
     
-    var owner : BackendUser? {
-        set { setValue(owner, forKey: kOwnerKey) }
-        get { return self[kOwnerKey] as? BackendUser ?? nil }
+    var owner : PFUser? {
+        set(newValue) { setValue(newValue, forKey: kOwnerKey) }
+        get { return self[kOwnerKey] as? PFUser ?? nil }
     }
     
     func getThumbnail() -> ThumbnailPhoto {
@@ -57,7 +69,7 @@ class FullsizePhoto : BackendObject {
             let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
-            let thumbnailFile = BackendFile(data: UIImageJPEGRepresentation(scaledImage, 0.8))
+            let thumbnailFile = PFFile(data: UIImageJPEGRepresentation(scaledImage, 0.8))
             thumbnailFile.saveInBackgroundWithBlock(nil)
             
             photo.file = thumbnailFile

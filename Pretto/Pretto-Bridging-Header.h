@@ -9,3 +9,5 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 
 #import "M13Checkbox.h"
+
+#import <Parse/PFObject+Subclass.h>
