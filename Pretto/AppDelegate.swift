@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate {
 
     var window: UIWindow?
 
@@ -20,11 +20,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize Parse.
         Parse.setApplicationId("EwtAHVSdrZseylxvkalCaMQ3aTWknFUgnhJRcozx",
             clientKey: "kA7v5dqEEndRpZgcOsL2G4jitdGuPzj63xmYm7xZ")
-        PFFacebookUtils.initializeFacebook()
+        
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
         application.setMinimumBackgroundFetchInterval(60 * 60)
         
         // Register for Push Notitications
+        self.registerForRemoteNotifications(application, launchOptions:launchOptions)
+        
+        // check user and start a storyboard accourdingly
+        if (!self.checkCurrentUser()) {
+            println("Starting login flow")
+            self.showLoginWindow()
+        }
+        else {
+            println("Starting main flow")
+            self.startMainStoryBoard()
+        }
+        
+        return true
+    }
+    
+    func checkCurrentUser() -> Bool {
+        
+        var currentUser = PFUser.currentUser()
+        if currentUser != nil {
+            println("there is a current user")
+            if PFFacebookUtils.isLinkedWithUser(currentUser!) {
+                return true
+            } else {
+                    println("current user is not linked")
+            }
+        } else {
+            println("current user is nil")
+        }
+        
+        return false
+    }
+    
+    func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
+        println("FB login is done")
+        self.startMainStoryBoard()
+    }
+    
+    func registerForRemoteNotifications(application: UIApplication, launchOptions: [NSObject: AnyObject]?) {
+        
         if application.applicationState != UIApplicationState.Background {
             // Track an app open here if we launch with a push, unless
             // "content_available" was used to trigger a background push (introduced in iOS 7).
@@ -50,8 +90,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             application.registerForRemoteNotifications()
         }
-        
-        return true
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
@@ -80,6 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         openURL url: NSURL,
         sourceApplication: String?,
         annotation: AnyObject?) -> Bool {
+            
             return FBSDKApplicationDelegate.sharedInstance().application(
                 application,
                 openURL: url,
@@ -110,7 +149,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         
     }
-
-
+    
+    func showLoginWindow() {
+        var logInController = LoginViewController()
+        logInController.fields = .Facebook
+        logInController.delegate = self;
+        self.window?.rootViewController = logInController
+    }
+    
+    func startMainStoryBoard() {
+        self.startStoryBoardWithName("Main")
+    }
+    
+    func startStoryBoardWithName(name:String!) {
+        var loginSB = UIStoryboard(name: name, bundle: nil)
+        let viewcontroller: UIViewController = loginSB.instantiateInitialViewController() as! UIViewController
+        self.window!.rootViewController = viewcontroller
+    }
 }
 

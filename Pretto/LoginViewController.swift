@@ -8,52 +8,36 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
-    @IBOutlet weak var logInWithFacebookButton: UIButton!
-
+class LoginViewController: PFLogInViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if let user = BackendUser.currentUser() {
-            println("Current User: \(user.description)")
-        } else {
-            println("No logged in user")
-        }
+        self.setPrettoLogo()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
-    @IBAction func didTapLogIn(sender: UIButton) {
-        let permissions = ["public_profile", "email", "user_friends"]
-        switch sender {
-        case logInWithFacebookButton:
-            PFFacebookUtils.logInWithPermissions(permissions) {
-                (user: PFUser?, error: NSError?) -> Void in
-                self.performSegueWithIdentifier("finishLogIn", sender: self)
-                println("Finished login flow")
-                if let error = error {
-                    println("Error: \(error)")
-                } else if let user = user {
-                    if user.isNew {
-                        println("User signed up and logged in through Facebook!")
-                    } else {
-                        println("User logged in through Facebook!")
-                    }
-                } else {
-                    println("Uh oh. The user cancelled the Facebook login.")
-                }
-            }
-        default:
-            return
-        }
+    func setPrettoLogo() {
+        var logoImage = UIImageView(frame:CGRectMake(0, 0, 300, 72))
+        logoImage.image = UIImage(named: "pretto")
+        
+        var logoView = UIView(frame:CGRectMake(0, 0, 300, 72))
+        logoView.addSubview(logoImage)
+        
+        let xConstraint = NSLayoutConstraint(
+            item: logoImage,
+            attribute: .CenterX,
+            relatedBy: .Equal,
+            toItem: logoView,
+            attribute: .CenterX,
+            multiplier: 1,
+            constant: 0)
+        
+        logoView.addConstraint(xConstraint)
+        logInView?.logo = logoView
     }
 }
 
