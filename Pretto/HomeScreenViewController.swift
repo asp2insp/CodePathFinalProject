@@ -10,8 +10,18 @@ import Foundation
 
 class HomeScreenViewController : ZoomableCollectionViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    var liveEvents : [Event] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshData()
+    }
+    
+    func refreshData() {
+        Event.getAllLiveEvents() { (events) -> Void in
+            self.liveEvents = events
+            self.collectionView.reloadData()
+        }
     }
 }
 
@@ -25,7 +35,11 @@ extension HomeScreenViewController {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return liveEvents[section].getAllPhotosInEvent(nil).count
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return liveEvents.count
     }
 }
 
