@@ -25,6 +25,7 @@
 		FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAF1B2682AF00F39BF8 /* Album.swift */; };
 		FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */; };
 		FE45EEB91B2DFD5C00F39BF8 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */; };
+		FE45EEBD1B2E0D6E00F39BF8 /* BackendQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEBC1B2E0D6E00F39BF8 /* BackendQuery.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		FE45EEAF1B2682AF00F39BF8 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableCollectionView.swift; sourceTree = "<group>"; };
 		FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		FE45EEBC1B2E0D6E00F39BF8 /* BackendQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendQuery.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 				FE45EEA01B23A57900F39BF8 /* BackendFile.swift */,
 				FE45EEA21B23AB9300F39BF8 /* BackendACL.swift */,
 				FE45EEA41B23AC3A00F39BF8 /* BackendUser.swift */,
+				FE45EEBC1B2E0D6E00F39BF8 /* BackendQuery.swift */,
 			);
 			name = "Backend Implementation";
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE45EEAE1B23CEC900F39BF8 /* FullsizePhoto.swift in Sources */,
+				FE45EEBD1B2E0D6E00F39BF8 /* BackendQuery.swift in Sources */,
 				FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */,
 				FE45EE9D1B23A54000F39BF8 /* ThumbnailPhoto.swift in Sources */,
 				FE45EEA51B23AC3A00F39BF8 /* BackendUser.swift in Sources */,

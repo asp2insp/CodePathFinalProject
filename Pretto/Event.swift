@@ -135,4 +135,68 @@ class Event : BackendObject {
             return photos
         }
     }
+    
+    // Query for all live events in the background and call the given block with the result
+    class func getAllLiveEvents(block: ([Event] -> Void) ) {
+        let query = BackendQuery(className: kClassName, predicate: NSPredicate(block: { (one, all) -> Bool in
+            return (one as? Event)?.isLive ?? false
+        }))
+        query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
+            if error == nil {
+                var events : [Event] = []
+                for obj in query.findObjects() ?? [] {
+                    if let event = obj as? Event {
+                        events.append(event)
+                    }
+                }
+                block(events)
+            }
+        }
+    }
+    
+    // Query for all past events in the background and call the given block with the result
+    class func getAllPastEvents(block: ([Event] -> Void) ) {
+        let query = BackendQuery(className: kClassName, predicate: NSPredicate(block: { (one, all) -> Bool in
+            if let event = one as? Event {
+                if let endDate = event.endDateTime {
+                    return endDate.compare(NSDate()) == NSComparisonResult.OrderedAscending
+                }
+            }
+            return false
+        }))
+        query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
+            if error == nil {
+                var events : [Event] = []
+                for obj in query.findObjects() ?? [] {
+                    if let event = obj as? Event {
+                        events.append(event)
+                    }
+                }
+                block(events)
+            }
+        }
+    }
+    
+    // Query for all future events in the background and call the given block with the result
+    class func getAllFutureEvents(block: ([Event] -> Void) ) {
+        let query = BackendQuery(className: kClassName, predicate: NSPredicate(block: { (one, all) -> Bool in
+            if let event = one as? Event {
+                if let startDate = event.startDateTime {
+                    return NSDate().compare(startDate) == NSComparisonResult.OrderedAscending
+                }
+            }
+            return false
+        }))
+        query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
+            if error == nil {
+                var events : [Event] = []
+                for obj in query.findObjects() ?? [] {
+                    if let event = obj as? Event {
+                        events.append(event)
+                    }
+                }
+                block(events)
+            }
+        }
+    }
 }
