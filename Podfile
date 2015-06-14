@@ -1,5 +1,7 @@
 pod 'Parse'
-pod 'ParseFacebookUtils'
+pod 'ParseUI'
+pod 'ParseFacebookUtilsV4'
 pod 'FBSDKCoreKit'
+pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 pod 'M13Checkbox'

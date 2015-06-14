@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Sin-eM-ad7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="F2K-AI-2G0">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <!--Home View Controller-->
+        <scene sceneID="Hfe-il-ZQk">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="LoginViewController" customModule="Pretto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="F2K-AI-2G0" customClass="HomeViewController" customModule="Pretto" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="Pwo-gk-MfB"/>
+                        <viewControllerLayoutGuide type="bottom" id="e8M-Uh-SmI"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="0ft-nP-iHp">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f0O-ZE-x0M">
-                                <rect key="frame" x="226" y="470" width="148" height="30"/>
-                                <state key="normal" title="Log in with Facebook">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home window goes here" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FfM-v3-ZQy">
+                                <rect key="frame" x="205" y="289" width="190.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDk-mo-LDQ">
+                                <rect key="frame" x="274.5" y="329.5" width="51" height="30"/>
+                                <state key="normal" title="LogOut">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapLogIn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="bP4-Y6-s0u"/>
+                                    <action selector="onLogOut:" destination="F2K-AI-2G0" eventType="touchUpInside" id="5ZX-wn-edy"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="f0O-ZE-x0M" secondAttribute="bottom" constant="100" id="LTa-fU-9hc"/>
-                            <constraint firstAttribute="centerX" secondItem="f0O-ZE-x0M" secondAttribute="centerX" id="pRj-1h-yVf"/>
+                            <constraint firstAttribute="centerX" secondItem="FfM-v3-ZQy" secondAttribute="centerX" id="0iR-G1-FJ6"/>
+                            <constraint firstAttribute="centerX" secondItem="SDk-mo-LDQ" secondAttribute="centerX" id="JiJ-bD-sn9"/>
+                            <constraint firstAttribute="centerY" secondItem="FfM-v3-ZQy" secondAttribute="centerY" id="Np2-54-dFV"/>
+                            <constraint firstItem="SDk-mo-LDQ" firstAttribute="top" secondItem="FfM-v3-ZQy" secondAttribute="bottom" constant="20" id="esI-hr-Hf2"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="logInWithFacebookButton" destination="f0O-ZE-x0M" id="uVl-D9-fyo"/>
-                        <segue destination="Sin-eM-ad7" kind="show" identifier="finishLogIn" id="PfB-ZA-yS8"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b33-E3-NPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="47" y="329"/>
         </scene>
@@ -156,7 +160,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SxO-6z-d2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1036" y="312"/>
+            <point key="canvasLocation" x="-714" y="268"/>
         </scene>
     </scenes>
 </document>
