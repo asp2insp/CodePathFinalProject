@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		F7946A7BA670F383BAB40980 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94BE76FA7DC3B5E1419C76CE /* libPods.a */; };
 		FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */; };
-		FE45EE401B1FE5DF00F39BF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE3F1B1FE5DF00F39BF8 /* ViewController.swift */; };
+		FE45EE401B1FE5DF00F39BF8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */; };
 		FE45EE431B1FE5DF00F39BF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE411B1FE5DF00F39BF8 /* Main.storyboard */; };
 		FE45EE451B1FE5DF00F39BF8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */; };
 		FE45EE481B1FE5DF00F39BF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE461B1FE5DF00F39BF8 /* LaunchScreen.xib */; };
@@ -44,7 +44,7 @@
 		FE45EE381B1FE5DF00F39BF8 /* Pretto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pretto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE45EE3C1B1FE5DF00F39BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FE45EE3F1B1FE5DF00F39BF8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FE45EE421B1FE5DF00F39BF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FE45EE471B1FE5DF00F39BF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -127,8 +127,8 @@
 				FE45EEB31B2DEF0300F39BF8 /* Views */,
 				FE45EE9B1B23A52D00F39BF8 /* Data Models */,
 				FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */,
-				FE45EE3F1B1FE5DF00F39BF8 /* ViewController.swift */,
 				FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */,
+				FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */,
 				FE45EE411B1FE5DF00F39BF8 /* Main.storyboard */,
 				FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */,
 				FE45EE461B1FE5DF00F39BF8 /* LaunchScreen.xib */,
@@ -344,7 +344,7 @@
 				FE45EEA11B23A57900F39BF8 /* BackendFile.swift in Sources */,
 				FE45EE9F1B23A57000F39BF8 /* BackendObject.swift in Sources */,
 				FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */,
-				FE45EE401B1FE5DF00F39BF8 /* ViewController.swift in Sources */,
+				FE45EE401B1FE5DF00F39BF8 /* LoginViewController.swift in Sources */,
 				FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */,
 				FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */,
 				FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */,
