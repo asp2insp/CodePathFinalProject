@@ -18,6 +18,7 @@ PODS:
     - FBSDKCoreKit/arc
   - FBSDKLoginKit (4.2.0):
     - FBSDKCoreKit
+  - M13Checkbox (1.1.2)
   - Parse (1.7.4):
     - Bolts/Tasks (>= 1.1.5)
   - ParseFacebookUtils (1.7.4):
@@ -28,6 +29,7 @@ PODS:
 DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
+  - M13Checkbox
   - Parse
   - ParseFacebookUtils
 
@@ -36,6 +38,7 @@ SPEC CHECKSUMS:
   Facebook-iOS-SDK: cd87f0b2f0c1d9574b44e8fa2baacc275524bac3
   FBSDKCoreKit: 84b3616a361801f190e43a9909caead7bb6087c7
   FBSDKLoginKit: 57e37106af12c9e264e473dcb75d7decdbb07fe4
+  M13Checkbox: 0c0bb08dcd144c4ea33f883b68270f3f56908ea2
   Parse: 6ca512c6e860b66739c95151b2f76ac4712b7842
   ParseFacebookUtils: 7115990b291ae95b920fde413272828d0eb0d963
 
