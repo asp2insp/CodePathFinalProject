@@ -145,17 +145,23 @@ class ZoomableCollectionViewController: UIViewController {
 }
 
 class SelectableImageCell : UICollectionViewCell {
-    @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var checkbox: M13Checkbox!
+    var image: UIImageView!
+    var checkbox: M13Checkbox!
     
-    var nameIndex : Int = 0 {
-        didSet {
-            image.image = UIImage(named: "\(nameIndex)")
-            checkbox.checkState = selected ? M13CheckboxStateChecked : M13CheckboxStateUnchecked
-            checkbox.radius = 0.5 * checkbox.frame.size.width;
-            checkbox.flat = true
-            checkbox.tintColor = checkbox.strokeColor
-            checkbox.checkColor = UIColor.whiteColor()
-        }
+    override func awakeFromNib() {
+        image = UIImageView(frame: self.bounds)
+        checkbox = M13Checkbox(frame: CGRectMake(0, 0, 20, 20))
+        checkbox.center = CGPointMake(25, 25)
+        checkbox.userInteractionEnabled = false
+        checkbox.checkState = selected ? M13CheckboxStateChecked : M13CheckboxStateUnchecked
+        checkbox.radius = 0.5 * checkbox.frame.size.width;
+        checkbox.flat = true
+        checkbox.tintColor = checkbox.strokeColor
+        checkbox.checkColor = UIColor.whiteColor()
+        
+        self.addSubview(image)
+        self.addSubview(checkbox)
     }
+    
+    
 }

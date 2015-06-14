@@ -15,6 +15,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if let user = BackendUser.currentUser() {
+            println("Current User: \(user.description)")
+        } else {
+            println("No logged in user")
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -28,6 +37,7 @@ class ViewController: UIViewController {
         case logInWithFacebookButton:
             PFFacebookUtils.logInWithPermissions(permissions) {
                 (user: PFUser?, error: NSError?) -> Void in
+                self.performSegueWithIdentifier("finishLogIn", sender: self)
                 println("Finished login flow")
                 if let error = error {
                     println("Error: \(error)")
