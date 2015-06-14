@@ -23,6 +23,7 @@
 		FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAA1B23C6CA00F39BF8 /* Request.swift */; };
 		FE45EEAE1B23CEC900F39BF8 /* FullsizePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */; };
 		FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAF1B2682AF00F39BF8 /* Album.swift */; };
+		FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		FE45EEAA1B23C6CA00F39BF8 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullsizePhoto.swift; sourceTree = "<group>"; };
 		FE45EEAF1B2682AF00F39BF8 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 		FE45EEB31B2DEF0300F39BF8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				FE45EEA31B23AB9300F39BF8 /* BackendACL.swift in Sources */,
 				FE45EEA11B23A57900F39BF8 /* BackendFile.swift in Sources */,
 				FE45EE9F1B23A57000F39BF8 /* BackendObject.swift in Sources */,
+				FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */,
 				FE45EE401B1FE5DF00F39BF8 /* ViewController.swift in Sources */,
 				FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */,
 				FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */,

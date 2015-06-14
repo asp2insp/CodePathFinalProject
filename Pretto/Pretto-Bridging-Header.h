@@ -7,3 +7,5 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+
+#import "M13Checkbox.h"

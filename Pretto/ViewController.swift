@@ -28,7 +28,10 @@ class ViewController: UIViewController {
         case logInWithFacebookButton:
             PFFacebookUtils.logInWithPermissions(permissions) {
                 (user: PFUser?, error: NSError?) -> Void in
-                if let user = user {
+                println("Finished login flow")
+                if let error = error {
+                    println("Error: \(error)")
+                } else if let user = user {
                     if user.isNew {
                         println("User signed up and logged in through Facebook!")
                     } else {
