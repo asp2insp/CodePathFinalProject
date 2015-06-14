@@ -8,9 +8,6 @@
 
 import Foundation
 
-private let kFileKey = "file"
-private let kFullsizeKey = "fullsize"
-private let kEventsKey = "events"
 private let kClassName = "Photo"
 
 class ThumbnailPhoto : PFObject, PFSubclassing {

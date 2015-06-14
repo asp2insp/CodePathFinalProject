@@ -9,10 +9,6 @@
 import Foundation
 
 private let kClassName = "FullsizePhoto"
-private let kThumbnailKey = "thumbnail"
-private let kLocalPathKey = "localPath"
-private let kFileKey = "file"
-private let kOwnerKey = "owner"
 
 class FullsizePhoto : PFObject, PFSubclassing {
     override class func initialize() {

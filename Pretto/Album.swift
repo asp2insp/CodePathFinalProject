@@ -9,7 +9,6 @@
 import Foundation
 
 private let kClassName = "Album"
-private let kPhotosKey = "photos"
 
 class Album : PFObject, PFSubclassing {
     override class func initialize() {

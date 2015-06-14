@@ -9,17 +9,8 @@
 import Foundation
 
 private let kClassName = "Event"
-private let kNameKey = "name"
-private let kOwnerKey = "owner"
-private let kPinKey = "pin"
-private let kStartDateTimeKey = "startDateAndTime"
-private let kEndDateTimeKey = "endDateAndTime"
-private let kLatitudeKey = "latitude"
-private let kLongitudeKey = "longitude"
-private let kLocationNameKey = "locationName"
-private let kAdminsKey = "admins"
-private let kGuestsKey = "guests"
-private let kAlbumsKey = "albums"
+private let kStartDateTimeKey = "startDateTime"
+private let kEndDateTimeKey = "endDateTime"
 
 class Event : PFObject, PFSubclassing {
     static let sDateFormatter = NSDateFormatter()
