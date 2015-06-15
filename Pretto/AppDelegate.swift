@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
                 user.save()
                 user.printProperties()
                 println("Save user details invoked")
-                //self.startMainStoryBoard()
+                self.startMainStoryBoard()
             
                 Friend.getAllFriendsFromFacebook(user.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
                     if friends != nil {
