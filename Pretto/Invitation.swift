@@ -63,10 +63,14 @@ class Invitation : PFObject, PFSubclassing {
         requestOptions.version = PHImageRequestOptionsVersion.Current
         let requestManager = PHImageManager.defaultManager()
         for var i = 0; i < allResult.count; i++ {
-             requestManager.requestImageForAsset(allResult[i] as! PHAsset, targetSize: CGSizeMake(100, 100), contentMode: PHImageContentMode.AspectFill, options: requestOptions, resultHandler: { (image, info) -> Void in
-                let photo = PFFile(data: UIImageJPEGRepresentation(image, 0.8))
-                photo.saveInBackground()
-             })
+            requestManager.requestImageDataForAsset(allResult[i] as! PHAsset, options: requestOptions, resultHandler: { (data, stringHuh, orientation, info) -> Void in
+//                let photo = PFFile(data: data)
+//                photo.saveInBackground()
+//                let image = FullsizePhoto()
+//                image.file = photo
+//                image.saveInBackground()
+                // TODO: Resize image and create thumbnail. Create fullsize photo without associated file
+            })
         }
     }
 }
