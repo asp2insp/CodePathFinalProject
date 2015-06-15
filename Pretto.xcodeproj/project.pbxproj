@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1628DCEC1B2E6755005E0841 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCEB1B2E6755005E0841 /* HomeScreenViewController.swift */; };
 		1628DCED1B2E6CB7005E0841 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FBBBA1B2E4BD7002E7A75 /* User.swift */; };
+		1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCEE1B2E73D4005E0841 /* AddUsersToEventViewController.swift */; };
+		1628DCF11B2E7B15005E0841 /* AddUsersAddedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCF01B2E7B15005E0841 /* AddUsersAddedUserCell.swift */; };
 		16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */; };
 		16354F431B2E6613003D2A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16354F411B2E6613003D2A2B /* Main.storyboard */; };
 		16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */; };
@@ -28,8 +30,6 @@
 		FE45EEAE1B23CEC900F39BF8 /* FullsizePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */; };
 		FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAF1B2682AF00F39BF8 /* Album.swift */; };
 		FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */; };
-		FE45EEB91B2DFD5C00F39BF8 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */; };
-		FE45EEBF1B2E490600F39BF8 /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEBE1B2E490600F39BF8 /* Invitation.swift */; };
 		FE45EEC11B2E4DE200F39BF8 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		1628DCEB1B2E6755005E0841 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		1628DCEE1B2E73D4005E0841 /* AddUsersToEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsersToEventViewController.swift; sourceTree = "<group>"; };
+		1628DCF01B2E7B15005E0841 /* AddUsersAddedUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsersAddedUserCell.swift; sourceTree = "<group>"; };
 		16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		16354F421B2E6613003D2A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventPhotoCell.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */,
 				16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */,
 				16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */,
+				1628DCF01B2E7B15005E0841 /* AddUsersAddedUserCell.swift */,
 			);
 			name = CreateEvent;
 			sourceTree = "<group>";
@@ -149,9 +152,9 @@
 				FE45EEB31B2DEF0300F39BF8 /* Views */,
 				FE45EE9B1B23A52D00F39BF8 /* Data Models */,
 				FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */,
-				FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */,
 				FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */,
 				16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */,
+				1628DCEE1B2E73D4005E0841 /* AddUsersToEventViewController.swift */,
 				1628DCEB1B2E6755005E0841 /* HomeScreenViewController.swift */,
 				FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */,
 				16354F411B2E6613003D2A2B /* Main.storyboard */,
@@ -353,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */,
+				1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */,
 				FE45EEAE1B23CEC900F39BF8 /* FullsizePhoto.swift in Sources */,
 				16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */,
 				FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */,
@@ -369,6 +373,7 @@
 				16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */,
 				FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */,
 				1628DCEC1B2E6755005E0841 /* HomeScreenViewController.swift in Sources */,
+				1628DCF11B2E7B15005E0841 /* AddUsersAddedUserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

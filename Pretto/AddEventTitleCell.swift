@@ -44,8 +44,12 @@ class AddEventTitleCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldDidChange(notification: NSNotification) {
-        titleCharCounter.text = "\(50 - count(eventTitle.text))"
         titleCharCounter.textColor = (titleCharCounter.text)!.toInt() != 50 ? UIColor.darkGrayColor() : UIColor.lightGrayColor()
+        titleCharCounter.text = "\(50 - count(eventTitle.text))"
+        if (titleCharCounter.text)!.toInt() == 0 {
+            eventTitle.text = eventTitle.text.substringToIndex(eventTitle.text.endIndex.predecessor())
+        }
+
         delegate?.addEventTitleCell!(self, titleDidChange: eventTitle.text)
     }
 
