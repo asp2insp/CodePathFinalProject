@@ -62,7 +62,7 @@ class Friend  : PFObject, PFSubclassing {
         }
     }
     
-    class func getAllFriendsFromDBase(facebookId: String, block: ([Friend]? -> Void) ) {
+    class func getAllFriendsFromDBase(facebookId: String, onComplete: ([Friend]? -> Void) ) {
         let query = PFQuery(className: kClassName, predicate: nil)
         query.whereKey(kFacebookId, equalTo: facebookId)
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
@@ -73,11 +73,28 @@ class Friend  : PFObject, PFSubclassing {
                         friends.append(friend)
                     }
                 }
-                block(friends)
+                onComplete(friends)
             }
             else {
-                block(nil)
+                onComplete(nil)
             }
         }
+    }
+    
+    class func subtract(those:[Friend], from:[Friend]) -> [Friend] {
+        
+        var hash = [String: Friend]()
+        for f in those {
+            hash[f.friendFacebookId] = f
+        }
+        
+        var result = [Friend]()
+        for f in from {
+            if hash[f.friendFacebookId] == nil {
+                result.append(f)
+            }
+        }
+        
+        return result
     }
 }

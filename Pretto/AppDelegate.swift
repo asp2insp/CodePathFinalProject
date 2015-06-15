@@ -32,14 +32,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         self.checkCurrentUser({ (user:User) -> Void in
                 user.save()
                 user.printProperties()
-                println("Saved user details")
-                self.startMainStoryBoard()
+                println("Save user details invoked")
+                //self.startMainStoryBoard()
             
                 Friend.getAllFriendsFromFacebook(user.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
                     if friends != nil {
+                        println("Friends retrieved from FB")
                         Friend.printDebugAll(friends!)
-                        Friend.saveAllInBackground(friends)
-                        println("Saved all friends")
+                        Friend.getAllFriendsFromDBase(user.facebookId!, onComplete: { (savedFriends:[Friend]?) -> Void in
+                            if savedFriends != nil {
+                                var unsavedFriends = Friend.subtract(friends!, from: savedFriends!)
+                                if unsavedFriends.count > 0 {
+                                    Friend.saveAllInBackground(unsavedFriends)
+                                    println("Saving friends invoked for \(unsavedFriends.count)")
+                                } else {
+                                    println("Friends are up to date.")
+                                }
+                            } else {
+                                println("Getting saved friends failed. Attempting to save all.")
+                                Friend.saveAllInBackground(friends!)
+                                println("Saving friends invoked for \(friends!.count)")
+                            }
+                        })
+                    } else {
+                        println("No FB friends using this app")
                     }
                 })
             
