@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ZoomableCollectionViewController: UIViewController {
+class ZoomableCollectionViewController: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -22,10 +22,14 @@ class ZoomableCollectionViewController: UIViewController {
     var previousRange : [NSIndexPath]?
     var previousIndex : NSIndexPath?
     
+    // Set to enable/disable selection and checkboxes
+    var allowsSelection : Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.setCollectionViewLayout(flowLayout, animated: false)
         collectionView.allowsMultipleSelection = true
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 8, 0, 8)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -60,7 +64,7 @@ class ZoomableCollectionViewController: UIViewController {
         let touchCoords = sender.locationInView(collectionView)
         switch sender.state {
         case .Began, .Changed:
-            let currentIndex = pointToIndexPath(touchCoords)
+            let currentIndex = pointToIndexPath(touchCoords, fuzzySize: 5)
             if currentIndex != nil {
                 if selectionStart == nil {
                     selectionStart = currentIndex
@@ -72,7 +76,6 @@ class ZoomableCollectionViewController: UIViewController {
                     let itemsToSelect = getIndexRange(start: selectionStart, end: currentIndex!)
                     let itemsToDeselect = difference(previousRange, minus: itemsToSelect)
                     for path in itemsToDeselect {
-                        collectionView.deselectItemAtIndexPath(path, animated: true)
                         deselectItemAtIndexPathIfNecessary(path)
                     }
                     for path in itemsToSelect {
@@ -92,6 +95,9 @@ class ZoomableCollectionViewController: UIViewController {
     }
     
     func selectItemAtIndexPathIfNecessary(path: NSIndexPath) {
+        if !allowsSelection {
+            return
+        }
         if let cell = collectionView.cellForItemAtIndexPath(path) as? SelectableImageCell {
             if !cell.selected {
                 collectionView.selectItemAtIndexPath(path, animated: true, scrollPosition: UICollectionViewScrollPosition.None)
@@ -102,6 +108,9 @@ class ZoomableCollectionViewController: UIViewController {
     }
     
     func deselectItemAtIndexPathIfNecessary(path: NSIndexPath) {
+        if !allowsSelection {
+            return
+        }
         if let cell = collectionView.cellForItemAtIndexPath(path) as? SelectableImageCell {
             if (cell.selected) {
                 collectionView.deselectItemAtIndexPath(path, animated: true)
@@ -144,8 +153,8 @@ class ZoomableCollectionViewController: UIViewController {
     
     // Convert a touch point to an index path of the cell under the point.
     // Returns nil if no cell exists under the given point.
-    func pointToIndexPath(point: CGPoint) -> NSIndexPath? {
-        let fingerRect = CGRectMake(point.x-5, point.y-5, 10, 10)
+    func pointToIndexPath(point: CGPoint, fuzzySize: CGFloat) -> NSIndexPath? {
+        let fingerRect = CGRectMake(point.x-fuzzySize, point.y-fuzzySize, fuzzySize*2, fuzzySize*2)
         for item in collectionView.visibleCells() {
             let cell = item as! SelectableImageCell
             if CGRectIntersectsRect(fingerRect, cell.frame) {
@@ -156,9 +165,32 @@ class ZoomableCollectionViewController: UIViewController {
     }
 }
 
+// UICollectionViewDelegate Extension
+extension ZoomableCollectionViewController {
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        deselectItemAtIndexPathIfNecessary(indexPath)
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        selectItemAtIndexPathIfNecessary(indexPath)
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if let c = cell as? SelectableImageCell {
+            c.showCheckbox = self.allowsSelection
+        }
+    }
+}
+
 class SelectableImageCell : UICollectionViewCell {
     var image: UIImageView!
     var checkbox: M13Checkbox!
+    var showCheckbox : Bool = true {
+        didSet {
+            self.checkbox.hidden = !showCheckbox
+            self.checkbox.setNeedsDisplay()
+        }
+    }
     
     override func awakeFromNib() {
         image = UIImageView(frame: self.bounds)
@@ -172,6 +204,7 @@ class SelectableImageCell : UICollectionViewCell {
         checkbox.checkColor = UIColor.whiteColor()
         
         self.addSubview(image)
+        
         self.addSubview(checkbox)
     }
     

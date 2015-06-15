@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -60,10 +61,11 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WcB-mA-zcS">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GkL-ek-jFd">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="50" height="50"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
@@ -93,7 +95,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name -- Start Date -- End Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T27-PA-Z0M">
                                             <rect key="frame" x="8" y="14" width="288" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -108,11 +110,30 @@
                                         <outlet property="pauseButton" destination="nPe-Wx-uNO" id="mTZ-Fa-Eqe"/>
                                     </connections>
                                 </collectionReusableView>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="sectionfooter" id="XcX-I5-EL9" customClass="EventFooter" customModule="Pretto" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="164" width="600" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 95 More" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0Q-GU-rFj">
+                                            <rect key="frame" x="279" y="14" width="79" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="f0Q-GU-rFj" secondAttribute="centerY" constant="0.5" id="dou-hv-0gW"/>
+                                        <constraint firstAttribute="centerX" secondItem="f0Q-GU-rFj" secondAttribute="centerX" constant="-18.5" id="q4N-FT-ozT"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="label" destination="f0Q-GU-rFj" id="4ZL-dr-uHn"/>
+                                    </connections>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="Hy1-1N-qk0" id="rTN-n6-S5M"/>
                                     <outlet property="delegate" destination="Hy1-1N-qk0" id="68w-Ms-5At"/>
                                     <outletCollection property="gestureRecognizers" destination="jMI-a0-IKp" appends="YES" id="3Uo-lq-sU9"/>
-                                    <outletCollection property="gestureRecognizers" destination="4HJ-hk-5kd" appends="YES" id="9BN-cS-w5n"/>
+                                    <outletCollection property="gestureRecognizers" destination="i4v-3r-RMO" appends="YES" id="Jjb-Ri-020"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -137,18 +158,18 @@
                         <action selector="didPinch:" destination="Hy1-1N-qk0" id="Ypy-EC-09Q"/>
                     </connections>
                 </pinchGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="4HJ-hk-5kd">
+                <tapGestureRecognizer id="i4v-3r-RMO">
                     <connections>
-                        <action selector="didLongPressAndDrag:" destination="Hy1-1N-qk0" id="feM-y2-cPo"/>
+                        <action selector="didTapToSelectEvent:" destination="Hy1-1N-qk0" id="Xnd-LY-7iG"/>
                     </connections>
-                </pongPressGestureRecognizer>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="846" y="-212"/>
         </scene>
-        <!--View Controller-->
+        <!--Event Detail View Controller-->
         <scene sceneID="H0E-Ly-bej">
             <objects>
-                <viewController id="QHM-MY-pEb" sceneMemberID="viewController">
+                <viewController id="QHM-MY-pEb" customClass="EventDetailViewController" customModule="Pretto" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FCf-dB-rkI"/>
                         <viewControllerLayoutGuide type="bottom" id="eeI-C3-cdI"/>
@@ -156,10 +177,61 @@
                     <view key="view" contentMode="scaleToFill" id="Inb-0K-ycw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZCm-RL-FXa">
+                                <rect key="frame" x="8" y="150" width="584" height="450"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lsz-VO-3bq">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="N0B-rQ-bIU" customClass="SelectableImageCell" customModule="Pretto" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="QHM-MY-pEb" id="SqA-Tj-3oI"/>
+                                    <outlet property="delegate" destination="QHM-MY-pEb" id="B7Z-Ln-CjL"/>
+                                    <outletCollection property="gestureRecognizers" destination="5SB-jh-VOl" appends="YES" id="dLD-AJ-Nui"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ZCm-RL-FXa" secondAttribute="bottom" id="Pla-fu-bmA"/>
+                            <constraint firstAttribute="trailing" secondItem="ZCm-RL-FXa" secondAttribute="trailing" constant="8" id="a30-yC-Jx4"/>
+                            <constraint firstItem="ZCm-RL-FXa" firstAttribute="height" secondItem="Inb-0K-ycw" secondAttribute="height" multiplier="3:4" id="mZG-gA-UP0"/>
+                            <constraint firstItem="ZCm-RL-FXa" firstAttribute="leading" secondItem="Inb-0K-ycw" secondAttribute="leading" constant="8" id="v9O-Po-m1g"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="tYZ-fq-1z2" appends="YES" id="xJG-RU-yCf"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="ZCm-RL-FXa" id="kgj-Is-Vtc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X9R-To-Skc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="5SB-jh-VOl">
+                    <connections>
+                        <action selector="didLongPressAndDrag:" destination="QHM-MY-pEb" id="lLJ-uu-bFV"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pinchGestureRecognizer id="tYZ-fq-1z2">
+                    <connections>
+                        <action selector="didPinch:" destination="QHM-MY-pEb" id="gwg-ME-UXB"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1607" y="-212"/>
         </scene>

@@ -24,17 +24,17 @@ class Album : PFObject, PFSubclassing {
         return kClassName
     }
     
-    @NSManaged var photos : [ThumbnailPhoto]
+    @NSManaged var photos : [ThumbnailPhoto]?
     
     func addPhoto(photo: ThumbnailPhoto) {
-        var p = self.photos
+        var p = self.photos ?? []
         p.append(photo)
         self.photos = p
         self.saveEventually(nil)
     }
     
     func addPhotos(photos: [ThumbnailPhoto]) {
-        var p = self.photos
+        var p = self.photos ?? []
         for photo in photos {
             p.append(photo)
         }

@@ -55,7 +55,7 @@ class Event : PFObject, PFSubclassing {
         var photos : [ThumbnailPhoto] = []
         for album in self.albums {
             album.fetchIfNeeded()
-            for p in album.photos {
+            for p in album.photos ?? [] {
                 photos.append(p)
             }
         }
