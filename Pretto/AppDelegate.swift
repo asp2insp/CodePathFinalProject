@@ -31,11 +31,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         // check user and start a storyboard accourdingly
         self.checkCurrentUser({ (user:User) -> Void in
                 user.save()
-                println(user.facebookId)
-                println(user.email)
-                println(user.name)
-                println(user.profilePhotoUrl)
+                user.printProperties()
+                println("Saved user details")
                 self.startMainStoryBoard()
+            
+                Friend.getAllFriendsFromFacebook(user.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
+                    if friends != nil {
+                        Friend.printDebugAll(friends!)
+                        Friend.saveAllInBackground(friends)
+                        println("Saved all friends")
+                    }
+                })
+            
             },
             otherwise: { (pfUser:PFUser?) -> Void in
                 if pfUser != nil {
@@ -51,29 +58,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         var currentUser = PFUser.currentUser()
         if currentUser != nil {
             if PFFacebookUtils.isLinkedWithUser(currentUser!) {
-                var request = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-                request.startWithCompletionHandler { (conn:FBSDKGraphRequestConnection!, res:AnyObject!, err:NSError!) -> Void in
-                    if err == nil && res != nil {
-                        var userData = res as! NSDictionary
-                        var facebookId = userData["id"] as! String
-                        var name = userData["name"] as! String
-                        var email = userData["email"] as! String?
-                        
-                        var currentUser = PFUser.currentUser()
-                        var user = User(innerUser: currentUser)
-                        user.facebookId = facebookId
-                        user.email = email
-                        user.name = name
-                        
-                        onValidUser(user)
+                User.getMe({ (me:User?) -> Void in
+                    if me != nil {
+                        onValidUser(me!)
+                    } else {
+                        otherwise(currentUser)
                     }
-                    else {
-                        otherwise(PFUser.currentUser())
-                    }
-                }
-
+                })
             } else {
-                otherwise(nil)
+                otherwise(currentUser)
             }
         } else {
             otherwise(nil)
