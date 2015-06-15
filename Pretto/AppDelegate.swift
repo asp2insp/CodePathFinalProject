@@ -34,14 +34,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         self.checkCurrentUser({ (user:User) -> Void in
                 user.save()
                 user.printProperties()
-                println("Saved user details")
+                println("Save user details invoked")
                 self.startMainStoryBoard()
             
                 Friend.getAllFriendsFromFacebook(user.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
                     if friends != nil {
+                        println("Friends retrieved from FB")
                         Friend.printDebugAll(friends!)
-                        Friend.saveAllInBackground(friends)
-                        println("Saved all friends")
+                        Friend.getAllFriendsFromDBase(user.facebookId!, onComplete: { (savedFriends:[Friend]?) -> Void in
+                            if savedFriends != nil {
+                                var unsavedFriends = Friend.subtract(friends!, from: savedFriends!)
+                                if unsavedFriends.count > 0 {
+                                    Friend.saveAllInBackground(unsavedFriends)
+                                    println("Saving friends invoked for \(unsavedFriends.count)")
+                                } else {
+                                    println("Friends are up to date.")
+                                }
+                            } else {
+                                println("No friends are saved yet. Attempting to save all.")
+                                Friend.saveAllInBackground(friends!)
+                                println("Saving friends invoked for \(friends!.count)")
+                            }
+                        })
+                    } else {
+                        println("No FB friends using this app")
                     }
                 })
             
@@ -175,12 +191,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     }
     
     func startMainStoryBoard() {
-        self.startStoryBoardWithName("Main")
-    }
-    
-    func startStoryBoardWithName(name:String!) {
-        var loginSB = UIStoryboard(name: name, bundle: nil)
-        let viewcontroller: UIViewController = loginSB.instantiateInitialViewController() as! UIViewController
+        var mainSB = UIStoryboard(name: "Main", bundle: nil)
+        let viewcontroller = mainSB.instantiateInitialViewController() as! UIViewController
         self.window!.rootViewController = viewcontroller
     }
 }
