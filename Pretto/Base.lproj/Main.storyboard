@@ -156,7 +156,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="Hy1-1N-qk0" kind="relationship" relationship="viewControllers" id="Avt-mT-sp3"/>
-                        <segue destination="wmx-cY-49M" kind="relationship" relationship="viewControllers" id="tch-Zd-L50"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SxO-6z-d2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
