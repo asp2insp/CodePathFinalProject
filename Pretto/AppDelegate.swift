@@ -191,9 +191,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     }
     
     func startMainStoryBoard() {
+        self.window = UIWindow(frame:UIScreen.mainScreen().bounds)
         var mainSB = UIStoryboard(name: "Main", bundle: nil)
-        let viewcontroller = mainSB.instantiateInitialViewController() as! UIViewController
-        self.window!.rootViewController = viewcontroller
+        let viewController = mainSB.instantiateInitialViewController() as! UITabBarController
+        self.window!.rootViewController = viewController
+        self.window!.makeKeyAndVisible()
     }
 }
 
