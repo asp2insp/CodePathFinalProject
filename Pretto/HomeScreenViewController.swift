@@ -48,6 +48,11 @@ class HomeScreenViewController : ZoomableCollectionViewController, UICollectionV
             self.collectionView.reloadData()
         }
     }
+    
+    @IBAction func onLogOut(sender: AnyObject) {
+        PFUser.logOut()
+        (UIApplication.sharedApplication().delegate as! AppDelegate).showLoginWindow()
+    }
 }
 
 // UICollectionViewDataSource Extension

@@ -29,33 +29,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         self.registerForRemoteNotifications(application, launchOptions:launchOptions)
         
         // check user and start a storyboard accourdingly
-        if (!self.checkCurrentUser()) {
-            println("Starting login flow")
-            self.showLoginWindow()
-        }
-        else {
-            println("Starting main flow")
-            self.startMainStoryBoard()
-        }
-        
-        return true
-    }
-    
-    func checkCurrentUser() -> Bool {
-        
-        var currentUser = PFUser.currentUser()
-        if currentUser != nil {
-            println("there is a current user")
-            if PFFacebookUtils.isLinkedWithUser(currentUser!) {
-                return true
-            } else {
-                    println("current user is not linked")
-            }
-        } else {
-            println("current user is nil")
-        }
+        self.checkCurrentUser({ (user:User) -> Void in
+                user.save()
+                user.printProperties()
+                println("Saved user details")
+                self.startMainStoryBoard()
+            
+                Friend.getAllFriendsFromFacebook(user.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
+                    if friends != nil {
+                        Friend.printDebugAll(friends!)
+                        Friend.saveAllInBackground(friends)
+                        println("Saved all friends")
+                    }
+                })
+            
+            },
+            otherwise: { (pfUser:PFUser?) -> Void in
+                if pfUser != nil {
+                    PFFacebookUtils.unlinkUserInBackground(pfUser!)
+                }
+                self.showLoginWindow()
+            })
         
         return false
+    }
+    
+    func checkCurrentUser(onValidUser:((User)->Void), otherwise:((PFUser?)->Void)) {
+        var currentUser = PFUser.currentUser()
+        if currentUser != nil {
+            if PFFacebookUtils.isLinkedWithUser(currentUser!) {
+                User.getMe({ (me:User?) -> Void in
+                    if me != nil {
+                        onValidUser(me!)
+                    } else {
+                        otherwise(currentUser)
+                    }
+                })
+            } else {
+                otherwise(currentUser)
+            }
+        } else {
+            otherwise(nil)
+        }
     }
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
