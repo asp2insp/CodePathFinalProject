@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
                                     println("Friends are up to date.")
                                 }
                             } else {
-                                println("Getting saved friends failed. Attempting to save all.")
+                                println("No friends are saved yet. Attempting to save all.")
                                 Friend.saveAllInBackground(friends!)
                                 println("Saving friends invoked for \(friends!.count)")
                             }

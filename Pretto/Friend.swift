@@ -83,6 +83,10 @@ class Friend  : PFObject, PFSubclassing {
     
     class func subtract(those:[Friend], from:[Friend]) -> [Friend] {
         
+        if from.count <= 0 {
+            return those;
+        }
+        
         var hash = [String: Friend]()
         for f in those {
             hash[f.friendFacebookId] = f
