@@ -53,7 +53,43 @@ class User {
         }
     }
     
+    func printProperties() {
+        println(self.facebookId)
+        println(self.email)
+        println(self.name)
+        println(self.profilePhotoUrl)
+    }
+    
     func save() {
-        self.inner.save()
+        self.inner.saveEventually()
+    }
+    
+    class func getMe(onComplete:((User?)->Void)){
+        var request = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        request.startWithCompletionHandler { (conn:FBSDKGraphRequestConnection!, res:AnyObject!, err:NSError!) -> Void in
+            if err == nil && res != nil {
+                var userData = res as! NSDictionary
+                var facebookId = userData["id"] as! String
+                var name = userData["name"] as! String
+                var email = userData["email"] as! String?
+                
+                var currentUser = PFUser.currentUser()
+                var user = User(innerUser: currentUser)
+                user.facebookId = facebookId
+                user.email = email
+                user.name = name
+                
+                onComplete(user)
+            }
+            else {
+                onComplete(nil)
+            }
+        }
+    }
+    
+    
+    
+    class func getAllFacebookFriends(onComplete:(([Friend]?)->Void)){
+        
     }
 }
