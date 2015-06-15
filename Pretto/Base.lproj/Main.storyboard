@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Sin-eM-ad7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Sin-eM-ad7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -125,7 +125,13 @@
                             <constraint firstItem="WcB-mA-zcS" firstAttribute="top" secondItem="V6G-Xx-Wga" secondAttribute="top" id="aj3-bl-d4u"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="u8i-RR-vRW"/>
+                    <navigationItem key="navigationItem" id="u8i-RR-vRW">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="VTf-2F-u91">
+                            <connections>
+                                <action selector="onLogOut:" destination="Hy1-1N-qk0" id="bll-Zd-Vxx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="WcB-mA-zcS" id="OIc-Fx-Mia"/>
                         <segue destination="QHM-MY-pEb" kind="show" identifier="albumdetail" id="fmn-Ap-o2d"/>

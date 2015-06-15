@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		605FBBBB1B2E4BD7002E7A75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FBBBA1B2E4BD7002E7A75 /* User.swift */; };
 		F7946A7BA670F383BAB40980 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94BE76FA7DC3B5E1419C76CE /* libPods.a */; };
 		FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */; };
 		FE45EE401B1FE5DF00F39BF8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		605FBBBA1B2E4BD7002E7A75 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6680AB9C507B239DAD236C85 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		94BE76FA7DC3B5E1419C76CE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC282821306927B51E4EE715 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				FE45EEA61B23B56300F39BF8 /* Event.swift */,
 				FE45EEAF1B2682AF00F39BF8 /* Album.swift */,
 				FE45EEBE1B2E490600F39BF8 /* Invitation.swift */,
+				605FBBBA1B2E4BD7002E7A75 /* User.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */,
 				FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */,
 				FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */,
+				605FBBBB1B2E4BD7002E7A75 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
