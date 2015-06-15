@@ -24,27 +24,9 @@ class HomeScreenViewController : ZoomableCollectionViewController, UICollectionV
     func refreshData() {
         Event.getAllLiveEvents() { (events) -> Void in
             self.liveEvents = events
-            
-            /////// DUMMY DATA ////////////
-            let ev1 = Event()
-            ev1.name = "Sarah's Wedding"
-            let alb1 = Album()
-            for var i = 0; i < 60; i++ {
-                alb1.addPhoto(ThumbnailPhoto())
+            for event in self.liveEvents {
+                event.getInvitation().updateFromCameraRoll()
             }
-            ev1.albums = [alb1]
-            self.liveEvents.append(ev1)
-            
-            let ev2 = Event()
-            ev2.name = "Crazy Night Out"
-            let alb2 = Album()
-            for var i = 0; i < 43; i++ {
-                alb2.addPhoto(ThumbnailPhoto())
-            }
-            ev2.albums = [alb2]
-            self.liveEvents.append(ev2)
-            
-            ////// DUMMY DATA /////////////
             self.collectionView.reloadData()
         }
     }

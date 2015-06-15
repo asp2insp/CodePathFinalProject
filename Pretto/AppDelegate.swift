@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        Invitation.registerSubclass()
+        
         Parse.enableLocalDatastore()
         
         // Initialize Parse.
