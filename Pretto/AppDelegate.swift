@@ -29,33 +29,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         self.registerForRemoteNotifications(application, launchOptions:launchOptions)
         
         // check user and start a storyboard accourdingly
-        if (!self.checkCurrentUser()) {
-            println("Starting login flow")
-            self.showLoginWindow()
-        }
-        else {
-            println("Starting main flow")
-            self.startMainStoryBoard()
-        }
-        
-        return true
-    }
-    
-    func checkCurrentUser() -> Bool {
-        
-        var currentUser = PFUser.currentUser()
-        if currentUser != nil {
-            println("there is a current user")
-            if PFFacebookUtils.isLinkedWithUser(currentUser!) {
-                return true
-            } else {
-                    println("current user is not linked")
-            }
-        } else {
-            println("current user is nil")
-        }
+        self.checkCurrentUser({ (user:User) -> Void in
+                user.save()
+                println(user.facebookId)
+                println(user.email)
+                println(user.name)
+                println(user.profilePhotoUrl)
+                self.startMainStoryBoard()
+            },
+            otherwise: { (pfUser:PFUser?) -> Void in
+                if pfUser != nil {
+                    PFFacebookUtils.unlinkUserInBackground(pfUser!)
+                }
+                self.showLoginWindow()
+            })
         
         return false
+    }
+    
+    func checkCurrentUser(onValidUser:((User)->Void), otherwise:((PFUser?)->Void)) {
+        var currentUser = PFUser.currentUser()
+        if currentUser != nil {
+            if PFFacebookUtils.isLinkedWithUser(currentUser!) {
+                var request = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+                request.startWithCompletionHandler { (conn:FBSDKGraphRequestConnection!, res:AnyObject!, err:NSError!) -> Void in
+                    if err == nil && res != nil {
+                        var userData = res as! NSDictionary
+                        var facebookId = userData["id"] as! String
+                        var name = userData["name"] as! String
+                        var email = userData["email"] as! String?
+                        
+                        var currentUser = PFUser.currentUser()
+                        var user = User(innerUser: currentUser)
+                        user.facebookId = facebookId
+                        user.email = email
+                        user.name = name
+                        
+                        onValidUser(user)
+                    }
+                    else {
+                        otherwise(PFUser.currentUser())
+                    }
+                }
+
+            } else {
+                otherwise(nil)
+            }
+        } else {
+            otherwise(nil)
+        }
     }
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {

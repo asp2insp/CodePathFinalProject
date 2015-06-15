@@ -9,9 +9,6 @@
 import Foundation
 
 private let kClassName = "Request"
-private let kPhotoKey = "photo"
-private let kRequesterKey = "requester"
-private let kRequestStatusKey = "status"
 
 class Request : PFObject, PFSubclassing {
     

@@ -176,7 +176,7 @@ class SelectableImageCell : UICollectionViewCell {
     }
     
     func animateStateChange() {
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.checkbox.transform = CGAffineTransformMakeScale(2, 2)
             self.checkbox.transform = CGAffineTransformMakeScale(1, 1)
         })

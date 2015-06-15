@@ -27,6 +27,7 @@
 		FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAF1B2682AF00F39BF8 /* Album.swift */; };
 		FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */; };
 		FE45EEB91B2DFD5C00F39BF8 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */; };
+		FE45EEBF1B2E490600F39BF8 /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEBE1B2E490600F39BF8 /* Invitation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		FE45EEAF1B2682AF00F39BF8 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableCollectionView.swift; sourceTree = "<group>"; };
 		FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		FE45EEBE1B2E490600F39BF8 /* Invitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +146,6 @@
 				FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */,
 				16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */,
 				FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */,
-				605FBBB81B2E25BA002E7A75 /* HomeViewController.swift */,
 				FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */,
 				FE45EE411B1FE5DF00F39BF8 /* Main.storyboard */,
 				FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */,
@@ -188,6 +189,8 @@
 				FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */,
 				FE45EEA61B23B56300F39BF8 /* Event.swift */,
 				FE45EEAF1B2682AF00F39BF8 /* Album.swift */,
+				FE45EEBE1B2E490600F39BF8 /* Invitation.swift */,
+				605FBBBA1B2E4BD7002E7A75 /* User.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				605FBBB91B2E25BA002E7A75 /* HomeViewController.swift in Sources */,
 				16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */,
 				FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */,
+				605FBBBB1B2E4BD7002E7A75 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
