@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Create New Event-->
+        <scene sceneID="0gd-Ax-iJd">
+            <objects>
+                <viewController title="Create New Event" id="OtM-mB-KEz" customClass="CreateEventViewController" customModule="Pretto" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mty-Ma-YQ5"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wco-IZ-ROY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A6Q-07-r6C">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="k6E-ZO-Bfw">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddEventPhotoCell" rowHeight="97" id="VqM-7Y-xaA" customClass="AddEventPhotoCell" customModule="Pretto" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VqM-7Y-xaA" id="LzF-iU-nfh">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pb9-83-nF5">
+                                                    <rect key="frame" x="16" y="10" width="50" height="50"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="0ZH-56-BmG"/>
+                                                        <constraint firstAttribute="height" constant="50" id="xlE-t7-Gc0"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please provide event title and optional event icon" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yex-a6-8xh">
+                                                    <rect key="frame" x="82" y="25" width="510" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="add photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSO-gT-8Gw">
+                                                    <rect key="frame" x="16" y="10" width="50" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pb9-83-nF5" firstAttribute="top" secondItem="LzF-iU-nfh" secondAttribute="top" constant="10" id="2s0-Oe-dL0"/>
+                                                <constraint firstItem="bSO-gT-8Gw" firstAttribute="height" secondItem="pb9-83-nF5" secondAttribute="height" id="6NV-hW-Kb9"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="pb9-83-nF5" secondAttribute="bottom" constant="20" id="BKS-Ay-ZmZ"/>
+                                                <constraint firstItem="bSO-gT-8Gw" firstAttribute="centerY" secondItem="pb9-83-nF5" secondAttribute="centerY" id="Khh-BK-wyA"/>
+                                                <constraint firstItem="bSO-gT-8Gw" firstAttribute="centerX" secondItem="pb9-83-nF5" secondAttribute="centerX" id="Qan-0B-fb9"/>
+                                                <constraint firstItem="Yex-a6-8xh" firstAttribute="leading" secondItem="pb9-83-nF5" secondAttribute="trailing" constant="16" id="UJj-1J-Cy6"/>
+                                                <constraint firstAttribute="trailing" secondItem="Yex-a6-8xh" secondAttribute="trailing" constant="8" id="ZYG-N6-QyF"/>
+                                                <constraint firstItem="bSO-gT-8Gw" firstAttribute="width" secondItem="pb9-83-nF5" secondAttribute="width" id="b4b-sk-yzn"/>
+                                                <constraint firstItem="pb9-83-nF5" firstAttribute="leading" secondItem="LzF-iU-nfh" secondAttribute="leading" constant="16" id="fCe-eH-aqS"/>
+                                                <constraint firstItem="pb9-83-nF5" firstAttribute="centerY" secondItem="Yex-a6-8xh" secondAttribute="centerY" id="nB5-kR-34r"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="eventPhoto" destination="pb9-83-nF5" id="vQO-86-3RN"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddEventTitleCell" id="5MZ-mR-SLu" customClass="AddEventTitleCell" customModule="Pretto" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5MZ-mR-SLu" id="ohD-az-00j">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Event Title" borderStyle="roundedRect" placeholder="Event Title" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r4Y-9K-I7L">
+                                                    <rect key="frame" x="16" y="7" width="551.5" height="30"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3D-h8-AcC">
+                                                    <rect key="frame" x="572" y="0.0" width="19.5" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="x3D-h8-AcC" firstAttribute="leading" secondItem="r4Y-9K-I7L" secondAttribute="trailing" constant="5" id="Cl1-OV-jtx"/>
+                                                <constraint firstItem="r4Y-9K-I7L" firstAttribute="leading" secondItem="ohD-az-00j" secondAttribute="leading" constant="16" id="JpC-l8-YdK"/>
+                                                <constraint firstAttribute="trailing" secondItem="x3D-h8-AcC" secondAttribute="trailing" constant="8" id="PaW-pD-9x8"/>
+                                                <constraint firstAttribute="centerY" secondItem="r4Y-9K-I7L" secondAttribute="centerY" id="ZmS-Ob-lOh"/>
+                                                <constraint firstAttribute="bottom" secondItem="x3D-h8-AcC" secondAttribute="bottom" id="f8E-jH-195"/>
+                                                <constraint firstItem="x3D-h8-AcC" firstAttribute="top" secondItem="ohD-az-00j" secondAttribute="top" id="tOB-JT-cJ0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="eventTitle" destination="r4Y-9K-I7L" id="Nl4-k7-tWU"/>
+                                            <outlet property="titleCharCounter" destination="x3D-h8-AcC" id="XWY-ts-7AP"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddEventDateCell" id="d7D-nm-4ty" customClass="AddEventDateCell" customModule="Pretto" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d7D-nm-4ty" id="zvL-Zy-dwV">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbG-Te-7dS">
+                                                    <rect key="frame" x="16" y="12" width="78" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etk-6I-wET">
+                                                    <rect key="frame" x="94" y="13" width="457" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="etk-6I-wET" secondAttribute="centerY" id="AC7-uZ-heA"/>
+                                                <constraint firstItem="dbG-Te-7dS" firstAttribute="leading" secondItem="zvL-Zy-dwV" secondAttribute="leading" constant="16" id="J2k-Di-cNs"/>
+                                                <constraint firstAttribute="centerY" secondItem="dbG-Te-7dS" secondAttribute="centerY" id="Llb-MW-e76"/>
+                                                <constraint firstAttribute="trailing" secondItem="etk-6I-wET" secondAttribute="trailing" constant="16" id="ehh-WU-iaP"/>
+                                                <constraint firstItem="etk-6I-wET" firstAttribute="leading" secondItem="dbG-Te-7dS" secondAttribute="trailing" id="jBZ-Nc-GEn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="etk-6I-wET" id="pZL-eO-qbL"/>
+                                            <outlet property="startOrEndLabel" destination="dbG-Te-7dS" id="kb1-SH-yY0"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddEventDatePickerCell" rowHeight="162" id="PLI-bk-Jnp" customClass="AddEventDatePickerCell" customModule="Pretto" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PLI-bk-Jnp" id="B5q-wa-KEz">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="h8t-wJ-cfA">
+                                                    <rect key="frame" x="140" y="-1" width="320" height="162"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="456001470.50103301">
+                                                        <!--2015-06-14 19:04:30 +0000-->
+                                                    </date>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="h8t-wJ-cfA" secondAttribute="bottom" id="1hm-Om-AF2"/>
+                                                <constraint firstAttribute="centerX" secondItem="h8t-wJ-cfA" secondAttribute="centerX" id="jiD-Xc-1FQ"/>
+                                                <constraint firstItem="h8t-wJ-cfA" firstAttribute="top" secondItem="B5q-wa-KEz" secondAttribute="top" id="tmG-eZ-k3V"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="datePicker" destination="h8t-wJ-cfA" id="TLZ-Jo-inV"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="k6E-ZO-Bfw" secondAttribute="bottom" id="3Ic-j5-HcI"/>
+                            <constraint firstItem="k6E-ZO-Bfw" firstAttribute="top" secondItem="A6Q-07-r6C" secondAttribute="top" id="eQd-rd-hKx"/>
+                            <constraint firstItem="k6E-ZO-Bfw" firstAttribute="top" secondItem="A6Q-07-r6C" secondAttribute="top" id="fSA-JM-uWw"/>
+                            <constraint firstItem="k6E-ZO-Bfw" firstAttribute="leading" secondItem="A6Q-07-r6C" secondAttribute="leading" id="hYD-gV-BTP"/>
+                            <constraint firstItem="k6E-ZO-Bfw" firstAttribute="leading" secondItem="A6Q-07-r6C" secondAttribute="leading" id="p3p-8U-zoT"/>
+                            <constraint firstAttribute="trailing" secondItem="k6E-ZO-Bfw" secondAttribute="trailing" id="pOU-Vp-6nN"/>
+                            <constraint firstAttribute="trailing" secondItem="k6E-ZO-Bfw" secondAttribute="trailing" id="rc3-K1-qV5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Event" id="kIe-zZ-xJB">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Cqy-2E-VUP"/>
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="dny-24-cnZ"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nextButton" destination="dny-24-cnZ" id="AU6-zw-DgO"/>
+                        <outlet property="tableView" destination="k6E-ZO-Bfw" id="4Tz-50-qy8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hqB-zv-ERL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18" y="563"/>
+        </scene>
+        <!--Create Event-->
+        <scene sceneID="o4h-2n-jBq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wmx-cY-49M" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Create Event" id="d0g-aR-V0t"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wad-WB-gHn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OtM-mB-KEz" kind="relationship" relationship="rootViewController" id="LiV-5Q-va4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S6B-PU-DhJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-802" y="563"/>
+        </scene>
+    </scenes>
+</document>
