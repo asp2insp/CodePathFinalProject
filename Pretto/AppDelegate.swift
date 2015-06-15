@@ -189,12 +189,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     }
     
     func startMainStoryBoard() {
-        self.startStoryBoardWithName("Main")
-    }
-    
-    func startStoryBoardWithName(name:String!) {
-        var loginSB = UIStoryboard(name: name, bundle: nil)
-        let viewcontroller: UIViewController = loginSB.instantiateInitialViewController() as! UIViewController
+        var mainSB = UIStoryboard(name: "Main", bundle: nil)
+        let viewcontroller = mainSB.instantiateInitialViewController() as! UIViewController
         self.window!.rootViewController = viewcontroller
     }
 }
