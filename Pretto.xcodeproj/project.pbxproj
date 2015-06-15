@@ -31,6 +31,7 @@
 		FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAF1B2682AF00F39BF8 /* Album.swift */; };
 		FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */; };
 		FE45EEC11B2E4DE200F39BF8 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */; };
+		FE45EEC21B2E774600F39BF8 /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEBE1B2E490600F39BF8 /* Invitation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -364,6 +365,7 @@
 				FE45EE9D1B23A54000F39BF8 /* ThumbnailPhoto.swift in Sources */,
 				16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */,
 				605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */,
+				FE45EEC21B2E774600F39BF8 /* Invitation.swift in Sources */,
 				FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */,
 				FE45EE401B1FE5DF00F39BF8 /* LoginViewController.swift in Sources */,
 				16D3AA341B2E476E00934948 /* AddEventTitleCell.swift in Sources */,

@@ -69,15 +69,23 @@ class Event : PFObject, PFSubclassing {
         }
     }
     
-    class func nowAsString() -> String {
-        return Event.sDateFormatter.stringFromDate(NSDate())
+    func addImageToEvent(image: FullsizePhoto) {
+        let album = self.albums[0]
+        album.addPhoto(image.getThumbnail())
+    }
+    
+    func getInvitation() -> Invitation {
+        let query = PFQuery(className:"Invitation", predicate: nil)
+        query.whereKey("event", equalTo: self)
+        let objects = query.findObjects()
+        return objects![0] as! Invitation
     }
     
     // Query for all live events in the background and call the given block with the result
     class func getAllLiveEvents(block: ([Event] -> Void) ) {
         let query = PFQuery(className: kClassName, predicate: nil)
-        query.whereKey(kStartDateTimeKey, lessThanOrEqualTo: nowAsString())
-        query.whereKey(kEndDateTimeKey, greaterThan: nowAsString())
+        query.whereKey(kStartDateTimeKey, lessThanOrEqualTo: NSDate())
+        query.whereKey(kEndDateTimeKey, greaterThan: NSDate())
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
                 var events : [Event] = []
@@ -94,7 +102,7 @@ class Event : PFObject, PFSubclassing {
     // Query for all past events in the background and call the given block with the result
     class func getAllPastEvents(block: ([Event] -> Void) ) {
         let query = PFQuery(className: kClassName, predicate: nil)
-        query.whereKey(kEndDateTimeKey, lessThan: nowAsString())
+        query.whereKey(kEndDateTimeKey, lessThan: NSDate())
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
                 var events : [Event] = []
@@ -111,7 +119,7 @@ class Event : PFObject, PFSubclassing {
     // Query for all future events in the background and call the given block with the result
     class func getAllFutureEvents(block: ([Event] -> Void) ) {
         let query = PFQuery(className: kClassName, predicate: nil)
-        query.whereKey(kStartDateTimeKey, greaterThanOrEqualTo: nowAsString())
+        query.whereKey(kStartDateTimeKey, greaterThanOrEqualTo: NSDate())
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
                 var events : [Event] = []
