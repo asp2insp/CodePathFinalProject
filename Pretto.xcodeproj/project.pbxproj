@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		605FBBBB1B2E4BD7002E7A75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FBBBA1B2E4BD7002E7A75 /* User.swift */; };
+		1628DCEC1B2E6755005E0841 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCEB1B2E6755005E0841 /* HomeScreenViewController.swift */; };
+		1628DCED1B2E6CB7005E0841 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FBBBA1B2E4BD7002E7A75 /* User.swift */; };
+		16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */; };
+		16354F431B2E6613003D2A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16354F411B2E6613003D2A2B /* Main.storyboard */; };
+		16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */; };
+		16D3AA341B2E476E00934948 /* AddEventTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */; };
+		16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */; };
+		16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */; };
 		605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FBBBC1B2E571F002E7A75 /* Friend.swift */; };
 		F7946A7BA670F383BAB40980 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94BE76FA7DC3B5E1419C76CE /* libPods.a */; };
 		FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */; };
 		FE45EE401B1FE5DF00F39BF8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */; };
-		FE45EE431B1FE5DF00F39BF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE411B1FE5DF00F39BF8 /* Main.storyboard */; };
 		FE45EE451B1FE5DF00F39BF8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */; };
 		FE45EE481B1FE5DF00F39BF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE461B1FE5DF00F39BF8 /* LaunchScreen.xib */; };
 		FE45EE541B1FE5DF00F39BF8 /* PrettoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE531B1FE5DF00F39BF8 /* PrettoTests.swift */; };
@@ -38,6 +44,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1628DCEB1B2E6755005E0841 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		16354F421B2E6613003D2A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventPhotoCell.swift; sourceTree = "<group>"; };
+		16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventTitleCell.swift; sourceTree = "<group>"; };
+		16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDateCell.swift; sourceTree = "<group>"; };
+		16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDatePickerCell.swift; sourceTree = "<group>"; };
 		605FBBBA1B2E4BD7002E7A75 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		605FBBBC1B2E571F002E7A75 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		6680AB9C507B239DAD236C85 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -47,7 +60,6 @@
 		FE45EE3C1B1FE5DF00F39BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		FE45EE421B1FE5DF00F39BF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FE45EE471B1FE5DF00F39BF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		FE45EE4D1B1FE5DF00F39BF8 /* PrettoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrettoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,7 +72,6 @@
 		FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullsizePhoto.swift; sourceTree = "<group>"; };
 		FE45EEAF1B2682AF00F39BF8 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableCollectionView.swift; sourceTree = "<group>"; };
-		FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		FE45EEBE1B2E490600F39BF8 /* Invitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
 		FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +95,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16D3AA301B2E46B600934948 /* CreateEvent */ = {
+			isa = PBXGroup;
+			children = (
+				16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */,
+				16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */,
+				16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */,
+				16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */,
+			);
+			name = CreateEvent;
+			sourceTree = "<group>";
+		};
 		35D30FEEDFCFBC4EE1C87B8C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,8 +151,10 @@
 				FE45EE3D1B1FE5DF00F39BF8 /* AppDelegate.swift */,
 				FE45EEB81B2DFD5C00F39BF8 /* HomeScreenViewController.swift */,
 				FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */,
+				16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */,
+				1628DCEB1B2E6755005E0841 /* HomeScreenViewController.swift */,
 				FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */,
-				FE45EE411B1FE5DF00F39BF8 /* Main.storyboard */,
+				16354F411B2E6613003D2A2B /* Main.storyboard */,
 				FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */,
 				FE45EE461B1FE5DF00F39BF8 /* LaunchScreen.xib */,
 				FE45EE3B1B1FE5DF00F39BF8 /* Supporting Files */,
@@ -182,6 +206,7 @@
 		FE45EEB31B2DEF0300F39BF8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				16D3AA301B2E46B600934948 /* CreateEvent */,
 				FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */,
 			);
 			name = Views;
@@ -274,9 +299,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE45EE431B1FE5DF00F39BF8 /* Main.storyboard in Resources */,
 				FE45EE481B1FE5DF00F39BF8 /* LaunchScreen.xib in Resources */,
 				FE45EE451B1FE5DF00F39BF8 /* Images.xcassets in Resources */,
+				16354F431B2E6613003D2A2B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,19 +352,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */,
 				FE45EEAE1B23CEC900F39BF8 /* FullsizePhoto.swift in Sources */,
+				16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */,
 				FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */,
+				1628DCED1B2E6CB7005E0841 /* User.swift in Sources */,
 				FE45EE9D1B23A54000F39BF8 /* ThumbnailPhoto.swift in Sources */,
+				16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */,
 				605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */,
-				FE45EEB91B2DFD5C00F39BF8 /* HomeScreenViewController.swift in Sources */,
 				FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */,
 				FE45EE401B1FE5DF00F39BF8 /* LoginViewController.swift in Sources */,
-				FE45EEBF1B2E490600F39BF8 /* Invitation.swift in Sources */,
+				16D3AA341B2E476E00934948 /* AddEventTitleCell.swift in Sources */,
 				FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */,
 				FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */,
 				FE45EEC11B2E4DE200F39BF8 /* EventDetailViewController.swift in Sources */,
+				16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */,
 				FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */,
-				605FBBBB1B2E4BD7002E7A75 /* User.swift in Sources */,
+				1628DCEC1B2E6755005E0841 /* HomeScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,10 +391,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FE45EE411B1FE5DF00F39BF8 /* Main.storyboard */ = {
+		16354F411B2E6613003D2A2B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FE45EE421B1FE5DF00F39BF8 /* Base */,
+				16354F421B2E6613003D2A2B /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
