@@ -195,14 +195,14 @@
 		FE45EE9B1B23A52D00F39BF8 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
-				FE45EEAA1B23C6CA00F39BF8 /* Request.swift */,
-				FE45EE9C1B23A54000F39BF8 /* ThumbnailPhoto.swift */,
-				FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */,
+				605FBBBA1B2E4BD7002E7A75 /* User.swift */,
+				605FBBBC1B2E571F002E7A75 /* Friend.swift */,
 				FE45EEA61B23B56300F39BF8 /* Event.swift */,
 				FE45EEAF1B2682AF00F39BF8 /* Album.swift */,
 				FE45EEBE1B2E490600F39BF8 /* Invitation.swift */,
-				605FBBBA1B2E4BD7002E7A75 /* User.swift */,
-				605FBBBC1B2E571F002E7A75 /* Friend.swift */,
+				FE45EE9C1B23A54000F39BF8 /* ThumbnailPhoto.swift */,
+				FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */,
+				FE45EEAA1B23C6CA00F39BF8 /* Request.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";

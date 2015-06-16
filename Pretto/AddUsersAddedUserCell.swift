@@ -14,9 +14,14 @@ class AddUsersAddedUserCell: UITableViewCell {
     @IBOutlet var userNameLabel: UILabel!
     
     
-    var profileImage: UIImage! {
+    var facebookId: String! {
         didSet{
-            self.userProfileImage.image = profileImage
+            self.userProfileImage.clipsToBounds = true
+            self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.width / 2
+            self.userProfileImage.layer.borderColor = UIColor.lightGrayColor().CGColor
+            self.userProfileImage.layer.borderWidth = 1
+            self.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
+            self.userProfileImage.setImageWithURL(NSURL(string: "https://graph.facebook.com/\(self.facebookId)/picture?type=large&return_ssl_resources=1")!)
         }
     }
     
@@ -29,6 +34,7 @@ class AddUsersAddedUserCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.None
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -26,7 +26,6 @@ class Invitation : PFObject, PFSubclassing {
         return kClassName
     }
     
-    
     @NSManaged var event : Event
     @NSManaged var from : PFUser
     @NSManaged var to : PFUser

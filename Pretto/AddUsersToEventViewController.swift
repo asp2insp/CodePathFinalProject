@@ -24,8 +24,9 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet var tableView: UITableView!
     
     @IBAction func onCreate(sender: UIBarButtonItem) {
-        var newEvent = Event(className: Event.parseClassName())
-        newEvent.name = self.eventTitle
+        var newEvent = Event()
+        newEvent.title = self.eventTitle
+//        newEvent.coverPhoto = nil
         newEvent.owner = PFUser.currentUser()!
         newEvent.pincode = "1111"
         newEvent.startDateTime = self.startDate
@@ -35,6 +36,8 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         newEvent.locationName = "Zynga"
         newEvent.admins = [PFUser.currentUser()!]
         newEvent.guests = [PFUser.currentUser()!]
+        newEvent.albums = [Album]()
+        
         newEvent.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
             if success {
                 println("Event Created!")
@@ -84,6 +87,10 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
 //MARK: UITableViewDelegate
 
 extension AddUsersToEventViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddUsersAddedUserCell
+        cell.accessoryType = (cell.accessoryType == .None) ? .Checkmark : .None
+    }
     
 }
 
@@ -100,7 +107,8 @@ extension AddUsersToEventViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(AddedUserCellReuseIdentifier, forIndexPath: indexPath) as! AddUsersAddedUserCell
-        cell.userName = "Paco Smith"
+        cell.userName = friends![indexPath.row].friendName
+        cell.facebookId = friends![indexPath.row].friendFacebookId
         return cell
     }
 }

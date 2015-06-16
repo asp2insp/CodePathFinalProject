@@ -13,7 +13,7 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = event?.name
+        self.title = event?.title
     }
 }
 

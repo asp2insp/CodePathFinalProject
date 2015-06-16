@@ -28,11 +28,13 @@ class Event : PFObject, PFSubclassing {
         return kClassName
     }
     
-    @NSManaged var name : String
-    @NSManaged var owner : PFUser
-    @NSManaged var pincode : String
+    @NSManaged var title : String
+    @NSManaged var coverPhoto : UIImage
     @NSManaged var startDateTime : NSDate
     @NSManaged var endDateTime : NSDate
+    @NSManaged var owner : PFUser
+    @NSManaged var pincode : String
+
     @NSManaged var latitude : Double
     @NSManaged var longitude : Double
     @NSManaged var locationName : String
