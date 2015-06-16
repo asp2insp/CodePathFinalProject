@@ -30,6 +30,10 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     
     var titleTextField: UITextField?
     
+    @IBAction func onCancel(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func unwindFromAddUsers(segue: UIStoryboardSegue) {
 
         var sourceVC = segue.sourceViewController as! AddUsersToEventViewController

@@ -24,13 +24,15 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet var tableView: UITableView!
     
     @IBAction func onCreate(sender: UIBarButtonItem) {
+        var eventDictionary = ["title": self.eventTitle,
+                               "cover_photo": nil]
         var newEvent = Event()
         newEvent.title = self.eventTitle
 //        newEvent.coverPhoto = nil
         newEvent.owner = PFUser.currentUser()!
         newEvent.pincode = "1111"
-        newEvent.startDateTime = self.startDate
-        newEvent.endDateTime = self.endDate
+        newEvent.startDate = self.startDate
+        newEvent.endDate = self.endDate
         newEvent.latitude = 37.770789
         newEvent.longitude = -122.403918
         newEvent.locationName = "Zynga"

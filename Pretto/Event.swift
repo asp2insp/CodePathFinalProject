@@ -29,17 +29,17 @@ class Event : PFObject, PFSubclassing {
     }
     
     @NSManaged var title : String
-    @NSManaged var coverPhoto : UIImage
-    @NSManaged var startDateTime : NSDate
-    @NSManaged var endDateTime : NSDate
-    @NSManaged var owner : PFUser
-    @NSManaged var pincode : String
+    @NSManaged var coverPhoto : UIImage?
+    @NSManaged var startDate : NSDate
+    @NSManaged var endDate : NSDate
+    @NSManaged var owner : PFUser?
+    @NSManaged var pincode : String?
 
     @NSManaged var latitude : Double
     @NSManaged var longitude : Double
-    @NSManaged var locationName : String
-    @NSManaged var admins : [PFUser]
-    @NSManaged var guests : [PFUser]
+    @NSManaged var locationName : String?
+    @NSManaged var admins : [PFUser]?
+    @NSManaged var guests : [PFUser]?
     
     // TODO - support more than one album per event, right now we're going
     // to have a 1:1 mapping
@@ -47,9 +47,49 @@ class Event : PFObject, PFSubclassing {
     
     var isLive : Bool {
         let now = NSDate()
-        let afterStart = startDateTime.compare(now) == NSComparisonResult.OrderedAscending
-        let beforeEnd = now.compare(endDateTime) == NSComparisonResult.OrderedAscending
+        let afterStart = startDate.compare(now) == NSComparisonResult.OrderedAscending
+        let beforeEnd = now.compare(endDate) == NSComparisonResult.OrderedAscending
         return afterStart && beforeEnd
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    init?(dictionary: NSDictionary) {
+        super.init()
+        
+        if let title = dictionary["title"] as? String {
+            self.title = title
+        } else {
+            return nil
+        }
+        
+        if let startDate = dictionary["start_date"] as? NSDate {
+            self.startDate = startDate
+        } else {
+            return nil
+        }
+        
+        if let endDate = dictionary["end_date"] as? NSDate {
+            self.endDate = endDate
+        } else {
+            return nil
+        }
+        
+        if let owner = dictionary["owner"] as? PFUser {
+            self.owner = owner
+        } else {
+            return nil
+        }
+    
+        self.coverPhoto = dictionary["owner"] as? UIImage
+        self.pincode = dictionary["pincode"] as? String
+        self.latitude = dictionary["latitude"] as! Double
+        self.longitude = dictionary["longitude"] as! Double
+        self.admins = dictionary["admins"] as? [PFUser]
+        self.guests = dictionary["guests"] as? [PFUser]
+
     }
 
     

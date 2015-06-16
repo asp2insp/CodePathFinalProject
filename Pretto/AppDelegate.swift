@@ -196,6 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         self.window = UIWindow(frame:UIScreen.mainScreen().bounds)
         var mainSB = UIStoryboard(name: "Main", bundle: nil)
         let viewController = mainSB.instantiateInitialViewController() as! UITabBarController
+        viewController.selectedIndex = 1
         self.window!.rootViewController = viewController
         self.window!.makeKeyAndVisible()
     }
