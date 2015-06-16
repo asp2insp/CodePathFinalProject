@@ -12,7 +12,6 @@ let AddedUserCellReuseIdentifier = "AddedUserCell"
 
 class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var eventDictionary: NSDictionary!
     var startDate: NSDate!
     var endDate: NSDate!
     var eventTitle: String!
@@ -64,15 +63,6 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
                 println("No friends found")
             }
         })
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        startDate = eventDictionary["start_date"] as! NSDate
-        endDate = eventDictionary["end_date"] as! NSDate
-        eventTitle = eventDictionary["event_title"] as! String
-        eventPhoto = eventDictionary["eventPhoto"] as? UIImage
-        
     }
 
     override func didReceiveMemoryWarning() {

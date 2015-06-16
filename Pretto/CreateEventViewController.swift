@@ -23,7 +23,6 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     private var shouldDisplayPickerForStartDate = false
     private var shouldDisplayPickerForEndDate = false
     
-    var eventDictionary = NSDictionary()
     var startDate: NSDate!
     var endDate: NSDate!
     var eventTitle: String!
@@ -34,22 +33,22 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func unwindFromAddUsers(segue: UIStoryboardSegue) {
 
         var sourceVC = segue.sourceViewController as! AddUsersToEventViewController
-        self.eventDictionary = sourceVC.eventDictionary
-//        if sourceVC.startDate != nil {
-//            self.startDate = sourceVC.startDate
-//        }
-//        
-//        if sourceVC.endDate != nil {
-//            self.endDate = sourceVC.endDate
-//        }
-//        
-//        if sourceVC.eventTitle != nil {
-//            self.eventTitle = sourceVC.eventTitle
-//        }
-//        
-//        if sourceVC.eventPhoto != nil {
-//            self.eventPhoto = sourceVC.eventPhoto
-//        }
+        
+        if sourceVC.startDate != nil {
+            self.startDate = sourceVC.startDate
+        }
+        
+        if sourceVC.endDate != nil {
+            self.endDate = sourceVC.endDate
+        }
+        
+        if sourceVC.eventTitle != nil {
+            self.eventTitle = sourceVC.eventTitle
+        }
+        
+        if sourceVC.eventPhoto != nil {
+            self.eventPhoto = sourceVC.eventPhoto
+        }
         
     }
     
@@ -76,15 +75,10 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AddUsersSegue" {
             var destinationVC = segue.destinationViewController as! AddUsersToEventViewController
-//            eventDictionary.setValue(self.startDate ?? NSDate(), forKey: "start_date")
-//            eventDictionary.setValue(self.endDate ?? NSDate(), forKey: "end_date")
-//            eventDictionary.setValue(self.eventTitle, forKey: "event_title")
-//            eventDictionary.setValue(self.eventPhoto, forKey: "event_photo")
-            destinationVC.eventDictionary = self.eventDictionary
-//            destinationVC.startDate = self.startDate ?? NSDate()
-//            destinationVC.endDate = self.endDate ?? NSDate()
-//            destinationVC.eventTitle = self.eventTitle
-//            destinationVC.eventPhoto = self.eventPhoto
+            destinationVC.startDate = self.startDate ?? NSDate()
+            destinationVC.endDate = self.endDate ?? NSDate()
+            destinationVC.eventTitle = self.eventTitle
+            destinationVC.eventPhoto = self.eventPhoto
         }
     }
 
@@ -182,8 +176,7 @@ extension CreateEventViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(AddEventTitleCellReuseIdentifier, forIndexPath: indexPath) as! AddEventTitleCell
             cell.delegate = self
             if self.eventTitle != nil {
-//                cell.title = self.eventTitle
-                cell.title = self.eventDictionary["event_title"] as? String ?? ""
+                cell.title = self.eventTitle
             }
             self.titleTextField = cell.eventTitle
             self.titleTextField?.becomeFirstResponder()
@@ -193,12 +186,10 @@ extension CreateEventViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(AddEventDateCellReuseIdentifier, forIndexPath: indexPath) as! AddEventDateCell
             if indexPath.section == 1 {
                 cell.isStartDate = true
-//                cell.date = self.startDate ?? NSDate()
-                cell.date = self.eventDictionary["start_date"] as? NSDate ?? NSDate()
+                cell.date = self.startDate ?? NSDate()
             } else {
                 cell.isStartDate = false
-//                cell.date = self.endDate ?? NSDate()
-                cell.date = self.eventDictionary["end_date"] as? NSDate ?? NSDate()
+                cell.date = self.endDate ?? NSDate()
             }
             return cell
             
@@ -221,8 +212,7 @@ extension CreateEventViewController: UITableViewDataSource {
 extension CreateEventViewController: AddEventTitleCellDelegate {
     func addEventTitleCell(addEventTitleCell: AddEventTitleCell, titleDidChange title: String) {
         nextButton.enabled = (title == "") || (title == "Event Title") ? false : true
-        eventDictionary.setValue(self.eventTitle, forKey: "event_title")
-//        self.eventTitle = title
+        self.eventTitle = title
     }
 }
 
@@ -234,11 +224,9 @@ extension CreateEventViewController: AddEventDatePickerCellDelegate {
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: isStartDatePicker ? 1 : 2)) as! AddEventDateCell
         cell.dateLabel.text = dateFormatter.stringFromDate(date)
         if isStartDatePicker {
-            eventDictionary.setValue(self.startDate ?? NSDate(), forKey: "start_date")
-//            self.startDate = date
+            self.startDate = date
         } else {
-            eventDictionary.setValue(self.endDate ?? NSDate(), forKey: "end_date")
-//            self.endDate = date
+            self.endDate = date
         }
     }
 }
