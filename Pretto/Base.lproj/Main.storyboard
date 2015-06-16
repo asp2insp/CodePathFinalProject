@@ -446,7 +446,7 @@
                                             <constraint firstAttribute="height" constant="30" id="xbp-UG-j2a"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter user's name" placeholder="Enter user's name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wxf-TG-Tjo">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter user's name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wxf-TG-Tjo">
                                         <rect key="frame" x="51" y="14" width="498" height="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -485,7 +485,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cb5-R3-Qtm">
                                                     <rect key="frame" x="54" y="11" width="530" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -522,7 +522,11 @@
                                 <segue destination="RRd-2r-KNS" kind="unwind" unwindAction="unwindFromAddUsers:" id="dTH-6a-nHv"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Create" id="qFC-Yb-c6I"/>
+                        <barButtonItem key="rightBarButtonItem" title="Create" id="qFC-Yb-c6I">
+                            <connections>
+                                <action selector="onCreate:" destination="53o-AH-dAa" id="Rqb-VZ-TCp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="searchUserTextField" destination="Wxf-TG-Tjo" id="U62-oT-uu3"/>

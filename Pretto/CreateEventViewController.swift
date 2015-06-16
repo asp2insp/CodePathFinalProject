@@ -75,8 +75,8 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AddUsersSegue" {
             var destinationVC = segue.destinationViewController as! AddUsersToEventViewController
-            destinationVC.startDate = self.startDate
-            destinationVC.endDate = self.endDate
+            destinationVC.startDate = self.startDate ?? NSDate()
+            destinationVC.endDate = self.endDate ?? NSDate()
             destinationVC.eventTitle = self.eventTitle
             destinationVC.eventPhoto = self.eventPhoto
         }

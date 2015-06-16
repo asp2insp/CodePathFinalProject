@@ -15,13 +15,34 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     var startDate: NSDate!
     var endDate: NSDate!
     var eventTitle: String!
-    var eventPhoto: UIImage!
-    var users: [String]?
+    var eventPhoto: UIImage?
+    var friends: [Friend]?
+    var selectedFriends: [Friend]?
     
     @IBOutlet var searchUserTextField: UITextField!
     @IBOutlet var topView: UIView!
     @IBOutlet var tableView: UITableView!
     
+    @IBAction func onCreate(sender: UIBarButtonItem) {
+        var newEvent = Event(className: Event.parseClassName())
+        newEvent.name = self.eventTitle
+        newEvent.owner = PFUser.currentUser()!
+        newEvent.pincode = "1111"
+        newEvent.startDateTime = self.startDate
+        newEvent.endDateTime = self.endDate
+        newEvent.latitude = 37.770789
+        newEvent.longitude = -122.403918
+        newEvent.locationName = "Zynga"
+        newEvent.admins = [PFUser.currentUser()!]
+        newEvent.guests = [PFUser.currentUser()!]
+        newEvent.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+            if success {
+                println("Event Created!")
+            } else {
+                println("Error creating event: \(error)")
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,6 +53,16 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         topView.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         searchUserTextField.autocapitalizationType = UITextAutocapitalizationType.Words
+        
+        Friend.getAllFriendsFromFacebook("10153067889372737", onComplete: { (friends:[Friend]?) -> Void in
+            if friends != nil {
+                self.friends = friends
+                println(friends![0].friendName)
+                self.tableView.reloadData()
+            } else {
+                println("No friends found")
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,7 +95,7 @@ extension AddUsersToEventViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users?.count ?? 0
+        return friends?.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
