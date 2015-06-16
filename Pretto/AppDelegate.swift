@@ -187,7 +187,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         var logInController = LoginViewController()
         logInController.fields = .Facebook
         logInController.delegate = self;
-        self.window?.rootViewController = logInController
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window!.rootViewController = logInController
+        self.window!.makeKeyAndVisible()
     }
     
     func startMainStoryBoard() {
