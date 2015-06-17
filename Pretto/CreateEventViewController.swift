@@ -60,7 +60,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
 
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.whiteColor()
+//        tableView.backgroundColor = UIColor.whiteColor()
         
         nextButton.enabled = false
     }

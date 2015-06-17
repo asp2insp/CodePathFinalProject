@@ -28,7 +28,7 @@ class AddEventDateCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.None
-        self.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.2)
+        self.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
