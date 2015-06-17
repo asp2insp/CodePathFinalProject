@@ -8,13 +8,12 @@
 
 import UIKit
 
-let dateFormatter = NSDateFormatter()
-let AddEventPhotoCellReuseIdentifier = "AddEventPhotoCell"
-let AddEventTitleCellReuseIdentifier = "AddEventTitleCell"
-let AddEventDateCellReuseIdentifier = "AddEventDateCell"
-let AddEventDatePickerCellReuseIdentifier = "AddEventDatePickerCell"
+private let AddEventPhotoCellReuseIdentifier = "AddEventPhotoCell"
+private let AddEventTitleCellReuseIdentifier = "AddEventTitleCell"
+private let AddEventDateCellReuseIdentifier = "AddEventDateCell"
+private let AddEventDatePickerCellReuseIdentifier = "AddEventDatePickerCell"
 
-class CreateEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, addEventPhotoCellDelegate, AddEventTitleCellDelegate, AddEventDatePickerCellDelegate {
+class CreateEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddEventPhotoCellDelegate, AddEventTitleCellDelegate, AddEventDatePickerCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var nextButton: UIBarButtonItem!
     
@@ -26,7 +25,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     var startDate: NSDate!
     var endDate: NSDate!
     var eventTitle: String!
-    var eventPhoto: UIImage!
+    var eventPhoto: UIImage?
     
     var titleTextField: UITextField?
     
@@ -174,6 +173,9 @@ extension CreateEventViewController: UITableViewDataSource {
         case (0, 0):
             let cell = tableView.dequeueReusableCellWithIdentifier(AddEventPhotoCellReuseIdentifier, forIndexPath: indexPath) as! AddEventPhotoCell
             cell.delegate = self
+            if self.eventPhoto != nil {
+                cell.eventImage = self.eventPhoto!
+            }
             return cell
             
         case (0, 1):
@@ -183,7 +185,7 @@ extension CreateEventViewController: UITableViewDataSource {
                 cell.title = self.eventTitle
             }
             self.titleTextField = cell.eventTitle
-            self.titleTextField?.becomeFirstResponder()
+//            self.titleTextField?.becomeFirstResponder()
             return cell
             
         case (1, 0), (2,0):
@@ -237,11 +239,29 @@ extension CreateEventViewController: AddEventDatePickerCellDelegate {
 
 // MARK: AddEventTitleCellDelegate
 
-extension CreateEventViewController: addEventPhotoCellDelegate {
+extension CreateEventViewController: AddEventPhotoCellDelegate {
     func addEventPhotoCell(addEventPhotoCell: AddEventPhotoCell, didTapOnEventPhoto photo: UIImageView) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let actionTakePhoto = UIAlertAction(title: "Take Photo", style: UIAlertActionStyle.Default) { (alertAction: UIAlertAction!) -> Void in println("Take Photo") }
-        let actionChoosePhoto = UIAlertAction(title: "Choose Photo", style: UIAlertActionStyle.Default) { (alertAction: UIAlertAction!) -> Void in println("Choose Photo") }
+        let actionTakePhoto = UIAlertAction(title: "Take Photo", style: UIAlertActionStyle.Default) { (alertAction: UIAlertAction!) -> Void in
+            println("Take Photo")
+            var photoPicker = UIImagePickerController()
+            if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+                photoPicker.delegate = self
+                photoPicker.sourceType = UIImagePickerControllerSourceType.Camera
+                photoPicker.cameraDevice = UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear) ? .Rear : .Front
+                self.presentViewController(photoPicker, animated: true, completion: nil)
+            }
+        }
+        
+        let actionChoosePhoto = UIAlertAction(title: "Choose Photo", style: UIAlertActionStyle.Default) { (alertAction: UIAlertAction!) -> Void in
+            println("Choose Photo")
+            var photoPicker = UIImagePickerController()
+            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+                photoPicker.delegate = self
+                photoPicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+                self.presentViewController(photoPicker, animated: true, completion: nil)
+            }
+        }
         let actionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (alertAction:UIAlertAction!) -> Void in println("Cancel") }
         alertController.addAction(actionTakePhoto)
         alertController.addAction(actionChoosePhoto)
@@ -249,5 +269,15 @@ extension CreateEventViewController: addEventPhotoCellDelegate {
         
         self.presentViewController(alertController, animated: true, completion: nil)
         
+    }
+}
+
+// MARK: UIImagePickerControllerDelegate
+extension CreateEventViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        println("Photo Taken or Picked")
+        self.eventPhoto = image
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
 }

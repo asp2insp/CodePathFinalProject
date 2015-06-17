@@ -22,6 +22,7 @@ class AddEventDatePickerCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.None
+        self.datePicker.minimumDate = NSDate()
         self.datePicker.addTarget(self, action: "datePickerValueChanged", forControlEvents: UIControlEvents.ValueChanged)
     }
 

@@ -98,6 +98,7 @@ class User {
         }
     }
     
+    
     func printProperties() {
         println("facebookId: \(self.facebookId!)")
         println("Email: \(self.email!)")

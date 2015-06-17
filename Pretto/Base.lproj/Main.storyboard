@@ -105,7 +105,7 @@
                             <constraint firstItem="WcB-mA-zcS" firstAttribute="top" secondItem="V6G-Xx-Wga" secondAttribute="top" id="aj3-bl-d4u"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="u8i-RR-vRW">
+                    <navigationItem key="navigationItem" title="Your Albums" id="u8i-RR-vRW">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="04g-59-obn">
                             <connections>
                                 <action selector="onLogOut:" destination="Hy1-1N-qk0" id="7xL-my-mee"/>
@@ -136,7 +136,7 @@
             </objects>
             <point key="canvasLocation" x="842" y="280"/>
         </scene>
-        <!--View Controller-->
+        <!--Notification Center-->
         <scene sceneID="q1x-RK-ZGd">
             <objects>
                 <viewController id="S1D-Ha-FqN" sceneMemberID="viewController">
@@ -149,7 +149,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pZN-QZ-DI1"/>
+                    <navigationItem key="navigationItem" title="Notification Center" id="PN9-0Z-cFD">
+                        <barButtonItem key="rightBarButtonItem" image="settings" id="tfD-pg-tO9"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tvq-Dz-ZSc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -279,29 +281,29 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddEventPhotoCell" rowHeight="97" id="7FF-DD-39V" customClass="AddEventPhotoCell" customModule="Pretto" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddEventPhotoCell" rowHeight="100" id="7FF-DD-39V" customClass="AddEventPhotoCell" customModule="Pretto" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7FF-DD-39V" id="PdG-wV-pWS">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="49L-Xf-7Xm">
-                                                    <rect key="frame" x="16" y="10" width="50" height="50"/>
+                                                    <rect key="frame" x="16" y="10" width="60" height="60"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="IFV-VC-wu9"/>
-                                                        <constraint firstAttribute="width" constant="50" id="Ns0-Gp-tRn"/>
+                                                        <constraint firstAttribute="height" constant="60" id="IFV-VC-wu9"/>
+                                                        <constraint firstAttribute="width" constant="60" id="Ns0-Gp-tRn"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please provide event title and optional event icon" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Io-uH-is7">
-                                                    <rect key="frame" x="82" y="25" width="510" height="21"/>
+                                                    <rect key="frame" x="92" y="30" width="500" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="add photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1J-hX-EBZ">
-                                                    <rect key="frame" x="16" y="10" width="50" height="50"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <rect key="frame" x="16" y="10" width="60" height="60"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -320,6 +322,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="addPhotoLabel" destination="J1J-hX-EBZ" id="3s1-jx-qQQ"/>
                                             <outlet property="eventPhoto" destination="49L-Xf-7Xm" id="VAG-Ar-gLG"/>
                                         </connections>
                                     </tableViewCell>
@@ -494,7 +497,7 @@
                                     <constraint firstAttribute="height" constant="44" id="tK4-ha-2QY"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8i4-GV-va7">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8i4-GV-va7">
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -568,7 +571,7 @@
             </objects>
             <point key="canvasLocation" x="3165" y="-45"/>
         </scene>
-        <!--View Controller-->
+        <!--Explore-->
         <scene sceneID="qxG-WV-xvY">
             <objects>
                 <viewController id="72o-ap-9Lr" sceneMemberID="viewController">
@@ -581,7 +584,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="knB-aa-2D1"/>
+                    <navigationItem key="navigationItem" title="Explore" id="AhD-uG-MXt">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="bc7-cT-wwt"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o8c-so-quc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -647,6 +652,7 @@
     </scenes>
     <resources>
         <image name="plus" width="32" height="32"/>
+        <image name="settings" width="20" height="20"/>
         <image name="user" width="32" height="32"/>
     </resources>
 </document>

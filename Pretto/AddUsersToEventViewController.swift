@@ -10,25 +10,27 @@ import UIKit
 
 let AddedUserCellReuseIdentifier = "AddedUserCell"
 
-class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UITextFieldDelegate {
     
     var startDate: NSDate!
     var endDate: NSDate!
     var eventTitle: String!
     var eventPhoto: UIImage?
     var friends: [Friend]?
+    var friendsNames: [String]?
     var selectedFriends: [Friend]?
+    var autocompleteArray : [String]?
+    
+    private var autocompleteTableView: UITableView!
     
     @IBOutlet var searchUserTextField: UITextField!
     @IBOutlet var topView: UIView!
     @IBOutlet var tableView: UITableView!
     
     @IBAction func onCreate(sender: UIBarButtonItem) {
-        var eventDictionary = ["title": self.eventTitle,
-                               "cover_photo": nil]
         var newEvent = Event()
+        
         newEvent.title = self.eventTitle
-//        newEvent.coverPhoto = nil
         newEvent.owner = PFUser.currentUser()!
         newEvent.pincode = "1111"
         newEvent.startDate = self.startDate
@@ -40,29 +42,66 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         newEvent.guests = [PFUser.currentUser()!]
         newEvent.albums = [Album]()
         
-        newEvent.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
-            if success {
-                println("Event Created!")
-            } else {
-                println("Error creating event: \(error)")
+        if eventPhoto != nil {
+            var imageData = UIImageJPEGRepresentation(eventPhoto, 0.5)
+            var imageFile = PFFile(name: "test.jpg", data: imageData)
+            imageFile.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
+                if success {
+                    newEvent.coverPhoto = imageFile
+                } else {
+                    println(error)
+                }
+                newEvent.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+                    if success {
+                        println("Event Created!")
+                    } else {
+                        println("Error creating event: \(error)")
+                    }
+                }
+            })
+        } else {
+            newEvent.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+                if success {
+                    println("Event Created!")
+                } else {
+                    println("Error creating event: \(error)")
+                }
             }
         }
+
+        self.navigationController?.topViewController.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.tag = 1
         
         topView.layer.borderWidth = 1
         topView.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         searchUserTextField.autocapitalizationType = UITextAutocapitalizationType.Words
+        searchUserTextField.delegate = self
+        
+        autocompleteTableView = UITableView(frame: tableView.frame, style: UITableViewStyle.Plain)
+        autocompleteTableView.delegate = self
+        autocompleteTableView.dataSource = self
+        autocompleteTableView.scrollEnabled = true
+        autocompleteTableView.hidden = true
+        autocompleteTableView.tag = 2
+        self.view.addSubview(autocompleteTableView)
+        
         
         Friend.getAllFriendsFromFacebook("10153067889372737", onComplete: { (friends:[Friend]?) -> Void in
             if friends != nil {
                 self.friends = friends
                 println(friends![0].friendName)
+                self.friendsNames = [String]()
+                for friend in friends! {
+                    self.friendsNames?.append(friend.friendName)
+                }
                 self.tableView.reloadData()
             } else {
                 println("No friends found")
@@ -90,8 +129,24 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
 
 extension AddUsersToEventViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddUsersAddedUserCell
-        cell.accessoryType = (cell.accessoryType == .None) ? .Checkmark : .None
+        if tableView.tag == 1 {
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddUsersAddedUserCell
+            cell.accessoryView = (cell.accessoryType == .None) ? UIImageView(image: UIImage(named: "checkmark")) : nil
+            cell.accessoryType = (cell.accessoryType == .None) ? .Checkmark : .None
+        } else if tableView.tag == 2 {
+            println("selected 2")
+            autocompleteTableView.hidden = true
+            searchUserTextField.resignFirstResponder()
+            var cell = tableView.cellForRowAtIndexPath(indexPath)
+            var name = cell?.textLabel?.text
+            var index = find(friendsNames!, name!)
+            if index != nil {
+                selectedFriends = selectedFriends ?? [Friend]()
+                selectedFriends?.append(friends![index!])
+            }
+            self.tableView.reloadData()
+        }
+        
     }
     
 }
@@ -104,13 +159,53 @@ extension AddUsersToEventViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friends?.count ?? 0
+        if tableView.tag == 1 {
+            return selectedFriends?.count ?? 0
+        } else {
+            return autocompleteArray?.count ?? 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(AddedUserCellReuseIdentifier, forIndexPath: indexPath) as! AddUsersAddedUserCell
-        cell.userName = friends![indexPath.row].friendName
-        cell.facebookId = friends![indexPath.row].friendFacebookId
-        return cell
+        if tableView.tag == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(AddedUserCellReuseIdentifier, forIndexPath: indexPath) as! AddUsersAddedUserCell
+            cell.userName = selectedFriends![indexPath.row].friendName
+            cell.facebookId = selectedFriends![indexPath.row].friendFacebookId
+            return cell
+        } else {
+            let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            cell.textLabel?.text = autocompleteArray![indexPath.row]
+            cell.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.3)
+            return cell
+        }
+    }
+}
+
+// MARK: UITextFieldDelegate
+
+extension AddUsersToEventViewController : UITextFieldDelegate {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        autocompleteTableView.hidden = false
+        var substring: NSString = searchUserTextField.text
+        substring = substring.stringByReplacingCharactersInRange(range, withString: string)
+        self.searchAutocompleteEntriesWithSubstring(substring as String)
+        return true
+    }
+}
+
+extension AddUsersToEventViewController {
+    func searchAutocompleteEntriesWithSubstring(substring: String) {
+        autocompleteArray?.removeAll(keepCapacity: false)
+        for friend in self.friendsNames! {
+            var substringRange = NSString(string: friend).rangeOfString(substring)
+            if substringRange.location == 0 {
+                if autocompleteArray == nil {
+                    autocompleteArray = [String]()
+                }
+                autocompleteArray?.append(friend)
+            }
+        }
+        autocompleteTableView.reloadData()
     }
 }

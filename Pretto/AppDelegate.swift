@@ -8,6 +8,8 @@
 
 import UIKit
 
+let dateFormatter = NSDateFormatter()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate {
 
