@@ -30,7 +30,7 @@ class FullsizePhoto : PFObject, PFSubclassing {
     }
     
     @NSManaged var thumbnailPhoto : ThumbnailPhoto?
-    @NSManaged var file : PFFile
+    @NSManaged var file : PFFile?
     @NSManaged var localPath : String
     @NSManaged var owner : PFUser
     
