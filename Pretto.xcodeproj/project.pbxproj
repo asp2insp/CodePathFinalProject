@@ -12,6 +12,9 @@
 		1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCEE1B2E73D4005E0841 /* AddUsersToEventViewController.swift */; };
 		1628DCF11B2E7B15005E0841 /* AddUsersAddedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCF01B2E7B15005E0841 /* AddUsersAddedUserCell.swift */; };
 		1628DCF51B30BE89005E0841 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCF41B30BE89005E0841 /* EventManager.swift */; };
+		1628DCFB1B31F86B005E0841 /* CustomLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCFA1B31F86B005E0841 /* CustomLoginViewController.swift */; };
+		1628DCFD1B31F87E005E0841 /* CustomSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCFC1B31F87E005E0841 /* CustomSignUpViewController.swift */; };
+		1628DCFF1B321477005E0841 /* CustomLandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */; };
 		16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */; };
 		16354F431B2E6613003D2A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16354F411B2E6613003D2A2B /* Main.storyboard */; };
 		16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */; };
@@ -49,6 +52,9 @@
 		1628DCEE1B2E73D4005E0841 /* AddUsersToEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsersToEventViewController.swift; sourceTree = "<group>"; };
 		1628DCF01B2E7B15005E0841 /* AddUsersAddedUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsersAddedUserCell.swift; sourceTree = "<group>"; };
 		1628DCF41B30BE89005E0841 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		1628DCFA1B31F86B005E0841 /* CustomLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLoginViewController.swift; sourceTree = "<group>"; };
+		1628DCFC1B31F87E005E0841 /* CustomSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSignUpViewController.swift; sourceTree = "<group>"; };
+		1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLandingViewController.swift; sourceTree = "<group>"; };
 		16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		16354F421B2E6613003D2A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventPhotoCell.swift; sourceTree = "<group>"; };
@@ -106,6 +112,9 @@
 				1628DCEE1B2E73D4005E0841 /* AddUsersToEventViewController.swift */,
 				1628DCEB1B2E6755005E0841 /* HomeScreenViewController.swift */,
 				FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */,
+				1628DCFA1B31F86B005E0841 /* CustomLoginViewController.swift */,
+				1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */,
+				1628DCFC1B31F87E005E0841 /* CustomSignUpViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -377,6 +386,7 @@
 				1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */,
 				FE45EEAE1B23CEC900F39BF8 /* Photo.swift in Sources */,
 				16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */,
+				1628DCFB1B31F86B005E0841 /* CustomLoginViewController.swift in Sources */,
 				FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */,
 				1628DCED1B2E6CB7005E0841 /* User.swift in Sources */,
 				16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */,
@@ -387,10 +397,12 @@
 				16D3AA341B2E476E00934948 /* AddEventTitleCell.swift in Sources */,
 				FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */,
 				FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */,
+				1628DCFF1B321477005E0841 /* CustomLandingViewController.swift in Sources */,
 				FE45EEC11B2E4DE200F39BF8 /* EventDetailViewController.swift in Sources */,
 				16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */,
 				FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */,
 				1628DCEC1B2E6755005E0841 /* HomeScreenViewController.swift in Sources */,
+				1628DCFD1B31F87E005E0841 /* CustomSignUpViewController.swift in Sources */,
 				1628DCF11B2E7B15005E0841 /* AddUsersAddedUserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

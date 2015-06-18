@@ -23,6 +23,10 @@ class LoginViewController: PFLogInViewController {
             println("No logged in user")
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

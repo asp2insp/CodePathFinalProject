@@ -10,8 +10,19 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friends_5" translatesAutoresizingMaskIntoConstraints="NO" id="iwG-Dn-1nn">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                </imageView>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wci-kt-mou">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="v3p-tC-jrl">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="light"/>
+                </visualEffectView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Pretto. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="440" width="441" height="21"/>
+                    <rect key="frame" x="20" y="439" width="441" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -27,10 +38,18 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="IcJ-C3-Jtc" secondAttribute="centerX" id="74C-fa-tcr"/>
+                <constraint firstItem="Wci-kt-mou" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8X2-hr-If1"/>
+                <constraint firstAttribute="bottom" secondItem="iwG-Dn-1nn" secondAttribute="bottom" id="CGc-VL-Tm9"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
+                <constraint firstAttribute="bottom" secondItem="Wci-kt-mou" secondAttribute="bottom" id="aXk-2F-vsg"/>
+                <constraint firstItem="iwG-Dn-1nn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dyH-Pk-Mip"/>
+                <constraint firstAttribute="trailing" secondItem="iwG-Dn-1nn" secondAttribute="trailing" id="gBG-VX-rsh"/>
                 <constraint firstAttribute="centerY" secondItem="IcJ-C3-Jtc" secondAttribute="centerY" id="gKu-0m-A3D"/>
+                <constraint firstItem="iwG-Dn-1nn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="iGB-Ff-JTF"/>
+                <constraint firstAttribute="trailing" secondItem="Wci-kt-mou" secondAttribute="trailing" id="qrX-RZ-M4C"/>
+                <constraint firstItem="Wci-kt-mou" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zyU-Cs-25W"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -38,6 +57,7 @@
         </view>
     </objects>
     <resources>
+        <image name="friends_5" width="320" height="568"/>
         <image name="pretto" width="450" height="109"/>
     </resources>
 </document>
