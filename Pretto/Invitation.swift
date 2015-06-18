@@ -29,8 +29,14 @@ class Invitation : PFObject, PFSubclassing {
     @NSManaged var event : Event
     @NSManaged var from : PFUser
     @NSManaged var to : PFUser
-    @NSManaged var paused: Bool
-    @NSManaged var accepted: Bool
+    var paused: Bool {
+        get { return self["paused"] as! Bool }
+        set { self["paused"] = newValue }
+    }
+    var accepted: Bool {
+        get { return self["accepted"] as! Bool }
+        set { self["accepted"] = newValue }
+    }
     @NSManaged var lastUpdated : NSDate?
     
     var shouldUploadPhotos : Bool {

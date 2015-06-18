@@ -7,17 +7,24 @@
 //
 
 import Foundation
+import UIKit
 
 class HomeScreenViewController : ZoomableCollectionViewController, UICollectionViewDataSource {
     
     var selectedEvent : Event?
     var liveEvents : [Event] = []
+    var refreshControl : UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         flowLayout.headerReferenceSize = CGSizeMake(0, 44)
         flowLayout.footerReferenceSize = CGSizeMake(0, 44)
         allowsSelection = false
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControl)
+        collectionView.alwaysBounceVertical = true
         refreshData()
     }
     
@@ -28,6 +35,7 @@ class HomeScreenViewController : ZoomableCollectionViewController, UICollectionV
                 event.getInvitation().updateFromCameraRoll()
             }
             self.collectionView.reloadData()
+            self.refreshControl.endRefreshing()
         }
     }
     

@@ -40,8 +40,11 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         newEvent.locationName = "Zynga"
         newEvent.admins = [PFUser.currentUser()!]
         newEvent.guests = [PFUser.currentUser()!]
-        newEvent.albums = [Album]()
+        let album = Album()
+        album.saveInBackground()
+        newEvent.albums = [album]
         
+        let invitation = newEvent.makeInvitationForUser(PFUser.currentUser()!)
         if eventPhoto != nil {
             var imageData = UIImageJPEGRepresentation(eventPhoto, 0.5)
             var imageFile = PFFile(name: "test.jpg", data: imageData)
@@ -68,6 +71,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
                 }
             }
         }
+        invitation.saveInBackground()
 
         self.navigationController?.topViewController.dismissViewControllerAnimated(true, completion: nil)
     }
