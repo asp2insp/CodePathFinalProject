@@ -35,6 +35,7 @@
 		FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */; };
 		FE45EEC11B2E4DE200F39BF8 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */; };
 		FE45EEC21B2E774600F39BF8 /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEBE1B2E490600F39BF8 /* Invitation.swift */; };
+		FE4EA23A1B326E4700AF2990 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4EA2391B326E4700AF2990 /* Notification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableCollectionView.swift; sourceTree = "<group>"; };
 		FE45EEBE1B2E490600F39BF8 /* Invitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
 		FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		FE4EA2391B326E4700AF2990 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +230,7 @@
 				FE45EEBE1B2E490600F39BF8 /* Invitation.swift */,
 				FE45EEAD1B23CEC900F39BF8 /* Photo.swift */,
 				FE45EEAA1B23C6CA00F39BF8 /* Request.swift */,
+				FE4EA2391B326E4700AF2990 /* Notification.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				FE45EEC11B2E4DE200F39BF8 /* EventDetailViewController.swift in Sources */,
 				16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */,
 				FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */,
+				FE4EA23A1B326E4700AF2990 /* Notification.swift in Sources */,
 				1628DCEC1B2E6755005E0841 /* HomeScreenViewController.swift in Sources */,
 				1628DCFD1B31F87E005E0841 /* CustomSignUpViewController.swift in Sources */,
 				1628DCF11B2E7B15005E0841 /* AddUsersAddedUserCell.swift in Sources */,
