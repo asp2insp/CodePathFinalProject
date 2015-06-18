@@ -27,7 +27,7 @@ class CustomSignUpViewController: PFSignUpViewController {
         self.signUpView?.addSubview(self.gradientView)
         self.signUpView?.sendSubviewToBack(self.gradientView)
         
-        self.signUpView?.backgroundColor = UIColor(patternImage: UIImage(named: "friends_5")!)
+        self.signUpView?.backgroundColor = UIColor(patternImage: UIImage(named: "friends_6")!)
     
         self.signUpView?.usernameField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.8)
         self.signUpView?.usernameField?.textColor = UIColor.whiteColor()

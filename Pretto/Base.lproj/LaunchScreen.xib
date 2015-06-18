@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friends_5" translatesAutoresizingMaskIntoConstraints="NO" id="iwG-Dn-1nn">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friends_6" translatesAutoresizingMaskIntoConstraints="NO" id="iwG-Dn-1nn">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wci-kt-mou">
@@ -57,7 +57,7 @@
         </view>
     </objects>
     <resources>
-        <image name="friends_5" width="320" height="568"/>
+        <image name="friends_6" width="320" height="568"/>
         <image name="pretto" width="450" height="109"/>
     </resources>
 </document>
