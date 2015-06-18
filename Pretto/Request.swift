@@ -25,24 +25,22 @@ class Request : PFObject, PFSubclassing {
         return kClassName
     }
     
-    init(photo: ThumbnailPhoto) {
+    init(photo: Photo) {
         super.init()
         self.status = "pending"
         self.photo = photo
         self.requester = PFUser.currentUser()!
     }
     
-    @NSManaged var photo : ThumbnailPhoto
+    @NSManaged var photo : Photo
     @NSManaged var requester : PFUser
     @NSManaged var status : String
     
     func acceptRequest() {
-        if let desiredPhoto = self.photo.fullsizePhoto.fetchIfNeeded() {
-            desiredPhoto.ACL?.setReadAccess(true, forUser: self.requester)
-            self.status = "accepted"
-            desiredPhoto.saveInBackgroundWithBlock(nil)
-            self.saveInBackgroundWithBlock(nil)
-        }
+        self.photo.accessList.append(self.requester)
+        self.status = "accepted"
+        self.photo.saveInBackgroundWithBlock(nil)
+        self.saveInBackgroundWithBlock(nil)
     }
     
     func denyRequest() {

@@ -128,7 +128,7 @@ class User {
                 var email = userData["email"] as! String?
                 var name = userData["name"] as! String
                 var firstName = userData["first_name"] as! String
-                var middleName = userData["middle_name"] as! String
+                var middleName = userData["middle_name"] as? String ?? ""
                 var lastName = userData["last_name"] as! String
                 var gender = userData["gender"] as! String
                 var locale = userData["locale"] as! String

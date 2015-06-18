@@ -25,10 +25,9 @@
 		FE45EE451B1FE5DF00F39BF8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE441B1FE5DF00F39BF8 /* Images.xcassets */; };
 		FE45EE481B1FE5DF00F39BF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE45EE461B1FE5DF00F39BF8 /* LaunchScreen.xib */; };
 		FE45EE541B1FE5DF00F39BF8 /* PrettoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE531B1FE5DF00F39BF8 /* PrettoTests.swift */; };
-		FE45EE9D1B23A54000F39BF8 /* ThumbnailPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EE9C1B23A54000F39BF8 /* ThumbnailPhoto.swift */; };
 		FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEA61B23B56300F39BF8 /* Event.swift */; };
 		FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAA1B23C6CA00F39BF8 /* Request.swift */; };
-		FE45EEAE1B23CEC900F39BF8 /* FullsizePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */; };
+		FE45EEAE1B23CEC900F39BF8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAD1B23CEC900F39BF8 /* Photo.swift */; };
 		FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEAF1B2682AF00F39BF8 /* Album.swift */; };
 		FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */; };
 		FE45EEC11B2E4DE200F39BF8 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */; };
@@ -71,10 +70,9 @@
 		FE45EE521B1FE5DF00F39BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE45EE531B1FE5DF00F39BF8 /* PrettoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettoTests.swift; sourceTree = "<group>"; };
 		FE45EE5D1B1FE6FE00F39BF8 /* Pretto-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pretto-Bridging-Header.h"; sourceTree = "<group>"; };
-		FE45EE9C1B23A54000F39BF8 /* ThumbnailPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPhoto.swift; sourceTree = "<group>"; };
 		FE45EEA61B23B56300F39BF8 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		FE45EEAA1B23C6CA00F39BF8 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullsizePhoto.swift; sourceTree = "<group>"; };
+		FE45EEAD1B23CEC900F39BF8 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		FE45EEAF1B2682AF00F39BF8 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableCollectionView.swift; sourceTree = "<group>"; };
 		FE45EEBE1B2E490600F39BF8 /* Invitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
@@ -219,8 +217,7 @@
 				FE45EEA61B23B56300F39BF8 /* Event.swift */,
 				FE45EEAF1B2682AF00F39BF8 /* Album.swift */,
 				FE45EEBE1B2E490600F39BF8 /* Invitation.swift */,
-				FE45EE9C1B23A54000F39BF8 /* ThumbnailPhoto.swift */,
-				FE45EEAD1B23CEC900F39BF8 /* FullsizePhoto.swift */,
+				FE45EEAD1B23CEC900F39BF8 /* Photo.swift */,
 				FE45EEAA1B23C6CA00F39BF8 /* Request.swift */,
 			);
 			name = "Data Models";
@@ -378,11 +375,10 @@
 				1628DCF51B30BE89005E0841 /* EventManager.swift in Sources */,
 				16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */,
 				1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */,
-				FE45EEAE1B23CEC900F39BF8 /* FullsizePhoto.swift in Sources */,
+				FE45EEAE1B23CEC900F39BF8 /* Photo.swift in Sources */,
 				16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */,
 				FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */,
 				1628DCED1B2E6CB7005E0841 /* User.swift in Sources */,
-				FE45EE9D1B23A54000F39BF8 /* ThumbnailPhoto.swift in Sources */,
 				16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */,
 				605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */,
 				FE45EEC21B2E774600F39BF8 /* Invitation.swift in Sources */,

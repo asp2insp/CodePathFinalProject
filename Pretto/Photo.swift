@@ -10,7 +10,7 @@ import Foundation
 
 private let kClassName = "FullsizePhoto"
 
-class FullsizePhoto : PFObject, PFSubclassing {
+class Photo : PFObject, PFSubclassing {
     override class func initialize() {
         struct Static {
             static var onceToken : dispatch_once_t = 0;
@@ -29,16 +29,15 @@ class FullsizePhoto : PFObject, PFSubclassing {
         self.ACL = PFACL(user: PFUser.currentUser()!)
     }
     
-    @NSManaged var thumbnailPhoto : ThumbnailPhoto?
-    @NSManaged var file : PFFile?
+    @NSManaged var fullsizeFile : PFFile?
     @NSManaged var localPath : String
     @NSManaged var owner : PFUser
+    @NSManaged var accessList : [PFUser]
+    @NSManaged var thumbnailFile : PFFile?
+    @NSManaged var events : [Event]
     
-    func getThumbnail() -> ThumbnailPhoto {
-        if thumbnailPhoto == nil {
-            let photo = ThumbnailPhoto()
-            photo.fullsizePhoto = self
-            
+    func getThumbnail() -> PFFile {
+        if thumbnailFile == nil {
             let fullSizeImage = UIImage(contentsOfFile: self.localPath)!
             
             let size = CGSizeApplyAffineTransform(fullSizeImage.size, CGAffineTransformMakeScale(0.5, 0.5))
@@ -50,14 +49,18 @@ class FullsizePhoto : PFObject, PFSubclassing {
             let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
-            let thumbnailFile = PFFile(data: UIImageJPEGRepresentation(scaledImage, 0.8))
-            thumbnailFile.saveInBackgroundWithBlock(nil)
-            
-            photo.file = thumbnailFile
-            photo.saveInBackgroundWithBlock(nil)
-            self.thumbnailPhoto = photo
-            self.saveInBackgroundWithBlock(nil)
+            self.thumbnailFile = PFFile(data: UIImageJPEGRepresentation(scaledImage, 0.8))
+            self.thumbnailFile!.saveInBackgroundWithBlock(nil)
         }
-        return self.thumbnailPhoto!
+        return self.thumbnailFile!
+    }
+    
+    func userCanSeeFullsizePhoto(user: PFUser) -> Bool {
+        for candidate in self.accessList {
+            if user == candidate {
+                return true
+            }
+        }
+        return false
     }
 }

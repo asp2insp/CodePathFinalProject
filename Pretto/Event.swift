@@ -104,8 +104,8 @@ class Event : PFObject, PFSubclassing {
     }
 
     
-    func getAllPhotosInEvent(orderedBy: String?) -> [ThumbnailPhoto] {
-        var photos : [ThumbnailPhoto] = []
+    func getAllPhotosInEvent(orderedBy: String?) -> [Photo] {
+        var photos : [Photo] = []
         for album in self.albums {
             album.fetchIfNeeded()
             for p in album.photos ?? [] {
@@ -122,9 +122,9 @@ class Event : PFObject, PFSubclassing {
         }
     }
     
-    func addImageToEvent(image: FullsizePhoto) {
+    func addImageToEvent(image: Photo) {
         let album = self.albums[0]
-        album.addPhoto(image.getThumbnail())
+        album.addPhoto(image)
     }
     
     func getInvitation() -> Invitation {
