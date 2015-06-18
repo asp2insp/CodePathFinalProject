@@ -9,6 +9,8 @@
 import UIKit
 
 let dateFormatter = NSDateFormatter()
+let kShowLoginWindowNotification = "showLoginWindow"
+let kShowLandingWindowNotification = "showLandingWindow"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
@@ -20,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         Invitation.registerSubclass()
         
         Parse.enableLocalDatastore()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showLoginWindow", name: kShowLoginWindowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showLandingWindow", name: kShowLandingWindowNotification, object: nil)
         
         // Initialize Parse.
         Parse.setApplicationId("EwtAHVSdrZseylxvkalCaMQ3aTWknFUgnhJRcozx",
@@ -193,11 +198,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     }
     
     func showLandingWindow() {
-        var logInController = CustomLandingViewController()
-        logInController.fields = .Facebook | .SignUpButton
-        logInController.delegate = self;
+        var logInViewController = CustomLandingViewController()
+        logInViewController.fields = .Facebook | .SignUpButton
+        logInViewController.delegate = self
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window!.rootViewController = logInController
+        self.window!.rootViewController = logInViewController
+        self.window!.makeKeyAndVisible()
+    }
+    
+    func showLoginWindow() {
+        var logInViewController = CustomLoginViewController()
+        logInViewController.fields = .Facebook | .UsernameAndPassword | .PasswordForgotten | .LogInButton | .DismissButton
+        logInViewController.delegate = self
+        logInViewController.emailAsUsername = true
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window!.rootViewController = logInViewController
         self.window!.makeKeyAndVisible()
     }
     
