@@ -33,7 +33,7 @@ class HomeScreenViewController : ZoomableCollectionViewController, UICollectionV
     
     @IBAction func onLogOut(sender: AnyObject) {
         PFUser.logOut()
-        (UIApplication.sharedApplication().delegate as! AppDelegate).showLoginWindow()
+        (UIApplication.sharedApplication().delegate as! AppDelegate).showLandingWindow()
     }
 }
 

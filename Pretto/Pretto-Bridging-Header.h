@@ -15,3 +15,5 @@
 
 //#import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
+
+#import <QuartzCore/QuartzCore.h>

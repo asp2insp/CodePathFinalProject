@@ -11,7 +11,7 @@ import UIKit
 let dateFormatter = NSDateFormatter()
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
 
     var window: UIWindow?
 
@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
                 if pfUser != nil {
                     PFFacebookUtils.unlinkUserInBackground(pfUser!)
                 }
-                self.showLoginWindow()
+                self.showLandingWindow()
             })
         
         return false
@@ -95,6 +95,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
         println("FB login is done")
+        logInController.dismissViewControllerAnimated(true, completion: nil)
+        self.startMainStoryBoard()
+    }
+    
+    func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
+        println("Sign Up is Done")
+        signUpController.dismissViewControllerAnimated(true, completion: nil)
         self.startMainStoryBoard()
     }
     
@@ -185,9 +192,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         
     }
     
-    func showLoginWindow() {
-        var logInController = LoginViewController()
-        logInController.fields = .Facebook
+    func showLandingWindow() {
+        var logInController = CustomLandingViewController()
+        logInController.fields = .Facebook | .SignUpButton
         logInController.delegate = self;
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = logInController
