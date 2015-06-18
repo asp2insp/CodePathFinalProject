@@ -26,7 +26,6 @@ class Invitation : PFObject, PFSubclassing {
         return kClassName
     }
     
-    
     @NSManaged var event : Event
     @NSManaged var from : PFUser
     @NSManaged var to : PFUser
@@ -41,7 +40,7 @@ class Invitation : PFObject, PFSubclassing {
     func updateFromCameraRoll() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        fetchOptions.predicate = NSPredicate(format: "creationDate > %@ AND creationDate < %@", event.startDateTime, event.endDateTime)
+        fetchOptions.predicate = NSPredicate(format: "creationDate > %@ AND creationDate < %@", event.startDate, event.endDate)
         PHPhotoLibrary.requestAuthorization { (authStatus:PHAuthorizationStatus) -> Void in
             switch authStatus {
             case .NotDetermined:

@@ -8,6 +8,8 @@
 
 import UIKit
 
+let dateFormatter = NSDateFormatter()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate {
 
@@ -187,13 +189,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         var logInController = LoginViewController()
         logInController.fields = .Facebook
         logInController.delegate = self;
-        self.window?.rootViewController = logInController
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window!.rootViewController = logInController
+        self.window!.makeKeyAndVisible()
     }
     
     func startMainStoryBoard() {
         self.window = UIWindow(frame:UIScreen.mainScreen().bounds)
         var mainSB = UIStoryboard(name: "Main", bundle: nil)
         let viewController = mainSB.instantiateInitialViewController() as! UITabBarController
+        viewController.selectedIndex = 1
         self.window!.rootViewController = viewController
         self.window!.makeKeyAndVisible()
     }

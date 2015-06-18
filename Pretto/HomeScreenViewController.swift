@@ -92,7 +92,7 @@ class EventHeader : UICollectionReusableView {
     
     var event : Event? {
         didSet {
-            label.text = event?.name ?? "Unknown"
+            label.text = event?.title ?? "Unknown"
         }
     }
     

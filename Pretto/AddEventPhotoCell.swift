@@ -8,15 +8,24 @@
 
 import UIKit
 
-@objc protocol addEventPhotoCellDelegate {
+@objc protocol AddEventPhotoCellDelegate {
     optional func addEventPhotoCell(addEventPhotoCell: AddEventPhotoCell, didTapOnEventPhoto photo: UIImageView)
 }
 
 class AddEventPhotoCell: UITableViewCell {
 
     @IBOutlet var eventPhoto: UIImageView!
+    @IBOutlet var addPhotoLabel: UILabel!
     
-    weak var delegate: addEventPhotoCellDelegate?
+    weak var delegate: AddEventPhotoCellDelegate?
+    
+    var eventImage: UIImage? {
+        didSet {
+            self.eventPhoto.image = eventImage
+            self.eventPhoto.layer.borderWidth = 0
+            self.addPhotoLabel.hidden = true
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +36,9 @@ class AddEventPhotoCell: UITableViewCell {
         eventPhoto.userInteractionEnabled = true
         eventPhoto.layer.borderWidth = 1
         eventPhoto.layer.borderColor = UIColor.lightGrayColor().CGColor
-        eventPhoto.layer.cornerRadius = 25
+        eventPhoto.layer.cornerRadius = 30
+        eventPhoto.clipsToBounds = true
+        eventPhoto.contentMode = UIViewContentMode.ScaleAspectFill
         
         var tapRecognizer = UITapGestureRecognizer(target: self, action: "didTapOnEventPhoto")
         eventPhoto.addGestureRecognizer(tapRecognizer)

@@ -24,7 +24,8 @@ class Album : PFObject, PFSubclassing {
         return kClassName
     }
     
-    @NSManaged var photos : [ThumbnailPhoto]?
+    @NSManaged var photos: [ThumbnailPhoto]?
+    @NSManaged var event: Event
     
     func addPhoto(photo: ThumbnailPhoto) {
         var p = self.photos ?? []
