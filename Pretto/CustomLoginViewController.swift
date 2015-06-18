@@ -14,22 +14,22 @@ class CustomLoginViewController: PFLogInViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.logInView?.dismissButton?.addTarget(self, action: "onDismissButton", forControlEvents: UIControlEvents.TouchUpInside)
 
         self.logInView?.logo = UIImageView(image: UIImage(named: "HeaderPretto")!)
-        
+
         self.gradientView = UIImageView(image: UIImage(named: "gradient"))
         self.logInView?.addSubview(self.gradientView)
         self.logInView?.sendSubviewToBack(self.gradientView)
-        
+
         self.logInView?.backgroundColor = UIColor(patternImage: UIImage(named: "friends_6")!)
-        
-        self.logInView?.signUpButton?.removeFromSuperview()
-        
+
         self.logInView?.usernameField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.8)
         self.logInView?.usernameField?.textColor = UIColor.whiteColor()
         self.logInView?.passwordField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.8)
         self.logInView?.passwordField?.textColor = UIColor.whiteColor()
-      
+
         self.logInView?.logInButton?.titleLabel?.font = self.logInView?.logInButton!.titleLabel?.font.fontWithSize(17)
         self.logInView?.logInButton?.backgroundColor = UIColor.clearColor()
         self.logInView?.logInButton?.setImage(nil, forState: UIControlState.Normal)
@@ -37,8 +37,13 @@ class CustomLoginViewController: PFLogInViewController {
         self.logInView?.logInButton?.setBackgroundImage(nil, forState: UIControlState.Normal)
         self.logInView?.logInButton?.setBackgroundImage(nil, forState: UIControlState.Highlighted)
         
-        self.logInView?.passwordForgottenButton?.tintColor = UIColor.whiteColor()
-        self.logInView?.passwordForgottenButton?.titleLabel?.font = self.logInView?.logInButton!.titleLabel?.font.fontWithSize(17)
+        self.logInView?.facebookButton?.setImage(nil, forState: UIControlState.Normal)
+        self.logInView?.facebookButton?.setImage(nil, forState: UIControlState.Highlighted)
+        self.logInView?.facebookButton?.setBackgroundImage(nil, forState: UIControlState.Normal)
+        self.logInView?.facebookButton?.setBackgroundImage(nil, forState: UIControlState.Highlighted)
+
+//        self.logInView?.passwordForgottenButton?.tintColor = UIColor.whiteColor()
+//        self.logInView?.passwordForgottenButton?.titleLabel?.font = self.logInView?.logInButton!.titleLabel?.font.fontWithSize(17)
         self.logInView?.passwordForgottenButton?.backgroundColor = UIColor.clearColor()
         self.logInView?.passwordForgottenButton?.setImage(nil, forState: UIControlState.Normal)
         self.logInView?.passwordForgottenButton?.setImage(nil, forState: UIControlState.Highlighted)
@@ -58,40 +63,42 @@ class CustomLoginViewController: PFLogInViewController {
         var screenHeight = self.view.frame.height
         var logoHeight = CGFloat(98.0)
         var logoWidth = CGFloat(168.0)
-        
+
         self.logInView?.logo?.frame = CGRect(x: (self.logInView!.frame.width - logoWidth) / 2.0, y: 50.0, width: logoWidth, height: logoHeight)
         
         self.gradientView.frame = CGRect(x: 0, y: self.logInView!.frame.height / 2, width: self.logInView!.frame.width, height: self.logInView!.frame.height / 2)
-        
+
         self.logInView?.usernameField?.placeholder = "Enter email"
         self.logInView?.passwordField?.placeholder = "Enter password"
-        
+
         self.logInView?.usernameField?.center = CGPoint(x: self.logInView!.usernameField!.center.x, y: self.logInView!.usernameField!.center.y - 40)
         self.logInView?.passwordField?.center = CGPoint(x: self.logInView!.passwordField!.center.x, y: self.logInView!.passwordField!.center.y - 40)
+
+        self.logInView?.passwordForgottenButton?.center = CGPoint(x: self.logInView!.passwordField!.center.x, y: self.logInView!.passwordField!.center.y + 40)
+        self.logInView?.passwordForgottenButton?.titleLabel?.textColor = UIColor.whiteColor()
         
-        self.logInView?.logInButton?.frame = CGRect(x: self.logInView!.logInButton!.frame.origin.x + 16, y: self.logInView!.frame.height - 104, width: self.logInView!.logInButton!.frame.width - 32, height: 44)
+        self.logInView?.facebookButton?.layer.borderColor = UIColor.whiteColor().CGColor
+        self.logInView?.facebookButton?.layer.borderWidth = 2
+        self.logInView?.facebookButton?.layer.cornerRadius = self.logInView!.facebookButton!.frame.height / 2
+        self.logInView?.facebookButton?.titleLabel?.frame = self.logInView!.facebookButton!.titleLabel!.superview!.frame
+        self.logInView?.facebookButton?.setTitle("Continue with Facebook", forState: UIControlState.Normal)
+        self.logInView?.facebookButton?.setTitle("Continue with Facebook", forState: UIControlState.Highlighted)
+        self.logInView?.facebookButton?.frame = CGRect(x: 16, y: self.logInView!.frame.height - 104, width: self.logInView!.facebookButton!.frame.width, height: self.logInView!.facebookButton!.frame.height)
+            //center = CGPoint(x: self.logInView!.facebookButton!.center.x, y: self.logInView!.frame.height - 60)
+        
+        self.logInView?.logInButton?.frame = CGRect(x: self.logInView!.logInButton!.frame.origin.x + 16, y: self.logInView!.facebookButton!.frame.origin.y - 60, width: self.logInView!.logInButton!.frame.width - 32, height: 44)
         self.logInView?.logInButton?.layer.borderColor = UIColor.whiteColor().CGColor
         self.logInView?.logInButton?.layer.borderWidth = 2
         self.logInView?.logInButton?.layer.cornerRadius = self.logInView!.logInButton!.frame.height / 2
         self.logInView?.logInButton?.setTitle("Log In with email", forState: UIControlState.Normal)
         self.logInView?.logInButton?.setTitle("Log In with email", forState: UIControlState.Highlighted)
-        
-        self.logInView?.passwordForgottenButton?.center = CGPoint(x: self.logInView!.passwordField!.center.x, y: self.logInView!.passwordField!.center.y + 40)
-        
-        
-//        self.logInView?.signUpButton?.center = CGPoint(x: self.logInView!.signUpButton!.center.x, y: self.signInButton.center.y - self.logInView!.signUpButton!.frame.height)
-//        
-//        self.logInView?.facebookButton?.layer.borderColor = UIColor.whiteColor().CGColor
-//        self.logInView?.facebookButton?.layer.borderWidth = 2
-//        self.logInView?.facebookButton?.layer.cornerRadius = self.logInView!.facebookButton!.frame.height / 2
-//        self.logInView?.facebookButton?.titleLabel?.frame = self.logInView!.facebookButton!.titleLabel!.superview!.frame
-//        self.logInView?.facebookButton?.setTitle("Continue with Facebook", forState: UIControlState.Normal)
-//        self.logInView?.facebookButton?.setTitle("Continue with Facebook", forState: UIControlState.Highlighted)
-//        self.logInView?.facebookButton?.center = CGPoint(x: self.logInView!.facebookButton!.center.x, y: self.logInView!.signUpButton!.center.y - self.logInView!.facebookButton!.frame.height - 16)
-//        
-//
-//        
-        
+    
+    }
+    
+    func onDismissButton() {
+        var notification = NSNotification(name: kShowLandingWindowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().postNotification(notification)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

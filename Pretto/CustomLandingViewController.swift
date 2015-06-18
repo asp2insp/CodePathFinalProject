@@ -90,15 +90,9 @@ class CustomLandingViewController: PFLogInViewController {
     }
     
     func onSignInButton() {
-        var logInViewController = CustomLoginViewController()
-        logInViewController.emailAsUsername = true
-        logInViewController.fields = PFLogInFields.UsernameAndPassword |
-                                    PFLogInFields.PasswordForgotten |
-                                    PFLogInFields.LogInButton |
-                                    PFLogInFields.Facebook |
-                                    PFLogInFields.DismissButton
-//        logInViewController.delegate = self.delegate
-        self.presentViewController(logInViewController, animated: true, completion: nil)
+        var notification = NSNotification(name: kShowLoginWindowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().postNotification(notification)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
