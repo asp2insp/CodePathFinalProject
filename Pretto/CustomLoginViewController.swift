@@ -21,7 +21,7 @@ class CustomLoginViewController: PFLogInViewController {
         self.logInView?.addSubview(self.gradientView)
         self.logInView?.sendSubviewToBack(self.gradientView)
         
-        self.logInView?.backgroundColor = UIColor(patternImage: UIImage(named: "friends_5")!)
+        self.logInView?.backgroundColor = UIColor(patternImage: UIImage(named: "friends_6")!)
         
         self.logInView?.signUpButton?.removeFromSuperview()
         

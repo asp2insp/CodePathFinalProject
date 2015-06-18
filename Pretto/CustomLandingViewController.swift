@@ -36,7 +36,7 @@ class CustomLandingViewController: PFLogInViewController {
         self.signInButton.addTarget(self, action: "onSignInButton", forControlEvents: UIControlEvents.TouchUpInside)
         self.logInView?.addSubview(self.signInButton)
         
-        self.logInView?.backgroundColor = UIColor(patternImage: UIImage(named: "friends_5")!)
+        self.logInView?.backgroundColor = UIColor(patternImage: UIImage(named: "friends_6")!)
         
         self.logInView?.facebookButton?.setImage(nil, forState: UIControlState.Normal)
         self.logInView?.facebookButton?.setImage(nil, forState: UIControlState.Highlighted)
