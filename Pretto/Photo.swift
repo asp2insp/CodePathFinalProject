@@ -24,11 +24,6 @@ class Photo : PFObject, PFSubclassing {
         return kClassName
     }
 
-    override init() {
-        super.init()
-        self.ACL = PFACL(user: PFUser.currentUser()!)
-    }
-    
     @NSManaged var fullsizeFile : PFFile?
     @NSManaged var localPath : String
     @NSManaged var owner : PFUser

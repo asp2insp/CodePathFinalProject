@@ -25,6 +25,8 @@ class AlbumGeneralViewCell: UITableViewCell {
         }
     }
     
+    var photos : [Photo] = []
+    
     private let sideMargin = CGFloat(16.0)
     private let imageVerticalSeparator = CGFloat(2.0)
     private let imageHorizontalSeparator = CGFloat(2.0)
@@ -63,8 +65,20 @@ class AlbumGeneralViewCell: UITableViewCell {
             albumTitle.text = event.title
             monthLabel.text = monthFormatter.stringFromDate(event.startDate)
             dayLabel.text = dayFormatter.stringFromDate(event.startDate)
-            let photos = event.getAllPhotosInEvent(nil)
+            photos = event.getAllPhotosInEvent(nil)
             moreLabel.text = "+ \(photos.count - 7)"
+            let photoCount = min(photos.count, albumImages.count)
+            println("About to load \(photoCount) photos")
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                for var i=0; i < photoCount; i++ {
+                    let photo = self.photos[i].fetchIfNeeded() as! Photo
+                    let data = photo.thumbnailFile!.getData()!
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.albumImages[i].image = UIImage(data: data)
+                    }
+                }
+            }
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: event.latitude, longitude: event.longitude), completionHandler: { (markers, error) -> Void in
                 if markers.count > 0 {
                     let marker = markers[0] as! CLPlacemark

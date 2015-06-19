@@ -31,7 +31,7 @@ class Album : PFObject, PFSubclassing {
         var p = self.photos ?? []
         p.append(photo)
         self.photos = p
-        self.saveEventually(nil)
+        self.saveInBackground()
     }
     
     func addPhotos(photos: [Photo]) {

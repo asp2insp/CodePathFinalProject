@@ -26,7 +26,7 @@ class HomeScreenViewController : ZoomableCollectionViewController, UICollectionV
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
-        refreshData()
+//        refreshData()
     }
     
     func refreshData() {
