@@ -522,7 +522,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="awesome" destination="q0s-hy-SYY" id="4F4-od-afV"/>
+                        <outlet property="awesomeButton" destination="q0s-hy-SYY" id="Gj9-4n-6An"/>
                         <outlet property="pageControl" destination="RmE-Mr-tzX" id="j3f-Lg-6Zp"/>
                         <outlet property="scrollView" destination="2wg-OZ-f71" id="dHE-j0-KVa"/>
                         <outlet property="skipButton" destination="0ej-GK-wXb" id="i9M-RN-eoq"/>

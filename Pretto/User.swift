@@ -118,6 +118,25 @@ class User {
         self.inner.saveEventually()
     }
     
+    class func checkCurrentUser(onValidUser:((User)->Void), otherwise:((PFUser?)->Void)) {
+        var currentUser = PFUser.currentUser()
+        if currentUser != nil {
+            if PFFacebookUtils.isLinkedWithUser(currentUser!) {
+                User.getMe({ (me:User?) -> Void in
+                    if me != nil {
+                        onValidUser(me!)
+                    } else {
+                        otherwise(currentUser)
+                    }
+                })
+            } else {
+                otherwise(currentUser)
+            }
+        } else {
+            otherwise(nil)
+        }
+    }
+    
     class func getMe(onComplete:((User?)->Void)){
         var request = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         request.startWithCompletionHandler { (conn:FBSDKGraphRequestConnection!, res:AnyObject!, err:NSError!) -> Void in

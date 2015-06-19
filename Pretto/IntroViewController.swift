@@ -23,12 +23,18 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
     private let screenWidth: CGFloat = UIScreen.mainScreen().bounds.width
     
     @IBOutlet var skipButton: UIButton!
-    @IBOutlet var awesome: UIButton!
+    @IBOutlet var awesomeButton: UIButton!
+
     
     @IBAction func onSkip(sender: UIButton) {
-        var notification = NSNotification(name: kShowLandingWindowNotification, object: nil)
+        println("onSkip")
+        var notification = NSNotification(name: kIntroDidFinishNotification, object: nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)
         self.dismissViewControllerAnimated(true, completion: nil)
+        
+//        var notification = NSNotification(name: kShowLandingWindowNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().postNotification(notification)
+//        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -57,7 +63,7 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
         pageControl.numberOfPages = Int(numberOfPages)
         pageControl.currentPage = 0
         
-        awesome.hidden = true
+        awesomeButton.hidden = true
         skipButton.hidden = false
         
     }
@@ -85,15 +91,15 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
 extension IntroViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         var pageIndex = floor(scrollView.contentOffset.x / scrollView.frame.width)
-        println("Scrolling Page Index: \(Int(pageIndex))")
+//        println("Scrolling Page Index: \(Int(pageIndex))")
         pageControl.currentPage = Int(pageIndex)
         
         if pageControl.currentPage == 2 {
             skipButton.hidden = true
-            awesome.hidden = false
+            awesomeButton.hidden = false
         } else {
             skipButton.hidden = false
-            awesome.hidden = true
+            awesomeButton.hidden = true
         }
     }
     
