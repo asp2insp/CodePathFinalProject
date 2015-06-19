@@ -16,9 +16,12 @@ let kShowLandingWindowNotification = "showLandingWindow"
 class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
 
     var window: UIWindow?
-
-
+    private var isTheFirstTimeEver = false
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
+        GlobalAppearance.setAll()
+        
         Invitation.registerSubclass()
         
         Parse.enableLocalDatastore()
@@ -38,44 +41,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         self.registerForRemoteNotifications(application, launchOptions:launchOptions)
         
         // check user and start a storyboard accourdingly
-        self.checkCurrentUser({ (user:User) -> Void in
-                user.save()
-                user.printProperties()
-                println("Save user details invoked")
-                self.startMainStoryBoard()
-            
-                Friend.getAllFriendsFromFacebook(user.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
-                    if friends != nil {
-                        println("Friends retrieved from FB")
-                        Friend.printDebugAll(friends!)
-                        Friend.getAllFriendsFromDBase(user.facebookId!, onComplete: { (savedFriends:[Friend]?) -> Void in
-                            if savedFriends != nil {
-                                var unsavedFriends = Friend.subtract(friends!, from: savedFriends!)
-                                if unsavedFriends.count > 0 {
-                                    Friend.saveAllInBackground(unsavedFriends)
-                                    println("Saving friends invoked for \(unsavedFriends.count)")
-                                } else {
-                                    println("Friends are up to date.")
-                                }
-                            } else {
-                                println("No friends are saved yet. Attempting to save all.")
-                                Friend.saveAllInBackground(friends!)
-                                println("Saving friends invoked for \(friends!.count)")
-                            }
-                        })
-                    } else {
-                        println("No FB friends using this app")
-                    }
-                })
-            
-            },
-            otherwise: { (pfUser:PFUser?) -> Void in
-                if pfUser != nil {
-                    PFFacebookUtils.unlinkUserInBackground(pfUser!)
-                }
-                self.showLandingWindow()
-            })
+        if isTheFirstTimeEver {
+            self.showIntroWindows()
+        } else {
         
+            self.checkCurrentUser({ (user:User) -> Void in
+                    user.save()
+                    user.printProperties()
+                    println("Save user details invoked")
+                    self.startMainStoryBoard()
+                
+                    Friend.getAllFriendsFromFacebook(user.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
+                        if friends != nil {
+                            println("Friends retrieved from FB")
+                            Friend.printDebugAll(friends!)
+                            Friend.getAllFriendsFromDBase(user.facebookId!, onComplete: { (savedFriends:[Friend]?) -> Void in
+                                if savedFriends != nil {
+                                    var unsavedFriends = Friend.subtract(friends!, from: savedFriends!)
+                                    if unsavedFriends.count > 0 {
+                                        Friend.saveAllInBackground(unsavedFriends)
+                                        println("Saving friends invoked for \(unsavedFriends.count)")
+                                    } else {
+                                        println("Friends are up to date.")
+                                    }
+                                } else {
+                                    println("No friends are saved yet. Attempting to save all.")
+                                    Friend.saveAllInBackground(friends!)
+                                    println("Saving friends invoked for \(friends!.count)")
+                                }
+                            })
+                        } else {
+                            println("No FB friends using this app")
+                        }
+                    })
+                
+                },
+                otherwise: { (pfUser:PFUser?) -> Void in
+                    if pfUser != nil {
+                        PFFacebookUtils.unlinkUserInBackground(pfUser!)
+                    }
+                    self.showLandingWindow()
+            })
+        }
         return false
     }
     
@@ -195,6 +202,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
 
     func applicationWillTerminate(application: UIApplication) {
         
+    }
+    
+    func showIntroWindows() {
+        var introViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IntroViewController") as! IntroViewController
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window!.rootViewController = introViewController
+        self.window!.makeKeyAndVisible()
     }
     
     func showLandingWindow() {
