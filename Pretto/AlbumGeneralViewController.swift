@@ -51,6 +51,10 @@ extension AlbumGeneralViewController : UITableViewDelegate {
         var cellHeight = calendarHeight + (2 * imageHeight) + (2 * verticalSeparator) + calendarTopAndBottom
         return cellHeight
     }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
 }
 
 // MARK: UITableViewDataSource
@@ -69,3 +73,12 @@ extension AlbumGeneralViewController : UITableViewDataSource {
         return cell
     }
 }
+//
+//class AlbumTableViewCell : UITableViewCell {
+//    var event : Event {
+//        didSet {
+//            return
+//        }
+//    }
+//}
+
