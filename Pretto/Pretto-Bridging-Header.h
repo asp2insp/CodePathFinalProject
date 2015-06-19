@@ -17,3 +17,4 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 #import <QuartzCore/QuartzCore.h>
+#import "SwiftTryCatch.h"

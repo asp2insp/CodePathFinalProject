@@ -44,6 +44,9 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
                 event.getInvitation().updateFromCameraRoll()
             }
             self.tableView.reloadData()
+            for cell in self.tableView.visibleCells() {
+                (cell as! AlbumGeneralViewCell).updateData()
+            }
             self.refreshControl.endRefreshing()
         }
     }

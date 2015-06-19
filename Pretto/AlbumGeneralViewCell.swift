@@ -69,7 +69,14 @@ class AlbumGeneralViewCell: UITableViewCell {
                 self.moreLabel.text = photos.count > 7 ? "+ \(photos.count - 7)" : ""
                 let photoCount = min(photos.count, self.albumImages.count)
                 for var i=0; i < photoCount; i++ {
-                    self.albumImages[i].file = photos[i].thumbnailFile
+                    SwiftTryCatch.try({
+                        self.albumImages[i].file = photos[i].thumbnailFile
+                        }, catch: { (error) in
+                            println("\(error.description)")
+                        }, finally: {
+                            // close resources
+                    })
+                    self.albumImages[i].loadInBackground()
                 }
             }
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: event.latitude, longitude: event.longitude), completionHandler: { (markers, error) -> Void in
