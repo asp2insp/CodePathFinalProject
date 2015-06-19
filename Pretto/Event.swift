@@ -173,7 +173,12 @@ class Event : PFObject, PFSubclassing {
     // Query for all past events in the background and call the given block with the result
     class func getAllPastEvents(block: ([Event] -> Void) ) {
         let query = PFQuery(className: "Invitation", predicate: nil)
-        query.whereKey(kEventEndDateKey, lessThan: NSDate())
+        query.includeKey("event")
+        
+        let innerQuery = PFQuery(className: "Event", predicate: nil)
+        innerQuery.whereKey(kEventEndDateKey, lessThan: NSDate())
+        
+        query.whereKey("event", matchesQuery: innerQuery)
         query.whereKey("to", equalTo: PFUser.currentUser()!)
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
@@ -191,7 +196,12 @@ class Event : PFObject, PFSubclassing {
     // Query for all future events in the background and call the given block with the result
     class func getAllFutureEvents(block: ([Event] -> Void) ) {
         let query = PFQuery(className: "Invitation", predicate: nil)
-        query.whereKey(kEventStartDateKey, greaterThanOrEqualTo: NSDate())
+        query.includeKey("event")
+        
+        let innerQuery = PFQuery(className: "Event", predicate: nil)
+        innerQuery.whereKey(kEventStartDateKey, greaterThanOrEqualTo: NSDate())
+        
+        query.whereKey("event", matchesQuery: innerQuery)
         query.whereKey("to", equalTo: PFUser.currentUser()!)
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
