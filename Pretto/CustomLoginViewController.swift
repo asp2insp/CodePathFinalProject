@@ -11,6 +11,7 @@ import UIKit
 class CustomLoginViewController: PFLogInViewController {
     
     private var gradientView: UIImageView!
+    private var backgroundImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,12 +19,15 @@ class CustomLoginViewController: PFLogInViewController {
         self.logInView?.dismissButton?.addTarget(self, action: "onDismissButton", forControlEvents: UIControlEvents.TouchUpInside)
 
         self.logInView?.logo = UIImageView(image: UIImage(named: "HeaderPretto")!)
+        
+        self.backgroundImage = UIImageView()
+        self.backgroundImage.image = UIImage(named: "friends_7")
+        self.logInView?.addSubview(backgroundImage)
+        self.logInView?.sendSubviewToBack(backgroundImage)
 
         self.gradientView = UIImageView(image: UIImage(named: "gradient"))
         self.logInView?.addSubview(self.gradientView)
         self.logInView?.sendSubviewToBack(self.gradientView)
-
-        self.logInView?.backgroundColor = UIColor(patternImage: UIImage(named: "friends_6")!)
 
         self.logInView?.usernameField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.8)
         self.logInView?.usernameField?.textColor = UIColor.whiteColor()
@@ -67,6 +71,8 @@ class CustomLoginViewController: PFLogInViewController {
         self.logInView?.logo?.frame = CGRect(x: (self.logInView!.frame.width - logoWidth) / 2.0, y: 50.0, width: logoWidth, height: logoHeight)
         
         self.gradientView.frame = CGRect(x: 0, y: self.logInView!.frame.height / 2, width: self.logInView!.frame.width, height: self.logInView!.frame.height / 2)
+        
+        self.backgroundImage.frame = self.logInView!.frame
 
         self.logInView?.usernameField?.placeholder = "Enter email"
         self.logInView?.passwordField?.placeholder = "Enter password"

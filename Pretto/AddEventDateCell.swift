@@ -29,6 +29,7 @@ class AddEventDateCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0)
+        self.dateLabel.textColor = UIColor.prettoRed()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

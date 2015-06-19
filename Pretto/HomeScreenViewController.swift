@@ -17,6 +17,7 @@ class HomeScreenViewController : ZoomableCollectionViewController, UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         flowLayout.headerReferenceSize = CGSizeMake(0, 44)
         flowLayout.footerReferenceSize = CGSizeMake(0, 44)
         allowsSelection = false

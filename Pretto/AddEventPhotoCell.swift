@@ -31,7 +31,8 @@ class AddEventPhotoCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.accessoryType = UITableViewCellAccessoryType.None
-        
+
+        addPhotoLabel.textColor = UIColor.prettoRed()
         
         eventPhoto.userInteractionEnabled = true
         eventPhoto.layer.borderWidth = 1
