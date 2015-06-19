@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 class AlbumGeneralViewCell: UITableViewCell {
-    @IBOutlet var albumImages: [UIImageView]!
+    @IBOutlet var albumImages: [PFImageView]!
 
     @IBOutlet var albumTitle: UILabel!
     @IBOutlet var albumLocation: UILabel!
