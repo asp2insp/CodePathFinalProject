@@ -17,6 +17,10 @@
 		1628DCFF1B321477005E0841 /* CustomLandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */; };
 		16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */; };
 		16354F431B2E6613003D2A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16354F411B2E6613003D2A2B /* Main.storyboard */; };
+		1684BBFA1B334F4500CBCDC1 /* AlbumGeneralViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BBF91B334F4500CBCDC1 /* AlbumGeneralViewCell.swift */; };
+		1684BBFC1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BBFB1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift */; };
+		1684BBFF1B3391F400CBCDC1 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BBFE1B3391F400CBCDC1 /* Appearance.swift */; };
+		1684BC011B33B88D00CBCDC1 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BC001B33B88D00CBCDC1 /* IntroViewController.swift */; };
 		16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */; };
 		16D3AA341B2E476E00934948 /* AddEventTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */; };
 		16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */; };
@@ -58,6 +62,10 @@
 		1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLandingViewController.swift; sourceTree = "<group>"; };
 		16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		16354F421B2E6613003D2A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1684BBF91B334F4500CBCDC1 /* AlbumGeneralViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumGeneralViewCell.swift; sourceTree = "<group>"; };
+		1684BBFB1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumGeneralViewController.swift; sourceTree = "<group>"; };
+		1684BBFE1B3391F400CBCDC1 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		1684BC001B33B88D00CBCDC1 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventPhotoCell.swift; sourceTree = "<group>"; };
 		16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventTitleCell.swift; sourceTree = "<group>"; };
 		16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDateCell.swift; sourceTree = "<group>"; };
@@ -117,6 +125,8 @@
 				1628DCFA1B31F86B005E0841 /* CustomLoginViewController.swift */,
 				1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */,
 				1628DCFC1B31F87E005E0841 /* CustomSignUpViewController.swift */,
+				1684BBFB1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift */,
+				1684BC001B33B88D00CBCDC1 /* IntroViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -127,6 +137,22 @@
 				1628DCF41B30BE89005E0841 /* EventManager.swift */,
 			);
 			name = EventManager;
+			sourceTree = "<group>";
+		};
+		1684BBF81B334F1D00CBCDC1 /* Albums */ = {
+			isa = PBXGroup;
+			children = (
+				1684BBF91B334F4500CBCDC1 /* AlbumGeneralViewCell.swift */,
+			);
+			name = Albums;
+			sourceTree = "<group>";
+		};
+		1684BBFD1B3391D000CBCDC1 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				1684BBFE1B3391F400CBCDC1 /* Appearance.swift */,
+			);
+			name = Appearance;
 			sourceTree = "<group>";
 		};
 		16D3AA301B2E46B600934948 /* CreateEvent */ = {
@@ -181,6 +207,7 @@
 		FE45EE3A1B1FE5DF00F39BF8 /* Pretto */ = {
 			isa = PBXGroup;
 			children = (
+				1684BBFD1B3391D000CBCDC1 /* Appearance */,
 				1628DCF31B30BE63005E0841 /* EventManager */,
 				FE45EE9B1B23A52D00F39BF8 /* Data Models */,
 				FE45EEB31B2DEF0300F39BF8 /* Views */,
@@ -238,6 +265,7 @@
 		FE45EEB31B2DEF0300F39BF8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1684BBF81B334F1D00CBCDC1 /* Albums */,
 				16D3AA301B2E46B600934948 /* CreateEvent */,
 				FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */,
 			);
@@ -385,11 +413,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1628DCF51B30BE89005E0841 /* EventManager.swift in Sources */,
+				1684BBFF1B3391F400CBCDC1 /* Appearance.swift in Sources */,
 				16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */,
 				1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */,
 				FE45EEAE1B23CEC900F39BF8 /* Photo.swift in Sources */,
 				16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */,
 				1628DCFB1B31F86B005E0841 /* CustomLoginViewController.swift in Sources */,
+				1684BBFC1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift in Sources */,
 				FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */,
 				1628DCED1B2E6CB7005E0841 /* User.swift in Sources */,
 				16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */,
@@ -405,7 +435,9 @@
 				16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */,
 				FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */,
 				FE4EA23A1B326E4700AF2990 /* Notification.swift in Sources */,
+				1684BC011B33B88D00CBCDC1 /* IntroViewController.swift in Sources */,
 				1628DCEC1B2E6755005E0841 /* HomeScreenViewController.swift in Sources */,
+				1684BBFA1B334F4500CBCDC1 /* AlbumGeneralViewCell.swift in Sources */,
 				1628DCFD1B31F87E005E0841 /* CustomSignUpViewController.swift in Sources */,
 				1628DCF11B2E7B15005E0841 /* AddUsersAddedUserCell.swift in Sources */,
 			);
