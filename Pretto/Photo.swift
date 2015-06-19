@@ -1,5 +1,5 @@
 //
-//  FullsizePhoto.swift
+//  Photo.swift
 //  Pretto
 //
 //  Created by Josiah Gaskin on 6/6/15.
