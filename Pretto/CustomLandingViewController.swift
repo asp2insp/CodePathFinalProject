@@ -56,10 +56,10 @@ class CustomLandingViewController: PFLogInViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        println("FB Button size \(self.logInView!.facebookButton!.frame.width) x \(self.logInView!.facebookButton!.frame.height)")
-        println("FB Origin x: \(self.logInView!.facebookButton!.frame.origin.x) y: \(self.logInView!.facebookButton!.frame.origin.y)")
-        println("SignUp Button size \(self.logInView!.signUpButton!.frame.width) x \(self.logInView!.signUpButton!.frame.height)")
-        println("SignUp Origin x: \(self.logInView!.signUpButton!.frame.origin.x) y: \(self.logInView!.signUpButton!.frame.origin.y)")
+//        println("FB Button size \(self.logInView!.facebookButton!.frame.width) x \(self.logInView!.facebookButton!.frame.height)")
+//        println("FB Origin x: \(self.logInView!.facebookButton!.frame.origin.x) y: \(self.logInView!.facebookButton!.frame.origin.y)")
+//        println("SignUp Button size \(self.logInView!.signUpButton!.frame.width) x \(self.logInView!.signUpButton!.frame.height)")
+//        println("SignUp Origin x: \(self.logInView!.signUpButton!.frame.origin.x) y: \(self.logInView!.signUpButton!.frame.origin.y)")
         var screenWidth = self.view.frame.width
         var screenHeight = self.view.frame.height
         var logoHeight = CGFloat(98.0)
@@ -97,6 +97,7 @@ class CustomLandingViewController: PFLogInViewController {
     
     func onSignInButton() {
         var notification = NSNotification(name: kShowLoginWindowNotification, object: nil)
+        
         NSNotificationCenter.defaultCenter().postNotification(notification)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
