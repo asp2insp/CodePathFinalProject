@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         
         // check user and start a storyboard accourdingly
         if isTheFirstTimeEver {
-            self.showIntroWindows()
+            self.showIntroWindow()
         } else {
         
             self.checkCurrentUser({ (user:User) -> Void in
@@ -206,7 +206,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         
     }
     
-    func showIntroWindows() {
+    func showIntroWindow() {
         var introViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IntroViewController") as! IntroViewController
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = introViewController
