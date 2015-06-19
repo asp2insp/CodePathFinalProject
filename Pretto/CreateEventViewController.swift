@@ -209,7 +209,7 @@ extension CreateEventViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
             return cell
         }
-        
+         
     }
 }
 

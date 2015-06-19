@@ -33,7 +33,9 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     
     @IBAction func onCreate(sender: UIBarButtonItem) {
         var newEvent = Event()
-        
+
+        newEvent.channel = Event.createEventPushChannel()
+
         newEvent.title = self.eventTitle
         newEvent.owner = PFUser.currentUser()!
         newEvent.pincode = "1111"
@@ -75,6 +77,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
                 }
             }
         }
+        invitation.accepted = true
         invitation.saveInBackground()
 
         self.navigationController?.topViewController.dismissViewControllerAnimated(true, completion: nil)

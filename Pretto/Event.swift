@@ -21,6 +21,7 @@ private let kEventLongitudeKey = "longitude"
 private let kEventLocationNameKey = "locationName"
 private let kEventAdminsKey = "admins"
 private let kEventGuestsKey = "guests"
+private let kEventChannelKey = "channel"
 
 
 class Event : PFObject, PFSubclassing {
@@ -51,6 +52,7 @@ class Event : PFObject, PFSubclassing {
     @NSManaged var locationName : String?
     @NSManaged var admins : [PFUser]?
     @NSManaged var guests : [PFUser]?
+    @NSManaged var channel : String?
     
     // TODO - support more than one album per event, right now we're going
     // to have a 1:1 mapping
@@ -100,6 +102,7 @@ class Event : PFObject, PFSubclassing {
         self.longitude = dictionary[kEventLongitudeKey] as! Double
         self.admins = dictionary[kEventAdminsKey] as? [PFUser]
         self.guests = dictionary[kEventGuestsKey] as? [PFUser]
+        self.channel = dictionary[kEventChannelKey] as? String
 
     }
 
@@ -213,5 +216,16 @@ class Event : PFObject, PFSubclassing {
                 block(events)
             }
         }
+    }
+    
+    class func createEventPushChannel() -> String {
+        dateFormatter.dateFormat = "MMyMhmMdyMyymhy" // just to mix things up a little ;)
+        let channelId = "\(PFUser.currentUser()!.objectId!)" + "\(dateFormatter.stringFromDate(NSDate()))"
+
+        let currentInstallation = PFInstallation.currentInstallation()
+        currentInstallation.addUniqueObject(channelId, forKey: "channels")
+        currentInstallation.saveInBackground()
+        
+        return channelId
     }
 }

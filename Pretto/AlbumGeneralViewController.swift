@@ -19,6 +19,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.prettoWhite()
