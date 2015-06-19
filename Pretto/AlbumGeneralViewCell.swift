@@ -33,6 +33,8 @@ class AlbumGeneralViewCell: UITableViewCell {
     private var imageWidth: CGFloat!
     private var imageHeight: CGFloat!
     
+    private let placeHolder: UIImage! = UIImage(named: "placeholder")
+    
     private var monthFormatter = NSDateFormatter()
     private var dayFormatter = NSDateFormatter()
     
@@ -47,15 +49,14 @@ class AlbumGeneralViewCell: UITableViewCell {
         albumLocation.preferredMaxLayoutWidth = albumLocation.frame.size.width
         
         calendarSheet.layer.cornerRadius = 3
-//        calendarSheet.layer.borderColor = UIColor.lightGrayColor().CGColor
-//        calendarSheet.layer.borderWidth = 1
         
         imageWidth = self.frame.width - (2 * sideMargin) - (3 * imageHorizontalSeparator)
         imageHeight = imageWidth
         
-        for album in albumImages {
-            album.clipsToBounds = true
-            album.frame = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
+        for imageView in albumImages {
+            imageView.clipsToBounds = true
+            imageView.frame = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
+            imageView.image = placeHolder
         }
     }
     
@@ -68,7 +69,7 @@ class AlbumGeneralViewCell: UITableViewCell {
                 self.moreLabel.text = photos.count > 7 ? "+ \(photos.count - 7)" : ""
                 let photoCount = min(photos.count, self.albumImages.count)
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                    for var i=0; i < photoCount; i++ {
+                    for var i = 0; i < photoCount; i++ {
                         let photo = self.photos[i].fetchIfNeeded() as! Photo
                         let data = photo.thumbnailFile!.getData()!
                         dispatch_async(dispatch_get_main_queue()) {
