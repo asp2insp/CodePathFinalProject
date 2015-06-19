@@ -8,7 +8,7 @@
 
 import Foundation
 
-private let kClassName = "FullsizePhoto"
+private let kClassName = "Photo"
 
 class Photo : PFObject, PFSubclassing {
     override class func initialize() {
