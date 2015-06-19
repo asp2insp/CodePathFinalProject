@@ -104,21 +104,20 @@ class Event : PFObject, PFSubclassing {
     }
 
     
-    func getAllPhotosInEvent(orderedBy: String?) -> [Photo] {
-        var photos : [Photo] = []
-        for album in self.albums {
-            album.fetchIfNeeded()
-            for p in album.photos ?? [] {
-                photos.append(p)
+    func getAllPhotosInEvent(orderedBy: String?, block: ([Photo] -> Void)) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            var photos : [Photo] = []
+            for album in self.albums {
+                album.fetchIfNeeded()
+                for p in album.photos ?? [] {
+                    photos.append(p)
+                }
             }
-        }
-        
-        let order = orderedBy ?? ""
-        switch order {
-        case "Date Descending":
-            return photos // TODO - order by date
-        default:
-            return photos
+            
+            let order = orderedBy ?? ""
+            dispatch_async(dispatch_get_main_queue()) {
+                block(photos)
+            }
         }
     }
     

@@ -7,136 +7,6 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Home-->
-        <scene sceneID="V6K-iT-POs">
-            <objects>
-                <viewController title="Home" id="Hy1-1N-qk0" customClass="HomeScreenViewController" customModule="Pretto" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Grj-hh-sQn"/>
-                        <viewControllerLayoutGuide type="bottom" id="Avu-L2-P1g"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="V6G-Xx-Wga">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WcB-mA-zcS">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GkL-ek-jFd">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="50" height="50"/>
-                                    <size key="footerReferenceSize" width="50" height="50"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="rrb-lf-9sD" customClass="SelectableImageCell" customModule="Pretto" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="sectionheader" id="M89-1M-t1q" customClass="EventHeader" customModule="Pretto" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPe-Wx-uNO">
-                                            <rect key="frame" x="546" y="10" width="43" height="30"/>
-                                            <state key="normal" title="Pause">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="didTapPause:" destination="M89-1M-t1q" eventType="touchUpInside" id="Evk-DL-dl3"/>
-                                            </connections>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name -- Start Date -- End Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T27-PA-Z0M">
-                                            <rect key="frame" x="8" y="14" width="288" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="T27-PA-Z0M" firstAttribute="leading" secondItem="M89-1M-t1q" secondAttribute="leadingMargin" id="3uU-IO-Bsg"/>
-                                        <constraint firstAttribute="centerY" secondItem="nPe-Wx-uNO" secondAttribute="centerY" id="DeM-5h-J5c"/>
-                                        <constraint firstAttribute="centerY" secondItem="T27-PA-Z0M" secondAttribute="centerY" constant="0.5" id="kKH-Jq-Hcd"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="nPe-Wx-uNO" secondAttribute="trailing" constant="3" id="vzi-99-BUe"/>
-                                    </constraints>
-                                    <connections>
-                                        <outlet property="label" destination="T27-PA-Z0M" id="2dI-1Q-uyL"/>
-                                        <outlet property="pauseButton" destination="nPe-Wx-uNO" id="mTZ-Fa-Eqe"/>
-                                    </connections>
-                                </collectionReusableView>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="sectionfooter" id="XcX-I5-EL9" customClass="EventFooter" customModule="Pretto" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="164" width="600" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 95 More" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0Q-GU-rFj">
-                                            <rect key="frame" x="279" y="14" width="79" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="centerY" secondItem="f0Q-GU-rFj" secondAttribute="centerY" constant="0.5" id="dou-hv-0gW"/>
-                                        <constraint firstAttribute="centerX" secondItem="f0Q-GU-rFj" secondAttribute="centerX" constant="-18.5" id="q4N-FT-ozT"/>
-                                    </constraints>
-                                    <connections>
-                                        <outlet property="label" destination="f0Q-GU-rFj" id="4ZL-dr-uHn"/>
-                                    </connections>
-                                </collectionReusableView>
-                                <connections>
-                                    <outlet property="dataSource" destination="Hy1-1N-qk0" id="rTN-n6-S5M"/>
-                                    <outlet property="delegate" destination="Hy1-1N-qk0" id="68w-Ms-5At"/>
-                                    <outletCollection property="gestureRecognizers" destination="jMI-a0-IKp" appends="YES" id="3Uo-lq-sU9"/>
-                                    <outletCollection property="gestureRecognizers" destination="i4v-3r-RMO" appends="YES" id="Jjb-Ri-020"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="WcB-mA-zcS" secondAttribute="bottom" id="Ira-7w-xMf"/>
-                            <constraint firstItem="WcB-mA-zcS" firstAttribute="leading" secondItem="V6G-Xx-Wga" secondAttribute="leading" id="SRu-Rv-Gd1"/>
-                            <constraint firstAttribute="trailing" secondItem="WcB-mA-zcS" secondAttribute="trailing" id="ZAd-m0-JB4"/>
-                            <constraint firstItem="WcB-mA-zcS" firstAttribute="top" secondItem="V6G-Xx-Wga" secondAttribute="top" id="aj3-bl-d4u"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="ALBUMS" id="u8i-RR-vRW">
-                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="04g-59-obn">
-                            <connections>
-                                <action selector="onLogOut:" destination="Hy1-1N-qk0" id="7xL-my-mee"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="VTf-2F-u91">
-                            <connections>
-                                <segue destination="qo8-DA-FXF" kind="presentation" identifier="CreateEventSegue" id="vwg-y7-HLl"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="collectionView" destination="WcB-mA-zcS" id="OIc-Fx-Mia"/>
-                        <segue destination="QHM-MY-pEb" kind="show" identifier="albumdetail" id="fmn-Ap-o2d"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VSp-nC-Nod" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer id="jMI-a0-IKp">
-                    <connections>
-                        <action selector="didPinch:" destination="Hy1-1N-qk0" id="Ypy-EC-09Q"/>
-                    </connections>
-                </pinchGestureRecognizer>
-                <tapGestureRecognizer id="i4v-3r-RMO">
-                    <connections>
-                        <action selector="didTapToSelectEvent:" destination="Hy1-1N-qk0" id="Xnd-LY-7iG"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="842" y="280"/>
-        </scene>
         <!--NOTIFICATIONS-->
         <scene sceneID="q1x-RK-ZGd">
             <objects>
@@ -241,7 +111,6 @@
                         <segue destination="dEV-L8-Cbu" kind="relationship" relationship="viewControllers" id="cfh-zm-jiM"/>
                         <segue destination="1H1-9l-Vg5" kind="relationship" relationship="viewControllers" id="Avt-mT-sp3"/>
                         <segue destination="qU1-RK-9aC" kind="relationship" relationship="viewControllers" id="YcD-gP-NaO"/>
-                        <segue destination="5RB-1R-GAf" kind="relationship" relationship="viewControllers" id="98F-hL-Dhn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SxO-6z-d2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -260,7 +129,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Hy1-1N-qk0" kind="relationship" relationship="rootViewController" id="KTg-VR-OXQ"/>
+                        <segue destination="yvM-WZ-e91" kind="relationship" relationship="rootViewController" id="bEQ-bg-Qyl"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfX-Wk-ohw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -719,7 +588,7 @@
                                 <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="370" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2hf-QG-AMI">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="370" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2hf-QG-AMI">
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -927,6 +796,7 @@
                                             <outletCollection property="albumImages" destination="TBJ-9d-TwV" collectionClass="NSMutableArray" id="9wG-Qq-PR4"/>
                                             <outletCollection property="albumImages" destination="T9H-fS-6mc" collectionClass="NSMutableArray" id="7Eh-aS-GCZ"/>
                                             <outletCollection property="albumImages" destination="8LH-g9-f0K" collectionClass="NSMutableArray" id="AAV-da-GXN"/>
+                                            <segue destination="QHM-MY-pEb" kind="show" identifier="AlbumDetailSegue" id="vud-F4-xSa"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -944,7 +814,20 @@
                             <constraint firstItem="2hf-QG-AMI" firstAttribute="top" secondItem="TMC-bJ-eIB" secondAttribute="bottom" id="yiG-Pf-Yna"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ALBUMS" id="xud-Fg-5do"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="ALBUMS" id="xud-Fg-5do">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="WAg-0c-Io1">
+                            <connections>
+                                <action selector="onLogOut:" destination="yvM-WZ-e91" id="eTY-dS-2gy"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="cUr-4t-gfF">
+                            <connections>
+                                <segue destination="qo8-DA-FXF" kind="presentation" identifier="CreateEventSegue" id="BF4-eI-bfI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchBar" destination="TMC-bJ-eIB" id="tmS-OJ-6R8"/>
                         <outlet property="tableView" destination="2hf-QG-AMI" id="tgM-DB-UGi"/>
@@ -952,31 +835,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omb-eH-Of9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="918" y="2264"/>
-        </scene>
-        <!--DemoView-->
-        <scene sceneID="cYU-Nt-2lW">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5RB-1R-GAf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="DemoView" image="TabBarCameraSimpleLineLogo" id="Uzd-Hd-hxs"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hyh-99-jP0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="yvM-WZ-e91" kind="relationship" relationship="rootViewController" id="mxT-5F-FOu"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GQz-dn-GVD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="106" y="2264"/>
+            <point key="canvasLocation" x="862" y="280"/>
         </scene>
     </scenes>
     <resources>
         <image name="TabBarCameraLogoIcon" width="34" height="29"/>
-        <image name="TabBarCameraSimpleLineLogo" width="36" height="32"/>
         <image name="TabBarSearchIcon" width="23" height="24"/>
         <image name="TabBarStuffIcon" width="19" height="18"/>
         <image name="settings" width="20" height="20"/>

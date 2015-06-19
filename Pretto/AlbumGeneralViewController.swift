@@ -15,6 +15,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     var refreshControl : UIRefreshControl!
     var liveEvents : [Event] = []
+    var selectedEvent : Event?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         Event.getAllLiveEvents() { (events) -> Void in
             self.liveEvents = events
             for event in self.liveEvents {
+                event.pinInBackground()
                 event.getInvitation().updateFromCameraRoll()
             }
             self.tableView.reloadData()
@@ -45,6 +47,10 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    @IBAction func onLogOut(sender: AnyObject) {
+        PFUser.logOut()
+        (UIApplication.sharedApplication().delegate as! AppDelegate).showLandingWindow()
+    }
 
     /*
     // MARK: - Navigation
@@ -71,8 +77,17 @@ extension AlbumGeneralViewController : UITableViewDelegate {
         return cellHeight
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.selectedEvent = liveEvents[indexPath.row]
+        performSegueWithIdentifier("AlbumDetailSegue", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "AlbumDetailSegue" {
+            let destination = segue.destinationViewController as! EventDetailViewController
+            destination.event = self.selectedEvent
+            self.selectedEvent = nil
+        }
     }
 }
 

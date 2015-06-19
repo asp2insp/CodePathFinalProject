@@ -11,9 +11,25 @@ import Foundation
 class EventDetailViewController : ZoomableCollectionViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     var event : Event?
     
+    var photos : [Photo] = []
+    var refreshControl : UIRefreshControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = event?.title
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControl)
+        collectionView.alwaysBounceVertical = true
+    }
+    
+    func refreshData() {
+        self.event?.getAllPhotosInEvent(nil) {photos in
+            self.photos = photos
+            self.collectionView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
     }
 }
 
@@ -28,6 +44,6 @@ extension EventDetailViewController {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.event?.getAllPhotosInEvent(nil).count ?? 0
+        return self.photos.count
     }
 }

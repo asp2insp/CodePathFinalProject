@@ -56,7 +56,6 @@ class AlbumGeneralViewCell: UITableViewCell {
         for album in albumImages {
             album.clipsToBounds = true
             album.frame = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
-            album.image = UIImage(named: "friends_6")
         }
     }
     
@@ -65,17 +64,16 @@ class AlbumGeneralViewCell: UITableViewCell {
             albumTitle.text = event.title
             monthLabel.text = monthFormatter.stringFromDate(event.startDate)
             dayLabel.text = dayFormatter.stringFromDate(event.startDate)
-            photos = event.getAllPhotosInEvent(nil)
-            moreLabel.text = "+ \(photos.count - 7)"
-            let photoCount = min(photos.count, albumImages.count)
-            println("About to load \(photoCount) photos")
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                for var i=0; i < photoCount; i++ {
-                    let photo = self.photos[i].fetchIfNeeded() as! Photo
-                    let data = photo.thumbnailFile!.getData()!
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.albumImages[i].image = UIImage(data: data)
+            event.getAllPhotosInEvent(nil) {(photos) in
+                self.moreLabel.text = photos.count > 7 ? "+ \(photos.count - 7)" : ""
+                let photoCount = min(photos.count, self.albumImages.count)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                    for var i=0; i < photoCount; i++ {
+                        let photo = self.photos[i].fetchIfNeeded() as! Photo
+                        let data = photo.thumbnailFile!.getData()!
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.albumImages[i].image = UIImage(data: data)
+                        }
                     }
                 }
             }

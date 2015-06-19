@@ -22,9 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
 
         GlobalAppearance.setAll()
         
-        Invitation.registerSubclass()
-        Event.registerSubclass()
-        Album.registerSubclass()
+        registerDataModels()
         
         Parse.enableLocalDatastore()
         
