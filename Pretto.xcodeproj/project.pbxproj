@@ -16,6 +16,7 @@
 		1628DCFF1B321477005E0841 /* CustomLandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */; };
 		16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */; };
 		16354F431B2E6613003D2A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16354F411B2E6613003D2A2B /* Main.storyboard */; };
+		1683557A1B34DED400264F6B /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168355791B34DED400264F6B /* PushManager.swift */; };
 		1684BBFA1B334F4500CBCDC1 /* AlbumGeneralViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BBF91B334F4500CBCDC1 /* AlbumGeneralViewCell.swift */; };
 		1684BBFC1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BBFB1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift */; };
 		1684BBFF1B3391F400CBCDC1 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BBFE1B3391F400CBCDC1 /* Appearance.swift */; };
@@ -62,6 +63,7 @@
 		1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLandingViewController.swift; sourceTree = "<group>"; };
 		16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		16354F421B2E6613003D2A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		168355791B34DED400264F6B /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		1684BBF91B334F4500CBCDC1 /* AlbumGeneralViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumGeneralViewCell.swift; sourceTree = "<group>"; };
 		1684BBFB1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumGeneralViewController.swift; sourceTree = "<group>"; };
 		1684BBFE1B3391F400CBCDC1 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				1628DCF41B30BE89005E0841 /* EventManager.swift */,
+				168355791B34DED400264F6B /* PushManager.swift */,
 			);
 			name = EventManager;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				1684BBFC1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift in Sources */,
 				FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */,
 				1628DCED1B2E6CB7005E0841 /* User.swift in Sources */,
+				1683557A1B34DED400264F6B /* PushManager.swift in Sources */,
 				16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */,
 				605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */,
 				FE45EEC21B2E774600F39BF8 /* Invitation.swift in Sources */,

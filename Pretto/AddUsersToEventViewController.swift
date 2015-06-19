@@ -34,7 +34,13 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     @IBAction func onCreate(sender: UIBarButtonItem) {
         var newEvent = Event()
 
-        newEvent.channel = Event.createEventPushChannel()
+        PushManager.createChannel { (success, channelId) -> () in
+            if success {
+                newEvent.channel = channelId
+            } else {
+                println("Channel NOT CREATED!!!")
+            }
+        }
 
         newEvent.title = self.eventTitle
         newEvent.owner = PFUser.currentUser()!
