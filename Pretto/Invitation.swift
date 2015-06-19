@@ -29,6 +29,7 @@ class Invitation : PFObject, PFSubclassing {
     @NSManaged var event : Event
     @NSManaged var from : PFUser
     @NSManaged var to : PFUser
+    
     var paused: Bool {
         get { return self["paused"] as! Bool }
         set { self["paused"] = newValue }
@@ -46,7 +47,8 @@ class Invitation : PFObject, PFSubclassing {
     func updateFromCameraRoll() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        fetchOptions.predicate = NSPredicate(format: "creationDate > %@ AND creationDate < %@", event.startDate, event.endDate)
+        let startDate = self.lastUpdated ?? event.startDate
+        fetchOptions.predicate = NSPredicate(format: "creationDate > %@ AND creationDate < %@", startDate, event.endDate)
         PHPhotoLibrary.requestAuthorization { (authStatus:PHAuthorizationStatus) -> Void in
             switch authStatus {
             case .NotDetermined:
@@ -67,15 +69,21 @@ class Invitation : PFObject, PFSubclassing {
         requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.FastFormat
         requestOptions.version = PHImageRequestOptionsVersion.Current
         let requestManager = PHImageManager.defaultManager()
+        println("Adding \(allResult.count) photos to \(event.title)")
         for var i = 0; i < allResult.count; i++ {
-            requestManager.requestImageDataForAsset(allResult[i] as! PHAsset, options: requestOptions, resultHandler: { (data, stringHuh, orientation, info) -> Void in
-//                let photo = PFFile(data: data)
-//                photo.saveInBackground()
-//                let image = FullsizePhoto()
-//                image.file = photo
-//                image.saveInBackground()
-                // TODO: Resize image and create thumbnail. Create fullsize photo without associated file
+            requestManager.requestImageDataForAsset(allResult[i] as! PHAsset, options: requestOptions, resultHandler: { (data, uti, orientation, info) -> Void in
+                let thumbFile = PFFile(data: data)
+                thumbFile.saveInBackground()
+                let image = Photo()
+                image.thumbnailFile = thumbFile
+                image.saveInBackground()
+                self.event.addImageToEvent(image)
             })
+            
+            let myLast : NSDate = (self.lastUpdated ?? NSDate.distantPast()) as! NSDate
+            let thisLast : NSDate = allResult[i].creationDate
+            lastUpdated = myLast.compare(thisLast) == NSComparisonResult.OrderedAscending ? thisLast : myLast
         }
+        saveInBackground()
     }
 }

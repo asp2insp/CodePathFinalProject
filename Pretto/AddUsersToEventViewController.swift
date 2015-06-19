@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 
 let AddedUserCellReuseIdentifier = "AddedUserCell"
 
-class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UITextFieldDelegate {
+class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UITextFieldDelegate, CLLocationManagerDelegate {
+    
+    var locationManager = CLLocationManager()
+    var location : CLLocation?
     
     var startDate: NSDate!
     var endDate: NSDate!
@@ -35,9 +39,9 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         newEvent.pincode = "1111"
         newEvent.startDate = self.startDate
         newEvent.endDate = self.endDate
-        newEvent.latitude = 37.770789
-        newEvent.longitude = -122.403918
-        newEvent.locationName = "Zynga"
+        newEvent.latitude = self.location?.coordinate.latitude ?? 37.770789
+        newEvent.longitude = self.location?.coordinate.longitude ?? -122.403918
+        newEvent.locationName = "TODO"
         newEvent.admins = [PFUser.currentUser()!]
         newEvent.guests = [PFUser.currentUser()!]
         let album = Album()
@@ -112,6 +116,14 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
             }
         })
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -125,8 +137,6 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     }
-    
-
 }
 
 //MARK: UITableViewDelegate
@@ -195,6 +205,16 @@ extension AddUsersToEventViewController : UITextFieldDelegate {
         substring = substring.stringByReplacingCharactersInRange(range, withString: string)
         self.searchAutocompleteEntriesWithSubstring(substring as String)
         return true
+    }
+}
+
+// MARK: CLLocationManagerDelegate
+extension AddUsersToEventViewController : CLLocationManagerDelegate {
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        let newLocation = locations.last as! CLLocation
+        println("Got location \(newLocation)")
+        self.location = newLocation
+        locationManager.stopUpdatingLocation()
     }
 }
 
