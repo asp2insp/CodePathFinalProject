@@ -918,6 +918,7 @@
                                             <outlet property="calendarSheet" destination="mtE-WH-9ul" id="9KO-cQ-u1g"/>
                                             <outlet property="dayLabel" destination="2gk-mj-Vkf" id="AES-Dm-a5c"/>
                                             <outlet property="monthLabel" destination="h43-34-mKf" id="f2E-64-aOC"/>
+                                            <outlet property="moreLabel" destination="Qfq-bH-vov" id="9nD-rO-R8H"/>
                                             <outletCollection property="albumImages" destination="cYj-5O-y7I" collectionClass="NSMutableArray" id="e9w-f9-54v"/>
                                             <outletCollection property="albumImages" destination="k8c-EA-3CU" collectionClass="NSMutableArray" id="bHW-vn-rS1"/>
                                             <outletCollection property="albumImages" destination="me2-5K-PQF" collectionClass="NSMutableArray" id="9wU-UQ-Jjh"/>

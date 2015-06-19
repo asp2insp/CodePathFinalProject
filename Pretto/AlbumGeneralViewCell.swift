@@ -7,11 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
 class AlbumGeneralViewCell: UITableViewCell {
-
-
-
     @IBOutlet var albumImages: [UIImageView]!
 
     @IBOutlet var albumTitle: UILabel!
@@ -19,7 +17,13 @@ class AlbumGeneralViewCell: UITableViewCell {
     @IBOutlet var calendarSheet: UIView!
     @IBOutlet var monthLabel: UILabel!
     @IBOutlet var dayLabel: UILabel!
-
+    @IBOutlet weak var moreLabel: UILabel!
+    
+    var event : Event? {
+        didSet {
+            self.updateData()
+        }
+    }
     
     private let sideMargin = CGFloat(16.0)
     private let imageVerticalSeparator = CGFloat(2.0)
@@ -27,8 +31,13 @@ class AlbumGeneralViewCell: UITableViewCell {
     private var imageWidth: CGFloat!
     private var imageHeight: CGFloat!
     
+    private var monthFormatter = NSDateFormatter()
+    private var dayFormatter = NSDateFormatter()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.monthFormatter.dateFormat = "MMM"
+        self.dayFormatter.dateFormat = "d"
         self.backgroundColor = UIColor.prettoWhite()
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.accessoryType = UITableViewCellAccessoryType.None
@@ -47,7 +56,22 @@ class AlbumGeneralViewCell: UITableViewCell {
             album.frame = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
             album.image = UIImage(named: "friends_6")
         }
-        
+    }
+    
+    func updateData() {
+        if let event = self.event {
+            albumTitle.text = event.title
+            monthLabel.text = monthFormatter.stringFromDate(event.startDate)
+            dayLabel.text = dayFormatter.stringFromDate(event.startDate)
+            let photos = event.getAllPhotosInEvent(nil)
+            moreLabel.text = "+ \(photos.count - 7)"
+            CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: event.latitude, longitude: event.longitude), completionHandler: { (markers, error) -> Void in
+                if markers.count > 0 {
+                    let marker = markers[0] as! CLPlacemark
+                    self.albumLocation.text = "\(marker.locality), \(marker.subLocality)"
+                }
+            })
+        }
     }
     
     override func layoutSubviews() {

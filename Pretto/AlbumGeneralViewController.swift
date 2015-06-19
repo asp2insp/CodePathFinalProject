@@ -13,17 +13,36 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet var tableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
     
+    var refreshControl : UIRefreshControl!
+    var liveEvents : [Event] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.prettoWhite()
         searchBar.backgroundColor = UIColor.prettoWhite()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(refreshControl)
+        refreshData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func refreshData() {
+        Event.getAllLiveEvents() { (events) -> Void in
+            self.liveEvents = events
+            for event in self.liveEvents {
+                event.getInvitation().updateFromCameraRoll()
+            }
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
     }
     
 
@@ -65,20 +84,12 @@ extension AlbumGeneralViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return liveEvents.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AlbumGeneralViewCell", forIndexPath: indexPath) as! AlbumGeneralViewCell
+        cell.event = liveEvents[indexPath.row]
         return cell
     }
 }
-//
-//class AlbumTableViewCell : UITableViewCell {
-//    var event : Event {
-//        didSet {
-//            return
-//        }
-//    }
-//}
-
