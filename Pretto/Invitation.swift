@@ -67,7 +67,7 @@ class Invitation : PFObject, PFSubclassing {
             case .Denied:
                 println("AuthStatus: Denied")
             case .Authorized:
-                println("AuthStatus: Authorized")
+                break
             default:
                 println("AuthStatus: ERROR")
             }
@@ -117,6 +117,7 @@ class Invitation : PFObject, PFSubclassing {
         query.whereKey("event", matchesQuery: innerQuery)
         query.whereKey("to", equalTo: PFUser.currentUser()!)
         query.includeKey("event")
+        query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
                 var invites : [Invitation] = []

@@ -56,7 +56,18 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         album.saveInBackground()
         newEvent.albums = [album]
         
+        // Send invitations
         let invitation = newEvent.makeInvitationForUser(PFUser.currentUser()!)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            let facebookIds : [String] = self.selectedFriends?.map({ (friend) -> String in
+                return friend.facebookId
+            }) ?? []
+            let query = PFUser.query()
+            query?.whereKey("facebookId", containedIn: facebookIds)
+            for invitedUser in query?.findObjects() ?? [] {
+                newEvent.makeInvitationForUser(invitedUser as! PFUser).save()
+            }
+        }
         if eventPhoto != nil {
             var imageData = UIImageJPEGRepresentation(eventPhoto, 0.5)
             var imageFile = PFFile(name: "test.jpg", data: imageData)
