@@ -11,8 +11,8 @@ import Foundation
 private let kClassName = "Event"
 
 private let kEventTitleKey = "title"
-private let kEventStartDateKey = "startDate"
-private let kEventEndDateKey = "endDate"
+internal let kEventStartDateKey = "startDate"
+internal let kEventEndDateKey = "endDate"
 private let kEventCoverPhotoKey = "coverPhoto"
 private let kEventOwnerKey = "owner"
 private let kEventPincodeKey = "pincode"
@@ -106,7 +106,6 @@ class Event : PFObject, PFSubclassing {
 
     }
 
-    
     func getAllPhotosInEvent(orderedBy: String?, block: ([Photo] -> Void)) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             var photos : [Photo] = []
@@ -146,76 +145,6 @@ class Event : PFObject, PFSubclassing {
         invitation.accepted = false
         invitation.lastUpdated = NSDate()
         return invitation
-    }
-    
-    // Query for all live events in the background and call the given block with the result
-    class func getAllLiveEvents(block: ([Event] -> Void) ) {
-        let query = PFQuery(className: "Invitation", predicate: nil)
-        query.includeKey("event")
-        
-        let innerQuery = PFQuery(className: "Event", predicate: nil)
-        innerQuery.whereKey(kEventStartDateKey, lessThanOrEqualTo: NSDate())
-        innerQuery.whereKey(kEventEndDateKey, greaterThan: NSDate())
-        
-        query.whereKey("event", matchesQuery: innerQuery)
-        query.whereKey("to", equalTo: PFUser.currentUser()!)
-        query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
-            if error == nil {
-                var events : [Event] = []
-                for obj in query.findObjects() ?? [] {
-                    if let invitation = obj as? Invitation {
-                        events.append(invitation.event)
-                    }
-                }
-                block(events)
-            }
-        }
-    }
-    
-    // Query for all past events in the background and call the given block with the result
-    class func getAllPastEvents(block: ([Event] -> Void) ) {
-        let query = PFQuery(className: "Invitation", predicate: nil)
-        query.includeKey("event")
-        
-        let innerQuery = PFQuery(className: "Event", predicate: nil)
-        innerQuery.whereKey(kEventEndDateKey, lessThan: NSDate())
-        
-        query.whereKey("event", matchesQuery: innerQuery)
-        query.whereKey("to", equalTo: PFUser.currentUser()!)
-        query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
-            if error == nil {
-                var events : [Event] = []
-                for obj in query.findObjects() ?? [] {
-                    if let invitation = obj as? Invitation {
-                        events.append(invitation.event)
-                    }
-                }
-                block(events)
-            }
-        }
-    }
-    
-    // Query for all future events in the background and call the given block with the result
-    class func getAllFutureEvents(block: ([Event] -> Void) ) {
-        let query = PFQuery(className: "Invitation", predicate: nil)
-        query.includeKey("event")
-        
-        let innerQuery = PFQuery(className: "Event", predicate: nil)
-        innerQuery.whereKey(kEventStartDateKey, greaterThanOrEqualTo: NSDate())
-        
-        query.whereKey("event", matchesQuery: innerQuery)
-        query.whereKey("to", equalTo: PFUser.currentUser()!)
-        query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
-            if error == nil {
-                var events : [Event] = []
-                for obj in query.findObjects() ?? [] {
-                    if let invitation = obj as? Invitation {
-                        events.append(invitation.event)
-                    }
-                }
-                block(events)
-            }
-        }
     }
     
 //    class func createEventPushChannel() -> String {

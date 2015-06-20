@@ -73,7 +73,7 @@ class AlbumGeneralViewCell: UITableViewCell {
                 let photoCount = min(photos.count, self.albumImages.count)
                 for var i=0; i < photoCount; i++ {
                     SwiftTryCatch.try({
-                        photos[i].fetchIfNeeded()
+                        photos[i].fetchIfNeededInBackground()
                         self.albumImages[i].file = photos[i].thumbnailFile
                         }, catch: { (error) in
                             println("\(error.description)")

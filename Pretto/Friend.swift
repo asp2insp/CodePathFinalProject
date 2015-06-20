@@ -68,7 +68,7 @@ class Friend  : PFObject, PFSubclassing {
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
                 var friends : [Friend] = []
-                for obj in query.findObjects() ?? [] {
+                for obj in items ?? [] {
                     if let friend = obj as? Friend {
                         friends.append(friend)
                     }

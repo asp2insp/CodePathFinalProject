@@ -14,8 +14,8 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet var searchBar: UISearchBar!
     
     var refreshControl : UIRefreshControl!
-    var liveEvents : [Event] = []
-    var selectedEvent : Event?
+    var liveInvitations : [Invitation] = []
+    var selectedInvitation : Invitation?
     
     var observer : NSObjectProtocol!
     
@@ -38,6 +38,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         self.observer = NSNotificationCenter.defaultCenter().addObserverForName("PrettoNewPhotoForEvent", object: nil, queue: nil) { (note) -> Void in
            self.refreshData()
         }
+        self.refreshData()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -51,11 +52,11 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func refreshData() {
-        Event.getAllLiveEvents() { (events) -> Void in
-            self.liveEvents = events
-            for event in self.liveEvents {
-                event.pinInBackground()
-                event.getInvitation().updateFromCameraRoll()
+        Invitation.getAllLiveEvents() { (invites) -> Void in
+            self.liveInvitations = invites
+            for invite in self.liveInvitations {
+                invite.pinInBackground()
+                invite.updateFromCameraRoll()
             }
             self.tableView.reloadData()
             for cell in self.tableView.visibleCells() {
@@ -96,15 +97,15 @@ extension AlbumGeneralViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.selectedEvent = liveEvents[indexPath.row]
+        self.selectedInvitation = liveInvitations[indexPath.row]
 //        performSegueWithIdentifier("AlbumDetailSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AlbumDetailSegue" {
             let destination = segue.destinationViewController as! EventDetailViewController
-            destination.event = self.selectedEvent
-            self.selectedEvent = nil
+            destination.invitation = self.selectedInvitation
+            self.selectedInvitation = nil
         }
     }
 }
@@ -117,12 +118,12 @@ extension AlbumGeneralViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return liveEvents.count
+        return liveInvitations.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AlbumGeneralViewCell", forIndexPath: indexPath) as! AlbumGeneralViewCell
-        cell.event = liveEvents[indexPath.row]
+        cell.event = liveInvitations[indexPath.row].event
         return cell
     }
 }
