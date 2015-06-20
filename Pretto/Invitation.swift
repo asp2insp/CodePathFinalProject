@@ -76,7 +76,16 @@ class Invitation : PFObject, PFSubclassing {
         let targetSize = CGSizeMake(100, 100)
         for var i = 0; i < allResult.count; i++ {
             requestManager.requestImageForAsset(allResult[i] as! PHAsset, targetSize: targetSize, contentMode: PHImageContentMode.AspectFill, options: requestOptions, resultHandler: { (image, info) -> Void in
-                let data = UIImageJPEGRepresentation(image, 0.5)
+                
+                UIGraphicsBeginImageContext(image.size)
+                image.drawInRect(CGRectMake(0, 0, 100, 100))
+                let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                let data = UIImageJPEGRepresentation(finalImage, 1.0)
+                if data == nil {
+                    println("FOR FUCKS SAKE! Is image nil? Answer: \(image == nil)")
+                    return
+                }
                 let thumbFile = PFFile(data: data)
                 thumbFile.saveInBackground()
                 let image = Photo()
