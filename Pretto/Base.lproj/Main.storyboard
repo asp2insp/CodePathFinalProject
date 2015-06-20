@@ -804,7 +804,6 @@
                                             <outletCollection property="albumImages" destination="TBJ-9d-TwV" collectionClass="NSMutableArray" id="9wG-Qq-PR4"/>
                                             <outletCollection property="albumImages" destination="T9H-fS-6mc" collectionClass="NSMutableArray" id="7Eh-aS-GCZ"/>
                                             <outletCollection property="albumImages" destination="8LH-g9-f0K" collectionClass="NSMutableArray" id="AAV-da-GXN"/>
-                                            <segue destination="QHM-MY-pEb" kind="show" identifier="AlbumDetailSegue" id="vud-F4-xSa"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -839,6 +838,7 @@
                     <connections>
                         <outlet property="searchBar" destination="TMC-bJ-eIB" id="tmS-OJ-6R8"/>
                         <outlet property="tableView" destination="2hf-QG-AMI" id="tgM-DB-UGi"/>
+                        <segue destination="QHM-MY-pEb" kind="show" identifier="AlbumDetailSegue" id="iU5-IK-ejn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omb-eH-Of9" userLabel="First Responder" sceneMemberID="firstResponder"/>
