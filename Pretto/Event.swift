@@ -113,7 +113,7 @@ class Event : PFObject, PFSubclassing {
             for album in self.albums {
                 album.fetchIfNeeded()
                 for p in album.photos ?? [] {
-                    p.fetchIfNeeded()
+                    SwiftTryCatch.try({ p.fetchIfNeeded() }, catch: nil, finally: nil)
                     photos.append(p)
                 }
             }
@@ -122,7 +122,9 @@ class Event : PFObject, PFSubclassing {
             switch order {
             case kOrderedByNewestFirst:
                 photos.sort {(a: Photo, b: Photo) -> Bool in
-                    return a.createdAt!.compare(b.createdAt!) == NSComparisonResult.OrderedDescending
+                    let aCreated = a.createdAt ?? NSDate.distantPast() as! NSDate
+                    let bCreated = b.createdAt ?? NSDate.distantPast() as! NSDate
+                    return aCreated.compare(bCreated) == NSComparisonResult.OrderedDescending
                 }
             default:
                 break

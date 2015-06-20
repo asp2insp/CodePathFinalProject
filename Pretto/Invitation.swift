@@ -79,12 +79,11 @@ class Invitation : PFObject, PFSubclassing {
         requestOptions.version = PHImageRequestOptionsVersion.Current
         let requestManager = PHImageManager.defaultManager()
         println("Adding \(allResult.count) photos to \(event.title)")
-        let targetSize = CGSizeMake(100, 100)
+        let targetRect = CGRectMake(0, 0, 140, 140)
         for var i = 0; i < allResult.count; i++ {
-            requestManager.requestImageForAsset(allResult[i] as! PHAsset, targetSize: targetSize, contentMode: PHImageContentMode.AspectFit, options: requestOptions, resultHandler: { (image, info) -> Void in
-                
+            requestManager.requestImageForAsset(allResult[i] as! PHAsset, targetSize: targetRect.size, contentMode: PHImageContentMode.AspectFit, options: requestOptions, resultHandler: { (image, info) -> Void in
                 UIGraphicsBeginImageContext(image.size)
-                image.drawInRect(CGRectMake(0, 0, 100, 100))
+                image.drawInRect(targetRect)
                 let finalImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 let data = UIImageJPEGRepresentation(finalImage, 1.0)
