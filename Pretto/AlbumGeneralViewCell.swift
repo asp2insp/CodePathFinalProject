@@ -57,7 +57,10 @@ class AlbumGeneralViewCell: UITableViewCell {
             album.clipsToBounds = true
             album.frame = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
         }
+
     }
+    
+    
     
     func updateData() {
         if let event = self.event {
@@ -69,6 +72,7 @@ class AlbumGeneralViewCell: UITableViewCell {
                 let photoCount = min(photos.count, self.albumImages.count)
                 for var i=0; i < photoCount; i++ {
                     SwiftTryCatch.try({
+                        photos[i].fetchIfNeeded()
                         self.albumImages[i].file = photos[i].thumbnailFile
                         }, catch: { (error) in
                             println("\(error.description)")

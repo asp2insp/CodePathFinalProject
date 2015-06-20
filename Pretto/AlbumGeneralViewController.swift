@@ -17,6 +17,8 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     var liveEvents : [Event] = []
     var selectedEvent : Event?
     
+    var observer : NSObjectProtocol!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +31,18 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
         refreshData()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.observer = NSNotificationCenter.defaultCenter().addObserverForName("PrettoNewPhotoForEvent", object: nil, queue: nil) { (note) -> Void in
+           self.refreshData()
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self.observer)
     }
 
     override func didReceiveMemoryWarning() {
