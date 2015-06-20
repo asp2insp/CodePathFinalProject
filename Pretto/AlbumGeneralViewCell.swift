@@ -61,14 +61,12 @@ class AlbumGeneralViewCell: UITableViewCell {
 
     }
     
-    
-    
     func updateData() {
         if let event = self.event {
             albumTitle.text = event.title
             monthLabel.text = monthFormatter.stringFromDate(event.startDate)
             dayLabel.text = dayFormatter.stringFromDate(event.startDate)
-            event.getAllPhotosInEvent(nil) {(photos) in
+            event.getAllPhotosInEvent(kOrderedByNewestFirst) {(photos) in
                 self.moreLabel.text = photos.count > 7 ? "+ \(photos.count - 7)" : ""
                 let photoCount = min(photos.count, self.albumImages.count)
                 for var i=0; i < photoCount; i++ {
@@ -80,7 +78,7 @@ class AlbumGeneralViewCell: UITableViewCell {
                         })
                         self.albumImages[i].file = photos[i].thumbnailFile
                         }, catch: { (error) in
-                            println("\(error.description)")
+                            // This is expected... file is still loading
                         }, finally: {
                             // close resources
                     })
