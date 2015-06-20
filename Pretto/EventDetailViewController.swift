@@ -9,14 +9,14 @@
 import Foundation
 
 class EventDetailViewController : ZoomableCollectionViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    var event : Event?
+    var invitation : Invitation?
     
     var photos : [Photo] = []
     var refreshControl : UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = event?.title
+        self.title = invitation?.event.title
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
@@ -25,7 +25,7 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
     }
     
     func refreshData() {
-        self.event?.getAllPhotosInEvent(nil) {photos in
+        self.invitation?.event.getAllPhotosInEvent(nil) {photos in
             self.photos = photos
             self.collectionView.reloadData()
             self.refreshControl.endRefreshing()
