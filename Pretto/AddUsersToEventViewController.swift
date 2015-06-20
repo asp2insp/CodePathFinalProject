@@ -34,13 +34,11 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     @IBAction func onCreate(sender: UIBarButtonItem) {
         var newEvent = Event()
 
-        PushManager.createChannel { (success, channelId) -> () in
-            if success {
-                newEvent.channel = channelId
-            } else {
-                println("Channel NOT CREATED!!!")
-            }
-        }
+        // Generate ChannelId
+        dateFormatter.dateFormat = "MMyMhmMdyMyymhy" // just to mix things up a little ;)
+        let channelId = "\(PFUser.currentUser()!.objectId!)" + "\(dateFormatter.stringFromDate(NSDate()))"
+        
+        PFPush.subscribeToChannelInBackground(channelId)
 
         newEvent.title = self.eventTitle
         newEvent.owner = PFUser.currentUser()!
