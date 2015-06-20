@@ -97,6 +97,7 @@ extension AlbumGeneralViewController : UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.selectedEvent = liveEvents[indexPath.row]
+//        performSegueWithIdentifier("AlbumDetailSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

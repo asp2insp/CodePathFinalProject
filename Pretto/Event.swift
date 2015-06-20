@@ -218,14 +218,14 @@ class Event : PFObject, PFSubclassing {
         }
     }
     
-    class func createEventPushChannel() -> String {
-        dateFormatter.dateFormat = "MMyMhmMdyMyymhy" // just to mix things up a little ;)
-        let channelId = "\(PFUser.currentUser()!.objectId!)" + "\(dateFormatter.stringFromDate(NSDate()))"
-
-        let currentInstallation = PFInstallation.currentInstallation()
-        currentInstallation.addUniqueObject(channelId, forKey: "channels")
-        currentInstallation.saveInBackground()
-        
-        return channelId
-    }
+//    class func createEventPushChannel() -> String {
+//        dateFormatter.dateFormat = "MMyMhmMdyMyymhy" // just to mix things up a little ;)
+//        let channelId = "\(PFUser.currentUser()!.objectId!)" + "\(dateFormatter.stringFromDate(NSDate()))"
+//
+//        let currentInstallation = PFInstallation.currentInstallation()
+//        currentInstallation.addUniqueObject(channelId, forKey: "channels")
+//        currentInstallation.saveInBackground()
+//        
+//        return channelId
+//    }
 }
