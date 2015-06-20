@@ -28,9 +28,7 @@ class Album : PFObject, PFSubclassing {
     @NSManaged var event: Event
     
     func addPhoto(photo: Photo) {
-        var p = self.photos ?? []
-        p.append(photo)
-        self.photos = p
+        self.addUniqueObject(photo, forKey: "photos")
         self.saveInBackground()
     }
     

@@ -72,8 +72,12 @@ class AlbumGeneralViewCell: UITableViewCell {
                 self.moreLabel.text = photos.count > 7 ? "+ \(photos.count - 7)" : ""
                 let photoCount = min(photos.count, self.albumImages.count)
                 for var i=0; i < photoCount; i++ {
+                    let index = i
                     SwiftTryCatch.try({
-                        photos[i].fetchIfNeededInBackground()
+                        photos[i].fetchIfNeededInBackgroundWithBlock({ (photo, err) -> Void in
+                            self.albumImages[index].file = photos[index].thumbnailFile
+                            self.albumImages[index].loadInBackground()
+                        })
                         self.albumImages[i].file = photos[i].thumbnailFile
                         }, catch: { (error) in
                             println("\(error.description)")
