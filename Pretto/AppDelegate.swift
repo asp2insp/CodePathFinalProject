@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         // Register for Push Notitications
         self.registerForRemoteNotifications(application, launchOptions:launchOptions)
         
-        // check user and start a storyboard accourdingly
+        // check user and start a storyboard accordingly
         let isFirstTime: Bool? = NSUserDefaults.standardUserDefaults().objectForKey(kFirstTimeRunningPretto) as? Bool
         
         if  isFirstTime == nil || isFirstTime == true {
