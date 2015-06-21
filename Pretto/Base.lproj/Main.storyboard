@@ -40,9 +40,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ghD-Wm-7vl" customClass="PFImageView">
+                                <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZCm-RL-FXa">
-                                <rect key="frame" x="8" y="150" width="584" height="450"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="-1" width="600" height="601"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lsz-VO-3bq">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -70,17 +73,30 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="ghD-Wm-7vl" secondAttribute="trailing" constant="-16" id="FPo-dQ-Jbd"/>
+                            <constraint firstItem="ghD-Wm-7vl" firstAttribute="leading" secondItem="Inb-0K-ycw" secondAttribute="leadingMargin" constant="-16" id="GN5-1o-Rau"/>
                             <constraint firstAttribute="bottom" secondItem="ZCm-RL-FXa" secondAttribute="bottom" id="Pla-fu-bmA"/>
-                            <constraint firstAttribute="trailing" secondItem="ZCm-RL-FXa" secondAttribute="trailing" constant="8" id="a30-yC-Jx4"/>
-                            <constraint firstItem="ZCm-RL-FXa" firstAttribute="height" secondItem="Inb-0K-ycw" secondAttribute="height" multiplier="3:4" id="mZG-gA-UP0"/>
-                            <constraint firstItem="ZCm-RL-FXa" firstAttribute="leading" secondItem="Inb-0K-ycw" secondAttribute="leading" constant="8" id="v9O-Po-m1g"/>
+                            <constraint firstItem="ghD-Wm-7vl" firstAttribute="top" secondItem="FCf-dB-rkI" secondAttribute="bottom" id="V5w-LN-INC"/>
+                            <constraint firstAttribute="trailing" secondItem="ZCm-RL-FXa" secondAttribute="trailing" id="a30-yC-Jx4"/>
+                            <constraint firstItem="ZCm-RL-FXa" firstAttribute="top" secondItem="ghD-Wm-7vl" secondAttribute="bottom" constant="-100" id="dAt-Jr-Bi9"/>
+                            <constraint firstItem="ZCm-RL-FXa" firstAttribute="height" secondItem="Inb-0K-ycw" secondAttribute="height" constant="1" id="mZG-gA-UP0"/>
+                            <constraint firstAttribute="centerX" secondItem="ghD-Wm-7vl" secondAttribute="centerX" id="nWy-OX-k0J"/>
+                            <constraint firstItem="ZCm-RL-FXa" firstAttribute="height" secondItem="ghD-Wm-7vl" secondAttribute="height" constant="1" id="sbD-mO-SWB"/>
+                            <constraint firstItem="ZCm-RL-FXa" firstAttribute="leading" secondItem="Inb-0K-ycw" secondAttribute="leading" id="v9O-Po-m1g"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="dAt-Jr-Bi9"/>
+                                <exclude reference="nWy-OX-k0J"/>
+                            </mask>
+                        </variation>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="tYZ-fq-1z2" appends="YES" id="xJG-RU-yCf"/>
                         </connections>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="ZCm-RL-FXa" id="kgj-Is-Vtc"/>
+                        <outlet property="headerImage" destination="ghD-Wm-7vl" id="W7f-LM-1iK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X9R-To-Skc" userLabel="First Responder" sceneMemberID="firstResponder"/>

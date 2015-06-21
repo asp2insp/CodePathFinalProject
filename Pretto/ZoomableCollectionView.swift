@@ -183,7 +183,7 @@ extension ZoomableCollectionViewController {
 }
 
 class SelectableImageCell : UICollectionViewCell {
-    var image: UIImageView!
+    var image: PFImageView!
     var checkbox: M13Checkbox!
     var showCheckbox : Bool = true {
         didSet {
@@ -193,7 +193,7 @@ class SelectableImageCell : UICollectionViewCell {
     }
     
     override func awakeFromNib() {
-        image = UIImageView(frame: self.bounds)
+        image = PFImageView(frame: self.bounds)
         checkbox = M13Checkbox(frame: CGRectMake(0, 0, 20, 20))
         checkbox.center = CGPointMake(25, 25)
         checkbox.userInteractionEnabled = false
@@ -206,6 +206,11 @@ class SelectableImageCell : UICollectionViewCell {
         self.addSubview(image)
         
         self.addSubview(checkbox)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        image.frame = self.bounds
     }
     
     func animateStateChange() {
