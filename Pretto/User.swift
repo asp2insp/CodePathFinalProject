@@ -149,8 +149,8 @@ class User {
                 var firstName = userData["first_name"] as! String
                 var middleName = userData["middle_name"] as? String ?? ""
                 var lastName = userData["last_name"] as! String
-                var gender = userData["gender"] as! String
-                var locale = userData["locale"] as! String
+                var gender = userData["gender"] as? String ?? ""
+                var locale = userData["locale"] as? String ?? ""
                 
                 var currentUser = PFUser.currentUser()
                 var user = User(innerUser: currentUser)

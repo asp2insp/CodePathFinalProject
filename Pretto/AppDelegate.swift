@@ -167,41 +167,44 @@ extension AppDelegate {
     func checkCurrentUser() {
         println("AppDelegate: checkCurrentUser")
         User.checkCurrentUser({ (user:User) -> Void in
+            println("Saving user details...")
             user.save()
             user.printProperties()
-            println("Save user details invoked")
             self.startMainStoryBoard()
-            
-            Friend.getAllFriendsFromFacebook(user.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
-                if friends != nil {
-                    println("Friends retrieved from FB")
-                    Friend.printDebugAll(friends!)
-                    Friend.getAllFriendsFromDBase(user.facebookId!, onComplete: { (savedFriends:[Friend]?) -> Void in
-                        if savedFriends != nil {
-                            var unsavedFriends = Friend.subtract(friends!, from: savedFriends!)
-                            if unsavedFriends.count > 0 {
-                                Friend.saveAllInBackground(unsavedFriends)
-                                println("Saving friends invoked for \(unsavedFriends.count)")
-                            } else {
-                                println("Friends are up to date.")
-                            }
-                        } else {
-                            println("No friends are saved yet. Attempting to save all.")
-                            Friend.saveAllInBackground(friends!)
-                            println("Saving friends invoked for \(friends!.count)")
-                        }
-                    })
-                } else {
-                    println("No FB friends using this app")
-                }
-            })
-            
+            self.fetchFriends(user)
             },
             otherwise: { (pfUser:PFUser?) -> Void in
                 if pfUser != nil {
+                    println("Unlinking user from FB")
                     PFFacebookUtils.unlinkUserInBackground(pfUser!)
                 }
                 self.showLandingWindow()
+        })
+    }
+    
+    func fetchFriends(user:User) {
+        Friend.getAllFriendsFromFacebook(user.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
+            if friends != nil {
+                println("Friends retrieved from FB")
+                Friend.printDebugAll(friends!)
+                Friend.getAllFriendsFromDBase(user.facebookId!, onComplete: { (savedFriends:[Friend]?) -> Void in
+                    if savedFriends != nil {
+                        var unsavedFriends = Friend.subtract(friends!, from: savedFriends!)
+                        if unsavedFriends.count > 0 {
+                            Friend.saveAllInBackground(unsavedFriends)
+                            println("Saving friends invoked for \(unsavedFriends.count)")
+                        } else {
+                            println("Friends are up to date.")
+                        }
+                    } else {
+                        println("No friends are saved yet. Attempting to save all.")
+                        Friend.saveAllInBackground(friends!)
+                        println("Saving friends invoked for \(friends!.count)")
+                    }
+                })
+            } else {
+                println("No FB friends using this app")
+            }
         })
     }
     
