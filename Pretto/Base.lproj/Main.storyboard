@@ -3,7 +3,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--NOTIFICATIONS-->
@@ -29,7 +28,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="So and So has requested 999 photos from you" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJn-Kc-tcZ">
-                                                    <rect key="frame" x="8" y="11" width="358" height="24.5"/>
+                                                    <rect key="frame" x="8" y="11" width="358" height="25"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -51,7 +50,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Someone cares enough to invite you to their thing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Waj-iW-vE7">
-                                                    <rect key="frame" x="8" y="11" width="382" height="20.5"/>
+                                                    <rect key="frame" x="8" y="11" width="382" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -73,7 +72,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some other notification" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPe-Ol-R2b">
-                                                    <rect key="frame" x="8" y="11" width="178.5" height="20.5"/>
+                                                    <rect key="frame" x="8" y="11" width="179" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -191,11 +190,11 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="nWy-OX-k0J"/>
                                 <exclude reference="Pla-fu-bmA"/>
                                 <exclude reference="dAt-Jr-Bi9"/>
                                 <exclude reference="gbQ-Qy-G3h"/>
                                 <exclude reference="mZG-gA-UP0"/>
+                                <exclude reference="nWy-OX-k0J"/>
                             </mask>
                         </variation>
                         <connections>
@@ -792,20 +791,20 @@
                                                                         <constraint firstAttribute="width" constant="70" id="hlG-PB-TmZ"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8YN-C2-ogc" customClass="PFImageView">
-                                                                    <rect key="frame" x="216" y="0.0" width="70" height="70"/>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="70" id="QUM-w0-sva"/>
-                                                                        <constraint firstAttribute="width" constant="70" id="TZQ-Nf-t1Z"/>
-                                                                    </constraints>
-                                                                </imageView>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="me2-5K-PQF" customClass="PFImageView">
                                                                     <rect key="frame" x="144" y="0.0" width="70" height="70"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="70" id="cSD-5Q-fVh"/>
                                                                         <constraint firstAttribute="height" constant="70" id="kCh-b9-QUN"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8YN-C2-ogc" customClass="PFImageView">
+                                                                    <rect key="frame" x="216" y="0.0" width="70" height="70"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="70" id="QUM-w0-sva"/>
+                                                                        <constraint firstAttribute="width" constant="70" id="TZQ-Nf-t1Z"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bw2-dg-o4C" customClass="PFImageView">
@@ -846,8 +845,8 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfq-bH-vov">
-                                                                                <rect key="frame" x="4" y="23" width="62" height="24"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfq-bH-vov">
+                                                                                <rect key="frame" x="26" y="23" width="17" height="24"/>
                                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <nil key="highlightedColor"/>
@@ -931,14 +930,14 @@
                                             <outlet property="dayLabel" destination="2gk-mj-Vkf" id="AES-Dm-a5c"/>
                                             <outlet property="monthLabel" destination="h43-34-mKf" id="f2E-64-aOC"/>
                                             <outlet property="moreLabel" destination="Qfq-bH-vov" id="9nD-rO-R8H"/>
-                                            <outletCollection property="albumImages" destination="cYj-5O-y7I" collectionClass="NSMutableArray" id="e9w-f9-54v"/>
-                                            <outletCollection property="albumImages" destination="k8c-EA-3CU" collectionClass="NSMutableArray" id="bHW-vn-rS1"/>
-                                            <outletCollection property="albumImages" destination="T9H-fS-6mc" collectionClass="NSMutableArray" id="7Eh-aS-GCZ"/>
-                                            <outletCollection property="albumImages" destination="TBJ-9d-TwV" collectionClass="NSMutableArray" id="9wG-Qq-PR4"/>
-                                            <outletCollection property="albumImages" destination="bw2-dg-o4C" collectionClass="NSMutableArray" id="3IJ-QL-9Pg"/>
-                                            <outletCollection property="albumImages" destination="me2-5K-PQF" collectionClass="NSMutableArray" id="9wU-UQ-Jjh"/>
-                                            <outletCollection property="albumImages" destination="8YN-C2-ogc" collectionClass="NSMutableArray" id="zje-km-dXE"/>
-                                            <outletCollection property="albumImages" destination="8LH-g9-f0K" collectionClass="NSMutableArray" id="AAV-da-GXN"/>
+                                            <outletCollection property="albumImages" destination="cYj-5O-y7I" collectionClass="NSMutableArray" id="cEh-Ag-smt"/>
+                                            <outletCollection property="albumImages" destination="k8c-EA-3CU" collectionClass="NSMutableArray" id="etH-fq-3Ku"/>
+                                            <outletCollection property="albumImages" destination="me2-5K-PQF" collectionClass="NSMutableArray" id="tks-9F-0nY"/>
+                                            <outletCollection property="albumImages" destination="8YN-C2-ogc" collectionClass="NSMutableArray" id="9P1-h7-0P3"/>
+                                            <outletCollection property="albumImages" destination="bw2-dg-o4C" collectionClass="NSMutableArray" id="HZc-Un-zMR"/>
+                                            <outletCollection property="albumImages" destination="TBJ-9d-TwV" collectionClass="NSMutableArray" id="XUP-K9-Sba"/>
+                                            <outletCollection property="albumImages" destination="T9H-fS-6mc" collectionClass="NSMutableArray" id="hAz-0U-SXk"/>
+                                            <outletCollection property="albumImages" destination="8LH-g9-f0K" collectionClass="NSMutableArray" id="6I0-wH-awi"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

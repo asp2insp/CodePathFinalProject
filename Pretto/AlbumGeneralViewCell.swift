@@ -73,7 +73,7 @@ class AlbumGeneralViewCell: UITableViewCell {
             dayLabel.text = dayFormatter.stringFromDate(event.startDate)
             // Now load the new images
             event.getAllPhotosInEvent(kOrderedByNewestFirst) {(photos) in
-                self.moreLabel.text = photos.count > 7 ? "+ \(photos.count - 7)" : ""
+                self.moreLabel.text = photos.count > 7 ? "+ \(photos.count - 7)" : "..."
                 let photoCount = min(photos.count, self.albumImages.count)
                 for var i=0; i < photoCount; i++ {
                     let index = i
@@ -92,7 +92,7 @@ class AlbumGeneralViewCell: UITableViewCell {
                 }
                 // Reset the image for any cells beyond the end of the current photos
                 for var i=photoCount; i<self.albumImages.count; i++ {
-                    self.albumImages[i].image = nil
+                    self.albumImages[i].image = self.placeHolder
                 }
             }
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: event.latitude, longitude: event.longitude), completionHandler: { (markers, error) -> Void in
