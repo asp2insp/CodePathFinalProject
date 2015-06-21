@@ -26,7 +26,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     var autocompleteArray : [String]?
     
     private var autocompleteTableView: UITableView!
-    
+
     @IBOutlet var searchUserTextField: UITextField!
     @IBOutlet var topView: UIView!
     @IBOutlet var tableView: UITableView!
@@ -94,12 +94,20 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         }
         invitation.accepted = true
         invitation.saveInBackground()
+        
+        presentEventSummary()
+        
 
-        self.navigationController?.topViewController.dismissViewControllerAnimated(true, completion: nil)
+//        self.navigationController?.topViewController.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "shareOnFacebook", name: kShareOnFacebookNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "shareOnTwitter", name: kShareOnTwitterNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "shareByEmail", name: kShareByEmailNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "okButton", name: kAcceptEventAndDismissVCNotification, object: nil)
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -236,7 +244,50 @@ extension AddUsersToEventViewController : CLLocationManagerDelegate {
     }
 }
 
+//MARK: Aux Funtions
 extension AddUsersToEventViewController {
+    
+    func shareOnFacebook() {
+        println("Notification received, sharing on Facebook")
+    }
+    
+    func shareOnTwitter() {
+        println("Notification received, sharing on Twitter")
+    }
+    
+    func shareByEmail() {
+        println("Notification received, sharing by email ")
+    }
+    
+    func okButton() {
+
+        self.navigationController?.topViewController.dismissViewControllerAnimated(true, completion: nil)
+    
+    }
+    
+    func presentEventSummary() {
+
+        let currentWindow = UIApplication.sharedApplication().keyWindow
+        var completionView = EventCreatedView()
+        
+        currentWindow?.addSubview(completionView)
+        currentWindow?.bringSubviewToFront(completionView)
+        completionView.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+        completionView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2)
+        
+        let scale = CGAffineTransformMakeScale(0.3, 0.3)
+        let translate = CGAffineTransformMakeTranslation(50, -50)
+        completionView.transform = CGAffineTransformConcat(scale, translate)
+        completionView.alpha = 0
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: nil, animations: { () -> Void in
+            let scale = CGAffineTransformMakeScale(1.0, 1.0)
+            let translate = CGAffineTransformMakeTranslation(0, 0)
+            completionView.transform = CGAffineTransformConcat(scale, translate)
+            completionView.alpha = 1
+            }, completion: nil)
+    }
+    
     func searchAutocompleteEntriesWithSubstring(substring: String) {
         autocompleteArray?.removeAll(keepCapacity: false)
         for friend in self.friendsNames! {

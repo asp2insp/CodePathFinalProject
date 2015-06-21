@@ -12,6 +12,10 @@ let dateFormatter = NSDateFormatter()
 let kShowLoginWindowNotification = "showLoginWindow"
 let kShowLandingWindowNotification = "showLandingWindow"
 let kIntroDidFinishNotification = "introIsOver"
+let kShareOnFacebookNotification = "shareOnFacebook"
+let kShareOnTwitterNotification = "shareOnTwitter"
+let kShareByEmailNotification = "shareByEmail"
+let kAcceptEventAndDismissVCNotification = "acceptEventAndDismissVC"
 let kFirstTimeRunningPretto = "isTheFirstTimeEver"
 
 @UIApplicationMain

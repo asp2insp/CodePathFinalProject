@@ -23,6 +23,8 @@
 		1684BBFC1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BBFB1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift */; };
 		1684BBFF1B3391F400CBCDC1 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BBFE1B3391F400CBCDC1 /* Appearance.swift */; };
 		1684BC011B33B88D00CBCDC1 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BC001B33B88D00CBCDC1 /* IntroViewController.swift */; };
+		16B286A71B371EAE00F540AF /* EventCreatedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16B286A61B371EAE00F540AF /* EventCreatedView.xib */; };
+		16B286A91B371F2900F540AF /* EventCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B286A81B371F2900F540AF /* EventCreatedView.swift */; };
 		16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */; };
 		16D3AA341B2E476E00934948 /* AddEventTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */; };
 		16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */; };
@@ -74,6 +76,8 @@
 		1684BBFB1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumGeneralViewController.swift; sourceTree = "<group>"; };
 		1684BBFE1B3391F400CBCDC1 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		1684BC001B33B88D00CBCDC1 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		16B286A61B371EAE00F540AF /* EventCreatedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCreatedView.xib; sourceTree = "<group>"; };
+		16B286A81B371F2900F540AF /* EventCreatedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCreatedView.swift; sourceTree = "<group>"; };
 		16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventPhotoCell.swift; sourceTree = "<group>"; };
 		16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventTitleCell.swift; sourceTree = "<group>"; };
 		16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDateCell.swift; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 				16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */,
 				16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */,
 				1628DCF01B2E7B15005E0841 /* AddUsersAddedUserCell.swift */,
+				16B286A81B371F2900F540AF /* EventCreatedView.swift */,
+				16B286A61B371EAE00F540AF /* EventCreatedView.xib */,
 			);
 			name = CreateEvent;
 			sourceTree = "<group>";
@@ -384,6 +390,7 @@
 				FE45EE451B1FE5DF00F39BF8 /* Images.xcassets in Resources */,
 				1683557E1B35F56A00264F6B /* NoAlbumsCell.xib in Resources */,
 				16354F431B2E6613003D2A2B /* Main.storyboard in Resources */,
+				16B286A71B371EAE00F540AF /* EventCreatedView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +447,7 @@
 				1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */,
 				FE45EEAE1B23CEC900F39BF8 /* Photo.swift in Sources */,
 				16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */,
+				16B286A91B371F2900F540AF /* EventCreatedView.swift in Sources */,
 				1628DCFB1B31F86B005E0841 /* CustomLoginViewController.swift in Sources */,
 				1684BBFC1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift in Sources */,
 				FE45EEA71B23B56300F39BF8 /* Event.swift in Sources */,

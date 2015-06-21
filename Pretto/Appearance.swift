@@ -81,6 +81,10 @@ extension UIColor {
         return UIColor(red: (81.0 / 255.0), green: (179.0 / 255.0), blue: (193.0 / 255.0), alpha: 1)
     }
     
+    class func prettoDarkBlue() -> UIColor {
+        return UIColor(red: (54.0 / 255.0), green: (158.0 / 255.0), blue: (72.0 / 255.0), alpha: 1)
+    }
+    
     class func prettoOrange() -> UIColor {
         return UIColor(red: (245.0 / 255.0), green: (166.0 / 255.0), blue: (35.0 / 255.0), alpha: 1)
     }
