@@ -13,6 +13,7 @@ private let kClassName = "Event"
 private let kEventTitleKey = "title"
 internal let kEventStartDateKey = "startDate"
 internal let kEventEndDateKey = "endDate"
+internal let kOrderedByNewestFirst = "newestFirst"
 private let kEventCoverPhotoKey = "coverPhoto"
 private let kEventOwnerKey = "owner"
 private let kEventPincodeKey = "pincode"
@@ -108,15 +109,26 @@ class Event : PFObject, PFSubclassing {
 
     func getAllPhotosInEvent(orderedBy: String?, block: ([Photo] -> Void)) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            var photos : [Photo] = []
+            var photos : Array<Photo> = []
             for album in self.albums {
                 album.fetchIfNeeded()
                 for p in album.photos ?? [] {
+                    SwiftTryCatch.try({ p.fetchIfNeeded() }, catch: nil, finally: nil)
                     photos.append(p)
                 }
             }
             
             let order = orderedBy ?? ""
+            switch order {
+            case kOrderedByNewestFirst:
+                photos.sort {(a: Photo, b: Photo) -> Bool in
+                    let aCreated = a.createdAt ?? NSDate.distantPast() as! NSDate
+                    let bCreated = b.createdAt ?? NSDate.distantPast() as! NSDate
+                    return aCreated.compare(bCreated) == NSComparisonResult.OrderedDescending
+                }
+            default:
+                break
+            }
             dispatch_async(dispatch_get_main_queue()) {
                 block(photos)
             }

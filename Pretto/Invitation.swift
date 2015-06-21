@@ -46,6 +46,7 @@ class Invitation : PFObject, PFSubclassing {
         return accepted && !paused
     }
     
+    // Get all photos from the camera roll past self.lastUpdated and add them to the event
     func updateFromCameraRoll() {
         if self.isUpdating {
             return
@@ -58,33 +59,18 @@ class Invitation : PFObject, PFSubclassing {
         
         fetchOptions.predicate = NSPredicate(format: "creationDate > %@ AND creationDate < %@", startDate, event.endDate)
         
-        PHPhotoLibrary.requestAuthorization { (authStatus:PHAuthorizationStatus) -> Void in
-            switch authStatus {
-            case .NotDetermined:
-                println("AuthStatus: NotDetermined")
-            case .Restricted:
-                println("AuthStatus: Restricted")
-            case .Denied:
-                println("AuthStatus: Denied")
-            case .Authorized:
-                println("AuthStatus: Authorized")
-            default:
-                println("AuthStatus: ERROR")
-            }
-        }
-        
+        PHPhotoLibrary.requestAuthorization(nil)
         let allResult = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
         let requestOptions = PHImageRequestOptions()
         requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.FastFormat
         requestOptions.version = PHImageRequestOptionsVersion.Current
         let requestManager = PHImageManager.defaultManager()
         println("Adding \(allResult.count) photos to \(event.title)")
-        let targetSize = CGSizeMake(100, 100)
+        let targetRect = CGRectMake(0, 0, 140, 140)
         for var i = 0; i < allResult.count; i++ {
-            requestManager.requestImageForAsset(allResult[i] as! PHAsset, targetSize: targetSize, contentMode: PHImageContentMode.AspectFit, options: requestOptions, resultHandler: { (image, info) -> Void in
-                
+            requestManager.requestImageForAsset(allResult[i] as! PHAsset, targetSize: targetRect.size, contentMode: PHImageContentMode.AspectFit, options: requestOptions, resultHandler: { (image, info) -> Void in
                 UIGraphicsBeginImageContext(image.size)
-                image.drawInRect(CGRectMake(0, 0, 100, 100))
+                image.drawInRect(targetRect)
                 let finalImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 let data = UIImageJPEGRepresentation(finalImage, 1.0)
@@ -117,6 +103,7 @@ class Invitation : PFObject, PFSubclassing {
         query.whereKey("event", matchesQuery: innerQuery)
         query.whereKey("to", equalTo: PFUser.currentUser()!)
         query.includeKey("event")
+        query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
                 var invites : [Invitation] = []
@@ -141,6 +128,7 @@ class Invitation : PFObject, PFSubclassing {
         query.whereKey("event", matchesQuery: innerQuery)
         query.whereKey("to", equalTo: PFUser.currentUser()!)
         query.includeKey("event")
+        query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
                 var invites : [Invitation] = []
@@ -165,6 +153,7 @@ class Invitation : PFObject, PFSubclassing {
         query.whereKey("event", matchesQuery: innerQuery)
         query.whereKey("to", equalTo: PFUser.currentUser()!)
         query.includeKey("event")
+        query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
                 var invites : [Invitation] = []
@@ -174,6 +163,7 @@ class Invitation : PFObject, PFSubclassing {
                     }
                 }
                 block(invites)
-            }        }
+            }
+        }
     }
 }

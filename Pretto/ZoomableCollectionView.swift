@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class ZoomableCollectionViewController: UIViewController, UICollectionViewDelegate {
     
@@ -15,7 +16,7 @@ class ZoomableCollectionViewController: UIViewController, UICollectionViewDelega
     let flowLayout = UICollectionViewFlowLayout()
     var baseSize : CGSize!
     var maxSize : CGSize!
-    let minSize = CGSizeMake(30.0, 30.0)
+    var minSize : CGSize!
     
     // Long press handling
     var selectionStart : NSIndexPath!
@@ -29,12 +30,13 @@ class ZoomableCollectionViewController: UIViewController, UICollectionViewDelega
         super.viewDidLoad()
         collectionView.setCollectionViewLayout(flowLayout, animated: false)
         collectionView.allowsMultipleSelection = true
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 8, 0, 8)
+        flowLayout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        maxSize = view.bounds.size
+        maxSize = CGSizeMake(view.bounds.size.width/2 - 2*flowLayout.minimumInteritemSpacing, view.bounds.size.height/2 - 2*flowLayout.minimumLineSpacing)
+        minSize = CGSizeMake(view.bounds.size.width/5 - 5*flowLayout.minimumInteritemSpacing, view.bounds.size.height/5 - 5*flowLayout.minimumLineSpacing)
     }
     
     @IBAction func didPinch(sender: UIPinchGestureRecognizer) {
@@ -69,6 +71,7 @@ class ZoomableCollectionViewController: UIViewController, UICollectionViewDelega
                 if selectionStart == nil {
                     selectionStart = currentIndex
                     selectItemAtIndexPathIfNecessary(selectionStart)
+                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
                     return
                 }
                 // Change detection
@@ -183,7 +186,7 @@ extension ZoomableCollectionViewController {
 }
 
 class SelectableImageCell : UICollectionViewCell {
-    var image: UIImageView!
+    var image: PFImageView!
     var checkbox: M13Checkbox!
     var showCheckbox : Bool = true {
         didSet {
@@ -193,7 +196,7 @@ class SelectableImageCell : UICollectionViewCell {
     }
     
     override func awakeFromNib() {
-        image = UIImageView(frame: self.bounds)
+        image = PFImageView(frame: self.bounds)
         checkbox = M13Checkbox(frame: CGRectMake(0, 0, 20, 20))
         checkbox.center = CGPointMake(25, 25)
         checkbox.userInteractionEnabled = false
@@ -206,6 +209,11 @@ class SelectableImageCell : UICollectionViewCell {
         self.addSubview(image)
         
         self.addSubview(checkbox)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        image.frame = self.bounds
     }
     
     func animateStateChange() {

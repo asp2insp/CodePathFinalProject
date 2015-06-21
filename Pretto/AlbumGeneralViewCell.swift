@@ -66,14 +66,13 @@ class AlbumGeneralViewCell: UITableViewCell {
 
     }
     
-    
-    
     func updateData() {
         if let event = self.event {
             albumTitle.text = event.title
             monthLabel.text = monthFormatter.stringFromDate(event.startDate)
             dayLabel.text = dayFormatter.stringFromDate(event.startDate)
-            event.getAllPhotosInEvent(nil) {(photos) in
+            // Now load the new images
+            event.getAllPhotosInEvent(kOrderedByNewestFirst) {(photos) in
                 self.moreLabel.text = photos.count > 7 ? "+ \(photos.count - 7)" : ""
                 let photoCount = min(photos.count, self.albumImages.count)
                 for var i=0; i < photoCount; i++ {
@@ -85,11 +84,15 @@ class AlbumGeneralViewCell: UITableViewCell {
                         })
                         self.albumImages[i].file = photos[i].thumbnailFile
                         }, catch: { (error) in
-                            println("\(error.description)")
+                            // This is expected... file is still loading
                         }, finally: {
                             // close resources
                     })
                     self.albumImages[i].loadInBackground()
+                }
+                // Reset the image for any cells beyond the end of the current photos
+                for var i=photoCount; i<self.albumImages.count; i++ {
+                    self.albumImages[i].image = nil
                 }
             }
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: event.latitude, longitude: event.longitude), completionHandler: { (markers, error) -> Void in

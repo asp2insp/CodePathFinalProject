@@ -61,6 +61,9 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func refreshData() {
+        Invitation.getAllPastEvents() { (invites) -> Void in
+            self.pastInvitations = invites
+        }
         Invitation.getAllLiveEvents() { (invites) -> Void in
             self.liveInvitations = invites
             if self.liveInvitations.count > 0 {
@@ -126,7 +129,7 @@ extension AlbumGeneralViewController : UITableViewDelegate {
 
 extension AlbumGeneralViewController : UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
