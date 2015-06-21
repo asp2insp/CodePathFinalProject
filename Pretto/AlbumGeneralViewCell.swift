@@ -66,10 +66,6 @@ class AlbumGeneralViewCell: UITableViewCell {
             albumTitle.text = event.title
             monthLabel.text = monthFormatter.stringFromDate(event.startDate)
             dayLabel.text = dayFormatter.stringFromDate(event.startDate)
-            // First clear existing pictures
-            for imageView in self.albumImages {
-                imageView.image = nil
-            }
             // Now load the new images
             event.getAllPhotosInEvent(kOrderedByNewestFirst) {(photos) in
                 self.moreLabel.text = photos.count > 7 ? "+ \(photos.count - 7)" : ""
@@ -88,6 +84,10 @@ class AlbumGeneralViewCell: UITableViewCell {
                             // close resources
                     })
                     self.albumImages[i].loadInBackground()
+                }
+                // Reset the image for any cells beyond the end of the current photos
+                for var i=photoCount; i<self.albumImages.count; i++ {
+                    self.albumImages[i].image = nil
                 }
             }
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: event.latitude, longitude: event.longitude), completionHandler: { (markers, error) -> Void in
