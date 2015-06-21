@@ -26,6 +26,8 @@ class ZoomableCollectionViewController: UIViewController, UICollectionViewDelega
     // Set to enable/disable selection and checkboxes
     var allowsSelection : Bool = true
     
+    var selectedPaths = NSMutableSet()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.setCollectionViewLayout(flowLayout, animated: false)
@@ -37,6 +39,10 @@ class ZoomableCollectionViewController: UIViewController, UICollectionViewDelega
         super.viewDidAppear(animated)
         maxSize = CGSizeMake(view.bounds.size.width/2 - 2*flowLayout.minimumInteritemSpacing, view.bounds.size.height/2 - 2*flowLayout.minimumLineSpacing)
         minSize = CGSizeMake(view.bounds.size.width/5 - 5*flowLayout.minimumInteritemSpacing, view.bounds.size.height/5 - 5*flowLayout.minimumLineSpacing)
+    }
+    
+    internal func onSelectionChange() {
+        // Override this in subclasses to respond to selection change
     }
     
     @IBAction func didPinch(sender: UIPinchGestureRecognizer) {
@@ -108,6 +114,8 @@ class ZoomableCollectionViewController: UIViewController, UICollectionViewDelega
             cell.checkbox.checkState = M13CheckboxStateChecked
             cell.animateStateChange()
         }
+        self.selectedPaths.addObject(path)
+        onSelectionChange()
     }
     
     func deselectItemAtIndexPathIfNecessary(path: NSIndexPath) {
@@ -121,6 +129,8 @@ class ZoomableCollectionViewController: UIViewController, UICollectionViewDelega
             cell.checkbox.checkState = M13CheckboxStateUnchecked
             cell.animateStateChange()
         }
+        self.selectedPaths.removeObject(path)
+        onSelectionChange()
     }
     
     // Return the difference of the given arrays of index paths
@@ -166,6 +176,8 @@ class ZoomableCollectionViewController: UIViewController, UICollectionViewDelega
         }
         return nil
     }
+    
+
 }
 
 // UICollectionViewDelegate Extension

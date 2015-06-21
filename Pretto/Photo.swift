@@ -29,7 +29,6 @@ class Photo : PFObject, PFSubclassing {
     @NSManaged var owner : PFUser
     @NSManaged var accessList : [PFUser]
     @NSManaged var thumbnailFile : PFFile?
-    @NSManaged var events : [Event]
     
     func getThumbnail() -> PFFile {
         if thumbnailFile == nil {

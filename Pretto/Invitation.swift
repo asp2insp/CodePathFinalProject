@@ -81,6 +81,7 @@ class Invitation : PFObject, PFSubclassing {
                 thumbFile.saveInBackground()
                 let image = Photo()
                 image.thumbnailFile = thumbFile
+                image.owner = PFUser.currentUser()!
                 image.saveInBackgroundWithBlock({ (success, err) -> Void in
                     NSNotificationCenter.defaultCenter().postNotificationName("PrettoNewPhotoForEvent", object: self.event)
                 })
