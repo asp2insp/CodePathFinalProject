@@ -91,7 +91,7 @@ class User {
     var profilePhotoUrl:String? {
         get {
             if(self.facebookId != nil) {
-                return "https://graph.facebook.com/\(self.facebookId)/picture?type=large&return_ssl_resources=1"
+                return "https://graph.facebook.com/\(self.facebookId!)/picture?type=large&return_ssl_resources=1"
             } else {
                 return nil
             }

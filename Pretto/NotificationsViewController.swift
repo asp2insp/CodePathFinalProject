@@ -9,6 +9,7 @@
 import Foundation
 
 class NotificationsViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     var notifications : [Notification] = []
     var upcomingInvitations : [Invitation] = []
@@ -19,6 +20,10 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.estimatedRowHeight = 78
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
@@ -85,15 +90,17 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("invitecell", forIndexPath: indexPath) as! InviteCell
             cell.invite = self.upcomingInvitations[indexPath.row]
-            return cell
+            return fixRowLine(cell)
         case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier("requestcell", forIndexPath: indexPath) as! RequestCell
+            // let cell = tableView.dequeueReusableCellWithIdentifier("requestcell", forIndexPath: indexPath) as! RequestCell
+            // cell.request = self.requests[indexPath.row]
+            let cell = tableView.dequeueReusableCellWithIdentifier("request.cell.2", forIndexPath: indexPath) as! RequestCell2
             cell.request = self.requests[indexPath.row]
-            return cell
+            return fixRowLine(cell)
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier("notificationcell", forIndexPath: indexPath) as! NotificationCell
             cell.notification = self.notifications[indexPath.row]
-            return cell
+            return fixRowLine(cell)
         default:
             return UITableViewCell()
         }
@@ -121,6 +128,19 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
         }
         tableView.endUpdates()
+    }
+    
+    func fixRowLine(cell:UITableViewCell) -> UITableViewCell {
+        if (cell.respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:"))){
+            cell.preservesSuperviewLayoutMargins = false
+        }
+        if (cell.respondsToSelector(Selector("setSeparatorInset:"))){
+            cell.separatorInset = UIEdgeInsetsMake(0, 4, 0, 0)
+        }
+        if (cell.respondsToSelector(Selector("setLayoutMargins:"))){
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+        return cell
     }
 }
 

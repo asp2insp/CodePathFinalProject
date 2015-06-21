@@ -30,6 +30,7 @@
 		16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */; };
 		16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */; };
 		605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FBBBC1B2E571F002E7A75 /* Friend.swift */; };
+		606748D21B37765400B33AAB /* RequestCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606748D11B37765400B33AAB /* RequestCell2.swift */; };
 		F7946A7BA670F383BAB40980 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94BE76FA7DC3B5E1419C76CE /* libPods.a */; };
 		FE1D2D0D1B348E1F00D4485F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE1D2D0C1B348E1F00D4485F /* CoreLocation.framework */; };
 		FE1D2D0F1B34B5E000D4485F /* ModelsIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D2D0E1B34B5E000D4485F /* ModelsIndex.swift */; };
@@ -84,6 +85,7 @@
 		16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDatePickerCell.swift; sourceTree = "<group>"; };
 		605FBBBA1B2E4BD7002E7A75 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		605FBBBC1B2E571F002E7A75 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		606748D11B37765400B33AAB /* RequestCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCell2.swift; sourceTree = "<group>"; };
 		6680AB9C507B239DAD236C85 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		94BE76FA7DC3B5E1419C76CE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC282821306927B51E4EE715 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -200,6 +202,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		606748D01B37762200B33AAB /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				606748D11B37765400B33AAB /* RequestCell2.swift */,
+			);
+			name = Notifications;
+			sourceTree = "<group>";
+		};
 		7BBF68BC4B2FB862CB519969 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +301,7 @@
 		FE45EEB31B2DEF0300F39BF8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				606748D01B37762200B33AAB /* Notifications */,
 				1684BBF81B334F1D00CBCDC1 /* Albums */,
 				16D3AA301B2E46B600934948 /* CreateEvent */,
 				FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */,
@@ -442,6 +453,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1628DCF51B30BE89005E0841 /* EventManager.swift in Sources */,
+				606748D21B37765400B33AAB /* RequestCell2.swift in Sources */,
 				1684BBFF1B3391F400CBCDC1 /* Appearance.swift in Sources */,
 				16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */,
 				1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */,
