@@ -82,6 +82,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             
             self.refreshControl.endRefreshing()
         }
+        self.refreshControl.endRefreshing()
     }
     
     @IBAction func onLogOut(sender: AnyObject) {
@@ -114,15 +115,17 @@ extension AlbumGeneralViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.section {
-        case 0:
-            self.selectedInvitation = liveInvitations[indexPath.row]
-        case 1:
-            self.selectedInvitation = pastInvitations[indexPath.row]
-        default:
-            break
+        if liveInvitations.count > 0 || pastInvitations.count > 0 {
+            switch indexPath.section {
+            case 0:
+                self.selectedInvitation = liveInvitations[indexPath.row]
+            case 1:
+                self.selectedInvitation = pastInvitations[indexPath.row]
+            default:
+                break
+            }
+            performSegueWithIdentifier("AlbumDetailSegue", sender: self)
         }
-        performSegueWithIdentifier("AlbumDetailSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
