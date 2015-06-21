@@ -60,7 +60,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
 
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.separatorColor = UIColor.clearColor()
         
         nextButton.enabled = false
     }
@@ -98,7 +98,7 @@ extension CreateEventViewController: UITableViewDelegate {
         case (1, 1), (2, 1):
             return 180
         default:
-            return 44
+            return 58
         }
     }
     
@@ -242,6 +242,7 @@ extension CreateEventViewController: AddEventDatePickerCellDelegate {
 extension CreateEventViewController: AddEventPhotoCellDelegate {
     func addEventPhotoCell(addEventPhotoCell: AddEventPhotoCell, didTapOnEventPhoto photo: UIImageView) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
         let actionTakePhoto = UIAlertAction(title: "Take Photo", style: UIAlertActionStyle.Default) { (alertAction: UIAlertAction!) -> Void in
             println("Take Photo")
             var photoPicker = UIImagePickerController()
@@ -266,7 +267,7 @@ extension CreateEventViewController: AddEventPhotoCellDelegate {
         alertController.addAction(actionTakePhoto)
         alertController.addAction(actionChoosePhoto)
         alertController.addAction(actionCancel)
-        
+    
         self.presentViewController(alertController, animated: true, completion: nil)
         
     }

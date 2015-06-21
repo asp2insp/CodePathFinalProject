@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         println("didFinishLaunchingWithOptions")
+        
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         GlobalAppearance.setAll()
         
         registerDataModels()
