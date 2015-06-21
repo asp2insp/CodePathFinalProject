@@ -88,7 +88,7 @@
                                             <outlet property="title" destination="IPe-Ol-R2b" id="5Ne-fD-dWw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="request.cell.2" rowHeight="78" id="let-M4-VQx" customClass="RequestCell2" customModule="Pretto" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="request.cell" rowHeight="78" id="let-M4-VQx" customClass="RequestCell" customModule="Pretto" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="let-M4-VQx" id="OBd-Tv-y2c">

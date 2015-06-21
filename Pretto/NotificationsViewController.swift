@@ -92,9 +92,7 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             cell.invite = self.upcomingInvitations[indexPath.row]
             return fixRowLine(cell)
         case 1:
-            // let cell = tableView.dequeueReusableCellWithIdentifier("requestcell", forIndexPath: indexPath) as! RequestCell
-            // cell.request = self.requests[indexPath.row]
-            let cell = tableView.dequeueReusableCellWithIdentifier("request.cell.2", forIndexPath: indexPath) as! RequestCell2
+            let cell = tableView.dequeueReusableCellWithIdentifier("request.cell", forIndexPath: indexPath) as! RequestCell
             cell.request = self.requests[indexPath.row]
             return fixRowLine(cell)
         case 2:
@@ -141,22 +139,6 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             cell.layoutMargins = UIEdgeInsetsZero
         }
         return cell
-    }
-}
-
-class RequestCell : UITableViewCell {
-    @IBOutlet weak var title: UILabel!
-    
-    var request : Request? {
-        didSet {
-            if let request = self.request {
-                let requester = User(innerUser: request.requester)
-                let name = requester.firstName ?? "Someone"
-                title.text = "\(name) has requested a photo from you!"
-            } else {
-                title.text = "Oops, an error occurred"
-            }
-        }
     }
 }
 

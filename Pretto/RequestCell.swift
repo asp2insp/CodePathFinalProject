@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RequestCell2: UITableViewCell {
+class RequestCell: UITableViewCell {
 
     var request:Request? {
         didSet {
