@@ -18,6 +18,7 @@ class AlbumGeneralViewCell: UITableViewCell {
     @IBOutlet var monthLabel: UILabel!
     @IBOutlet var dayLabel: UILabel!
     @IBOutlet weak var moreLabel: UILabel!
+    @IBOutlet var cardView: UIView!
     
     var event : Event? {
         didSet {
@@ -33,18 +34,22 @@ class AlbumGeneralViewCell: UITableViewCell {
     private var imageWidth: CGFloat!
     private var imageHeight: CGFloat!
     
-    private let placeHolder: UIImage! = UIImage(named: "placeholder")
+    private let placeHolder: UIImage! = UIImage(named: "PalmBWBorder")
     
     private var monthFormatter = NSDateFormatter()
     private var dayFormatter = NSDateFormatter()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.monthFormatter.dateFormat = "MMM"
-        self.dayFormatter.dateFormat = "d"
-        self.backgroundColor = UIColor.prettoWhite()
-        self.selectionStyle = UITableViewCellSelectionStyle.None
-        self.accessoryType = UITableViewCellAccessoryType.None
+        cardView.layer.borderColor = UIColor.prettoLightGrey().CGColor
+        cardView.layer.borderWidth = 1
+        cardView.layer.cornerRadius = 5
+        monthFormatter.dateFormat = "MMM"
+        dayFormatter.dateFormat = "d"
+        selectionStyle = UITableViewCellSelectionStyle.None
+        accessoryType = UITableViewCellAccessoryType.None
+        monthLabel.textColor = UIColor.orangeColor()
+        dayLabel.textColor = UIColor.orangeColor()
         albumTitle.preferredMaxLayoutWidth = albumTitle.frame.size.width
         albumLocation.preferredMaxLayoutWidth = albumLocation.frame.size.width
         

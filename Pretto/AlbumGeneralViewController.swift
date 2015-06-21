@@ -8,15 +8,18 @@
 
 import UIKit
 
+let albumGeneralCellReuseIdentifier = "AlbumGeneralViewCell"
+let noAlbumsCellReuseIdentifier = "NoAlbumsCell"
+
 class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var searchBar: UISearchBar!
     
-    var refreshControl : UIRefreshControl!
-    var pastInvitations : [Invitation] = []
-    var liveInvitations : [Invitation] = []
-    var selectedInvitation : Invitation?
+    private var refreshControl : UIRefreshControl!
+    private var liveInvitations : [Invitation] = []
+    private var pastInvitations : [Invitation] = []
+    private var selectedInvitation : Invitation?
+    private var searchBar: UISearchBar!
     
     var observer : NSObjectProtocol!
     
@@ -25,8 +28,14 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.prettoWhite()
-        searchBar.backgroundColor = UIColor.prettoWhite()
+        tableView.backgroundColor = UIColor.prettoLightGrey()
+        tableView.separatorColor = UIColor.clearColor()
+        
+        searchBar = UISearchBar()
+        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        self.navigationItem.titleView = searchBar
+        
+        tableView.registerNib(UINib(nibName: "NoAlbumsCell", bundle: nil), forCellReuseIdentifier: noAlbumsCellReuseIdentifier)
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
@@ -58,14 +67,19 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         }
         Invitation.getAllLiveEvents() { (invites) -> Void in
             self.liveInvitations = invites
-            for invite in self.liveInvitations {
-                invite.pinInBackground()
-                invite.updateFromCameraRoll()
+            if self.liveInvitations.count > 0 {
+                for invite in self.liveInvitations {
+                    invite.pinInBackground()
+                    invite.updateFromCameraRoll()
+                }
+                self.tableView.reloadData()
+                for cell in self.tableView.visibleCells() {
+                    (cell as! AlbumGeneralViewCell).updateData()
+                }
+            } else {
+                self.tableView.reloadData()
             }
-            self.tableView.reloadData()
-            for cell in self.tableView.visibleCells() {
-                (cell as! AlbumGeneralViewCell).updateData()
-            }
+            
             self.refreshControl.endRefreshing()
         }
     }
@@ -91,13 +105,12 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
 
 extension AlbumGeneralViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var calendarHeight = CGFloat(40.0)
-        var calendarTopAndBottom = CGFloat(14.0)
-        var cellWidth = tableView.frame.width
-        var imageHeight = 0.24 * cellWidth
-        var verticalSeparator = CGFloat(5.0)
-        var cellHeight = calendarHeight + (2 * imageHeight) + (2 * verticalSeparator) + calendarTopAndBottom
-        return cellHeight
+        
+       if liveInvitations.count != 0 {
+            return 218
+        } else {
+            return 420
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -125,41 +138,66 @@ extension AlbumGeneralViewController : UITableViewDelegate {
 
 extension AlbumGeneralViewController : UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        if liveInvitations.count > 0 || pastInvitations.count > 0 {
+            return 2
+        } else {
+            return 1
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return liveInvitations.count
-        case 1:
-            return pastInvitations.count
-        default:
-            return 0
+        if liveInvitations.count > 0 || pastInvitations.count > 0 {
+            switch section {
+            case 0:
+                return liveInvitations.count
+            case 1:
+                return pastInvitations.count
+            default:
+                return 0
+            }
+        } else {
+            return 1
         }
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "Live Events"
-        case 1:
-            return "Past Events"
-        default:
+        if liveInvitations.count > 0 || pastInvitations.count > 0 {
+            switch section {
+            case 0:
+                return "Live Events"
+            case 1:
+                return "Past Events"
+            default:
+                return ""
+            }
+        } else {
             return ""
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("AlbumGeneralViewCell", forIndexPath: indexPath) as! AlbumGeneralViewCell
-        switch indexPath.section {
-        case 0:
-            cell.event = liveInvitations[indexPath.row].event
-        case 1:
-            cell.event = pastInvitations[indexPath.row].event
-        default:
-            break
+        if liveInvitations.count > 0 || pastInvitations.count > 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("AlbumGeneralViewCell", forIndexPath: indexPath) as! AlbumGeneralViewCell
+            switch indexPath.section {
+            case 0:
+                cell.event = liveInvitations[indexPath.row].event
+            case 1:
+                cell.event = pastInvitations[indexPath.row].event
+            default:
+                break
+            }
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(noAlbumsCellReuseIdentifier, forIndexPath: indexPath) as? NoAlbumsCell
+            let originalCenter = cell!.arrow.center
+            
+            UIView.animateWithDuration(0.6, delay: 0.0, options: .Autoreverse | .Repeat | .CurveEaseOut, animations: { () -> Void in
+                cell!.arrow.center.y = cell!.arrow.center.y - 10
+                }, completion: { (sucees:Bool) -> Void in
+                cell!.arrow.center = originalCenter
+            })
+            
+            return cell!
         }
-        return cell
     }
 }

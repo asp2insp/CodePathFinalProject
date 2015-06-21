@@ -12,11 +12,13 @@ class GlobalAppearance {
     class func setNavBarAppearance() {
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().barStyle = UIBarStyle.Default
-//        UINavigationBar.appearance().barTintColor = UIColor.prettoWhite()
+        UINavigationBar.appearance().barTintColor = UIColor.prettoBlue()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
-        UINavigationBar.appearance().tintColor = UIColor.blackColor()
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         
-//        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "navBarBackground")!, forBarMetrics: .Default)
+        
+        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "NavigationBarBGBlue")!, forBarMetrics: .Default)
 //        UINavigationBar.appearance().backgroundColor = UIColor.orangeColor()
         UINavigationBar.appearance().shadowImage = UIImage()
         
@@ -29,12 +31,12 @@ class GlobalAppearance {
 //        UITabBar.appearance().barTintColor = UIColor.orangeColor()
         
         
-        UITabBar.appearance().tintColor = UIColor.prettoRed()
+        UITabBar.appearance().tintColor = UIColor.prettoBlue()
 
        UITabBar.appearance().backgroundImage = UIImage()
 //        UITabBar.appearance().backgroundColor = UIColor.orangeColor()
 //        UITabBar.appearance().shadowImage = UIImage()
-        UITabBar.appearance().selectionIndicatorImage = UIImage(named: "TabBarSelected")
+        UITabBar.appearance().selectionIndicatorImage = UIImage(named: "TabBarSelectedBlue")
 
     }
     
@@ -46,10 +48,22 @@ class GlobalAppearance {
 
     }
     
+    class func setSearchBarAppearance() {
+        UISearchBar.appearance().backgroundColor = UIColor.prettoBlue()
+        UISearchBar.appearance().tintColor = UIColor.whiteColor()
+        
+        
+        UISearchBar.appearance().setImage(UIImage(named: "TabBarSearchIcon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
+        UISearchBar.appearance().setImage(UIImage(named: "TabBarSearchIcon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Highlighted)
+        UISearchBar.appearance().setImage(UIImage(named: "CancelSearchButton"), forSearchBarIcon: UISearchBarIcon.Clear, state: UIControlState.Normal)
+        UISearchBar.appearance().setImage(UIImage(named: "CancelSearchButton"), forSearchBarIcon: UISearchBarIcon.Clear, state: UIControlState.Highlighted)
+    }
+    
     class func setAll() {
         setNavBarAppearance()
         setTabBarAppearance()
         setTableViewAppearance()
+        setSearchBarAppearance()
     }
 }
 
@@ -61,5 +75,17 @@ extension UIColor {
     
     class func prettoRed() -> UIColor {
         return UIColor(red: (255.0 / 255.0), green: (104.0 / 255.0), blue: (79.0 / 255.0), alpha: 1)
+    }
+    
+    class func prettoBlue() -> UIColor {
+        return UIColor(red: (81.0 / 255.0), green: (179.0 / 255.0), blue: (193.0 / 255.0), alpha: 1)
+    }
+    
+    class func prettoOrange() -> UIColor {
+        return UIColor(red: (245.0 / 255.0), green: (166.0 / 255.0), blue: (35.0 / 255.0), alpha: 1)
+    }
+    
+    class func prettoLightGrey() -> UIColor {
+        return UIColor(red: (238.0 / 255.0), green: (238.0 / 255.0), blue: (238.0 / 255.0), alpha: 1)
     }
 }

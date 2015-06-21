@@ -23,26 +23,32 @@
                 </visualEffectView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gye-Vf-TEr">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
-                    <color key="backgroundColor" red="0.8784313725490196" green="0.88627450980392153" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pretto" translatesAutoresizingMaskIntoConstraints="NO" id="IcJ-C3-Jtc">
-                    <rect key="frame" x="90" y="204" width="300" height="72"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreenThingy" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-o8-6d8">
+                            <rect key="frame" x="122" y="303" width="236" height="107"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LauchScreenLogo2" translatesAutoresizingMaskIntoConstraints="NO" id="Dv2-rA-tRA">
+                            <rect key="frame" x="141" y="100" width="198" height="112"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.31764705882352939" green="0.70196078431372544" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="300" id="dPL-mL-uwP"/>
-                        <constraint firstAttribute="height" constant="72" id="yUG-7J-CgW"/>
+                        <constraint firstAttribute="bottom" secondItem="cfb-o8-6d8" secondAttribute="bottom" constant="70" id="T0P-oj-ENg"/>
+                        <constraint firstItem="Dv2-rA-tRA" firstAttribute="top" secondItem="Gye-Vf-TEr" secondAttribute="top" constant="100" id="Ver-B9-C6s"/>
+                        <constraint firstAttribute="centerX" secondItem="Dv2-rA-tRA" secondAttribute="centerX" id="d2i-Vu-EWn"/>
+                        <constraint firstAttribute="centerX" secondItem="cfb-o8-6d8" secondAttribute="centerX" id="pnR-Eo-SKD"/>
                     </constraints>
-                </imageView>
+                </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Pretto. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
                     <rect key="frame" x="20" y="439" width="441" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Gye-Vf-TEr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6IO-d8-NdH"/>
-                <constraint firstAttribute="centerX" secondItem="IcJ-C3-Jtc" secondAttribute="centerX" id="74C-fa-tcr"/>
                 <constraint firstItem="Wci-kt-mou" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8X2-hr-If1"/>
                 <constraint firstAttribute="bottom" secondItem="iwG-Dn-1nn" secondAttribute="bottom" id="CGc-VL-Tm9"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
@@ -54,7 +60,6 @@
                 <constraint firstAttribute="trailing" secondItem="Gye-Vf-TEr" secondAttribute="trailing" id="daG-jf-2oY"/>
                 <constraint firstItem="iwG-Dn-1nn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dyH-Pk-Mip"/>
                 <constraint firstAttribute="trailing" secondItem="iwG-Dn-1nn" secondAttribute="trailing" id="gBG-VX-rsh"/>
-                <constraint firstAttribute="centerY" secondItem="IcJ-C3-Jtc" secondAttribute="centerY" id="gKu-0m-A3D"/>
                 <constraint firstItem="iwG-Dn-1nn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="iGB-Ff-JTF"/>
                 <constraint firstAttribute="trailing" secondItem="Wci-kt-mou" secondAttribute="trailing" id="qrX-RZ-M4C"/>
                 <constraint firstItem="Wci-kt-mou" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zyU-Cs-25W"/>
@@ -65,7 +70,8 @@
         </view>
     </objects>
     <resources>
+        <image name="LauchScreenLogo2" width="198" height="112"/>
+        <image name="LaunchScreenThingy" width="236" height="107"/>
         <image name="friends_7" width="320" height="568"/>
-        <image name="pretto" width="450" height="109"/>
     </resources>
 </document>
