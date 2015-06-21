@@ -25,16 +25,19 @@ class Request : PFObject, PFSubclassing {
         return kClassName
     }
     
-    init(photo: Photo) {
-        super.init()
-        self.status = "pending"
-        self.photo = photo
-        self.requester = PFUser.currentUser()!
+    static func makeRequestForPhoto(photo: Photo) -> Request {
+        var request = Request()
+        request.status = "pending"
+        request.photo = photo
+        request.requester = PFUser.currentUser()!
+        request.requestee = photo.owner
+        return request
     }
     
     @NSManaged var photo : Photo
     @NSManaged var requester : PFUser
     @NSManaged var status : String
+    @NSManaged var requestee : PFUser
     
     func acceptRequest() {
         self.photo.accessList.append(self.requester)
@@ -46,5 +49,14 @@ class Request : PFObject, PFSubclassing {
     func denyRequest() {
         self.status = "denied"
         self.saveInBackgroundWithBlock(nil)
+    }
+    
+    static func getAllPendingRequests(completion: ([Request] -> Void)) {
+        let query = PFQuery(className: kClassName)
+        query.whereKey("requestee", equalTo: PFUser.currentUser()!)
+        query.whereKey("status", equalTo: "pending")
+        query.findObjectsInBackgroundWithBlock { (results, err) -> Void in
+            completion(results as! [Request])
+        }
     }
 }

@@ -8,8 +8,9 @@
 
 import Foundation
 
+private let kClassName = "Notification"
 class Notification : PFObject, PFSubclassing {
-        
+    
     override class func initialize() {
         struct Static {
             static var onceToken : dispatch_once_t = 0;
@@ -20,7 +21,7 @@ class Notification : PFObject, PFSubclassing {
     }
     
     static func parseClassName() -> String {
-        return "Notification"
+        return kClassName
     }
     
     
@@ -28,4 +29,13 @@ class Notification : PFObject, PFSubclassing {
     @NSManaged var title : String
     @NSManaged var message : String
     @NSManaged var hasBeenRead : Bool
+    @NSManaged var type : String
+    
+    static func getAll(completion: ([Notification] -> Void)) {
+        let query = PFQuery(className: kClassName)
+        query.whereKey("user", equalTo: PFUser.currentUser()!)
+        query.findObjectsInBackgroundWithBlock { (results, err) -> Void in
+            completion(results as! [Notification])
+        }
+    }
 }
