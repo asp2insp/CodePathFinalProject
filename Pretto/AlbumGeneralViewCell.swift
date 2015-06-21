@@ -66,6 +66,11 @@ class AlbumGeneralViewCell: UITableViewCell {
             albumTitle.text = event.title
             monthLabel.text = monthFormatter.stringFromDate(event.startDate)
             dayLabel.text = dayFormatter.stringFromDate(event.startDate)
+            // First clear existing pictures
+            for imageView in self.albumImages {
+                imageView.image = nil
+            }
+            // Now load the new images
             event.getAllPhotosInEvent(kOrderedByNewestFirst) {(photos) in
                 self.moreLabel.text = photos.count > 7 ? "+ \(photos.count - 7)" : ""
                 let photoCount = min(photos.count, self.albumImages.count)

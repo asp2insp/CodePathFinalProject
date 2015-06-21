@@ -46,6 +46,7 @@ class Invitation : PFObject, PFSubclassing {
         return accepted && !paused
     }
     
+    // Get all photos from the camera roll past self.lastUpdated and add them to the event
     func updateFromCameraRoll() {
         if self.isUpdating {
             return
@@ -58,21 +59,7 @@ class Invitation : PFObject, PFSubclassing {
         
         fetchOptions.predicate = NSPredicate(format: "creationDate > %@ AND creationDate < %@", startDate, event.endDate)
         
-        PHPhotoLibrary.requestAuthorization { (authStatus:PHAuthorizationStatus) -> Void in
-            switch authStatus {
-            case .NotDetermined:
-                println("AuthStatus: NotDetermined")
-            case .Restricted:
-                println("AuthStatus: Restricted")
-            case .Denied:
-                println("AuthStatus: Denied")
-            case .Authorized:
-                break
-            default:
-                println("AuthStatus: ERROR")
-            }
-        }
-        
+        PHPhotoLibrary.requestAuthorization(nil)
         let allResult = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
         let requestOptions = PHImageRequestOptions()
         requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.FastFormat
@@ -141,6 +128,7 @@ class Invitation : PFObject, PFSubclassing {
         query.whereKey("event", matchesQuery: innerQuery)
         query.whereKey("to", equalTo: PFUser.currentUser()!)
         query.includeKey("event")
+        query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
                 var invites : [Invitation] = []
@@ -165,6 +153,7 @@ class Invitation : PFObject, PFSubclassing {
         query.whereKey("event", matchesQuery: innerQuery)
         query.whereKey("to", equalTo: PFUser.currentUser()!)
         query.includeKey("event")
+        query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
                 var invites : [Invitation] = []
@@ -174,6 +163,7 @@ class Invitation : PFObject, PFSubclassing {
                     }
                 }
                 block(invites)
-            }        }
+            }
+        }
     }
 }

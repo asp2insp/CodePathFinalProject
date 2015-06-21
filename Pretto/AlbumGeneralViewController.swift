@@ -14,6 +14,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet var searchBar: UISearchBar!
     
     var refreshControl : UIRefreshControl!
+    var pastInvitations : [Invitation] = []
     var liveInvitations : [Invitation] = []
     var selectedInvitation : Invitation?
     
@@ -52,6 +53,9 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func refreshData() {
+        Invitation.getAllPastEvents() { (invites) -> Void in
+            self.pastInvitations = invites
+        }
         Invitation.getAllLiveEvents() { (invites) -> Void in
             self.liveInvitations = invites
             for invite in self.liveInvitations {
@@ -97,7 +101,14 @@ extension AlbumGeneralViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.selectedInvitation = liveInvitations[indexPath.row]
+        switch indexPath.section {
+        case 0:
+            self.selectedInvitation = liveInvitations[indexPath.row]
+        case 1:
+            self.selectedInvitation = pastInvitations[indexPath.row]
+        default:
+            break
+        }
         performSegueWithIdentifier("AlbumDetailSegue", sender: self)
     }
     
@@ -114,16 +125,41 @@ extension AlbumGeneralViewController : UITableViewDelegate {
 
 extension AlbumGeneralViewController : UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return liveInvitations.count
+        switch section {
+        case 0:
+            return liveInvitations.count
+        case 1:
+            return pastInvitations.count
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Live Events"
+        case 1:
+            return "Past Events"
+        default:
+            return ""
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AlbumGeneralViewCell", forIndexPath: indexPath) as! AlbumGeneralViewCell
-        cell.event = liveInvitations[indexPath.row].event
+        switch indexPath.section {
+        case 0:
+            cell.event = liveInvitations[indexPath.row].event
+        case 1:
+            cell.event = pastInvitations[indexPath.row].event
+        default:
+            break
+        }
         return cell
     }
 }
