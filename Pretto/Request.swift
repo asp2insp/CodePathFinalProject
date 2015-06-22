@@ -40,7 +40,8 @@ class Request : PFObject, PFSubclassing {
     @NSManaged var requestee : PFUser
     
     func acceptRequest() {
-        self.photo.accessList.append(self.requester)
+        // TODO: below line is crashing
+        // self.photo.accessList.append(self.requester)
         self.status = "accepted"
         self.photo.saveInBackgroundWithBlock(nil)
         self.saveInBackgroundWithBlock(nil)

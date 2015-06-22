@@ -8,8 +8,15 @@
 
 import UIKit
 
+@objc protocol RequestActionDelegate {
+    optional func onAcceptRequest(request:Request, sender: RequestCell)
+    optional func onDeclineRequest(request:Request, sender: RequestCell)
+}
+
 class RequestCell: UITableViewCell {
 
+    var delegate:RequestActionDelegate?
+    
     var request:Request? {
         didSet {
             if self.request != nil {
@@ -66,5 +73,9 @@ class RequestCell: UITableViewCell {
         self.acceptButton.enabled = false
         self.backgroundColor = UIColor.prettoWindowBackground()
         println("accepted photo request")
+        
+        if self.delegate != nil {
+            self.delegate!.onAcceptRequest!(self.request!, sender: self)
+        }
     }
 }

@@ -8,11 +8,18 @@
 
 import UIKit
 
+@objc protocol InvitationActionDelegate {
+    optional func onAcceptInvitation(invitation:Invitation, sender: InvitationCell)
+    optional func onRejectInvitation(invitation:Invitation, sender: InvitationCell)
+}
+
 class InvitationCell: UITableViewCell {
 
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet private weak var invitationDescriptionLabel: UILabel!
     @IBOutlet private weak var joinButton: UIButton!
+    
+    var delegate:InvitationActionDelegate?
     
     var invitation: Invitation? {
         didSet {
@@ -70,5 +77,9 @@ class InvitationCell: UITableViewCell {
         self.joinButton.enabled = false
         self.backgroundColor = UIColor.prettoWindowBackground()
         println("joined event...")
+        
+        if self.delegate != nil {
+            self.delegate!.onAcceptInvitation!(self.invitation!, sender: self)
+        }
     }
 }
