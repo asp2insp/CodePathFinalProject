@@ -39,7 +39,8 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
                 self.refreshControl.endRefreshing()
             }
         }
-        Invitation.getAllFutureEvents() {invites in
+        Invitation.getAllLiveAndFutureEvents() {invites in
+            println("Invitations received: \(invites.count)")
             self.upcomingInvitations = invites
             if --self.refreshCount == 0 {
                 self.tableView.reloadData()
@@ -88,8 +89,8 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier("invitecell", forIndexPath: indexPath) as! InviteCell
-            cell.invite = self.upcomingInvitations[indexPath.row]
+            let cell = tableView.dequeueReusableCellWithIdentifier("invitation.cell", forIndexPath: indexPath) as! InvitationCell
+            cell.invitation = self.upcomingInvitations[indexPath.row]
             return fixRowLine(cell)
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("request.cell", forIndexPath: indexPath) as! RequestCell
@@ -139,22 +140,6 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             cell.layoutMargins = UIEdgeInsetsZero
         }
         return cell
-    }
-}
-
-class InviteCell : UITableViewCell {
-    @IBOutlet weak var title: UILabel!
-    
-    var invite : Invitation? {
-        didSet {
-            if let invite = self.invite {
-                let host = User(innerUser: invite.from)
-                let name = host.firstName ?? "Someone"
-                title.text = "\(name) has invited you to their event \(invite.event.title)"
-            } else {
-                title.text = "Oops, an error occurred"
-            }
-        }
     }
 }
 

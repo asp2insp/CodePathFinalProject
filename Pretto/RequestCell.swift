@@ -15,7 +15,6 @@ class RequestCell: UITableViewCell {
             if self.request != nil {
                 let requester = User(innerUser: self.request!.requester)
                 let userImageUrlText = requester.profilePhotoUrl!
-                println("Requester Photo: \(userImageUrlText)")
                 let userImageUrl = NSURL(string: userImageUrlText)
                 self.userImageView.setImageWithURL(userImageUrl)
                 
@@ -44,6 +43,6 @@ class RequestCell: UITableViewCell {
     }
 
     @IBAction func onAcceptButton(sender: AnyObject) {
-        println("accepted")
+        println("accepted photo request")
     }
 }
