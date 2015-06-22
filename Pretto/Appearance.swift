@@ -92,4 +92,8 @@ extension UIColor {
     class func prettoLightGrey() -> UIColor {
         return UIColor(red: (238.0 / 255.0), green: (238.0 / 255.0), blue: (238.0 / 255.0), alpha: 1)
     }
+    
+    class func prettoWindowBackground() -> UIColor {
+        return UIColor(red: (235.0 / 255.0), green: (235.0 / 255.0), blue: (241.0 / 255.0), alpha: 1)
+    }
 }

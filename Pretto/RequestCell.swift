@@ -21,6 +21,14 @@ class RequestCell: UITableViewCell {
                 let requesterId = requester.firstName ?? requester.email!
                 let cellDescription = "\(requesterId) has requested a photo from you!"
                 self.notificationDescriptionLabel.text = cellDescription
+                
+                if request?.status != "pending" {
+                    self.acceptButton.enabled = false
+                    self.backgroundColor = UIColor.prettoWindowBackground()
+                } else {
+                    self.acceptButton.enabled = true
+                    self.backgroundColor = UIColor.whiteColor()
+                }
             }
         }
     }
@@ -54,6 +62,9 @@ class RequestCell: UITableViewCell {
     }
 
     @IBAction func onAcceptButton(sender: AnyObject) {
+        self.request!.acceptRequest()
+        self.acceptButton.enabled = false
+        self.backgroundColor = UIColor.prettoWindowBackground()
         println("accepted photo request")
     }
 }

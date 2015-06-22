@@ -10,7 +10,6 @@ import UIKit
 
 class InvitationCell: UITableViewCell {
 
-
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet private weak var invitationDescriptionLabel: UILabel!
     @IBOutlet private weak var joinButton: UIButton!
@@ -26,6 +25,14 @@ class InvitationCell: UITableViewCell {
                 let persona = from.firstName ?? from.email!
                 let cellDescription = "\(persona) has invited you to their event: \(self.invitation!.event.title)"
                 self.invitationDescriptionLabel.text = cellDescription
+                
+                if invitation!.accepted {
+                    self.joinButton.enabled = false
+                    self.backgroundColor = UIColor.prettoWindowBackground()
+                } else {
+                    self.joinButton.enabled = true
+                    self.backgroundColor = UIColor.whiteColor()
+                }
             }
         }
     }
@@ -58,6 +65,10 @@ class InvitationCell: UITableViewCell {
     }
 
     @IBAction func onJoinButton(sender: AnyObject) {
+        self.invitation!.accepted = true
+        self.invitation!.saveInBackground()
+        self.joinButton.enabled = false
+        self.backgroundColor = UIColor.prettoWindowBackground()
         println("joined event...")
     }
 }
