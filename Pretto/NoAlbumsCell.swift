@@ -14,9 +14,11 @@ class NoAlbumsCell: UITableViewCell {
     @IBOutlet var lowerCardView: UIView!
     @IBOutlet var myButton: UIButton!
     @IBAction func onButton(sender: UIButton) {
-        println("Pressed")
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: kDidPressCreateEventNotification, object: nil))
     }
     @IBOutlet var arrow: UIImageView!
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -18,6 +18,8 @@ class CustomLandingViewController: PFLogInViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.facebookPermissions = ["public_profile", "email", "user_friends"]
+        
         var signUpController = CustomSignUpViewController()
         signUpController.emailAsUsername = true
         signUpController.fields = .UsernameAndPassword | .SignUpButton | .DismissButton

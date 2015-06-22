@@ -144,7 +144,7 @@ class User {
                 var userData = res as! NSDictionary
                 
                 var facebookId = userData["id"] as! String
-                var email = userData["email"] as! String?
+                var email = userData["email"] as! String
                 var name = userData["name"] as! String
                 var firstName = userData["first_name"] as! String
                 var middleName = userData["middle_name"] as? String ?? ""

@@ -18,6 +18,7 @@ let kShareOnTwitterNotification = "shareOnTwitter"
 let kShareByEmailNotification = "shareByEmail"
 let kAcceptEventAndDismissVCNotification = "acceptEventAndDismissVC"
 let kFirstTimeRunningPretto = "isTheFirstTimeEver"
+let kDidPressCreateEventNotification = "createNewEvent"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
@@ -56,7 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         let isFirstTime: Bool? = NSUserDefaults.standardUserDefaults().objectForKey(kFirstTimeRunningPretto) as? Bool
         
         if  isFirstTime == nil || isFirstTime == true {
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: kFirstTimeRunningPretto)
             self.showIntroWindow()
         } else {
             self.checkCurrentUser()
@@ -284,8 +284,18 @@ extension AppDelegate: PFLogInViewControllerDelegate {
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
         println("FB login is done")
-        logInController.dismissViewControllerAnimated(true, completion: nil)
-        self.startMainStoryBoard()
+       
+        // Handles the very first time a user logs in
+        let isFirstTime: Bool? = NSUserDefaults.standardUserDefaults().objectForKey(kFirstTimeRunningPretto) as? Bool
+        
+        if  isFirstTime == nil || isFirstTime == true {
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: kFirstTimeRunningPretto)
+            logInController.dismissViewControllerAnimated(true, completion: nil)
+            self.checkCurrentUser()
+        } else {
+            logInController.dismissViewControllerAnimated(true, completion: nil)
+            self.startMainStoryBoard()
+        }
     }
     
     func logInViewControllerDidCancelLogIn(logInController: PFLogInViewController) {

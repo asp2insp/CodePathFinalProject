@@ -17,6 +17,8 @@ class CustomLoginViewController: PFLogInViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.facebookPermissions = ["public_profile", "email", "user_friends"]
+        
         self.logInView?.dismissButton?.addTarget(self, action: "onDismissButton", forControlEvents: UIControlEvents.TouchUpInside)
 
         self.logInView?.logo = UIImageView(image: UIImage(named: "LauchScreenLogo2")!)

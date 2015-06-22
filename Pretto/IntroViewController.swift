@@ -105,7 +105,7 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
 extension IntroViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         var pageIndex = floor(scrollView.contentOffset.x / scrollView.frame.width)
-        println("Scrolling Page Index: \(Int(pageIndex))")
+//        println("Scrolling Page Index: \(Int(pageIndex))")
         pageControl.currentPage = Int(pageIndex)
         
         if pageControl.currentPage == 2 {

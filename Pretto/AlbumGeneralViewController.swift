@@ -26,6 +26,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "createEvent", name: kDidPressCreateEventNotification, object: nil)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.prettoLightGrey()
@@ -83,6 +84,10 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             self.refreshControl.endRefreshing()
         }
         self.refreshControl.endRefreshing()
+    }
+    
+    func createEvent() {
+        self.performSegueWithIdentifier("CreateEventSegue", sender: nil)
     }
 
     /*
