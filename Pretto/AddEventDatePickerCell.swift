@@ -16,13 +16,34 @@ class AddEventDatePickerCell: UITableViewCell {
 
     @IBOutlet var datePicker: UIDatePicker!
     var isStartDate: Bool!
+    var currentDate: NSDate? {
+        didSet {
+            if currentDate != nil {
+                self.datePicker.date = currentDate!.laterDate(NSDate())
+            } else {
+                self.datePicker.date = NSDate()
+            }
+        }
+    }
+    var minimunDate: NSDate? {
+        didSet{
+            if isStartDate != nil {
+                if minimunDate != nil && !isStartDate {
+                    self.datePicker.minimumDate = NSDate().laterDate(minimunDate!)
+                } else {
+                    self.datePicker.minimumDate = NSDate()
+                }
+            } else {
+                self.datePicker.minimumDate = NSDate()
+            }
+        }
+    }
     
     weak var delegate: AddEventDatePickerCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.None
-        self.datePicker.minimumDate = NSDate()
         self.datePicker.addTarget(self, action: "datePickerValueChanged", forControlEvents: UIControlEvents.ValueChanged)
     }
 

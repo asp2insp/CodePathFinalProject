@@ -24,6 +24,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     
     var startDate: NSDate!
     var endDate: NSDate!
+    var minimunDate: NSDate?
     var eventTitle: String!
     var eventPhoto: UIImage?
     
@@ -186,7 +187,6 @@ extension CreateEventViewController: UITableViewDataSource {
                 cell.title = self.eventTitle
             }
             self.titleTextField = cell.eventTitle
-//            self.titleTextField?.becomeFirstResponder()
             return cell
             
         case (1, 0), (2,0):
@@ -204,6 +204,8 @@ extension CreateEventViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(AddEventDatePickerCellReuseIdentifier, forIndexPath: indexPath) as! AddEventDatePickerCell
             cell.delegate = self
             cell.isStartDate = indexPath.section == 1 ? true : false
+            cell.currentDate = indexPath.section == 1 ? (startDate ?? NSDate()) : (endDate ?? NSDate())
+            cell.minimunDate = self.minimunDate
             return cell
             
         default:
@@ -232,9 +234,17 @@ extension CreateEventViewController: AddEventDatePickerCellDelegate {
         cell.dateLabel.text = dateFormatter.stringFromDate(date)
         if isStartDatePicker {
             self.startDate = date
+            self.minimunDate = date
+            if self.endDate != nil {
+                self.endDate = endDate.laterDate(date)
+            } else {
+                self.endDate = date
+            }
+
         } else {
             self.endDate = date
         }
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)!,NSIndexPath(forRow: 0, inSection: 2)!], withRowAnimation: UITableViewRowAnimation.None)
     }
 }
 
