@@ -133,8 +133,12 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             var deleted : PFObject?
             switch indexPath.section {
             case 0:
+                var invitation = self.upcomingInvitations[indexPath.row]
+                invitation.deleteInBackground()
                 deleted = self.upcomingInvitations.removeAtIndex(indexPath.row)
             case 1:
+                var request = self.requests[indexPath.row]
+                request.denyRequest()
                 deleted = self.requests.removeAtIndex(indexPath.row)
             case 2:
                 deleted = self.notifications.removeAtIndex(indexPath.row)
