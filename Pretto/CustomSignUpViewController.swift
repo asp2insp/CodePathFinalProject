@@ -29,6 +29,9 @@ class CustomSignUpViewController: PFSignUpViewController {
         self.otherImage.image = UIImage(named: "LaunchScreenThingy")
         self.signUpView?.addSubview(otherImage)
         
+        self.signUpView?.dismissButton?.setImage(UIImage(named: "CloseButton"), forState: UIControlState.Normal)
+        self.signUpView?.dismissButton?.setImage(UIImage(named: "CloseButton"), forState: UIControlState.Highlighted)
+        
         var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
         self.blurEffectView = UIVisualEffectView(effect: blurEffect)
         

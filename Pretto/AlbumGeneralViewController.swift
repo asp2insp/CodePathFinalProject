@@ -157,6 +157,10 @@ extension AlbumGeneralViewController: UITableViewDelegate {
         }
     }
     
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        (view as! UITableViewHeaderFooterView).textLabel.textColor = UIColor.prettoBlue()
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AlbumDetailSegue" {
             let destination = segue.destinationViewController as! EventDetailViewController

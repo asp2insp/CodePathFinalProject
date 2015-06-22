@@ -32,7 +32,10 @@ class CustomLoginViewController: PFLogInViewController {
 //        self.otherImage = UIImageView()
 //        self.otherImage.image = UIImage(named: "LaunchScreenThingy")
 //        self.logInView?.addSubview(otherImage)
-
+        
+        self.logInView?.dismissButton?.setImage(UIImage(named: "CloseButton"), forState: UIControlState.Normal)
+        self.logInView?.dismissButton?.setImage(UIImage(named: "CloseButton"), forState: UIControlState.Highlighted)
+        
         self.gradientView = UIImageView(image: UIImage(named: "gradient"))
         self.logInView?.addSubview(self.gradientView)
         self.logInView?.sendSubviewToBack(self.gradientView)
@@ -87,7 +90,7 @@ class CustomLoginViewController: PFLogInViewController {
         self.gradientView.frame = CGRect(x: 0, y: self.logInView!.frame.height / 2, width: self.logInView!.frame.width, height: self.logInView!.frame.height / 2)
         
         self.backgroundImage.frame = self.logInView!.frame
-        
+
 //        self.otherImage.frame = CGRect(x: 0, y: 0, width: 236, height: 107)
 //        self.otherImage.center = CGPoint(x: self.logInView!.center.x, y: self.logInView!.center.y + 60)
 
