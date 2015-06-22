@@ -18,9 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="h2B-Fu-jgQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="h2B-Fu-jgQ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationcell" id="Ltl-GQ-QyD" customClass="NotificationCell" customModule="Pretto" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -64,9 +64,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jvT-OI-wz6">
-                                                    <rect key="frame" x="522" y="24" width="70" height="30"/>
+                                                    <rect key="frame" x="522" y="23" width="70" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="SnR-o9-Qnh"/>
+                                                        <constraint firstAttribute="height" constant="32" id="SyY-wt-O7J"/>
                                                     </constraints>
                                                     <state key="normal" title="Accept"/>
                                                     <connections>
@@ -112,9 +113,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbn-vq-y0f">
-                                                    <rect key="frame" x="522" y="24" width="70" height="30"/>
+                                                    <rect key="frame" x="522" y="23" width="70" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="8B2-NN-vzY"/>
+                                                        <constraint firstAttribute="height" constant="32" id="arq-hs-KW3"/>
                                                     </constraints>
                                                     <state key="normal" title="Join"/>
                                                     <connections>

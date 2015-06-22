@@ -31,15 +31,26 @@ class RequestCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.acceptButton.backgroundColor = UIColor.prettoBlue()
-        self.acceptButton.setTitleColor(UIColor.whiteColor(), forState:UIControlState.Normal)
-        self.acceptButton.setTitleColor(UIColor.whiteColor(), forState:UIControlState.Selected)
+        var prettoColorAsImage = self.imageWithColor(UIColor.prettoBlue())
+        self.acceptButton.setBackgroundImage(prettoColorAsImage, forState: .Normal)
+        self.acceptButton.setBackgroundImage(prettoColorAsImage, forState: .Highlighted)
+        self.acceptButton.setTitleColor(UIColor.whiteColor(), forState:.Normal)
+        self.acceptButton.setTitleColor(UIColor.whiteColor(), forState:.Highlighted)
     }
 
+    func imageWithColor(color:UIColor) -> UIImage {
+        var rect = CGRectMake(0.0, 0.0, 1.0, 1.0)
+        UIGraphicsBeginImageContext(rect.size)
+        var context = UIGraphicsGetCurrentContext()
+        CGContextSetFillColorWithColor(context, color.CGColor)
+        CGContextFillRect(context, rect)
+        var image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     @IBAction func onAcceptButton(sender: AnyObject) {

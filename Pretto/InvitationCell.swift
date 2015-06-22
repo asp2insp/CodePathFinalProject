@@ -32,10 +32,22 @@ class InvitationCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        self.joinButton.backgroundColor = UIColor.prettoBlue()
-        self.joinButton.setTitleColor(UIColor.whiteColor(), forState:UIControlState.Normal)
-        self.joinButton.setTitleColor(UIColor.whiteColor(), forState:UIControlState.Selected)
+        var prettoColorAsImage = self.imageWithColor(UIColor.prettoBlue())
+        self.joinButton.setBackgroundImage(prettoColorAsImage, forState: .Normal)
+        self.joinButton.setBackgroundImage(prettoColorAsImage, forState: .Highlighted)
+        self.joinButton.setTitleColor(UIColor.whiteColor(), forState:.Normal)
+        self.joinButton.setTitleColor(UIColor.whiteColor(), forState:.Highlighted)
+    }
+    
+    func imageWithColor(color:UIColor) -> UIImage {
+        var rect = CGRectMake(0.0, 0.0, 1.0, 1.0)
+        UIGraphicsBeginImageContext(rect.size)
+        var context = UIGraphicsGetCurrentContext()
+        CGContextSetFillColorWithColor(context, color.CGColor)
+        CGContextFillRect(context, rect)
+        var image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 
 
