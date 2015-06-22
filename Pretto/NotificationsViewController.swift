@@ -43,7 +43,6 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             }
         }
         Invitation.getAllLiveAndFutureEvents() {invites in
-            println("Invitations received: \(invites.count)")
             self.upcomingInvitations = invites
             if --self.refreshCount == 0 {
                 self.tableView.reloadData()
@@ -59,8 +58,21 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
         }
     }
     
+    func hasAnyTableData() -> Bool {
+        if self.notifications.count > 0 {
+            return true
+        }
+        if self.upcomingInvitations.count > 0 {
+            return true
+        }
+        if self.requests.count > 0 {
+            return true
+        }
+        return false
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return self.hasAnyTableData() ? 3 : 0
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
