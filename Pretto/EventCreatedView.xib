@@ -8,6 +8,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventCreatedView" customModule="Pretto" customModuleProvider="target">
             <connections>
+                <outlet property="eventDate" destination="JpH-aY-cqo" id="PD9-m2-U1j"/>
+                <outlet property="eventLocation" destination="szG-nF-jCk" id="cap-tq-XHE"/>
+                <outlet property="eventTItle" destination="prh-qP-74T" id="kWR-d6-ISV"/>
                 <outlet property="innerView" destination="2Eg-Jm-lHv" id="gXc-dF-EgA"/>
                 <outlet property="mainView" destination="5gJ-AH-wef" id="bk4-Yl-a4e"/>
                 <outlet property="okButton" destination="bCw-6I-Ncm" id="hn4-I8-Pyh"/>
@@ -77,8 +80,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/10/14  10:22 AM to 10/10/15 11:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JpH-aY-cqo">
-                                        <rect key="frame" x="29" y="210" width="223" height="15"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
+                                        <rect key="frame" x="23" y="210" width="235" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -110,8 +113,8 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let the world know" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVs-3z-sSb">
-                                        <rect key="frame" x="8" y="389" width="131" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify your friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVs-3z-sSb">
+                                        <rect key="frame" x="8" y="389" width="126" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>

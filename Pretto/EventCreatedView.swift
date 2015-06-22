@@ -13,6 +13,9 @@ class EventCreatedView: UIView {
     @IBOutlet var mainView: UIView!
     @IBOutlet var innerView: UIView!
     @IBOutlet var okButton: UIButton!
+    @IBOutlet var eventTItle: UILabel!
+    @IBOutlet var eventDate: UILabel!
+    @IBOutlet var eventLocation: UILabel!
     
     @IBAction func onShareOnFacebook(sender: UIButton) {
         println("Share on Facebook")

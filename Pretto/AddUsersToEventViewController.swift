@@ -286,6 +286,25 @@ extension AddUsersToEventViewController {
         completionView.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
         completionView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2)
         
+        // Add Data to Summary Card
+        if self.location != nil {
+            CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: self.location!.coordinate.latitude, longitude: self.location!.coordinate.longitude), completionHandler: { (markers, error) -> Void in
+                if markers.count > 0 {
+                    let marker = markers[0] as! CLPlacemark
+                    completionView.eventLocation.text = "\(marker.locality), \(marker.subLocality)"
+                } else {
+                    completionView.eventLocation.text = "Location TBD"
+                }
+            })
+        } else {
+            completionView.eventLocation.text = "Location TBD"
+        }
+        completionView.eventTItle.text = self.eventTitle
+        dateFormatter.dateFormat = "MM/dd/yyy HH:mm"
+        completionView.eventDate.text = "\(dateFormatter.stringFromDate(startDate))  -  \(dateFormatter.stringFromDate(endDate))"
+        
+        
+        
         let scale = CGAffineTransformMakeScale(0.3, 0.3)
         let translate = CGAffineTransformMakeTranslation(50, -50)
         completionView.transform = CGAffineTransformConcat(scale, translate)
