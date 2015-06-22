@@ -133,10 +133,9 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
             if friends != nil {
                 self.friends = friends
                 // TODO: delete below line later
-                self.friends?.append(self.getMeAsTestFriend(me))
+                // self.friends?.append(self.getMeAsTestFriend(me))
                 self.friendsNames = [String]()
                 for friend in self.friends! {
-                    println("Bro: \(friend.friendName)")
                     self.friendsNames?.append(friend.friendName)
                 }
                 self.tableView.reloadData()
