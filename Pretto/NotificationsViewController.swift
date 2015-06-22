@@ -78,11 +78,11 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Invitations"
+            return "Event Invitations"
         case 1:
-            return "Requests"
+            return "Photo Requests"
         case 2:
-            return "Notifications"
+            return "Other Notifications"
         default:
             return nil
         }
