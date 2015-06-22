@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         self.registerForRemoteNotifications(application, launchOptions:launchOptions)
         
         // check user and start a storyboard accordingly
-        let isFirstTime: Bool? = true//NSUserDefaults.standardUserDefaults().objectForKey(kFirstTimeRunningPretto) as? Bool
+        let isFirstTime: Bool? = NSUserDefaults.standardUserDefaults().objectForKey(kFirstTimeRunningPretto) as? Bool
         
         if  isFirstTime == nil || isFirstTime == true {
             NSUserDefaults.standardUserDefaults().setBool(false, forKey: kFirstTimeRunningPretto)

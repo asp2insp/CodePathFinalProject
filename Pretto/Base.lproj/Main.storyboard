@@ -684,7 +684,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="RmE-Mr-tzX">
-                                <rect key="frame" x="280" y="491" width="39" height="37"/>
+                                <rect key="frame" x="280" y="501" width="39" height="37"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ej-GK-wXb">
@@ -717,7 +717,7 @@
                             <constraint firstItem="0ej-GK-wXb" firstAttribute="leading" secondItem="bsH-FB-CHD" secondAttribute="leading" constant="8" id="Nhb-VP-VJC"/>
                             <constraint firstAttribute="trailing" secondItem="2wg-OZ-f71" secondAttribute="trailing" id="TMa-ZJ-mgp"/>
                             <constraint firstItem="2wg-OZ-f71" firstAttribute="leading" secondItem="bsH-FB-CHD" secondAttribute="leading" id="VPs-rZ-Mk8"/>
-                            <constraint firstItem="0ej-GK-wXb" firstAttribute="top" secondItem="RmE-Mr-tzX" secondAttribute="bottom" constant="10" id="aRp-L7-rAq"/>
+                            <constraint firstItem="0ej-GK-wXb" firstAttribute="top" secondItem="RmE-Mr-tzX" secondAttribute="bottom" id="aRp-L7-rAq"/>
                             <constraint firstItem="2wg-OZ-f71" firstAttribute="top" secondItem="bsH-FB-CHD" secondAttribute="top" id="bRo-o8-UcJ"/>
                             <constraint firstItem="AJM-h5-5Zo" firstAttribute="top" secondItem="2wg-OZ-f71" secondAttribute="bottom" id="cMA-Mt-L0p"/>
                             <constraint firstItem="q0s-hy-SYY" firstAttribute="bottom" secondItem="0ej-GK-wXb" secondAttribute="bottom" id="dO8-0z-aeG"/>

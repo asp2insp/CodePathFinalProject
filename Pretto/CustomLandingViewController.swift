@@ -62,10 +62,6 @@ class CustomLandingViewController: PFLogInViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-//        println("FB Button size \(self.logInView!.facebookButton!.frame.width) x \(self.logInView!.facebookButton!.frame.height)")
-//        println("FB Origin x: \(self.logInView!.facebookButton!.frame.origin.x) y: \(self.logInView!.facebookButton!.frame.origin.y)")
-//        println("SignUp Button size \(self.logInView!.signUpButton!.frame.width) x \(self.logInView!.signUpButton!.frame.height)")
-//        println("SignUp Origin x: \(self.logInView!.signUpButton!.frame.origin.x) y: \(self.logInView!.signUpButton!.frame.origin.y)")
         var screenWidth = self.view.frame.width
         var screenHeight = self.view.frame.height
         var logoHeight = CGFloat(98.0)
@@ -85,14 +81,14 @@ class CustomLandingViewController: PFLogInViewController {
         self.signInButton.center = CGPoint(x: self.signInButton.center.x, y: self.logInView!.frame.height - self.signInButton.frame.height / 2 - 16)
         
         self.logInView?.signUpButton?.layer.borderColor = UIColor.whiteColor().CGColor
-        self.logInView?.signUpButton?.layer.borderWidth = 2
+        self.logInView?.signUpButton?.layer.borderWidth = 1
         self.logInView?.signUpButton?.layer.cornerRadius = self.logInView!.signUpButton!.frame.height / 2
         self.logInView?.signUpButton?.setTitle("Sign up with email", forState: UIControlState.Normal)
         self.logInView?.signUpButton?.setTitle("Sign up with email", forState: UIControlState.Highlighted)
         self.logInView?.signUpButton?.center = CGPoint(x: self.logInView!.signUpButton!.center.x, y: self.signInButton.center.y - self.logInView!.signUpButton!.frame.height)
         
         self.logInView?.facebookButton?.layer.borderColor = UIColor.whiteColor().CGColor
-        self.logInView?.facebookButton?.layer.borderWidth = 2
+        self.logInView?.facebookButton?.layer.borderWidth = 1
         self.logInView?.facebookButton?.layer.cornerRadius = self.logInView!.facebookButton!.frame.height / 2
         self.logInView?.facebookButton?.titleLabel?.frame = self.logInView!.facebookButton!.titleLabel!.superview!.frame
         self.logInView?.facebookButton?.setTitle("Continue with Facebook", forState: UIControlState.Normal)

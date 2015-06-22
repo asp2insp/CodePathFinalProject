@@ -15,9 +15,13 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
     
     private let numberOfPages: CGFloat = 3
     
-    private var firstScreen: UIImageView!
-    private var secondScreen: UIImageView!
-    private var thirdScreen: UIImageView!
+    private var firstScreen: FirstIntroView!
+    private var secondScreen: SecondIntroView!
+    private var thirdScreen: ThirdIntroView!
+    
+    private var runFirstAnimation: Bool!
+    private var runSecondAnimation: Bool!
+    private var runThirdAnimation: Bool!
     
     private let screenHeight: CGFloat = UIScreen.mainScreen().bounds.height
     private let screenWidth: CGFloat = UIScreen.mainScreen().bounds.width
@@ -40,7 +44,7 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         println("viewDidLoad")
         super.viewDidLoad()
-//        scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+        //scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
         scrollView.delegate = self
         scrollView.pagingEnabled = true
         scrollView.contentSize = CGSize(width: screenWidth * numberOfPages, height: screenHeight)
@@ -48,17 +52,23 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
         scrollView.showsVerticalScrollIndicator = false
         
         
-        firstScreen = UIImageView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
-        secondScreen = UIImageView(frame: CGRect(x: screenWidth, y: 0, width: screenWidth, height: screenHeight))
-        thirdScreen = UIImageView(frame: CGRect(x: screenWidth * 2, y: 0, width: screenWidth, height: screenHeight))
-        
-        firstScreen.image = UIImage(named: "Intro1")
-        secondScreen.image = UIImage(named: "Intro2")
-        thirdScreen.image = UIImage(named: "Intro3")
+        firstScreen = FirstIntroView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+        firstScreen.backgroundColor = UIColor.prettoIntroBlue()
+//        firstScreen.mainView.backgroundColor = UIColor.prettoLightGrey()
+        secondScreen = SecondIntroView(frame: CGRect(x: screenWidth, y: 0, width: screenWidth, height: screenHeight))
+        secondScreen.backgroundColor = UIColor.prettoIntroBlue()
+//        secondScreen.mainView.backgroundColor = UIColor.prettoLightGrey()
+        thirdScreen = ThirdIntroView(frame: CGRect(x: screenWidth * 2, y: 0, width: screenWidth, height: screenHeight))
+        thirdScreen.backgroundColor = UIColor.prettoIntroBlue()
+//        thirdScreen.mainView.backgroundColor = UIColor.prettoLightGrey()
         
         self.scrollView.addSubview(firstScreen)
         self.scrollView.addSubview(secondScreen)
         self.scrollView.addSubview(thirdScreen)
+        
+        runFirstAnimation = true
+        runSecondAnimation = true
+        runThirdAnimation = true
         
         pageControl.numberOfPages = Int(numberOfPages)
         pageControl.currentPage = 0
@@ -66,6 +76,10 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
         awesomeButton.hidden = true
         skipButton.hidden = false
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,7 +105,7 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
 extension IntroViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         var pageIndex = floor(scrollView.contentOffset.x / scrollView.frame.width)
-//        println("Scrolling Page Index: \(Int(pageIndex))")
+        println("Scrolling Page Index: \(Int(pageIndex))")
         pageControl.currentPage = Int(pageIndex)
         
         if pageControl.currentPage == 2 {
@@ -100,6 +114,32 @@ extension IntroViewController: UIScrollViewDelegate {
         } else {
             skipButton.hidden = false
             awesomeButton.hidden = true
+        }
+        
+        // Reset animations when scrolling
+        switch pageControl.currentPage {
+        case 0:
+            if runFirstAnimation! {
+                self.firstScreen.animationTrigger()
+            }
+            runFirstAnimation = false
+            runSecondAnimation = true
+            
+        case 1:
+            if runSecondAnimation! {
+                self.secondScreen.animationTrigger()
+            }
+            runFirstAnimation = true
+            runSecondAnimation = false
+            runThirdAnimation = true
+        case 2:
+            if runThirdAnimation! {
+                self.thirdScreen.animationTrigger()
+            }
+            runSecondAnimation = true
+            runThirdAnimation = false
+        default:
+            break
         }
     }
     

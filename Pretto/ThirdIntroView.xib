@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ThirdIntroView" customModule="Pretto" customModuleProvider="target">
+            <connections>
+                <outlet property="avatar1" destination="Bvw-yE-LdB" id="Yvo-UA-gYi"/>
+                <outlet property="avatar2" destination="65I-oe-3qK" id="nRY-KS-yZE"/>
+                <outlet property="avatar3" destination="Ypw-qh-oOD" id="iDl-ba-Jbh"/>
+                <outlet property="avatar4" destination="6iS-XK-AdG" id="N2L-Kh-N0B"/>
+                <outlet property="avatar5" destination="eG8-8B-enU" id="Wyd-0s-prw"/>
+                <outlet property="avatar6" destination="EGs-s0-sNj" id="1KA-w1-AbR"/>
+                <outlet property="avatar7" destination="3DB-LR-x4S" id="V7O-9z-Ckc"/>
+                <outlet property="avatar8" destination="xyt-Hu-v1T" id="mEF-gj-0xW"/>
+                <outlet property="cloudImage" destination="Hnb-Oq-Yj6" id="wYg-fY-fzK"/>
+                <outlet property="mainView" destination="iN0-l3-epB" id="DmE-J3-Jyu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cloud" translatesAutoresizingMaskIntoConstraints="NO" id="Hnb-Oq-Yj6">
+                    <rect key="frame" x="118" y="162" width="84" height="84"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="84" id="vcX-96-Kpn"/>
+                        <constraint firstAttribute="height" constant="84" id="vez-np-8bS"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar2" translatesAutoresizingMaskIntoConstraints="NO" id="65I-oe-3qK">
+                    <rect key="frame" x="8" y="173" width="65" height="63"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar3" translatesAutoresizingMaskIntoConstraints="NO" id="Ypw-qh-oOD">
+                    <rect key="frame" x="42" y="260" width="65" height="63"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar4" translatesAutoresizingMaskIntoConstraints="NO" id="6iS-XK-AdG">
+                    <rect key="frame" x="128" y="291" width="65" height="60"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar5" translatesAutoresizingMaskIntoConstraints="NO" id="eG8-8B-enU">
+                    <rect key="frame" x="216" y="259" width="65" height="64"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar8" translatesAutoresizingMaskIntoConstraints="NO" id="xyt-Hu-v1T">
+                    <rect key="frame" x="128" y="56" width="65" height="61"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar7" translatesAutoresizingMaskIntoConstraints="NO" id="3DB-LR-x4S">
+                    <rect key="frame" x="216" y="88" width="65" height="64"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar6" translatesAutoresizingMaskIntoConstraints="NO" id="EGs-s0-sNj">
+                    <rect key="frame" x="247" y="172" width="65" height="64"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar1" translatesAutoresizingMaskIntoConstraints="NO" id="Bvw-yE-LdB">
+                    <rect key="frame" x="42" y="88" width="57" height="64"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't beg for your memories" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gt-YT-Isw">
+                    <rect key="frame" x="41" y="374" width="239" height="22"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All the pictures taken during the event are available for everyone. Because special moments do not belong to the camera owner." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hY-ke-PnB">
+                    <rect key="frame" x="35" y="406" width="250" height="63"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="TLa-gj-r2Q"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Hnb-Oq-Yj6" firstAttribute="top" secondItem="xyt-Hu-v1T" secondAttribute="bottom" constant="45" id="0Xr-xJ-HlA"/>
+                <constraint firstItem="Hnb-Oq-Yj6" firstAttribute="leading" secondItem="Ypw-qh-oOD" secondAttribute="trailing" constant="11" id="463-kM-PpK"/>
+                <constraint firstItem="xyt-Hu-v1T" firstAttribute="centerX" secondItem="6iS-XK-AdG" secondAttribute="centerX" id="Lol-Q0-6aW"/>
+                <constraint firstItem="Ypw-qh-oOD" firstAttribute="top" secondItem="Hnb-Oq-Yj6" secondAttribute="bottom" constant="14" id="Mxt-29-JiK"/>
+                <constraint firstItem="6iS-XK-AdG" firstAttribute="top" secondItem="Hnb-Oq-Yj6" secondAttribute="bottom" constant="45" id="O5m-9C-c23"/>
+                <constraint firstItem="EGs-s0-sNj" firstAttribute="leading" secondItem="Hnb-Oq-Yj6" secondAttribute="trailing" constant="45" id="PPB-ac-9k4"/>
+                <constraint firstItem="eG8-8B-enU" firstAttribute="top" secondItem="Hnb-Oq-Yj6" secondAttribute="bottom" constant="13" id="Qmo-m8-bU0"/>
+                <constraint firstItem="Hnb-Oq-Yj6" firstAttribute="top" secondItem="3DB-LR-x4S" secondAttribute="bottom" constant="10" id="ZTh-BC-XQs"/>
+                <constraint firstItem="Hnb-Oq-Yj6" firstAttribute="top" secondItem="Bvw-yE-LdB" secondAttribute="bottom" constant="10" id="aVk-R6-L6K"/>
+                <constraint firstItem="Hnb-Oq-Yj6" firstAttribute="leading" secondItem="Bvw-yE-LdB" secondAttribute="trailing" constant="19" id="eJD-o5-yYt"/>
+                <constraint firstAttribute="centerY" secondItem="Hnb-Oq-Yj6" secondAttribute="centerY" constant="80" id="et6-bE-kTm"/>
+                <constraint firstItem="Hnb-Oq-Yj6" firstAttribute="centerY" secondItem="EGs-s0-sNj" secondAttribute="centerY" id="fkf-w4-TS1"/>
+                <constraint firstItem="3DB-LR-x4S" firstAttribute="leading" secondItem="Hnb-Oq-Yj6" secondAttribute="trailing" constant="14" id="gpJ-Ag-A6T"/>
+                <constraint firstItem="xyt-Hu-v1T" firstAttribute="centerX" secondItem="Hnb-Oq-Yj6" secondAttribute="centerX" id="hWB-Dn-Kqc"/>
+                <constraint firstItem="Hnb-Oq-Yj6" firstAttribute="leading" secondItem="65I-oe-3qK" secondAttribute="trailing" constant="45" id="nB1-Ga-Auw"/>
+                <constraint firstAttribute="centerX" secondItem="0gt-YT-Isw" secondAttribute="centerX" id="qI6-Rs-Kv8"/>
+                <constraint firstItem="eG8-8B-enU" firstAttribute="leading" secondItem="Hnb-Oq-Yj6" secondAttribute="trailing" constant="14" id="r00-Tz-ixf"/>
+                <constraint firstAttribute="centerX" secondItem="8hY-ke-PnB" secondAttribute="centerX" id="sc3-2R-W2a"/>
+                <constraint firstAttribute="bottom" secondItem="8hY-ke-PnB" secondAttribute="bottom" constant="100" id="sjf-5k-7qq"/>
+                <constraint firstItem="Hnb-Oq-Yj6" firstAttribute="centerY" secondItem="65I-oe-3qK" secondAttribute="centerY" id="urm-ex-rsv"/>
+                <constraint firstItem="8hY-ke-PnB" firstAttribute="top" secondItem="0gt-YT-Isw" secondAttribute="bottom" constant="10" id="xyB-5f-wiD"/>
+                <constraint firstAttribute="centerX" secondItem="Hnb-Oq-Yj6" secondAttribute="centerX" id="y73-gm-E0S"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="282" y="512"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Cloud" width="84" height="84"/>
+        <image name="avatar1" width="57" height="64"/>
+        <image name="avatar2" width="65" height="63"/>
+        <image name="avatar3" width="65" height="63"/>
+        <image name="avatar4" width="65" height="60"/>
+        <image name="avatar5" width="65" height="64"/>
+        <image name="avatar6" width="65" height="64"/>
+        <image name="avatar7" width="65" height="64"/>
+        <image name="avatar8" width="65" height="61"/>
+    </resources>
+</document>

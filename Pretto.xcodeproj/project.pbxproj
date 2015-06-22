@@ -16,12 +16,12 @@
 		1628DCFF1B321477005E0841 /* CustomLandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */; };
 		16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */; };
 		16354F431B2E6613003D2A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16354F411B2E6613003D2A2B /* Main.storyboard */; };
-		1649D9D21B37AC3F00EEA0DD /* IntroView01.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649D9D11B37AC3F00EEA0DD /* IntroView01.xib */; };
-		1649D9D41B37AC5800EEA0DD /* IntroView01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649D9D31B37AC5800EEA0DD /* IntroView01.swift */; };
-		1649D9D81B37AD4300EEA0DD /* IntroView02.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649D9D71B37AD4300EEA0DD /* IntroView02.xib */; };
-		1649D9DA1B37AD5100EEA0DD /* IntroView03.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649D9D91B37AD5100EEA0DD /* IntroView03.xib */; };
-		1649D9DC1B37AD6300EEA0DD /* IntroView02.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649D9DB1B37AD6300EEA0DD /* IntroView02.swift */; };
-		1649D9DE1B37AD7000EEA0DD /* IntroView03.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649D9DD1B37AD7000EEA0DD /* IntroView03.swift */; };
+		1649D9E01B3865CC00EEA0DD /* FirstIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649D9DF1B3865CC00EEA0DD /* FirstIntroView.xib */; };
+		1649D9E21B38661C00EEA0DD /* FirstIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649D9E11B38661C00EEA0DD /* FirstIntroView.swift */; };
+		1649D9E41B386D9B00EEA0DD /* SecondIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649D9E31B386D9B00EEA0DD /* SecondIntroView.swift */; };
+		1649D9E61B386DB000EEA0DD /* ThirdIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649D9E51B386DB000EEA0DD /* ThirdIntroView.swift */; };
+		1649D9E81B386DC300EEA0DD /* SecondIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649D9E71B386DC300EEA0DD /* SecondIntroView.xib */; };
+		1649D9EA1B386DCE00EEA0DD /* ThirdIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649D9E91B386DCE00EEA0DD /* ThirdIntroView.xib */; };
 		1683557A1B34DED400264F6B /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168355791B34DED400264F6B /* PushManager.swift */; };
 		1683557C1B35EEC000264F6B /* NoAlbumsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1683557B1B35EEC000264F6B /* NoAlbumsCell.swift */; };
 		1683557E1B35F56A00264F6B /* NoAlbumsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1683557D1B35F56A00264F6B /* NoAlbumsCell.xib */; };
@@ -77,12 +77,12 @@
 		1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLandingViewController.swift; sourceTree = "<group>"; };
 		16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		16354F421B2E6613003D2A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1649D9D11B37AC3F00EEA0DD /* IntroView01.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroView01.xib; sourceTree = "<group>"; };
-		1649D9D31B37AC5800EEA0DD /* IntroView01.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroView01.swift; sourceTree = "<group>"; };
-		1649D9D71B37AD4300EEA0DD /* IntroView02.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroView02.xib; sourceTree = "<group>"; };
-		1649D9D91B37AD5100EEA0DD /* IntroView03.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroView03.xib; sourceTree = "<group>"; };
-		1649D9DB1B37AD6300EEA0DD /* IntroView02.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroView02.swift; sourceTree = "<group>"; };
-		1649D9DD1B37AD7000EEA0DD /* IntroView03.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroView03.swift; sourceTree = "<group>"; };
+		1649D9DF1B3865CC00EEA0DD /* FirstIntroView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstIntroView.xib; sourceTree = "<group>"; };
+		1649D9E11B38661C00EEA0DD /* FirstIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstIntroView.swift; sourceTree = "<group>"; };
+		1649D9E31B386D9B00EEA0DD /* SecondIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondIntroView.swift; sourceTree = "<group>"; };
+		1649D9E51B386DB000EEA0DD /* ThirdIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdIntroView.swift; sourceTree = "<group>"; };
+		1649D9E71B386DC300EEA0DD /* SecondIntroView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondIntroView.xib; sourceTree = "<group>"; };
+		1649D9E91B386DCE00EEA0DD /* ThirdIntroView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThirdIntroView.xib; sourceTree = "<group>"; };
 		168355791B34DED400264F6B /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		1683557B1B35EEC000264F6B /* NoAlbumsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAlbumsCell.swift; sourceTree = "<group>"; };
 		1683557D1B35F56A00264F6B /* NoAlbumsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoAlbumsCell.xib; sourceTree = "<group>"; };
@@ -177,12 +177,12 @@
 		1649D9D01B37AAEF00EEA0DD /* Intro */ = {
 			isa = PBXGroup;
 			children = (
-				1649D9D11B37AC3F00EEA0DD /* IntroView01.xib */,
-				1649D9D71B37AD4300EEA0DD /* IntroView02.xib */,
-				1649D9D91B37AD5100EEA0DD /* IntroView03.xib */,
-				1649D9D31B37AC5800EEA0DD /* IntroView01.swift */,
-				1649D9DB1B37AD6300EEA0DD /* IntroView02.swift */,
-				1649D9DD1B37AD7000EEA0DD /* IntroView03.swift */,
+				1649D9DF1B3865CC00EEA0DD /* FirstIntroView.xib */,
+				1649D9E71B386DC300EEA0DD /* SecondIntroView.xib */,
+				1649D9E91B386DCE00EEA0DD /* ThirdIntroView.xib */,
+				1649D9E11B38661C00EEA0DD /* FirstIntroView.swift */,
+				1649D9E31B386D9B00EEA0DD /* SecondIntroView.swift */,
+				1649D9E51B386DB000EEA0DD /* ThirdIntroView.swift */,
 			);
 			name = Intro;
 			sourceTree = "<group>";
@@ -426,12 +426,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE45EE481B1FE5DF00F39BF8 /* LaunchScreen.xib in Resources */,
+				1649D9E81B386DC300EEA0DD /* SecondIntroView.xib in Resources */,
 				FE45EE451B1FE5DF00F39BF8 /* Images.xcassets in Resources */,
-				1649D9DA1B37AD5100EEA0DD /* IntroView03.xib in Resources */,
-				1649D9D21B37AC3F00EEA0DD /* IntroView01.xib in Resources */,
 				1683557E1B35F56A00264F6B /* NoAlbumsCell.xib in Resources */,
 				16354F431B2E6613003D2A2B /* Main.storyboard in Resources */,
-				1649D9D81B37AD4300EEA0DD /* IntroView02.xib in Resources */,
+				1649D9EA1B386DCE00EEA0DD /* ThirdIntroView.xib in Resources */,
+				1649D9E01B3865CC00EEA0DD /* FirstIntroView.xib in Resources */,
 				16B286A71B371EAE00F540AF /* EventCreatedView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,7 +488,6 @@
 				1684BBFF1B3391F400CBCDC1 /* Appearance.swift in Sources */,
 				16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */,
 				1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */,
-				1649D9DC1B37AD6300EEA0DD /* IntroView02.swift in Sources */,
 				FE45EEAE1B23CEC900F39BF8 /* Photo.swift in Sources */,
 				16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */,
 				16B286A91B371F2900F540AF /* EventCreatedView.swift in Sources */,
@@ -498,26 +497,27 @@
 				1628DCED1B2E6CB7005E0841 /* User.swift in Sources */,
 				1683557A1B34DED400264F6B /* PushManager.swift in Sources */,
 				16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */,
-				1649D9DE1B37AD7000EEA0DD /* IntroView03.swift in Sources */,
 				1683557C1B35EEC000264F6B /* NoAlbumsCell.swift in Sources */,
 				605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */,
 				FE45EEC21B2E774600F39BF8 /* Invitation.swift in Sources */,
 				FE45EEB51B2DF13F00F39BF8 /* ZoomableCollectionView.swift in Sources */,
 				FE1D2D131B36583E00D4485F /* NotificationsViewController.swift in Sources */,
+				1649D9E41B386D9B00EEA0DD /* SecondIntroView.swift in Sources */,
 				FE45EE401B1FE5DF00F39BF8 /* LoginViewController.swift in Sources */,
 				16D3AA341B2E476E00934948 /* AddEventTitleCell.swift in Sources */,
 				FE1D2D0F1B34B5E000D4485F /* ModelsIndex.swift in Sources */,
 				FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */,
 				FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */,
-				1649D9D41B37AC5800EEA0DD /* IntroView01.swift in Sources */,
 				606748D41B37864300B33AAB /* InvitationCell.swift in Sources */,
 				1628DCFF1B321477005E0841 /* CustomLandingViewController.swift in Sources */,
 				FE45EEC11B2E4DE200F39BF8 /* EventDetailViewController.swift in Sources */,
+				1649D9E21B38661C00EEA0DD /* FirstIntroView.swift in Sources */,
 				16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */,
 				FE45EE3E1B1FE5DF00F39BF8 /* AppDelegate.swift in Sources */,
 				FE4EA23A1B326E4700AF2990 /* Notification.swift in Sources */,
 				1684BC011B33B88D00CBCDC1 /* IntroViewController.swift in Sources */,
 				1684BBFA1B334F4500CBCDC1 /* AlbumGeneralViewCell.swift in Sources */,
+				1649D9E61B386DB000EEA0DD /* ThirdIntroView.swift in Sources */,
 				1628DCFD1B31F87E005E0841 /* CustomSignUpViewController.swift in Sources */,
 				1628DCF11B2E7B15005E0841 /* AddUsersAddedUserCell.swift in Sources */,
 			);

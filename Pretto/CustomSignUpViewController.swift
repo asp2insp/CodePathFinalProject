@@ -22,7 +22,6 @@ class CustomSignUpViewController: PFSignUpViewController {
         
         self.backgroundImage = UIImageView()
         self.backgroundImage.backgroundColor = UIColor.prettoBlue()
-//        self.backgroundImage.image = UIImage(named: "friends_7")
         self.signUpView?.addSubview(backgroundImage)
         self.signUpView?.sendSubviewToBack(backgroundImage)
         
@@ -87,7 +86,7 @@ class CustomSignUpViewController: PFSignUpViewController {
         self.signUpView?.signUpButton?.setTitle("Sign up with email", forState: UIControlState.Highlighted)
         self.signUpView?.signUpButton?.frame = CGRect(x: self.signUpView!.signUpButton!.frame.origin.x + 16, y: self.signUpView!.frame.height - 104, width: self.signUpView!.frame.width - 32, height: 44)
         self.signUpView?.signUpButton?.layer.borderColor = UIColor.whiteColor().CGColor
-        self.signUpView?.signUpButton?.layer.borderWidth = 2
+        self.signUpView?.signUpButton?.layer.borderWidth = 1
         self.signUpView?.signUpButton?.layer.cornerRadius = self.signUpView!.signUpButton!.frame.height / 2
         
     }
