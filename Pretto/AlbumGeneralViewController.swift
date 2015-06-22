@@ -84,11 +84,6 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         }
         self.refreshControl.endRefreshing()
     }
-    
-    @IBAction func onLogOut(sender: AnyObject) {
-        PFUser.logOut()
-        (UIApplication.sharedApplication().delegate as! AppDelegate).showLandingWindow()
-    }
 
     /*
     // MARK: - Navigation

@@ -103,7 +103,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="NOTIFICATIONS" id="PN9-0Z-cFD">
-                        <barButtonItem key="rightBarButtonItem" image="settings" id="tfD-pg-tO9"/>
+                        <barButtonItem key="rightBarButtonItem" title="LogOut" id="tfD-pg-tO9">
+                            <connections>
+                                <action selector="onLogOut:" destination="S1D-Ha-FqN" id="JDN-ES-si7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="h2B-Fu-jgQ" id="FjS-ZY-d6C"/>
@@ -580,7 +584,7 @@
                     <view key="view" contentMode="scaleToFill" id="G3k-IY-Xjl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="EXPLORE" id="AhD-uG-MXt">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="bc7-cT-wwt"/>
@@ -974,7 +978,6 @@
         <image name="TabBarCameraLogoIcon" width="34" height="29"/>
         <image name="TabBarSearchIcon" width="23" height="24"/>
         <image name="TabBarStuffIcon" width="19" height="18"/>
-        <image name="settings" width="20" height="20"/>
         <image name="user" width="32" height="32"/>
     </resources>
 </document>

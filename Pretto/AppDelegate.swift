@@ -9,6 +9,7 @@
 import UIKit
 
 let dateFormatter = NSDateFormatter()
+let kUserDidLogOutNotification = "userDidLogOut"
 let kShowLoginWindowNotification = "showLoginWindow"
 let kShowLandingWindowNotification = "showLandingWindow"
 let kIntroDidFinishNotification = "introIsOver"
@@ -37,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showLoginWindow", name: kShowLoginWindowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showLandingWindow", name: kShowLandingWindowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "introDidFinish", name: kIntroDidFinishNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogOut", name: kUserDidLogOutNotification, object: nil)
         
         
         // Initialize Parse.
@@ -206,6 +208,11 @@ extension AppDelegate {
                 println("No FB friends using this app")
             }
         })
+    }
+    
+    func userDidLogOut() {
+        PFUser.logOut()
+        (UIApplication.sharedApplication().delegate as! AppDelegate).showLandingWindow()
     }
     
     func introDidFinish() {

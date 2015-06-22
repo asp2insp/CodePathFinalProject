@@ -12,26 +12,32 @@ class CustomLoginViewController: PFLogInViewController {
     
     private var gradientView: UIImageView!
     private var backgroundImage: UIImageView!
+    private var otherImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.logInView?.dismissButton?.addTarget(self, action: "onDismissButton", forControlEvents: UIControlEvents.TouchUpInside)
 
-        self.logInView?.logo = UIImageView(image: UIImage(named: "HeaderPretto")!)
+        self.logInView?.logo = UIImageView(image: UIImage(named: "LauchScreenLogo2")!)
         
         self.backgroundImage = UIImageView()
-        self.backgroundImage.image = UIImage(named: "friends_7")
+        self.backgroundImage.backgroundColor = UIColor.prettoBlue()
+        //        self.backgroundImage.image = UIImage(named: "friends_7")
         self.logInView?.addSubview(backgroundImage)
         self.logInView?.sendSubviewToBack(backgroundImage)
+        
+        self.otherImage = UIImageView()
+        self.otherImage.image = UIImage(named: "LaunchScreenThingy")
+        self.logInView?.addSubview(otherImage)
 
         self.gradientView = UIImageView(image: UIImage(named: "gradient"))
         self.logInView?.addSubview(self.gradientView)
         self.logInView?.sendSubviewToBack(self.gradientView)
 
-        self.logInView?.usernameField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.8)
+        self.logInView?.usernameField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.0)
         self.logInView?.usernameField?.textColor = UIColor.whiteColor()
-        self.logInView?.passwordField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.8)
+        self.logInView?.passwordField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.0)
         self.logInView?.passwordField?.textColor = UIColor.whiteColor()
 
         self.logInView?.logInButton?.titleLabel?.font = self.logInView?.logInButton!.titleLabel?.font.fontWithSize(17)
@@ -46,13 +52,24 @@ class CustomLoginViewController: PFLogInViewController {
         self.logInView?.facebookButton?.setBackgroundImage(nil, forState: UIControlState.Normal)
         self.logInView?.facebookButton?.setBackgroundImage(nil, forState: UIControlState.Highlighted)
 
-//        self.logInView?.passwordForgottenButton?.tintColor = UIColor.whiteColor()
-//        self.logInView?.passwordForgottenButton?.titleLabel?.font = self.logInView?.logInButton!.titleLabel?.font.fontWithSize(17)
         self.logInView?.passwordForgottenButton?.backgroundColor = UIColor.clearColor()
         self.logInView?.passwordForgottenButton?.setImage(nil, forState: UIControlState.Normal)
         self.logInView?.passwordForgottenButton?.setImage(nil, forState: UIControlState.Highlighted)
         self.logInView?.passwordForgottenButton?.setBackgroundImage(nil, forState: UIControlState.Normal)
         self.logInView?.passwordForgottenButton?.setBackgroundImage(nil, forState: UIControlState.Highlighted)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.logInView?.passwordForgottenButton?.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        self.logInView?.passwordForgottenButton?.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
+        self.logInView?.passwordForgottenButton?.titleLabel?.font = UIFont.systemFontOfSize(12)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        self.logInView?.usernameField?.attributedPlaceholder = NSAttributedString(string: "Enter email", attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        self.logInView?.passwordField?.attributedPlaceholder = NSAttributedString(string: "Enter password", attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
     }
     
     override func viewDidLayoutSubviews() {
@@ -73,9 +90,9 @@ class CustomLoginViewController: PFLogInViewController {
         self.gradientView.frame = CGRect(x: 0, y: self.logInView!.frame.height / 2, width: self.logInView!.frame.width, height: self.logInView!.frame.height / 2)
         
         self.backgroundImage.frame = self.logInView!.frame
-
-        self.logInView?.usernameField?.placeholder = "Enter email"
-        self.logInView?.passwordField?.placeholder = "Enter password"
+        
+        self.otherImage.frame = CGRect(x: 0, y: 0, width: 236, height: 107)
+        self.otherImage.center = CGPoint(x: self.logInView!.center.x, y: self.logInView!.center.y + 60)
 
         self.logInView?.usernameField?.center = CGPoint(x: self.logInView!.usernameField!.center.x, y: self.logInView!.usernameField!.center.y - 40)
         self.logInView?.passwordField?.center = CGPoint(x: self.logInView!.passwordField!.center.x, y: self.logInView!.passwordField!.center.y - 40)

@@ -18,6 +18,9 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.requestButton.backgroundColor = UIColor.prettoBlue()
+        
         self.title = invitation?.event.title
 
         self.headerImage.file = invitation?.event.coverPhoto

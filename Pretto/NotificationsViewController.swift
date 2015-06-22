@@ -9,6 +9,10 @@
 import Foundation
 
 class NotificationsViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBAction func onLogOut(sender: UIBarButtonItem) {
+        var notification = NSNotification(name: kUserDidLogOutNotification, object: nil)
+        NSNotificationCenter.defaultCenter().postNotification(notification)
+    }
     @IBOutlet weak var tableView: UITableView!
     var notifications : [Notification] = []
     var upcomingInvitations : [Invitation] = []

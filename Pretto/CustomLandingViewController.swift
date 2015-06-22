@@ -13,6 +13,7 @@ class CustomLandingViewController: PFLogInViewController {
     private var signInButton: UIButton!
     private var gradientView: UIImageView!
     private var backgroundImage: UIImageView!
+    private var otherImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +24,17 @@ class CustomLandingViewController: PFLogInViewController {
         signUpController.delegate = self.delegate as? PFSignUpViewControllerDelegate
         self.signUpController = signUpController
         
-        self.logInView?.logo = UIImageView(image: UIImage(named: "HeaderPretto")!)
+        self.logInView?.logo = UIImageView(image: UIImage(named: "LauchScreenLogo2")!)
         
         self.backgroundImage = UIImageView()
-        self.backgroundImage.image = UIImage(named: "friends_7")
+        self.backgroundImage.backgroundColor = UIColor.prettoBlue()
+//        self.backgroundImage.image = UIImage(named: "friends_7")
         self.logInView?.addSubview(backgroundImage)
         self.logInView?.sendSubviewToBack(backgroundImage)
+        
+        self.otherImage = UIImageView()
+        self.otherImage.image = UIImage(named: "LaunchScreenThingy")
+        self.logInView?.addSubview(otherImage)
         
         self.gradientView = UIImageView(image: UIImage(named: "gradient"))
         self.logInView?.addSubview(self.gradientView)
@@ -70,6 +76,9 @@ class CustomLandingViewController: PFLogInViewController {
         self.gradientView.frame = CGRect(x: 0, y: self.logInView!.frame.height / 2, width: self.logInView!.frame.width, height: self.logInView!.frame.height / 2)
         
         self.backgroundImage.frame = self.logInView!.frame
+        
+        self.otherImage.frame = CGRect(x: 0, y: 0, width: 236, height: 107)
+        self.otherImage.center = self.logInView!.center
         
         self.signInButton.frame = CGRect(x: self.logInView!.facebookButton!.frame.origin.x, y: self.logInView!.facebookButton!.frame.origin.y - 60, width: self.logInView!.facebookButton!.frame.width, height: self.logInView!.facebookButton!.frame.height)
         self.signInButton.setTitle("Already have and account? Sign in", forState: UIControlState.Normal)

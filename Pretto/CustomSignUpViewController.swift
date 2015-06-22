@@ -13,16 +13,22 @@ class CustomSignUpViewController: PFSignUpViewController {
     private var blurEffectView: UIVisualEffectView!
     private var gradientView: UIImageView!
     private var backgroundImage: UIImageView!
+    private var otherImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.signUpView?.logo = UIImageView(image: UIImage(named: "HeaderPretto")!)
+        self.signUpView?.logo = UIImageView(image: UIImage(named: "LauchScreenLogo2")!)
         
         self.backgroundImage = UIImageView()
-        self.backgroundImage.image = UIImage(named: "friends_7")
+        self.backgroundImage.backgroundColor = UIColor.prettoBlue()
+//        self.backgroundImage.image = UIImage(named: "friends_7")
         self.signUpView?.addSubview(backgroundImage)
         self.signUpView?.sendSubviewToBack(backgroundImage)
+        
+        self.otherImage = UIImageView()
+        self.otherImage.image = UIImage(named: "LaunchScreenThingy")
+        self.signUpView?.addSubview(otherImage)
         
         var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
         self.blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -31,9 +37,10 @@ class CustomSignUpViewController: PFSignUpViewController {
         self.signUpView?.addSubview(self.gradientView)
         self.signUpView?.sendSubviewToBack(self.gradientView)
     
-        self.signUpView?.usernameField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.8)
+        self.signUpView?.usernameField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.0)
         self.signUpView?.usernameField?.textColor = UIColor.whiteColor()
-        self.signUpView?.passwordField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.8)
+
+        self.signUpView?.passwordField?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.0)
         self.signUpView?.passwordField?.textColor = UIColor.whiteColor()
         
         self.signUpView?.signUpButton?.titleLabel?.font = self.signUpView?.signUpButton!.titleLabel?.font.fontWithSize(17)
@@ -44,13 +51,22 @@ class CustomSignUpViewController: PFSignUpViewController {
         self.signUpView?.signUpButton?.setBackgroundImage(nil, forState: UIControlState.Highlighted)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.signUpView?.usernameField?.attributedPlaceholder = NSAttributedString(string: "Enter email", attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        self.signUpView?.passwordField?.attributedPlaceholder = NSAttributedString(string: "Enter password", attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
         var screenWidth = self.view.frame.width
         var screenHeight = self.view.frame.height
         var logoHeight = CGFloat(98.0)
         var logoWidth = CGFloat(168.0)
+        
+        self.signUpView?.usernameField?.attributedPlaceholder = NSAttributedString(string: "Enter email", attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        self.signUpView?.passwordField?.attributedPlaceholder = NSAttributedString(string: "Enter password", attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
         
         self.blurEffectView.frame = CGRect(x: self.signUpView!.usernameField!.frame.origin.x, y: self.signUpView!.usernameField!.frame.origin.y, width: self.signUpView!.usernameField!.frame.width, height: self.signUpView!.usernameField!.frame.height * 2)
         
@@ -60,8 +76,8 @@ class CustomSignUpViewController: PFSignUpViewController {
         
         self.backgroundImage.frame = self.signUpView!.frame
         
-        self.signUpView?.usernameField?.placeholder = "Enter email"
-        self.signUpView?.passwordField?.placeholder = "Enter password"
+        self.otherImage.frame = CGRect(x: 0, y: 0, width: 236, height: 107)
+        self.otherImage.center = CGPoint(x: self.signUpView!.center.x, y: self.signUpView!.center.y + 100)
         
         self.signUpView?.usernameField?.center = CGPoint(x: self.signUpView!.usernameField!.center.x, y: self.signUpView!.usernameField!.center.y - 80)
         self.signUpView?.passwordField?.center = CGPoint(x: self.signUpView!.passwordField!.center.x, y: self.signUpView!.passwordField!.center.y - 80)
