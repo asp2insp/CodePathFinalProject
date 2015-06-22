@@ -23,6 +23,10 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.estimatedRowHeight = 78
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
@@ -38,7 +42,8 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
                 self.refreshControl.endRefreshing()
             }
         }
-        Invitation.getAllFutureEvents() {invites in
+        Invitation.getAllLiveAndFutureEvents() {invites in
+            println("Invitations received: \(invites.count)")
             self.upcomingInvitations = invites
             if --self.refreshCount == 0 {
                 self.tableView.reloadData()
@@ -87,17 +92,17 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier("invitecell", forIndexPath: indexPath) as! InviteCell
-            cell.invite = self.upcomingInvitations[indexPath.row]
-            return cell
+            let cell = tableView.dequeueReusableCellWithIdentifier("invitation.cell", forIndexPath: indexPath) as! InvitationCell
+            cell.invitation = self.upcomingInvitations[indexPath.row]
+            return fixRowLine(cell)
         case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier("requestcell", forIndexPath: indexPath) as! RequestCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("request.cell", forIndexPath: indexPath) as! RequestCell
             cell.request = self.requests[indexPath.row]
-            return cell
+            return fixRowLine(cell)
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier("notificationcell", forIndexPath: indexPath) as! NotificationCell
             cell.notification = self.notifications[indexPath.row]
-            return cell
+            return fixRowLine(cell)
         default:
             return UITableViewCell()
         }
@@ -126,37 +131,18 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
         }
         tableView.endUpdates()
     }
-}
-
-class RequestCell : UITableViewCell {
-    @IBOutlet weak var title: UILabel!
     
-    var request : Request? {
-        didSet {
-            if let request = self.request {
-                let requester = User(innerUser: request.requester)
-                let name = requester.firstName ?? "Someone"
-                title.text = "\(name) has requested a photo from you!"
-            } else {
-                title.text = "Oops, an error occurred"
-            }
+    func fixRowLine(cell:UITableViewCell) -> UITableViewCell {
+        if (cell.respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:"))){
+            cell.preservesSuperviewLayoutMargins = false
         }
-    }
-}
-
-class InviteCell : UITableViewCell {
-    @IBOutlet weak var title: UILabel!
-    
-    var invite : Invitation? {
-        didSet {
-            if let invite = self.invite {
-                let host = User(innerUser: invite.from)
-                let name = host.firstName ?? "Someone"
-                title.text = "\(name) has invited you to their event \(invite.event.title)"
-            } else {
-                title.text = "Oops, an error occurred"
-            }
+        if (cell.respondsToSelector(Selector("setSeparatorInset:"))){
+            cell.separatorInset = UIEdgeInsetsMake(0, 4, 0, 0)
         }
+        if (cell.respondsToSelector(Selector("setLayoutMargins:"))){
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+        return cell
     }
 }
 

@@ -167,4 +167,29 @@ class Invitation : PFObject, PFSubclassing {
             }
         }
     }
+    
+    // Query for all future events in the background and call the given block with the result
+    class func getAllLiveAndFutureEvents(block: ([Invitation] -> Void) ) {
+        let query = PFQuery(className: "Invitation", predicate: nil)
+        query.includeKey("event")
+        
+        let innerQuery = PFQuery(className: "Event", predicate: nil)
+        innerQuery.whereKey(kEventEndDateKey, greaterThanOrEqualTo: NSDate())
+        
+        query.whereKey("event", matchesQuery: innerQuery)
+        query.whereKey("to", equalTo: PFUser.currentUser()!)
+        query.includeKey("event")
+        query.orderByDescending("createdAt")
+        query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
+            if error == nil {
+                var invites : [Invitation] = []
+                for obj in items ?? [] {
+                    if let invitation = obj as? Invitation {
+                        invites.append(invitation)
+                    }
+                }
+                block(invites)
+            }
+        }
+    }
 }

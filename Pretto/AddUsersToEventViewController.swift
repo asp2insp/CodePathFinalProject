@@ -58,7 +58,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         let invitation = newEvent.makeInvitationForUser(PFUser.currentUser()!)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             let facebookIds : [String] = self.selectedFriends?.map({ (friend) -> String in
-                return friend.facebookId
+                return friend.friendFacebookId
             }) ?? []
             let query = PFUser.query()
             query?.whereKey("facebookId", containedIn: facebookIds)
@@ -128,12 +128,15 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         self.view.addSubview(autocompleteTableView)
         
         
-        Friend.getAllFriendsFromFacebook("10153067889372737", onComplete: { (friends:[Friend]?) -> Void in
+        var me = User(innerUser: PFUser.currentUser())
+        Friend.getAllFriendsFromFacebook(me.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
             if friends != nil {
                 self.friends = friends
-                println(friends![0].friendName)
+                // TODO: delete below line later
+                self.friends?.append(self.getMeAsTestFriend(me))
                 self.friendsNames = [String]()
-                for friend in friends! {
+                for friend in self.friends! {
+                    println("Bro: \(friend.friendName)")
                     self.friendsNames?.append(friend.friendName)
                 }
                 self.tableView.reloadData()
@@ -141,6 +144,14 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
                 println("No friends found")
             }
         })
+    }
+    
+    func getMeAsTestFriend(me:User) -> Friend {
+        var selfie = Friend()
+        selfie.facebookId = me.facebookId!
+        selfie.friendFacebookId = me.facebookId!
+        selfie.friendName = me.name!
+        return selfie
     }
     
     override func viewDidAppear(animated: Bool) {
