@@ -169,7 +169,7 @@ class Invitation : PFObject, PFSubclassing {
     }
     
     // Query for all future events in the background and call the given block with the result
-    class func getAllLiveAndFutureEvents(block: ([Invitation] -> Void) ) {
+    class func getAllLiveAndFutureNonAcceptedEvents(block: ([Invitation] -> Void) ) {
         let query = PFQuery(className: "Invitation", predicate: nil)
         query.includeKey("event")
         
@@ -178,6 +178,7 @@ class Invitation : PFObject, PFSubclassing {
         
         query.whereKey("event", matchesQuery: innerQuery)
         query.whereKey("to", equalTo: PFUser.currentUser()!)
+        query.whereKey("accepted", equalTo: false)
         query.includeKey("event")
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in

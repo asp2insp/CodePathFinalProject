@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NotificationsViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NotificationsViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, InvitationActionDelegate, RequestActionDelegate {
     @IBAction func onLogOut(sender: UIBarButtonItem) {
         var notification = NSNotification(name: kUserDidLogOutNotification, object: nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)
@@ -42,7 +42,7 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
                 self.refreshControl.endRefreshing()
             }
         }
-        Invitation.getAllLiveAndFutureEvents() {invites in
+        Invitation.getAllLiveAndFutureNonAcceptedEvents() {invites in
             self.upcomingInvitations = invites
             if --self.refreshCount == 0 {
                 self.tableView.reloadData()
@@ -72,7 +72,8 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.hasAnyTableData() ? 3 : 0
+        return 3
+        // return self.hasAnyTableData() ? 3 : 0
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -106,10 +107,12 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("invitation.cell", forIndexPath: indexPath) as! InvitationCell
             cell.invitation = self.upcomingInvitations[indexPath.row]
+            cell.delegate = self
             return fixRowLine(cell)
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("request.cell", forIndexPath: indexPath) as! RequestCell
             cell.request = self.requests[indexPath.row]
+             cell.delegate = self
             return fixRowLine(cell)
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier("notificationcell", forIndexPath: indexPath) as! NotificationCell
@@ -130,8 +133,12 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             var deleted : PFObject?
             switch indexPath.section {
             case 0:
+                var invitation = self.upcomingInvitations[indexPath.row]
+                invitation.deleteInBackground()
                 deleted = self.upcomingInvitations.removeAtIndex(indexPath.row)
             case 1:
+                var request = self.requests[indexPath.row]
+                request.denyRequest()
                 deleted = self.requests.removeAtIndex(indexPath.row)
             case 2:
                 deleted = self.notifications.removeAtIndex(indexPath.row)
@@ -155,6 +162,42 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             cell.layoutMargins = UIEdgeInsetsZero
         }
         return cell
+    }
+
+    // MARK: InvitationActionDelegate
+    func onAcceptInvitation(invitation:Invitation, sender: InvitationCell) {
+        var indexForRow = self.tableView.indexPathForCell(sender)
+        if indexForRow == nil {
+            return
+        }
+        
+        self.tableView.beginUpdates()
+        self.upcomingInvitations.removeAtIndex(indexForRow!.row)
+        var indices = [NSIndexPath]()
+        indices.append(indexForRow!)
+        self.tableView.deleteRowsAtIndexPaths(indices, withRowAnimation: UITableViewRowAnimation.Automatic)
+        self.tableView.endUpdates()
+    }
+    
+    func onRejectInvitation(invitation:Invitation, sender: InvitationCell) {
+    }
+    
+    // MARK: RequestActionDelegate
+    func onAcceptRequest(request:Request, sender: RequestCell) {
+        var indexForRow = self.tableView.indexPathForCell(sender)
+        if indexForRow == nil {
+            return
+        }
+        
+        self.tableView.beginUpdates()
+        self.requests.removeAtIndex(indexForRow!.row)
+        var indices = [NSIndexPath]()
+        indices.append(indexForRow!)
+        self.tableView.deleteRowsAtIndexPaths(indices, withRowAnimation: UITableViewRowAnimation.Automatic)
+        self.tableView.endUpdates()
+    }
+    
+    func onDeclineRequest(request:Request, sender: RequestCell) {
     }
 }
 

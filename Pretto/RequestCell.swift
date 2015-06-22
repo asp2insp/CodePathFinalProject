@@ -8,8 +8,15 @@
 
 import UIKit
 
+@objc protocol RequestActionDelegate {
+    optional func onAcceptRequest(request:Request, sender: RequestCell)
+    optional func onDeclineRequest(request:Request, sender: RequestCell)
+}
+
 class RequestCell: UITableViewCell {
 
+    var delegate:RequestActionDelegate?
+    
     var request:Request? {
         didSet {
             if self.request != nil {
@@ -21,6 +28,14 @@ class RequestCell: UITableViewCell {
                 let requesterId = requester.firstName ?? requester.email!
                 let cellDescription = "\(requesterId) has requested a photo from you!"
                 self.notificationDescriptionLabel.text = cellDescription
+                
+                if request?.status != "pending" {
+                    self.acceptButton.enabled = false
+                    self.backgroundColor = UIColor.prettoWindowBackground()
+                } else {
+                    self.acceptButton.enabled = true
+                    self.backgroundColor = UIColor.whiteColor()
+                }
             }
         }
     }
@@ -54,6 +69,13 @@ class RequestCell: UITableViewCell {
     }
 
     @IBAction func onAcceptButton(sender: AnyObject) {
+        self.request!.acceptRequest()
+        self.acceptButton.enabled = false
+        self.backgroundColor = UIColor.prettoWindowBackground()
         println("accepted photo request")
+        
+        if self.delegate != nil {
+            self.delegate!.onAcceptRequest!(self.request!, sender: self)
+        }
     }
 }
