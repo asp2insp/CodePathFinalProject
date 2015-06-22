@@ -19,6 +19,9 @@ let kShareByEmailNotification = "shareByEmail"
 let kAcceptEventAndDismissVCNotification = "acceptEventAndDismissVC"
 let kFirstTimeRunningPretto = "isTheFirstTimeEver"
 let kDidPressCreateEventNotification = "createNewEvent"
+let kUserDidPressCameraNotification = "openCamera"
+
+let cameraView: UIImageView = UIImageView()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
@@ -166,6 +169,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
 
 extension AppDelegate {
     
+    func addCameraOverlay() {
+        var window = UIApplication.sharedApplication().keyWindow
+        let iconSize = CGSize(width: 56.0, height: 56.0)
+        let margin = CGFloat(8.0)
+        window?.addSubview(cameraView)
+        window?.bringSubviewToFront(cameraView)
+        cameraView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: iconSize)
+        cameraView.backgroundColor = UIColor.clearColor()
+        cameraView.image = UIImage(named: "OverlayCameraButtonOrange")
+        cameraView.center = CGPoint(x: window!.bounds.width - (iconSize.width / 2) - margin, y: window!.bounds.height - (iconSize.height / 2) - margin - 51)
+        cameraView.userInteractionEnabled = true
+        var tapRecognizer = UITapGestureRecognizer(target: self, action: "tappedOnCamera")
+        cameraView.addGestureRecognizer(tapRecognizer)
+    }
+    
+    func tappedOnCamera() {
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: kUserDidPressCameraNotification, object: nil))
+    }
+    
     func checkCurrentUser() {
         println("AppDelegate: checkCurrentUser")
         User.checkCurrentUser({ (user:User) -> Void in
@@ -257,6 +279,7 @@ extension AppDelegate {
         viewController.selectedIndex = 1
         self.window!.rootViewController = viewController
         self.window!.makeKeyAndVisible()
+        self.addCameraOverlay()
     }
 }
 

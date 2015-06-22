@@ -11,7 +11,7 @@ import UIKit
 let albumGeneralCellReuseIdentifier = "AlbumGeneralViewCell"
 let noAlbumsCellReuseIdentifier = "NoAlbumsCell"
 
-class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var tableView: UITableView!
     
@@ -21,11 +21,13 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     private var selectedInvitation : Invitation?
     private var searchBar: UISearchBar!
     
+    private var photoPicker: UIImagePickerController!
     var observer : NSObjectProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "tappedOnCamera", name: kUserDidPressCameraNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "createEvent", name: kDidPressCreateEventNotification, object: nil)
         tableView.delegate = self
         tableView.dataSource = self
@@ -46,6 +48,8 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        cameraView.hidden = false
+        photoPicker = UIImagePickerController()
         self.observer = NSNotificationCenter.defaultCenter().addObserverForName("PrettoNewPhotoForEvent", object: nil, queue: nil) { (note) -> Void in
            self.refreshData()
         }
@@ -102,12 +106,37 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
 
 }
 
+// MARK: AUX Methods
+
+extension AlbumGeneralViewController {
+    func tappedOnCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            photoPicker.delegate = self
+            photoPicker.sourceType = UIImagePickerControllerSourceType.Camera
+            photoPicker.cameraDevice = UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear) ? .Rear : .Front
+            cameraView.hidden = true
+            self.presentViewController(photoPicker, animated: true, completion: nil)
+        }
+    }
+
+}
+
+// MARK: UIImagePickerControllerDelegate
+extension AlbumGeneralViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        println("Photo Taken or Picked")
+        cameraView.hidden = false
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
 // MARK: UITableViewDelegate
 
-extension AlbumGeneralViewController : UITableViewDelegate {
+extension AlbumGeneralViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-       if liveInvitations.count != 0 {
+       if liveInvitations.count > 0 || pastInvitations.count > 0 {
             return 218
         } else {
             return 420
@@ -204,3 +233,5 @@ extension AlbumGeneralViewController : UITableViewDataSource {
         }
     }
 }
+
+

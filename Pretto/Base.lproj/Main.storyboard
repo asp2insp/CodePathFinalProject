@@ -304,7 +304,7 @@
         <scene sceneID="erz-oe-mIE">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1H1-9l-Vg5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="TabBarCameraLogoIcon" id="yMZ-8a-kiS"/>
+                    <tabBarItem key="tabBarItem" title="" image="TabBarPhotosIcon" id="yMZ-8a-kiS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qiq-N8-otZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -760,7 +760,7 @@
         <scene sceneID="GTj-l8-KOu">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qU1-RK-9aC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="TabBarStuffIcon" id="Oan-jW-9Qt"/>
+                    <tabBarItem key="tabBarItem" title="" image="TabBarStuffIconWide" id="Oan-jW-9Qt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d0t-w9-7wf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1030,9 +1030,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="TabBarCameraLogoIcon" width="34" height="29"/>
+        <image name="TabBarPhotosIcon" width="43" height="35"/>
         <image name="TabBarSearchIcon" width="23" height="24"/>
-        <image name="TabBarStuffIcon" width="19" height="18"/>
+        <image name="TabBarStuffIconWide" width="23" height="19"/>
         <image name="user" width="32" height="32"/>
     </resources>
 </document>

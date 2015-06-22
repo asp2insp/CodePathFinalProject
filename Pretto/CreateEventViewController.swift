@@ -67,6 +67,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+        cameraView.hidden = true
         tableView.reloadData()
     }
 

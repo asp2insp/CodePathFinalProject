@@ -154,6 +154,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     override func viewDidAppear(animated: Bool) {
+        cameraView.hidden = true
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
         locationManager.distanceFilter = kCLDistanceFilterNone
