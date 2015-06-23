@@ -51,6 +51,10 @@ class Invitation : PFObject, PFSubclassing {
         if self.isUpdating {
             return
         }
+        if !self.accepted || self.paused {
+            lastUpdated = NSDate()
+            return
+        }
         self.isUpdating = true
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
