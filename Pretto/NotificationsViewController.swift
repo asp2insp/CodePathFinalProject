@@ -16,7 +16,8 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var tableView: UITableView!
     var notifications : [Notification] = []
     var upcomingInvitations : [Invitation] = []
-    var requests : [Request] = []
+    // Requests are grouped by user
+    var requests : [[Request]] = []
     
     var refreshControl : UIRefreshControl!
     var refreshCount = 0
@@ -55,12 +56,28 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             }
         }
         Request.getAllPendingRequests() {requests in
-            self.requests = requests
+            self.requests = self.groupByRequester(requests)
             if --self.refreshCount == 0 {
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
             }
         }
+    }
+    
+    func groupByRequester(reqs: [Request]) -> [[Request]] {
+        var byUser : [PFUser:[Request]] = [:]
+        for request in reqs {
+            let user = request.requester
+            if byUser[user] == nil {
+                byUser[user] = []
+            }
+            byUser[user]!.append(request)
+        }
+        var grouped : [[Request]] = []
+        for (_, group) in byUser {
+            grouped.append(group)
+        }
+        return grouped
     }
     
     func hasAnyTableData() -> Bool {
@@ -84,11 +101,11 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Event Invitations"
+            return self.upcomingInvitations.count > 0 ? "Event Invitations" : nil
         case 1:
-            return "Photo Requests"
+            return self.requests.count > 0 ? "Photo Requests" : nil
         case 2:
-            return "Other Notifications"
+            return self.notifications.count > 0 ? "Other Notifications" : nil
         default:
             return nil
         }
@@ -116,7 +133,7 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             return fixRowLine(cell)
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("request.cell", forIndexPath: indexPath) as! RequestCell
-            cell.request = self.requests[indexPath.row]
+            cell.requests = self.requests[indexPath.row]
              cell.delegate = self
             return fixRowLine(cell)
         case 2:
@@ -135,22 +152,22 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         tableView.beginUpdates()
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            var deleted : PFObject?
             switch indexPath.section {
             case 0:
                 var invitation = self.upcomingInvitations[indexPath.row]
                 invitation.deleteInBackground()
-                deleted = self.upcomingInvitations.removeAtIndex(indexPath.row)
+                self.upcomingInvitations.removeAtIndex(indexPath.row)
             case 1:
-                var request = self.requests[indexPath.row]
-                request.denyRequest()
-                deleted = self.requests.removeAtIndex(indexPath.row)
+                var requestGroup = self.requests[indexPath.row]
+                for request in requestGroup {
+                    request.denyRequest()
+                }
+                self.requests.removeAtIndex(indexPath.row)
             case 2:
-                deleted = self.notifications.removeAtIndex(indexPath.row)
+                self.notifications.removeAtIndex(indexPath.row)
             default:
-                deleted = nil
+                break;
             }
-            deleted?.deleteInBackground()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
         }
         tableView.endUpdates()

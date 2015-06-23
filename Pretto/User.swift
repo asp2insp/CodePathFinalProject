@@ -10,10 +10,13 @@ import Foundation
 
 class User {
     
+    static var currentUser : User?
+    
     var inner:PFUser!
     
     init(innerUser:PFUser!) {
         inner = innerUser
+        inner.fetchIfNeeded()
     }
     
     var email:String? {
@@ -81,7 +84,8 @@ class User {
     
     var facebookId:String? {
         get {
-            return self.inner.valueForKey("facebookId") as! String?
+            let result = self.inner.valueForKey("facebookId") as! String?
+            return result
         }
         set {
             self.inner.setValue(newValue, forKey: "facebookId")
@@ -163,6 +167,7 @@ class User {
                 user.gender = gender
                 user.locale = locale
                 
+                User.currentUser = user
                 onComplete(user)
             }
             else {

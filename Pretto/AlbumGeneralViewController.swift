@@ -197,16 +197,12 @@ extension AlbumGeneralViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if liveInvitations.count > 0 || pastInvitations.count > 0 {
-            switch section {
-            case 0:
-                return "Live Events"
-            case 1:
-                return "Past Events"
-            default:
-                return ""
-            }
-        } else {
+        switch section {
+        case 0:
+            return liveInvitations.count > 0 ? "Live Events" : nil
+        case 1:
+            return pastInvitations.count > 0 ? "Past Events" : nil
+        default:
             return ""
         }
     }

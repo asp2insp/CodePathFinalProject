@@ -9,33 +9,33 @@
 import UIKit
 
 @objc protocol RequestActionDelegate {
-    optional func onAcceptRequest(request:Request, sender: RequestCell)
-    optional func onDeclineRequest(request:Request, sender: RequestCell)
+    optional func onAcceptRequests(requests:[Request], sender: RequestCell)
+    optional func onDeclineRequests(requests:[Request], sender: RequestCell)
 }
 
 class RequestCell: UITableViewCell {
 
     var delegate:RequestActionDelegate?
     
-    var request:Request? {
+    var requests:[Request]? {
         didSet {
-            if self.request != nil {
-                let requester = User(innerUser: self.request!.requester)
+            if self.requests != nil && self.requests!.count > 0 {
+                let requester = User(innerUser: self.requests![0].requester)
                 let userImageUrlText = requester.profilePhotoUrl!
                 let userImageUrl = NSURL(string: userImageUrlText)
                 self.userImageView.setImageWithURL(userImageUrl)
                 
                 let requesterId = requester.firstName ?? requester.email!
-                let cellDescription = "\(requesterId) has requested a photo from you!"
+                let cellDescription = "\(requesterId) has requested \(self.requests!.count) photos from you!"
                 self.notificationDescriptionLabel.text = cellDescription
                 
-                if request?.status != "pending" {
-                    self.acceptButton.enabled = false
-                    self.backgroundColor = UIColor.prettoWindowBackground()
-                } else {
-                    self.acceptButton.enabled = true
-                    self.backgroundColor = UIColor.whiteColor()
-                }
+//                if requests?.status != "pending" {
+//                    self.acceptButton.enabled = false
+//                    self.backgroundColor = UIColor.prettoWindowBackground()
+//                } else {
+//                    self.acceptButton.enabled = true
+//                    self.backgroundColor = UIColor.whiteColor()
+//                }
             }
         }
     }
@@ -69,13 +69,15 @@ class RequestCell: UITableViewCell {
     }
 
     @IBAction func onAcceptButton(sender: AnyObject) {
-        self.request!.acceptRequest()
+        for request in self.requests ?? [] {
+            request.acceptRequest()
+        }
         self.acceptButton.enabled = false
         self.backgroundColor = UIColor.prettoWindowBackground()
         println("accepted photo request")
         
         if self.delegate != nil {
-            self.delegate!.onAcceptRequest!(self.request!, sender: self)
+            self.delegate!.onAcceptRequests?(self.requests!, sender: self)
         }
     }
 }
