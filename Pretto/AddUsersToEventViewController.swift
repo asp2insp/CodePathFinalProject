@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import MessageUI
+import Social
 
 let AddedUserCellReuseIdentifier = "AddedUserCell"
 
@@ -281,6 +282,15 @@ extension AddUsersToEventViewController {
     
     func shareOnTwitter() {
         println("Notification received, sharing on Twitter")
+
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
+            var composeController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            composeController.setInitialText("I just created a new event on Pretto and would like you to join us. http://pretto.co")
+            self.presentViewController(composeController, animated: true, completion: { () -> Void in
+                println("Shared")
+            })
+        }
+        
     }
     
     func shareByEmail() {
