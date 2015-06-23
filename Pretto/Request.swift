@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Photos
 private let kClassName = "Request"
 
 class Request : PFObject, PFSubclassing {
@@ -40,16 +40,42 @@ class Request : PFObject, PFSubclassing {
     @NSManaged var requestee : PFUser
     
     func acceptRequest() {
-        // TODO: below line is crashing
-        // self.photo.accessList.append(self.requester)
+        self.photo.fetchIfNeededInBackgroundWithBlock { (photo, err) -> Void in
+            if let photo = photo as? Photo {
+                photo.addUniqueObject(self.requester, forKey: "accessList")
+                if photo.fullsizeFile == nil {
+                    PHPhotoLibrary.requestAuthorization(nil)
+                    println("Searching for photo with id \(photo.localPath)")
+                    let collections = PHAsset.fetchAssetsWithLocalIdentifiers([photo.localPath], options: nil)
+                    if collections.count > 0 {
+                        println("Found photo, fetching...")
+                        let requestOptions = PHImageRequestOptions()
+                        requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.HighQualityFormat
+                        requestOptions.version = PHImageRequestOptionsVersion.Original
+                        let requestManager = PHImageManager.defaultManager()
+                        requestManager.requestImageForAsset(collections[0] as! PHAsset, targetSize: PHImageManagerMaximumSize, contentMode: .AspectFit, options: nil, resultHandler: { (image, info) -> Void in
+                            println("Got photo, starting upload...")
+                            let data = UIImagePNGRepresentation(image!)
+                            photo.fullsizeFile = PFFile(data: data)
+                            photo.fullsizeFile?.saveInBackgroundWithBlock({ (success, err) -> Void in
+                                println("Finished upload")
+                                photo.saveInBackground()
+                            })
+                        })
+                    }
+                } else {
+                    photo.saveInBackground()
+                }
+            }
+        }
+
         self.status = "accepted"
-        self.photo.saveInBackgroundWithBlock(nil)
-        self.saveInBackgroundWithBlock(nil)
+        self.saveInBackground()
     }
     
     func denyRequest() {
         self.status = "denied"
-        self.saveInBackgroundWithBlock(nil)
+        self.saveInBackground()
     }
     
     static func getAllPendingRequests(completion: ([Request] -> Void)) {
