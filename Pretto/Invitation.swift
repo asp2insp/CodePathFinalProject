@@ -65,32 +65,37 @@ class Invitation : PFObject, PFSubclassing {
         requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.FastFormat
         requestOptions.resizeMode = PHImageRequestOptionsResizeMode.Fast
         requestOptions.version = PHImageRequestOptionsVersion.Current
+        requestOptions.synchronous = true
         let requestManager = PHImageManager.defaultManager()
         println("Adding \(allResult.count) photos to \(event.title)")
         let targetRect = CGRectMake(0, 0, 140, 140)
-        for var i = 0; i < allResult.count; i++ {
-            requestManager.requestImageForAsset(allResult[i] as! PHAsset, targetSize: targetRect.size, contentMode: PHImageContentMode.AspectFit, options: requestOptions, resultHandler: { (assetResult, info) -> Void in
-                UIGraphicsBeginImageContext(targetRect.size)
-                assetResult.drawInRect(targetRect)
-                let finalImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                let data = UIImageJPEGRepresentation(finalImage, 1.0)
-                if data == nil {
-                    return
-                }
-                let thumbFile = PFFile(data: data)
-                thumbFile.saveInBackground()
-                let image = Photo()
-                image.thumbnailFile = thumbFile
-                image.owner = PFUser.currentUser()!
-                image.saveInBackgroundWithBlock({ (success, err) -> Void in
-                    NSNotificationCenter.defaultCenter().postNotificationName("PrettoNewPhotoForEvent", object: self.event)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            for var i = 0; i < allResult.count; i++ {
+                let currentAsset = allResult[i] as! PHAsset
+                requestManager.requestImageForAsset(currentAsset, targetSize: targetRect.size, contentMode: PHImageContentMode.AspectFit, options: requestOptions, resultHandler: { (assetResult, info) -> Void in
+                    UIGraphicsBeginImageContext(targetRect.size)
+                    assetResult.drawInRect(targetRect)
+                    let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    let data = UIImageJPEGRepresentation(finalImage, 1.0)
+                    if data == nil {
+                        return
+                    }
+                    let thumbFile = PFFile(data: data)
+                    thumbFile.saveInBackground()
+                    let image = Photo()
+                    image.thumbnailFile = thumbFile
+                    image.owner = PFUser.currentUser()!
+                    image.localPath = currentAsset.localIdentifier
+                    image.saveInBackgroundWithBlock({ (success, err) -> Void in
+                        NSNotificationCenter.defaultCenter().postNotificationName("PrettoNewPhotoForEvent", object: self.event)
+                    })
+                    self.event.addImageToEvent(image)
                 })
-                self.event.addImageToEvent(image)
-            })
+            }
+            self.saveInBackground()
+            self.isUpdating = false
         }
-        saveInBackground()
-        self.isUpdating = false
     }
     
     // Query for all live events in the background and call the given block with the result
