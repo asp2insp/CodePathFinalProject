@@ -15,6 +15,7 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
     @IBOutlet weak var headerImage: PFImageView!
     var photos : [Photo] = []
     var refreshControl : UIRefreshControl!
+    var selectedIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        cameraView.hidden = false
         // Scale up to maximum
         flowLayout.itemSize = aspectScaleWithConstraints(flowLayout.itemSize, scale: 10, max: maxSize, min: minSize)
         self.refreshControl.beginRefreshing()
@@ -74,10 +76,31 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
     }
 }
 
+// MARK: AUX Methods
+extension EventDetailViewController {
+    func doubleTapReconized(sender: UITapGestureRecognizer) {
+        println(collectionView.indexPathForCell(sender.view as! SelectableImageCell))
+        selectedIndex = collectionView.indexPathForCell(sender.view as! SelectableImageCell)?.row
+        self.performSegueWithIdentifier("SingleImageViewSegue", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        println("Preparing for Segue")
+        cameraView.hidden = true
+        let singlePhotoVC = segue.destinationViewController as! SinglePhotoViewController
+        singlePhotoVC.photos = self.photos
+        singlePhotoVC.index = self.selectedIndex ?? 0
+        
+    }
+}
+
 // UICollectionViewDataSource Extension
 extension EventDetailViewController : UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("imageCell", forIndexPath: indexPath) as! SelectableImageCell
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: "doubleTapReconized:")
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        cell.addGestureRecognizer(doubleTapRecognizer)
         cell.image.file = self.photos[indexPath.row].thumbnailFile
         cell.image.loadInBackground()
         cell.backgroundColor = UIColor.lightGrayColor()

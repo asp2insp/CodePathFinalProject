@@ -17,6 +17,7 @@
 		16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */; };
 		16354F431B2E6613003D2A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16354F411B2E6613003D2A2B /* Main.storyboard */; };
 		163692071B38D9FB006606A2 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163692061B38D9FB006606A2 /* ExploreViewController.swift */; };
+		163692091B39DDBA006606A2 /* SinglePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163692081B39DDBA006606A2 /* SinglePhotoViewController.swift */; };
 		1649D9E01B3865CC00EEA0DD /* FirstIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649D9DF1B3865CC00EEA0DD /* FirstIntroView.xib */; };
 		1649D9E21B38661C00EEA0DD /* FirstIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649D9E11B38661C00EEA0DD /* FirstIntroView.swift */; };
 		1649D9E41B386D9B00EEA0DD /* SecondIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649D9E31B386D9B00EEA0DD /* SecondIntroView.swift */; };
@@ -79,6 +80,7 @@
 		16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		16354F421B2E6613003D2A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		163692061B38D9FB006606A2 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		163692081B39DDBA006606A2 /* SinglePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePhotoViewController.swift; sourceTree = "<group>"; };
 		1649D9DF1B3865CC00EEA0DD /* FirstIntroView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstIntroView.xib; sourceTree = "<group>"; };
 		1649D9E11B38661C00EEA0DD /* FirstIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstIntroView.swift; sourceTree = "<group>"; };
 		1649D9E31B386D9B00EEA0DD /* SecondIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondIntroView.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */,
+				163692081B39DDBA006606A2 /* SinglePhotoViewController.swift */,
 				16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */,
 				1628DCEE1B2E73D4005E0841 /* AddUsersToEventViewController.swift */,
 				FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */,
@@ -193,6 +196,7 @@
 		1684BBF81B334F1D00CBCDC1 /* Albums */ = {
 			isa = PBXGroup;
 			children = (
+				FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */,
 				1684BBF91B334F4500CBCDC1 /* AlbumGeneralViewCell.swift */,
 				1683557B1B35EEC000264F6B /* NoAlbumsCell.swift */,
 				1683557D1B35F56A00264F6B /* NoAlbumsCell.xib */,
@@ -336,7 +340,6 @@
 				606748D01B37762200B33AAB /* Notifications */,
 				1684BBF81B334F1D00CBCDC1 /* Albums */,
 				16D3AA301B2E46B600934948 /* CreateEvent */,
-				FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */,
 				FE45EEAE1B23CEC900F39BF8 /* Photo.swift in Sources */,
 				16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */,
+				163692091B39DDBA006606A2 /* SinglePhotoViewController.swift in Sources */,
 				16B286A91B371F2900F540AF /* EventCreatedView.swift in Sources */,
 				1628DCFB1B31F86B005E0841 /* CustomLoginViewController.swift in Sources */,
 				1684BBFC1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift in Sources */,

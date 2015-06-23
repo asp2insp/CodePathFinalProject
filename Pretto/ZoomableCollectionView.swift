@@ -215,8 +215,11 @@ class SelectableImageCell : UICollectionViewCell {
         checkbox.checkState = selected ? M13CheckboxStateChecked : M13CheckboxStateUnchecked
         checkbox.radius = 0.5 * checkbox.frame.size.width;
         checkbox.flat = true
-        checkbox.tintColor = checkbox.strokeColor
-        checkbox.checkColor = UIColor.whiteColor()
+//        checkbox.tintColor = checkbox.strokeColor
+//        checkbox.checkColor = UIColor.whiteColor()
+        checkbox.strokeColor = UIColor.clearColor()
+        checkbox.tintColor = UIColor.prettoOrange()
+        checkbox.checkColor = UIColor.prettoBlue()
         
         self.addSubview(image)
         

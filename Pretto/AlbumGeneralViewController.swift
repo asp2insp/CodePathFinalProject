@@ -50,7 +50,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidAppear(animated)
         cameraView.hidden = false
         photoPicker = UIImagePickerController()
-        self.observer = NSNotificationCenter.defaultCenter().addObserverForName("PrettoNewPhotoForEvent", object: nil, queue: nil) { (note) -> Void in
+        self.observer = NSNotificationCenter.defaultCenter().addObserverForName(kNewPhotoForEventNotification, object: nil, queue: nil) { (note) -> Void in
            self.refreshData()
         }
         self.refreshData()

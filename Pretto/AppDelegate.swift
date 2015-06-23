@@ -9,6 +9,7 @@
 import UIKit
 
 let dateFormatter = NSDateFormatter()
+let kNewPhotoForEventNotification = "PrettoNewPhotoForEvent"
 let kUserDidLogOutNotification = "userDidLogOut"
 let kShowLoginWindowNotification = "showLoginWindow"
 let kShowLandingWindowNotification = "showLandingWindow"
