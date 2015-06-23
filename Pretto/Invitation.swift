@@ -63,14 +63,15 @@ class Invitation : PFObject, PFSubclassing {
         let allResult = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
         let requestOptions = PHImageRequestOptions()
         requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.FastFormat
+        requestOptions.resizeMode = PHImageRequestOptionsResizeMode.Fast
         requestOptions.version = PHImageRequestOptionsVersion.Current
         let requestManager = PHImageManager.defaultManager()
         println("Adding \(allResult.count) photos to \(event.title)")
         let targetRect = CGRectMake(0, 0, 140, 140)
         for var i = 0; i < allResult.count; i++ {
-            requestManager.requestImageForAsset(allResult[i] as! PHAsset, targetSize: targetRect.size, contentMode: PHImageContentMode.AspectFit, options: requestOptions, resultHandler: { (image, info) -> Void in
-                UIGraphicsBeginImageContext(image.size)
-                image.drawInRect(targetRect)
+            requestManager.requestImageForAsset(allResult[i] as! PHAsset, targetSize: targetRect.size, contentMode: PHImageContentMode.AspectFit, options: requestOptions, resultHandler: { (assetResult, info) -> Void in
+                UIGraphicsBeginImageContext(targetRect.size)
+                assetResult.drawInRect(targetRect)
                 let finalImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 let data = UIImageJPEGRepresentation(finalImage, 1.0)
