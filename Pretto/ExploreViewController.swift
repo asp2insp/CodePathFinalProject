@@ -9,14 +9,37 @@
 import UIKit
 import MapKit
 
-class ExploreViewController: UIViewController, UISearchBarDelegate {
+class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate {
 
     @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var mapView: MKMapView!
+    
+    let latitude: Double = 37.771052
+    let longitude: Double = -122.403891
+    let latDelta: Double = 0.01
+    let longDelta: Double = 0.01
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        // Do any additional setup after loading the view.
+        searchBar.barTintColor = UIColor.prettoBlue()
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: "didTapOnView")
+        self.view.addGestureRecognizer(tapRecognizer)
+        
+        
+        mapView.delegate = self
+        let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
+        
+        let region = MKCoordinateRegion(center: center, span: span)
+        
+        mapView.setRegion(region, animated: true)
+        
+    }
+    
+    func didTapOnView() {
+        self.searchBar.resignFirstResponder()
     }
     
     override func viewDidAppear(animated: Bool) {

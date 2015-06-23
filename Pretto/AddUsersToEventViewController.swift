@@ -8,13 +8,15 @@
 
 import UIKit
 import CoreLocation
+import MessageUI
 
 let AddedUserCellReuseIdentifier = "AddedUserCell"
 
-class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UITextFieldDelegate, CLLocationManagerDelegate {
+class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UITextFieldDelegate, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate {
     
     var locationManager = CLLocationManager()
     var location : CLLocation?
+    var locationString: String?
     
     var startDate: NSDate!
     var endDate: NSDate!
@@ -255,11 +257,26 @@ extension AddUsersToEventViewController : CLLocationManagerDelegate {
     }
 }
 
+
+// MARK: MFMailComposeViewControllerDelegate
+extension AddUsersToEventViewController : MFMailComposeViewControllerDelegate {
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
 //MARK: Aux Funtions
 extension AddUsersToEventViewController {
     
     func shareOnFacebook() {
         println("Notification received, sharing on Facebook")
+        var content: FBSDKShareLinkContent = FBSDKShareLinkContent()
+        dateFormatter.dateFormat = "MM/dd/yy HH:mm"
+        content.contentDescription = " between " + dateFormatter.stringFromDate(startDate) + " and " + dateFormatter.stringFromDate(endDate)
+        content.contentURL = NSURL(string: "http://www.pretto.co/")
+        content.contentTitle = self.eventTitle + " - Where? " + (self.locationString ?? "Somewhere")
+        content.peopleIDs = [String]()
+        content.ref = ""
+        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
     }
     
     func shareOnTwitter() {
@@ -268,6 +285,20 @@ extension AddUsersToEventViewController {
     
     func shareByEmail() {
         println("Notification received, sharing by email ")
+        if MFMailComposeViewController.canSendMail() {
+            var emailController = MFMailComposeViewController()
+            emailController.mailComposeDelegate = self
+            let subject = "I'd like to invite you to join me for an event on Pretto"
+            emailController.setSubject(subject)
+            
+            dateFormatter.dateFormat = "MM/dd/yy HH:mm"
+            let messagePart1 = "<p>Hi,</p><p>I just created a new event on Pretto and would like you to join us. Pretto it's the simplest way to share our memories after the event.</p><p>---</br>"
+            let messagePart2 = "Event: <span><strong>\(self.eventTitle)</strong></span></br>" + "Location: <span><strong>\(self.locationString!)</strong></span></br>"
+            let messagePart3 =  "Between <span><strong>" + dateFormatter.stringFromDate(startDate) + "</strong></span> and <span><strong>" + dateFormatter.stringFromDate(endDate) + "</strong></span></br></p>"
+            let message = messagePart1 + messagePart2 + messagePart3
+            emailController.setMessageBody(message, isHTML: true)
+            self.presentViewController(emailController, animated: true, completion: nil)
+        }
     }
     
     func okButton() {
@@ -291,7 +322,9 @@ extension AddUsersToEventViewController {
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: self.location!.coordinate.latitude, longitude: self.location!.coordinate.longitude), completionHandler: { (markers, error) -> Void in
                 if markers.count > 0 {
                     let marker = markers[0] as! CLPlacemark
-                    completionView.eventLocation.text = "\(marker.locality), \(marker.subLocality)"
+                    self.locationString = "\(marker.locality), \(marker.subLocality)"
+                    completionView.eventLocation.text = self.locationString
+                    
                 } else {
                     completionView.eventLocation.text = "Location TBD"
                 }
