@@ -10,6 +10,8 @@ import Foundation
 
 class User {
     
+    static var currentUser : User?
+    
     var inner:PFUser!
     
     init(innerUser:PFUser!) {
@@ -165,6 +167,7 @@ class User {
                 user.gender = gender
                 user.locale = locale
                 
+                User.currentUser = user
                 onComplete(user)
             }
             else {

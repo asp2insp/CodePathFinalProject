@@ -79,11 +79,11 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Event Invitations"
+            return self.upcomingInvitations.count > 0 ? "Event Invitations" : nil
         case 1:
-            return "Photo Requests"
+            return self.requests.count > 0 ? "Photo Requests" : nil
         case 2:
-            return "Other Notifications"
+            return self.notifications.count > 0 ? "Other Notifications" : nil
         default:
             return nil
         }
