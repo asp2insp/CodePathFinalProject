@@ -33,6 +33,11 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
         refreshData()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        cameraView.hidden = false
+    }
+    
     func refreshData() {
         refreshCount += 3
         Notification.getAll() {notifications in
