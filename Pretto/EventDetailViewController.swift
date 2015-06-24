@@ -40,6 +40,7 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
         // Scale up to maximum
         flowLayout.itemSize = aspectScaleWithConstraints(flowLayout.itemSize, scale: 10, max: maxSize, min: minSize)
         self.refreshControl.beginRefreshing()
+        self.clearSelections()
         self.refreshData()
     }
     
@@ -47,7 +48,17 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
         self.invitation?.event.getAllPhotosInEvent(kOrderedByNewestFirst) {photos in
             self.photos = photos
             self.collectionView.reloadData()
+            self.clearSelections()
             self.refreshControl.endRefreshing()
+        }
+    }
+    
+    // Clear all selections
+    func clearSelections() {
+        for path in selectedPaths {
+            if let path = path as? NSIndexPath {
+                deselectItemAtIndexPathIfNecessary(path)
+            }
         }
     }
     
@@ -60,6 +71,7 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
             }
             dispatch_async(dispatch_get_main_queue()) {
                 self.requestButton.setTitle("Request Sent!", forState: UIControlState.Normal)
+                self.clearSelections()
             }
         }
     }
