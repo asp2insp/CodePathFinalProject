@@ -57,7 +57,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTp-Zg-caY">
-                                                    <rect key="frame" x="58" y="4" width="460" height="69"/>
+                                                    <rect key="frame" x="64" y="4" width="454" height="69"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -84,7 +84,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="eTp-Zg-caY" secondAttribute="bottom" constant="4" id="QNH-YK-Y5T"/>
                                                 <constraint firstAttribute="centerY" secondItem="IV7-wd-8g7" secondAttribute="centerY" id="THY-F6-2BJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="IV7-wd-8g7" secondAttribute="bottom" constant="14.5" id="blH-Kn-FV4"/>
-                                                <constraint firstItem="eTp-Zg-caY" firstAttribute="leading" secondItem="IV7-wd-8g7" secondAttribute="trailing" constant="4" id="tkh-yj-QzN"/>
+                                                <constraint firstItem="eTp-Zg-caY" firstAttribute="leading" secondItem="IV7-wd-8g7" secondAttribute="trailing" constant="10" id="tkh-yj-QzN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

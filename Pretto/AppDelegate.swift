@@ -32,30 +32,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         println("didFinishLaunchingWithOptions")
-        
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
-        GlobalAppearance.setAll()
-        
-        registerDataModels()
-        
-        Parse.enableLocalDatastore()
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showLoginWindow", name: kShowLoginWindowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showLandingWindow", name: kShowLandingWindowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "introDidFinish", name: kIntroDidFinishNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogOut", name: kUserDidLogOutNotification, object: nil)
-        
-        
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+        GlobalAppearance.setAll()
+        registerDataModels()
+
         // Initialize Parse.
-        Parse.setApplicationId("EwtAHVSdrZseylxvkalCaMQ3aTWknFUgnhJRcozx",
-            clientKey: "kA7v5dqEEndRpZgcOsL2G4jitdGuPzj63xmYm7xZ")
-        
+        Parse.enableLocalDatastore()
+        Parse.setApplicationId("EwtAHVSdrZseylxvkalCaMQ3aTWknFUgnhJRcozx", clientKey: "kA7v5dqEEndRpZgcOsL2G4jitdGuPzj63xmYm7xZ")
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
-        application.setMinimumBackgroundFetchInterval(60 * 60)
+        if application.applicationState != UIApplicationState.Background {
+            // Track an app open here if we launch with a push, unless
+            // "content_available" was used to trigger a background push (introduced in iOS 7).
+            // In that case, we skip tracking here to avoid double counting the app-open.
+            
+            let preBackgroundPush = !application.respondsToSelector("backgroundRefreshStatus")
+            let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
+            var pushPayload = false
+            
+            if let options = launchOptions {
+                pushPayload = options[UIApplicationLaunchOptionsRemoteNotificationKey] != nil
+            }
+            
+            if (preBackgroundPush || oldPushHandlerOnly || pushPayload) {
+                PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+            }
+        }
         
         // Register for Push Notitications
-        self.registerForRemoteNotifications(application, launchOptions:launchOptions)
+        application.registerForRemoteNotifications()
+        application.setMinimumBackgroundFetchInterval(30)
         
         // check user and start a storyboard accordingly
         let isFirstTime: Bool? = NSUserDefaults.standardUserDefaults().objectForKey(kFirstTimeRunningPretto) as? Bool
@@ -65,36 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         } else {
             self.checkCurrentUser()
         }
-        return false
-    }
-    
-    func registerForRemoteNotifications(application: UIApplication, launchOptions: [NSObject: AnyObject]?) {
-        println("registerForRemoteNotifications")
-        if application.applicationState != UIApplicationState.Background {
-            // Track an app open here if we launch with a push, unless
-            // "content_available" was used to trigger a background push (introduced in iOS 7).
-            // In that case, we skip tracking here to avoid double counting the app-open.
-            
-            let preBackgroundPush = !application.respondsToSelector("backgroundRefreshStatus")
-            let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
-            var pushPayload = false
-            if let options = launchOptions {
-                pushPayload = options[UIApplicationLaunchOptionsRemoteNotificationKey] != nil
-            }
-            if (preBackgroundPush || oldPushHandlerOnly || pushPayload) {
-                PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
-                
-            }
-        }
-        
-        if application.respondsToSelector("registerUserNotificationSettings:") {
-            let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-            let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
-        } else {
-            application.registerForRemoteNotifications()
-        }
+        return true
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
@@ -119,36 +100,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         if application.applicationState == UIApplicationState.Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayloadInBackground(userInfo, block: nil)
         }
-        println("Remote Notification Received!")
     }
     
-    func application(application: UIApplication,
-        openURL url: NSURL,
-        sourceApplication: String?,
-        annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
             println("openURL")
-            
-            return FBSDKApplicationDelegate.sharedInstance().application(
-                application,
-                openURL: url,
-                sourceApplication: sourceApplication,
-                annotation: annotation)
+            return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         // TODO - upload new pictures here
+        println("AppDelegate : performFetchWithCompletionHandler")
     }
 
     func applicationWillResignActive(application: UIApplication) {
-        
+        println("AppDelegate : applicationWillResignActive")
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        
+        println("AppDelegate : applicationDidEnterBackground")
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
-        
+        println("AppDelegate : applicationWillEnterForeground")
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
