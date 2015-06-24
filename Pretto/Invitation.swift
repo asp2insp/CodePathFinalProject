@@ -102,8 +102,12 @@ class Invitation : PFObject, PFSubclassing {
                     image.localPath = currentAsset.localIdentifier
                     image.saveInBackgroundWithBlock({ (success, err) -> Void in
                         NSNotificationCenter.defaultCenter().postNotificationName(kNewPhotoForEventNotification, object: self.event)
+                        self.event.addImageToEvent(image)
+                        self.event.saveInBackgroundWithBlock({ (success:Bool, erro:NSError?) -> Void in
+                            self.saveInBackground()
+                        })
                     })
-                    self.event.addImageToEvent(image)
+
                 })
             }
             self.saveInBackground()

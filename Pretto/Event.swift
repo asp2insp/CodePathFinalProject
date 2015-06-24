@@ -111,7 +111,8 @@ class Event : PFObject, PFSubclassing {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             var photos : Array<Photo> = []
             for album in self.albums {
-                album.fetchIfNeeded()
+//                album.fetchIfNeeded()
+                album.fetch()
                 for p in album.photos ?? [] {
                     SwiftTryCatch.try({ p.fetchIfNeeded() }, catch: nil, finally: nil)
                     photos.append(p)

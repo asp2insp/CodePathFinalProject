@@ -75,13 +75,15 @@ class InvitationCell: UITableViewCell {
 
     @IBAction func onJoinButton(sender: AnyObject) {
         self.invitation!.accepted = true
-        self.invitation!.saveInBackground()
-        self.joinButton.enabled = false
-        self.backgroundColor = UIColor.prettoWindowBackground()
-        println("joined event...")
-        
-        if self.delegate != nil {
-            self.delegate!.onAcceptInvitation!(self.invitation!, sender: self)
+        self.invitation!.event.guests?.append(PFUser.currentUser()!)
+        self.invitation!.event.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+            self.invitation!.saveInBackground()
+            self.joinButton.enabled = false
+            self.backgroundColor = UIColor.prettoWindowBackground()
+            println("joined event...")
+            if self.delegate != nil {
+                self.delegate!.onAcceptInvitation!(self.invitation!, sender: self)
+            }
         }
     }
 }

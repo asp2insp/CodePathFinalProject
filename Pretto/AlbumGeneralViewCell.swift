@@ -77,7 +77,6 @@ class AlbumGeneralViewCell: UITableViewCell {
         
         statusButton.layer.cornerRadius = 15
         
-        
         calendarSheet.layer.cornerRadius = 3
         
         imageWidth = self.frame.width - (2 * sideMargin) - (3 * imageHorizontalSeparator)
@@ -102,17 +101,17 @@ class AlbumGeneralViewCell: UITableViewCell {
                 let photoCount = min(photos.count, self.albumImages.count)
                 for var i=0; i < photoCount; i++ {
                     let index = i
-                    SwiftTryCatch.try({
+//                    SwiftTryCatch.try({
                         photos[i].fetchIfNeededInBackgroundWithBlock({ (photo, err) -> Void in
                             self.albumImages[index].file = photos[index].thumbnailFile
                             self.albumImages[index].loadInBackground()
                         })
                         self.albumImages[i].file = photos[i].thumbnailFile
-                        }, catch: { (error) in
-                            // This is expected... file is still loading
-                        }, finally: {
-                            // close resources
-                    })
+//                        }, catch: { (error) in
+//                            // This is expected... file is still loading
+//                        }, finally: {
+//                            // close resources
+//                    })
                     self.albumImages[i].loadInBackground()
                 }
                 // Reset the image for any cells beyond the end of the current photos

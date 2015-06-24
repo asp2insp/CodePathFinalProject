@@ -15,7 +15,7 @@ import UIKit
 
 class RequestCell: UITableViewCell {
 
-    var delegate:RequestActionDelegate?
+    weak var delegate: RequestActionDelegate?
     
     var requests:[Request]? {
         didSet {
@@ -79,8 +79,6 @@ class RequestCell: UITableViewCell {
         self.backgroundColor = UIColor.prettoWindowBackground()
         println("accepted photo request")
         
-        if self.delegate != nil {
-            self.delegate!.onAcceptRequests?(self.requests!, sender: self)
-        }
+        self.delegate?.onAcceptRequests!(self.requests!, sender: self)
     }
 }
