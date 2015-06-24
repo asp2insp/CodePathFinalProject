@@ -32,12 +32,15 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         shouldPresentFuruteEvents = false
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "tappedOnCamera", name: kUserDidPressCameraNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "createEvent", name: kDidPressCreateEventNotification, object: nil)
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.prettoLightGrey()
         tableView.separatorColor = UIColor.clearColor()
+        tableView.registerNib(UINib(nibName: "NoAlbumsCell", bundle: nil), forCellReuseIdentifier: noAlbumsCellReuseIdentifier)
         
         searchBar = UISearchBar()
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
@@ -46,13 +49,9 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         segmentedControl.tintColor = UIColor.prettoBlue()
         segmentedControlContainerView.backgroundColor = UIColor.prettoBlue()
         segmentedControl.addTarget(self, action: "segmentedControlValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
-
         segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: UIControlState.Normal)
         segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: UIControlState.Selected)
 
-        
-        tableView.registerNib(UINib(nibName: "NoAlbumsCell", bundle: nil), forCellReuseIdentifier: noAlbumsCellReuseIdentifier)
-        
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
@@ -132,6 +131,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
 // MARK: AUX Methods
 
 extension AlbumGeneralViewController {
+    
     func tappedOnCamera() {
         if UIImagePickerController.isSourceTypeAvailable(.Camera) {
             photoPicker.delegate = self
@@ -188,6 +188,7 @@ extension AlbumGeneralViewController: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.searchBar.resignFirstResponder()
         if shouldPresentFuruteEvents! {
             
         } else {

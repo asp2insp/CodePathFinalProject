@@ -56,11 +56,11 @@ class Invitation : PFObject, PFSubclassing {
             return
         }
         self.isUpdating = true
+        
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let startDate = self.lastUpdated ?? event.startDate
         lastUpdated = NSDate()
-        
         fetchOptions.predicate = NSPredicate(format: "creationDate > %@ AND creationDate < %@", startDate, event.endDate)
         
         PHPhotoLibrary.requestAuthorization(nil)
@@ -70,6 +70,7 @@ class Invitation : PFObject, PFSubclassing {
         requestOptions.resizeMode = PHImageRequestOptionsResizeMode.Fast
         requestOptions.version = PHImageRequestOptionsVersion.Current
         requestOptions.synchronous = true
+        
         let requestManager = PHImageManager.defaultManager()
         println("Adding \(allResult.count) photos to \(event.title)")
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
