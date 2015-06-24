@@ -19,6 +19,7 @@
 		163692071B38D9FB006606A2 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163692061B38D9FB006606A2 /* ExploreViewController.swift */; };
 		163692091B39DDBA006606A2 /* SinglePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163692081B39DDBA006606A2 /* SinglePhotoViewController.swift */; };
 		1636920B1B3A6772006606A2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1636920A1B3A6772006606A2 /* Utils.swift */; };
+		1636920D1B3A913B006606A2 /* FutureEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1636920C1B3A913B006606A2 /* FutureEventCell.swift */; };
 		1649D9E01B3865CC00EEA0DD /* FirstIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649D9DF1B3865CC00EEA0DD /* FirstIntroView.xib */; };
 		1649D9E21B38661C00EEA0DD /* FirstIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649D9E11B38661C00EEA0DD /* FirstIntroView.swift */; };
 		1649D9E41B386D9B00EEA0DD /* SecondIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649D9E31B386D9B00EEA0DD /* SecondIntroView.swift */; };
@@ -83,6 +84,7 @@
 		163692061B38D9FB006606A2 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		163692081B39DDBA006606A2 /* SinglePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePhotoViewController.swift; sourceTree = "<group>"; };
 		1636920A1B3A6772006606A2 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		1636920C1B3A913B006606A2 /* FutureEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureEventCell.swift; sourceTree = "<group>"; };
 		1649D9DF1B3865CC00EEA0DD /* FirstIntroView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstIntroView.xib; sourceTree = "<group>"; };
 		1649D9E11B38661C00EEA0DD /* FirstIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstIntroView.swift; sourceTree = "<group>"; };
 		1649D9E31B386D9B00EEA0DD /* SecondIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondIntroView.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			children = (
 				FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */,
 				1684BBF91B334F4500CBCDC1 /* AlbumGeneralViewCell.swift */,
+				1636920C1B3A913B006606A2 /* FutureEventCell.swift */,
 				1683557B1B35EEC000264F6B /* NoAlbumsCell.swift */,
 				1683557D1B35F56A00264F6B /* NoAlbumsCell.xib */,
 			);
@@ -521,6 +524,7 @@
 				FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */,
 				FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */,
 				606748D41B37864300B33AAB /* InvitationCell.swift in Sources */,
+				1636920D1B3A913B006606A2 /* FutureEventCell.swift in Sources */,
 				1628DCFF1B321477005E0841 /* CustomLandingViewController.swift in Sources */,
 				FE45EEC11B2E4DE200F39BF8 /* EventDetailViewController.swift in Sources */,
 				1649D9E21B38661C00EEA0DD /* FirstIntroView.swift in Sources */,

@@ -72,11 +72,9 @@ class Invitation : PFObject, PFSubclassing {
         requestOptions.synchronous = true
         let requestManager = PHImageManager.defaultManager()
         println("Adding \(allResult.count) photos to \(event.title)")
-//        let targetRect = CGRectMake(0, 0, 140, 140)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             for var i = 0; i < allResult.count; i++ {
                 let currentAsset = allResult[i] as! PHAsset
-//                 let targetRect = CGRectMake(0, 0, 140, 140)
                 var targetScaleRatio = CGFloat(Double(1248.0 / Double(currentAsset.pixelWidth)))
                 println("Scale: \(targetScaleRatio)")
                 var targetWidth = CGFloat(currentAsset.pixelWidth) * targetScaleRatio
@@ -176,7 +174,7 @@ class Invitation : PFObject, PFSubclassing {
         query.whereKey("event", matchesQuery: innerQuery)
         query.whereKey("to", equalTo: PFUser.currentUser()!)
         query.includeKey("event")
-        query.orderByDescending("createdAt")
+        query.orderByAscending("createdAt")
         query.findObjectsInBackgroundWithBlock { (items, error) -> Void in
             if error == nil {
                 var invites : [Invitation] = []
