@@ -24,6 +24,8 @@ class RequestCell: UITableViewCell {
                 let userImageUrlText = requester.profilePhotoUrl!
                 let userImageUrl = NSURL(string: userImageUrlText)
                 self.userImageView.setImageWithURL(userImageUrl)
+                self.userImageView.layer.cornerRadius = 25
+                
                 
                 let requesterId = requester.firstName ?? requester.email!
                 let cellDescription = "\(requesterId) has requested \(self.requests!.count) photos from you!"
@@ -46,6 +48,7 @@ class RequestCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = UITableViewCellSelectionStyle.None
         var prettoColorAsImage = self.imageWithColor(UIColor.prettoBlue())
         self.acceptButton.setBackgroundImage(prettoColorAsImage, forState: .Normal)
         self.acceptButton.setBackgroundImage(prettoColorAsImage, forState: .Highlighted)

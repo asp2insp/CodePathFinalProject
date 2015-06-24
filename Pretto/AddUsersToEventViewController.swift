@@ -26,6 +26,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     var friends: [Friend]?
     var friendsNames: [String]?
     var selectedFriends: [Friend]?
+    var selectedIndexes: [Int]?
     var autocompleteArray : [String]?
     
     private var autocompleteTableView: UITableView!
@@ -35,6 +36,15 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet var tableView: UITableView!
     
     @IBAction func onCreate(sender: UIBarButtonItem) {
+        searchUserTextField.resignFirstResponder()
+        
+        if selectedIndexes != nil {
+            selectedFriends = [Friend]()
+            for var i = 0; i < selectedIndexes!.count; i++ {
+                selectedFriends!.append(friends![selectedIndexes![i]])
+            }
+        }
+        
         var newEvent = Event()
 
         // Generate ChannelId
@@ -42,7 +52,8 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         let channelId = "\(PFUser.currentUser()!.objectId!)" + "\(dateFormatter.stringFromDate(NSDate()))"
         
         PFPush.subscribeToChannelInBackground(channelId)
-
+        
+        newEvent.channel = channelId
         newEvent.title = self.eventTitle
         newEvent.owner = PFUser.currentUser()!
         newEvent.pincode = "1111"
@@ -71,7 +82,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         }
         if eventPhoto != nil {
             var imageData = UIImageJPEGRepresentation(eventPhoto, 0.5)
-            var imageFile = PFFile(name: "test.jpg", data: imageData)
+            var imageFile = PFFile(name: channelId + ".jpg", data: imageData)
             imageFile.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
                 if success {
                     newEvent.coverPhoto = imageFile
@@ -99,9 +110,6 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         invitation.saveInBackground()
         
         presentEventSummary()
-        
-
-//        self.navigationController?.topViewController.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -116,19 +124,19 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         tableView.delegate = self
         tableView.tag = 1
         
-        topView.layer.borderWidth = 1
+        topView.layer.borderWidth = 0
         topView.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         searchUserTextField.autocapitalizationType = UITextAutocapitalizationType.Words
-        searchUserTextField.delegate = self
+//        searchUserTextField.delegate = self
         
-        autocompleteTableView = UITableView(frame: tableView.frame, style: UITableViewStyle.Plain)
-        autocompleteTableView.delegate = self
-        autocompleteTableView.dataSource = self
-        autocompleteTableView.scrollEnabled = true
-        autocompleteTableView.hidden = true
-        autocompleteTableView.tag = 2
-        self.view.addSubview(autocompleteTableView)
+//        autocompleteTableView = UITableView(frame: tableView.frame, style: UITableViewStyle.Plain)
+//        autocompleteTableView.delegate = self
+//        autocompleteTableView.dataSource = self
+//        autocompleteTableView.scrollEnabled = true
+//        autocompleteTableView.hidden = true
+//        autocompleteTableView.tag = 2
+//        self.view.addSubview(autocompleteTableView)
         
         
         var me = User(innerUser: PFUser.currentUser())
@@ -185,8 +193,15 @@ extension AddUsersToEventViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.tag == 1 {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddUsersAddedUserCell
-            cell.accessoryView = (cell.accessoryType == .None) ? UIImageView(image: UIImage(named: "checkmark")) : nil
-            cell.accessoryType = (cell.accessoryType == .None) ? .Checkmark : .None
+            if cell.accessoryType == .None {
+                cell.accessoryView = UIImageView(image: UIImage(named: "checkmark"))
+                cell.accessoryType = .Checkmark
+                addFriendToSelectedList(indexPath)
+            } else {
+                cell.accessoryView = nil
+                cell.accessoryType = .None
+                removeFriendToSelectedList(indexPath)
+            }
         } else if tableView.tag == 2 {
             println("selected 2")
             autocompleteTableView.hidden = true
@@ -203,6 +218,23 @@ extension AddUsersToEventViewController: UITableViewDelegate {
         
     }
     
+    func addFriendToSelectedList(indexPath: NSIndexPath) {
+        if selectedIndexes == nil {
+            selectedIndexes = [Int]()
+        }
+        if find(selectedIndexes!, indexPath.row) == nil {
+            selectedIndexes!.append(indexPath.row)
+        }
+    }
+    
+    func removeFriendToSelectedList(indexPath: NSIndexPath) {
+        if selectedIndexes != nil && selectedIndexes!.count > 0 {
+            if let index = find(selectedIndexes!, indexPath.row) {
+                selectedIndexes!.removeAtIndex(index)
+            }
+        }
+    }
+    
 }
 
 //MARK: UITableViewDataSource
@@ -214,7 +246,7 @@ extension AddUsersToEventViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 1 {
-            return selectedFriends?.count ?? 0
+            return friends?.count ?? 0
         } else {
             return autocompleteArray?.count ?? 0
         }
@@ -223,8 +255,8 @@ extension AddUsersToEventViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView.tag == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(AddedUserCellReuseIdentifier, forIndexPath: indexPath) as! AddUsersAddedUserCell
-            cell.userName = selectedFriends![indexPath.row].friendName
-            cell.facebookId = selectedFriends![indexPath.row].friendFacebookId
+            cell.userName = friends![indexPath.row].friendName
+            cell.facebookId = friends![indexPath.row].friendFacebookId
             return cell
         } else {
             let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
@@ -240,7 +272,7 @@ extension AddUsersToEventViewController: UITableViewDataSource {
 
 extension AddUsersToEventViewController : UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        autocompleteTableView.hidden = false
+//        autocompleteTableView.hidden = false
         var substring: NSString = searchUserTextField.text
         substring = substring.stringByReplacingCharactersInRange(range, withString: string)
         self.searchAutocompleteEntriesWithSubstring(substring as String)

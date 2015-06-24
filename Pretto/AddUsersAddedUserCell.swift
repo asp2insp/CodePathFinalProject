@@ -18,7 +18,7 @@ class AddUsersAddedUserCell: UITableViewCell {
         didSet{
             self.userProfileImage.clipsToBounds = true
             self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.width / 2
-            self.userProfileImage.layer.borderColor = UIColor.lightGrayColor().CGColor
+            self.userProfileImage.layer.borderColor = UIColor.prettoBlue().CGColor
             self.userProfileImage.layer.borderWidth = 1
             self.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
             self.userProfileImage.setImageWithURL(NSURL(string: "https://graph.facebook.com/\(self.facebookId)/picture?type=large&return_ssl_resources=1")!)

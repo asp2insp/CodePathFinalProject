@@ -28,6 +28,7 @@ class InvitationCell: UITableViewCell {
                 let userImageUrlText = from.profilePhotoUrl!
                 let userImageUrl = NSURL(string: userImageUrlText)
                 self.userImageView.setImageWithURL(userImageUrl)
+                self.userImageView.layer.cornerRadius = 25
                 
                 let persona = from.firstName ?? from.email!
                 let cellDescription = "\(persona) has invited you to their event: \(self.invitation!.event.title)"
@@ -46,6 +47,7 @@ class InvitationCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = UITableViewCellSelectionStyle.None
         var prettoColorAsImage = self.imageWithColor(UIColor.prettoBlue())
         self.joinButton.setBackgroundImage(prettoColorAsImage, forState: .Normal)
         self.joinButton.setBackgroundImage(prettoColorAsImage, forState: .Highlighted)
