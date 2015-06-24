@@ -19,6 +19,28 @@ class AlbumGeneralViewCell: UITableViewCell {
     @IBOutlet var dayLabel: UILabel!
     @IBOutlet weak var moreLabel: UILabel!
     @IBOutlet var cardView: UIView!
+    @IBOutlet var statusButton: UIButton!
+    @IBAction func onChangeStatus(sender: UIButton) {
+        if invite!.paused {
+            invite?.paused = false
+            invite?.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
+                self.statusButton.backgroundColor = UIColor.prettoBlue()
+            })
+            
+        } else {
+            invite?.paused = true
+            invite?.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
+                self.statusButton.backgroundColor = UIColor.prettoRed()
+            })
+
+        }
+    }
+    
+    var invite : Invitation? {
+        didSet {
+            self.event = invite?.event
+        }
+    }
     
     var event : Event? {
         didSet {
@@ -52,6 +74,9 @@ class AlbumGeneralViewCell: UITableViewCell {
         dayLabel.textColor = UIColor.orangeColor()
         albumTitle.preferredMaxLayoutWidth = albumTitle.frame.size.width
         albumLocation.preferredMaxLayoutWidth = albumLocation.frame.size.width
+        
+        statusButton.layer.cornerRadius = 15
+        
         
         calendarSheet.layer.cornerRadius = 3
         
@@ -108,6 +133,8 @@ class AlbumGeneralViewCell: UITableViewCell {
         super.layoutSubviews()
         albumTitle.preferredMaxLayoutWidth = albumTitle.frame.size.width
         albumLocation.preferredMaxLayoutWidth = albumLocation.frame.size.width
+        self.statusButton.hidden = !event!.isLive ? true : false
+        self.statusButton.backgroundColor = invite!.paused ? UIColor.prettoRed() : UIColor.prettoBlue()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

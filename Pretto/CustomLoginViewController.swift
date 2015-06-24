@@ -29,10 +29,6 @@ class CustomLoginViewController: PFLogInViewController {
         self.logInView?.addSubview(backgroundImage)
         self.logInView?.sendSubviewToBack(backgroundImage)
         
-//        self.otherImage = UIImageView()
-//        self.otherImage.image = UIImage(named: "LaunchScreenThingy")
-//        self.logInView?.addSubview(otherImage)
-        
         self.logInView?.dismissButton?.setImage(UIImage(named: "CloseButton"), forState: UIControlState.Normal)
         self.logInView?.dismissButton?.setImage(UIImage(named: "CloseButton"), forState: UIControlState.Highlighted)
         

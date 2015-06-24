@@ -174,7 +174,7 @@ extension AlbumGeneralViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if shouldPresentFuruteEvents! {
             if futureInvitations.count > 0 {
-                return 44
+                return 60
             } else {
                 return 0
             }
@@ -248,7 +248,7 @@ extension AlbumGeneralViewController : UITableViewDataSource {
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if shouldPresentFuruteEvents! {
-            return "Upcoming Evetns"
+            return "Upcoming Events"
         } else {
             switch section {
             case 0:
@@ -275,9 +275,11 @@ extension AlbumGeneralViewController : UITableViewDataSource {
                 let cell = tableView.dequeueReusableCellWithIdentifier(albumGeneralCellReuseIdentifier, forIndexPath: indexPath) as! AlbumGeneralViewCell
                 switch indexPath.section {
                 case 0:
-                    cell.event = liveInvitations[indexPath.row].event
+//                    cell.event = liveInvitations[indexPath.row].event
+                    cell.invite = liveInvitations[indexPath.row]
                 case 1:
-                    cell.event = pastInvitations[indexPath.row].event
+//                    cell.event = pastInvitations[indexPath.row].event
+                    cell.invite = pastInvitations[indexPath.row]
                 default:
                     break
                 }
