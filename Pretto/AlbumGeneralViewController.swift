@@ -123,6 +123,16 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             let destination = segue.destinationViewController as! EventDetailViewController
             destination.invitation = self.selectedInvitation
             self.selectedInvitation = nil
+        } else if segue.identifier == "EditEventSegue" {
+            let navController = segue.destinationViewController as! UINavigationController
+            navController.navigationBar.topItem?.title = "EDIT"
+            let destination = navController.topViewController as! CreateEventViewController
+            var eventInvite: Invitation = selectedInvitation!
+            var eventToEdit: Event = eventInvite.event
+            destination.startDate = eventToEdit.startDate
+            destination.endDate = eventToEdit.endDate
+            destination.eventPhoto = UIImage(data: eventToEdit.coverPhoto!.getData()!) ?? nil
+            destination.eventTitle = eventToEdit.title
         }
     }
 
@@ -190,7 +200,10 @@ extension AlbumGeneralViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.searchBar.resignFirstResponder()
         if shouldPresentFuruteEvents! {
-            
+            if futureInvitations.count > 0 {
+                self.selectedInvitation = futureInvitations[indexPath.row]
+            }
+            self.performSegueWithIdentifier("EditEventSegue", sender: self)
         } else {
             if liveInvitations.count > 0 || pastInvitations.count > 0 {
                 switch indexPath.section {

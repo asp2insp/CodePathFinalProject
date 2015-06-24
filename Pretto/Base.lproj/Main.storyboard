@@ -1084,14 +1084,14 @@
                                             <outletCollection property="albumImages" destination="8LH-g9-f0K" collectionClass="NSMutableArray" id="6I0-wH-awi"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FutureEventCell" rowHeight="60" id="FQf-79-jZb" customClass="FutureEventCell" customModule="Pretto" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FutureEventCell" rowHeight="60" id="FQf-79-jZb" customClass="FutureEventCell" customModule="Pretto" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FQf-79-jZb" id="fiX-fY-zYg">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEB-Xu-8wt">
-                                                    <rect key="frame" x="8" y="0.0" width="584" height="60"/>
+                                                    <rect key="frame" x="8" y="0.0" width="551" height="60"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WwW-iO-DHl" userLabel="calendarView">
                                                             <rect key="frame" x="0.0" y="10" width="40" height="40"/>
@@ -1116,13 +1116,13 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="San Francisco, CA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcD-bI-7l1">
-                                                            <rect key="frame" x="60" y="31" width="524" height="15"/>
+                                                            <rect key="frame" x="60" y="31" width="491" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="MARY'S BIRTHDAY IN THE JUNGLE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZE-Sp-VMH">
-                                                            <rect key="frame" x="60" y="15" width="524" height="16"/>
+                                                            <rect key="frame" x="60" y="15" width="491" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -1155,6 +1155,7 @@
                                             <outlet property="calendarSheet" destination="WwW-iO-DHl" id="Svc-Un-Xh6"/>
                                             <outlet property="dayLabel" destination="10R-bc-Wbi" id="Ukb-V3-7u4"/>
                                             <outlet property="monthLabel" destination="DsM-B5-D6F" id="3d8-eS-kVV"/>
+                                            <segue destination="qo8-DA-FXF" kind="presentation" identifier="EditEventSegue" trigger="accessoryAction" id="JfU-Cb-Zvt"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1216,4 +1217,7 @@
         <image name="TabBarSearchIcon" width="23" height="24"/>
         <image name="TabBarStuffIconWide" width="23" height="19"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="JfU-Cb-Zvt"/>
+    </inferredMetricsTieBreakers>
 </document>
