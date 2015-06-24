@@ -113,9 +113,7 @@ class User {
         println("Gender: \(self.gender!)")
         println("locale: \(self.locale!)")
         println("Profile Image URL: \(self.profilePhotoUrl!)")
-//        println(self.email)
-//        println(self.name)
-//        println(self.profilePhotoUrl)
+
     }
     
     func save() {
@@ -146,26 +144,16 @@ class User {
         request.startWithCompletionHandler { (conn:FBSDKGraphRequestConnection!, res:AnyObject!, err:NSError!) -> Void in
             if err == nil && res != nil {
                 var userData = res as! NSDictionary
-                
-                var facebookId = userData["id"] as! String
-                var email = userData["email"] as! String
-                var name = userData["name"] as! String
-                var firstName = userData["first_name"] as! String
-                var middleName = userData["middle_name"] as? String ?? ""
-                var lastName = userData["last_name"] as! String
-                var gender = userData["gender"] as? String ?? ""
-                var locale = userData["locale"] as? String ?? ""
-                
-                var currentUser = PFUser.currentUser()
-                var user = User(innerUser: currentUser)
-                user.facebookId = facebookId
-                user.email = email
-                user.name = name
-                user.firstName = firstName
-                user.middleName = middleName
-                user.lastName = lastName
-                user.gender = gender
-                user.locale = locale
+    
+                var user = User(innerUser: PFUser.currentUser())
+                user.email = userData["email"] as? String
+                user.name = userData["name"] as? String
+                user.firstName = userData["first_name"] as? String
+                user.middleName = userData["middle_name"] as? String ?? ""
+                user.lastName = userData["last_name"] as? String
+                user.gender = userData["gender"] as? String ?? ""
+                user.locale = userData["locale"] as? String ?? ""
+                user.facebookId = userData["id"] as? String
                 
                 User.currentUser = user
                 onComplete(user)

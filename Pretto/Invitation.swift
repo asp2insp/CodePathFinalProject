@@ -66,22 +66,32 @@ class Invitation : PFObject, PFSubclassing {
         PHPhotoLibrary.requestAuthorization(nil)
         let allResult = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
         let requestOptions = PHImageRequestOptions()
-        requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.FastFormat
+        requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.HighQualityFormat
         requestOptions.resizeMode = PHImageRequestOptionsResizeMode.Fast
         requestOptions.version = PHImageRequestOptionsVersion.Current
         requestOptions.synchronous = true
         let requestManager = PHImageManager.defaultManager()
         println("Adding \(allResult.count) photos to \(event.title)")
-        let targetRect = CGRectMake(0, 0, 140, 140)
+//        let targetRect = CGRectMake(0, 0, 140, 140)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             for var i = 0; i < allResult.count; i++ {
                 let currentAsset = allResult[i] as! PHAsset
-                requestManager.requestImageForAsset(currentAsset, targetSize: targetRect.size, contentMode: PHImageContentMode.AspectFit, options: requestOptions, resultHandler: { (assetResult, info) -> Void in
+//                 let targetRect = CGRectMake(0, 0, 140, 140)
+                var targetScaleRatio = CGFloat(Double(1248.0 / Double(currentAsset.pixelWidth)))
+                println("Scale: \(targetScaleRatio)")
+                var targetWidth = CGFloat(currentAsset.pixelWidth) * targetScaleRatio
+                var targetHeight = CGFloat(currentAsset.pixelHeight) * targetScaleRatio
+                let targetSize = CGSize(width: targetWidth, height: targetHeight)
+                println("Width from \(currentAsset.pixelWidth) to \(targetWidth)")
+                println("Height from \(currentAsset.pixelHeight) to \(targetHeight)")
+                let targetRect = CGRect(origin: CGPoint(x: 0, y: 0), size: targetSize)
+                requestManager.requestImageForAsset(currentAsset, targetSize: targetSize, contentMode: PHImageContentMode.AspectFit, options: requestOptions, resultHandler: { (assetResult, info) -> Void in
                     UIGraphicsBeginImageContext(targetRect.size)
                     assetResult.drawInRect(targetRect)
                     let finalImage = UIGraphicsGetImageFromCurrentImageContext()
                     UIGraphicsEndImageContext()
-                    let data = UIImageJPEGRepresentation(finalImage, 1.0)
+                    let data = UIImageJPEGRepresentation(finalImage, 0.0)
+                    println("Image Size = \(data.length)")
                     if data == nil {
                         return
                     }

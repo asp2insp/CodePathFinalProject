@@ -103,7 +103,7 @@ extension EventDetailViewController : UICollectionViewDataSource {
         cell.addGestureRecognizer(doubleTapRecognizer)
         cell.image.file = self.photos[indexPath.row].thumbnailFile
         cell.image.loadInBackground()
-        cell.backgroundColor = UIColor.lightGrayColor()
+        cell.backgroundColor = UIColor.clearColor()
         cell.updateCheckState()
         return cell
     }

@@ -209,6 +209,7 @@ class SelectableImageCell : UICollectionViewCell {
     
     override func awakeFromNib() {
         image = PFImageView(frame: self.bounds)
+        image.contentMode = UIViewContentMode.ScaleAspectFill
         checkbox = M13Checkbox(frame: CGRectMake(0, 0, 20, 20))
         checkbox.center = CGPointMake(25, 25)
         checkbox.userInteractionEnabled = false
