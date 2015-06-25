@@ -91,17 +91,16 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
 // MARK: AUX Methods
 extension EventDetailViewController {
     func doubleTapReconized(sender: UITapGestureRecognizer) {
-        println(collectionView.indexPathForCell(sender.view as! SelectableImageCell))
         selectedIndex = collectionView.indexPathForCell(sender.view as! SelectableImageCell)?.row
         self.performSegueWithIdentifier("SingleImageViewSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("Preparing for Segue")
+        println("Preparing for Segue with image index \(selectedIndex)")
         cameraView.hidden = true
         let singlePhotoVC = segue.destinationViewController as! SinglePhotoViewController
         singlePhotoVC.photos = self.photos
-        singlePhotoVC.index = self.selectedIndex ?? 0
+        singlePhotoVC.initialIndex = self.selectedIndex ?? 0
         
     }
 }

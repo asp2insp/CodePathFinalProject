@@ -9,67 +9,49 @@
 import UIKit
 import CoreImage
 
-class SinglePhotoViewController: UIViewController {
+class SinglePhotoViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func onDone(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBOutlet var photoView: PFImageView!
-    
     private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
     var photos: [Photo]!
-    var index: Int!
     
     // For Face Recognition
     private var context: CIContext!
     private var detector: CIDetector!
     
+    var initialIndex : Int = 0
+    
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var pageControl: UIPageControl!
+    
+    var pageViews: [UIImageView?] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        photoView.contentMode = UIViewContentMode.ScaleAspectFit
-        photoView.userInteractionEnabled = true
-        
-        var leftSwipe = UISwipeGestureRecognizer(target: self, action: "swipeLeft")
-        leftSwipe.direction = UISwipeGestureRecognizerDirection.Left
-        var rightSwipe = UISwipeGestureRecognizer(target: self, action: "swipeRight")
-        rightSwipe.direction = UISwipeGestureRecognizerDirection.Right
-        
-        photoView.addGestureRecognizer(leftSwipe)
-        photoView.addGestureRecognizer(rightSwipe)
-        // Do any additional setup after loading the view.
-        
         activityIndicator.center = self.view.center
+        let pageCount = photos.count
         
-        loadImageToDisplay()
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        pageControl.currentPage = 0
+        pageControl.numberOfPages = pageCount
+        
+        for _ in 0..<pageCount {
+            pageViews.append(nil)
+        }
     }
     
-    func loadImageToDisplay() {
-        addActivityIndicator()
-        let localPath = self.photos![index!].localPath
-        let fullSizeImage = UIImage(contentsOfFile: localPath)
-        photoView.file = self.photos![index!].fullsizeFile ?? self.photos![index!].thumbnailFile
-        photoView.loadInBackground { (image: UIImage?, error:NSError?) -> Void in
-            self.removeActivityIndicator()
-            if let fullSizeImage = fullSizeImage {
-                if let ciImage = fullSizeImage.CIImage {
-                    var features: [CIFeature] = self.detectFacesOnImage(image!.CIImage)!
-                    if features.count > 0 {
-                        for feature in features {
-                            println(feature.bounds)
-                            println(feature.type)
-                        }
-                    }
-                }
-            }
-
+    var onceToken : dispatch_once_t = 0
+    override func viewDidLayoutSubviews() {
+        dispatch_once(&onceToken) {
+            let pagesScrollViewSize = self.scrollView.frame.size
+            self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * CGFloat(self.photos.count), pagesScrollViewSize.height)
+            
+            let initialOffset = CGPointMake(CGFloat(self.initialIndex) * pagesScrollViewSize.width, 0)
+            self.scrollView.setContentOffset(initialOffset, animated: false)
+            self.loadVisiblePages()
         }
     }
     
@@ -82,33 +64,109 @@ class SinglePhotoViewController: UIViewController {
         activityIndicator.stopAnimating()
         activityIndicator.hidden = true
     }
-    func swipeLeft() {
-        if index! < photos.count - 1 {
-            index!++
-            loadImageToDisplay()
+    
+    func loadPage(page: Int) {
+        if page < 0 || page >= photos.count {
+            // If it's outside the range of what you have to display, then do nothing
+            return
+        }
+
+        if let pageView = pageViews[page] {
+            // Do nothing. The view is already loaded.
+        } else {
+            var frame = scrollView.bounds
+            frame.origin.x = frame.size.width * CGFloat(page)
+            frame.origin.y = 0.0
+            
+            addActivityIndicator()
+            let newPageView = PFImageView()
+            newPageView.contentMode = .ScaleAspectFit
+            newPageView.frame = frame
+            scrollView.addSubview(newPageView)
+            pageViews[page] = newPageView
+            
+            newPageView.file = self.photos![page].fullsizeFile ?? self.photos![page].thumbnailFile
+            newPageView.loadInBackground { (image: UIImage?, error:NSError?) -> Void in
+                self.removeActivityIndicator()
+            }
         }
     }
     
-    func swipeRight() {
-        if index! > 0 {
-            index!--
-            loadImageToDisplay()
+    func purgePage(page: Int) {
+        if page < 0 || page >= photos.count {
+            // If it's outside the range of what you have to display, then do nothing
+            return
+        }
+        
+        // Remove a page from the scroll view and reset the container array
+        if let pageView = pageViews[page] {
+            pageView.removeFromSuperview()
+            pageViews[page] = nil
+        }
+        
+    }
+    
+    func loadVisiblePages() {
+        
+        // First, determine which page is currently visible
+        let pageWidth = scrollView.frame.size.width
+        let page = Int(floor((scrollView.contentOffset.x * 2.0 + pageWidth) / (pageWidth * 2.0)))
+        
+        // Update the page control
+        pageControl.currentPage = page
+        
+        // Work out which pages you want to load
+        let firstPage = page - 1
+        let lastPage = page + 1
+        
+        
+        // Purge anything before the first page
+        for var index = 0; index < firstPage; ++index {
+            purgePage(index)
+        }
+        
+        // Load pages in our range
+        for var index = firstPage; index <= lastPage; ++index {
+            loadPage(index)
+        }
+        
+        // Purge anything after the last page
+        for var index = lastPage+1; index < photos.count; ++index {
+            purgePage(index)
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        // Load the pages that are now on screen
+        loadVisiblePages()
     }
-    */
-
 }
 
-//MARK: FaceRegonition
+// TODO add in facial recognition on image load:
+//    func loadImageToDisplay() {
+//        addActivityIndicator()
+//        let localPath = self.photos![index!].localPath
+//        let fullSizeImage = UIImage(contentsOfFile: localPath)
+//        photoView.file = self.photos![index!].fullsizeFile ?? self.photos![index!].thumbnailFile
+//        photoView.loadInBackground { (image: UIImage?, error:NSError?) -> Void in
+//            self.removeActivityIndicator()
+//            if let fullSizeImage = fullSizeImage {
+//                if let ciImage = fullSizeImage.CIImage {
+//                    var features: [CIFeature] = self.detectFacesOnImage(image!.CIImage)!
+//                    if features.count > 0 {
+//                        for feature in features {
+//                            println(feature.bounds)
+//                            println(feature.type)
+//                        }
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
+
+//MARK: FaceRecognition
 extension SinglePhotoViewController {
     func initializeFaceDetector() {
         context = CIContext(options: nil)
