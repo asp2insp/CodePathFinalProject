@@ -197,7 +197,7 @@ extension CreateEventViewController: UITableViewDataSource {
                 cell.date = self.startDate ?? NSDate()
             } else {
                 cell.isStartDate = false
-                cell.date = self.endDate ?? NSDate()
+                cell.date = self.endDate ?? NSDate().dateByAddingTimeInterval(3600)
             }
             return cell
             
