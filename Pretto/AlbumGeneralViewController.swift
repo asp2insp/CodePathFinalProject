@@ -24,14 +24,14 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     private var futureInvitations : [Invitation] = []
     private var selectedInvitation : Invitation?
     private var searchBar: UISearchBar!
-    private var shouldPresentFuruteEvents: Bool!
+    private var shouldPresentFutureEvents: Bool!
     
     private var photoPicker: UIImagePickerController!
     var observer : NSObjectProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shouldPresentFuruteEvents = false
+        shouldPresentFutureEvents = false
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "tappedOnCamera", name: kUserDidPressCameraNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "createEvent", name: kDidPressCreateEventNotification, object: nil)
@@ -61,7 +61,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         cameraView.hidden = false
-        shouldPresentFuruteEvents = false
+        shouldPresentFutureEvents = false
         photoPicker = UIImagePickerController()
         self.observer = NSNotificationCenter.defaultCenter().addObserverForName(kNewPhotoForEventNotification, object: nil, queue: nil) { (note) -> Void in
            self.refreshData()
@@ -80,14 +80,11 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func refreshData() {
-        if shouldPresentFuruteEvents! {
-            Invitation.getAllFutureEvents() { (invites) -> Void in
+        if shouldPresentFutureEvents! {
+            Invitation.getAllLiveAndFutureNonAcceptedEvents { (invites) -> Void in
                 self.futureInvitations = invites
             }
         } else {
-            Invitation.getAllFutureEvents() { (invites) -> Void in
-                self.futureInvitations = invites
-            }
             
             Invitation.getAllPastEvents() { (invites) -> Void in
                 self.pastInvitations = invites
@@ -156,12 +153,12 @@ extension AlbumGeneralViewController {
         if sender.selectedSegmentIndex == 0 {
             sender.setTitle("> Live & Past", forSegmentAtIndex: 0)
             sender.setTitle("Upcoming", forSegmentAtIndex: 1)
-            shouldPresentFuruteEvents = false
+            shouldPresentFutureEvents = false
             tableView.separatorColor = UIColor.clearColor()
         } else {
             sender.setTitle("Live & Past", forSegmentAtIndex: 0)
             sender.setTitle("> Upcoming", forSegmentAtIndex: 1)
-            shouldPresentFuruteEvents = true
+            shouldPresentFutureEvents = true
             tableView.separatorColor = UIColor.prettoBlue()
         }
         tableView.reloadData()
@@ -182,7 +179,7 @@ extension AlbumGeneralViewController: UIImagePickerControllerDelegate {
 
 extension AlbumGeneralViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if shouldPresentFuruteEvents! {
+        if shouldPresentFutureEvents! {
             if futureInvitations.count > 0 {
                 return 60
             } else {
@@ -199,7 +196,7 @@ extension AlbumGeneralViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.searchBar.resignFirstResponder()
-        if shouldPresentFuruteEvents! {
+        if shouldPresentFutureEvents! {
             if futureInvitations.count > 0 {
                 self.selectedInvitation = futureInvitations[indexPath.row]
             }
@@ -229,7 +226,7 @@ extension AlbumGeneralViewController: UITableViewDelegate {
 
 extension AlbumGeneralViewController : UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if shouldPresentFuruteEvents! {
+        if shouldPresentFutureEvents! {
             return 1
         } else {
             if liveInvitations.count > 0 || pastInvitations.count > 0 {
@@ -241,7 +238,7 @@ extension AlbumGeneralViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if shouldPresentFuruteEvents! {
+        if shouldPresentFutureEvents! {
             return futureInvitations.count
         } else {
             if liveInvitations.count > 0 || pastInvitations.count > 0 {
@@ -260,7 +257,7 @@ extension AlbumGeneralViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if shouldPresentFuruteEvents! {
+        if shouldPresentFutureEvents! {
             return "Upcoming Events"
         } else {
             switch section {
@@ -275,7 +272,7 @@ extension AlbumGeneralViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if shouldPresentFuruteEvents! {
+        if shouldPresentFutureEvents! {
             if futureInvitations.count > 0 {
                 let cell = tableView.dequeueReusableCellWithIdentifier(futureAlbumReuseIdentifier, forIndexPath: indexPath) as! FutureEventCell
                 cell.event = futureInvitations[indexPath.row].event
