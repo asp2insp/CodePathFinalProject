@@ -34,7 +34,10 @@ class Invitation : PFObject, PFSubclassing {
     
     var paused: Bool {
         get { return self["paused"] as! Bool }
-        set { self["paused"] = newValue }
+        set {
+            self["paused"] = newValue
+            self.lastUpdated = NSDate()
+        }
     }
     var accepted: Bool {
         get { return self["accepted"] as! Bool }
