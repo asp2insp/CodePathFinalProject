@@ -63,8 +63,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
             }
         }
         
-        // Register for Push Notitications
-        application.registerForRemoteNotifications()
+        if application.respondsToSelector("registerUserNotificationSettings:") {
+            let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+            let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
+        } else {
+            application.registerForRemoteNotifications()
+        }
+        
+//        // Register for Push Notitications
+//        application.registerForRemoteNotifications()
         application.setMinimumBackgroundFetchInterval(30)
         
         // check user and start a storyboard accordingly

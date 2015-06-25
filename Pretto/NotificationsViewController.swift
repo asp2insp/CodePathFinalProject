@@ -205,7 +205,8 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     }
     
     // MARK: RequestActionDelegate
-    func onAcceptRequest(request:Request, sender: RequestCell) {
+    func onAcceptRequests(requests: [Request], sender: RequestCell) {
+    
         var indexForRow = self.tableView.indexPathForCell(sender)
         if indexForRow == nil {
             return
@@ -219,7 +220,8 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
         self.tableView.endUpdates()
     }
     
-    func onDeclineRequest(request:Request, sender: RequestCell) {
+    func onDeclineRequests(requests: [Request], sender: RequestCell) {
+        // do nothing yet
     }
 }
 
