@@ -79,6 +79,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
             for invitedUser in query?.findObjects() ?? [] {
                 newEvent.makeInvitationForUser(invitedUser as! PFUser).save()
             }
+            
         }
         if eventPhoto != nil {
             var imageData = UIImageJPEGRepresentation(eventPhoto, 0.5)
@@ -106,11 +107,22 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
                 }
             }
         }
+        sendInvitationNotification(invitation)
         invitation.accepted = true
         invitation.saveInBackground()
         
         presentEventSummary()
     }
+    
+    func sendInvitationNotification(invite: Invitation) {
+        println("Sending Push")
+        var pushQuery: PFQuery = PFInstallation.query()!
+        pushQuery.whereKey("deviceType", equalTo: "ios")
+        var error: NSError?
+        var myString = User.currentUser!.name! + "invited you to an event"
+        PFPush.sendPushMessageToQuery(pushQuery, withMessage: myString, error: &error)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
