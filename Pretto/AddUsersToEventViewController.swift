@@ -119,7 +119,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         var pushQuery: PFQuery = PFInstallation.query()!
         pushQuery.whereKey("deviceType", equalTo: "ios")
         var error: NSError?
-        var myString = User.currentUser!.name! + "invited you to an event"
+        var myString = User.currentUser!.name! + " invited you to an event"
         PFPush.sendPushMessageToQuery(pushQuery, withMessage: myString, error: &error)
     }
     

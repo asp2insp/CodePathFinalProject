@@ -64,6 +64,9 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.separatorColor = UIColor.clearColor()
         
         nextButton.enabled = false
+        
+        self.startDate = self.startDate ?? NSDate()
+        self.endDate = self.startDate.dateByAddingTimeInterval(3600)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -205,7 +208,7 @@ extension CreateEventViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(AddEventDatePickerCellReuseIdentifier, forIndexPath: indexPath) as! AddEventDatePickerCell
             cell.delegate = self
             cell.isStartDate = indexPath.section == 1 ? true : false
-            cell.currentDate = indexPath.section == 1 ? (startDate ?? NSDate()) : (endDate ?? NSDate())
+            cell.currentDate = indexPath.section == 1 ? (startDate ?? NSDate().dateByAddingTimeInterval(3600)) : (endDate ?? NSDate().dateByAddingTimeInterval(3600))
             cell.minimunDate = self.minimunDate
             return cell
             
