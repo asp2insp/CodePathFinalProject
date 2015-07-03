@@ -58,6 +58,12 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         refreshData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControlValueChanged(segmentedControl)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         cameraView.hidden = false
@@ -157,14 +163,14 @@ extension AlbumGeneralViewController {
     }
     
     func segmentedControlValueChanged(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            sender.setTitle("> Live & Past", forSegmentAtIndex: 0)
-            sender.setTitle("Upcoming", forSegmentAtIndex: 1)
+        if segmentedControl.selectedSegmentIndex == 0 {
+            segmentedControl.setTitle("> Live & Past", forSegmentAtIndex: 0)
+            segmentedControl.setTitle("Upcoming", forSegmentAtIndex: 1)
             shouldPresentFutureEvents = false
             tableView.separatorColor = UIColor.clearColor()
         } else {
-            sender.setTitle("Live & Past", forSegmentAtIndex: 0)
-            sender.setTitle("> Upcoming", forSegmentAtIndex: 1)
+            segmentedControl.setTitle("Live & Past", forSegmentAtIndex: 0)
+            segmentedControl.setTitle("> Upcoming", forSegmentAtIndex: 1)
             shouldPresentFutureEvents = true
             tableView.separatorColor = UIColor.prettoBlue()
         }
