@@ -183,8 +183,9 @@ extension AppDelegate {
             println("Saving user details...")
             user.save()
             user.printProperties()
-            self.startMainStoryBoard()
             self.fetchFriends(user)
+            self.startMainStoryBoard()
+
             },
             otherwise: { (pfUser:PFUser?) -> Void in
                 if pfUser != nil {
@@ -296,7 +297,12 @@ extension AppDelegate: PFLogInViewControllerDelegate {
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
         println("FB login is done")
-       
+        // Add a pointer to the current User in the Current Installation to send targeted Push Notif
+        // Associate the device with a user
+        let installation = PFInstallation.currentInstallation()
+        installation["user"] = PFUser.currentUser()
+        installation.saveInBackground()
+        
         // Handles the very first time a user logs in
         let isFirstTime: Bool? = NSUserDefaults.standardUserDefaults().objectForKey(kFirstTimeRunningPretto) as? Bool
         

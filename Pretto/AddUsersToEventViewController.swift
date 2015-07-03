@@ -107,20 +107,10 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
                 }
             }
         }
-        sendInvitationNotification(invitation)
         invitation.accepted = true
         invitation.saveInBackground()
         
         presentEventSummary()
-    }
-    
-    func sendInvitationNotification(invite: Invitation) {
-        println("Sending Push")
-        var pushQuery: PFQuery = PFInstallation.query()!
-        pushQuery.whereKey("deviceType", equalTo: "ios")
-        var error: NSError?
-        var myString = User.currentUser!.name! + " invited you to an event"
-        PFPush.sendPushMessageToQuery(pushQuery, withMessage: myString, error: &error)
     }
     
     

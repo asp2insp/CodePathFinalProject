@@ -157,7 +157,20 @@ class Event : PFObject, PFSubclassing {
         invitation.event = self
         invitation.accepted = false
         invitation.lastUpdated = NSDate()
+        sendInvitationNotification(invitation)
         return invitation
+    }
+    
+    func sendInvitationNotification(invite: Invitation) {
+        println("Sending Push")
+        if invite.from != invite.to {
+            var pushQuery: PFQuery = PFInstallation.query()!
+            pushQuery.whereKey("deviceType", equalTo: "ios")
+            pushQuery.whereKey("user", equalTo: invite.to)
+            var error: NSError?
+            var myString = User.currentUser!.name! + " invited you to an event"
+            PFPush.sendPushMessageToQuery(pushQuery, withMessage: myString, error: &error)
+        }
     }
     
 //    class func createEventPushChannel() -> String {
