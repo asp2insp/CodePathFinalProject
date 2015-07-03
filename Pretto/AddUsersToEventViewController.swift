@@ -313,7 +313,7 @@ extension AddUsersToEventViewController {
     func shareOnFacebook() {
         println("Notification received, sharing on Facebook")
         var content: FBSDKShareLinkContent = FBSDKShareLinkContent()
-        dateFormatter.dateFormat = "MM/dd/yy HH:mm"
+        dateFormatter.dateFormat = "MMM dd, yyyy HH:mm"
         content.contentDescription = " between " + dateFormatter.stringFromDate(startDate) + " and " + dateFormatter.stringFromDate(endDate)
         content.contentURL = NSURL(string: "http://www.pretto.co/")
         content.contentTitle = self.eventTitle + " - Where? " + (self.locationString ?? "Somewhere")
@@ -374,7 +374,13 @@ extension AddUsersToEventViewController {
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: self.location!.coordinate.latitude, longitude: self.location!.coordinate.longitude), completionHandler: { (markers, error) -> Void in
                 if markers.count > 0 {
                     let marker = markers[0] as! CLPlacemark
-                    self.locationString = "\(marker.locality), \(marker.subLocality)"
+                    let locality = marker.locality ?? ""
+                    if let sublocality = marker.subLocality {
+                        self.locationString = locality + ", " + sublocality
+                    } else {
+                        self.locationString = locality
+                    }
+                    
                     completionView.eventLocation.text = self.locationString
                     
                 } else {
@@ -385,8 +391,9 @@ extension AddUsersToEventViewController {
             completionView.eventLocation.text = "Location TBD"
         }
         completionView.eventTItle.text = self.eventTitle
-        dateFormatter.dateFormat = "MM/dd/yyy HH:mm"
-        completionView.eventDate.text = "\(dateFormatter.stringFromDate(startDate))  -  \(dateFormatter.stringFromDate(endDate))"
+        dateFormatter.dateFormat = "MMM dd, yyyy - hh:mm a"
+        completionView.eventStartDate.text = dateFormatter.stringFromDate(startDate)
+        completionView.eventEndDate.text = dateFormatter.stringFromDate(endDate)
         
         
         
