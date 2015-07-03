@@ -73,6 +73,13 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         super.viewWillDisappear(animated)
         NSNotificationCenter.defaultCenter().removeObserver(self.observer)
     }
+    
+    deinit {
+        println("AlbumGeneralViewController : deinit")
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kUserDidPressCameraNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kDidPressCreateEventNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kNewPhotoForEventNotification, object: nil)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

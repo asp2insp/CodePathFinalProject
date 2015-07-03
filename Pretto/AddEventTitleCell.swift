@@ -33,8 +33,13 @@ class AddEventTitleCell: UITableViewCell, UITextFieldDelegate {
         eventTitle.delegate = self
         eventTitle.autocapitalizationType = UITextAutocapitalizationType.Sentences
         eventTitle.borderStyle = UITextBorderStyle.None
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "textFieldDidChange:", name: "UITextFieldTextDidChangeNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "textFieldDidChange:", name: kTextFieldDidChangeNotification, object: nil)
         
+    }
+    
+    deinit {
+        println("AddEventTitleCell : deinit")
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "UITextFieldTextDidChangeNotification", object: nil)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

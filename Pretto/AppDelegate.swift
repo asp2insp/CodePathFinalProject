@@ -9,6 +9,7 @@
 import UIKit
 
 let dateFormatter = NSDateFormatter()
+let kTextFieldDidChangeNotification = "UITextFieldTextDidChangeNotification"
 let kNewPhotoForEventNotification = "PrettoNewPhotoForEvent"
 let kUserDidLogOutNotification = "userDidLogOut"
 let kShowLoginWindowNotification = "showLoginWindow"
@@ -143,6 +144,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     }
 
     func applicationWillTerminate(application: UIApplication) {
+        println("AppDelegate : deinit")
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kShowLoginWindowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kShowLandingWindowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kIntroDidFinishNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kUserDidLogOutNotification, object: nil)
         
     }
     

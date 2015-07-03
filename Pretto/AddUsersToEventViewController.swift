@@ -168,6 +168,14 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
         })
     }
     
+    deinit {
+        println("AddUsersToEventViewController : deinit")
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kShareOnFacebookNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kShareOnTwitterNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kShareByEmailNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kAcceptEventAndDismissVCNotification, object: nil)
+    }
+    
     func getMeAsTestFriend(me:User) -> Friend {
         var selfie = Friend()
         selfie.facebookId = me.facebookId!
