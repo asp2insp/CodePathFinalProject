@@ -167,9 +167,12 @@ class Event : PFObject, PFSubclassing {
             var pushQuery: PFQuery = PFInstallation.query()!
             pushQuery.whereKey("deviceType", equalTo: "ios")
             pushQuery.whereKey("user", equalTo: invite.to)
-            var error: NSError?
-            var myString = User.currentUser!.name! + " invited you to an event"
-            PFPush.sendPushMessageToQuery(pushQuery, withMessage: myString, error: &error)
+            let myString = User.currentUser!.name! + " invited you to an event"
+            let data = ["alert" : myString, "badge" : "Increment"]
+            let push = PFPush()
+            push.setData(data)
+            push.setQuery(pushQuery)
+            push.sendPushInBackground()
         }
     }
     

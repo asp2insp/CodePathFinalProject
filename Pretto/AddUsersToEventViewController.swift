@@ -49,7 +49,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
 
         // Generate ChannelId
         dateFormatter.dateFormat = "MMyMhmMdyMyymhy" // just to mix things up a little ;)
-        let channelId = "\(PFUser.currentUser()!.objectId!)" + "\(dateFormatter.stringFromDate(NSDate()))"
+        let channelId = "pretto_" + "\(PFUser.currentUser()!.objectId!)" + "\(dateFormatter.stringFromDate(NSDate()))"
         
         PFPush.subscribeToChannelInBackground(channelId)
         
