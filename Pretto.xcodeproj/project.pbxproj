@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1628DCED1B2E6CB7005E0841 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FBBBA1B2E4BD7002E7A75 /* User.swift */; };
-		1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCEE1B2E73D4005E0841 /* AddUsersToEventViewController.swift */; };
+		1628DCEF1B2E73D4005E0841 /* CreateEventAddUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCEE1B2E73D4005E0841 /* CreateEventAddUsersViewController.swift */; };
 		1628DCF11B2E7B15005E0841 /* AddUsersAddedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCF01B2E7B15005E0841 /* AddUsersAddedUserCell.swift */; };
 		1628DCF51B30BE89005E0841 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCF41B30BE89005E0841 /* EventManager.swift */; };
 		1628DCFB1B31F86B005E0841 /* CustomLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1628DCFA1B31F86B005E0841 /* CustomLoginViewController.swift */; };
@@ -33,6 +33,9 @@
 		1684BBFC1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BBFB1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift */; };
 		1684BBFF1B3391F400CBCDC1 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BBFE1B3391F400CBCDC1 /* Appearance.swift */; };
 		1684BC011B33B88D00CBCDC1 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684BC001B33B88D00CBCDC1 /* IntroViewController.swift */; };
+		169C9A041B4B0A8A00F3CBC4 /* AddEventPrivacyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169C9A031B4B0A8A00F3CBC4 /* AddEventPrivacyCell.swift */; };
+		169C9A061B4B0AB100F3CBC4 /* AddEventLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169C9A051B4B0AB100F3CBC4 /* AddEventLocationCell.swift */; };
+		169C9A081B4B103700F3CBC4 /* CreateEventAddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169C9A071B4B103700F3CBC4 /* CreateEventAddLocationViewController.swift */; };
 		16B286A71B371EAE00F540AF /* EventCreatedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16B286A61B371EAE00F540AF /* EventCreatedView.xib */; };
 		16B286A91B371F2900F540AF /* EventCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B286A81B371F2900F540AF /* EventCreatedView.swift */; };
 		16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */; };
@@ -73,7 +76,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1628DCEE1B2E73D4005E0841 /* AddUsersToEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsersToEventViewController.swift; sourceTree = "<group>"; };
+		1628DCEE1B2E73D4005E0841 /* CreateEventAddUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventAddUsersViewController.swift; sourceTree = "<group>"; };
 		1628DCF01B2E7B15005E0841 /* AddUsersAddedUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsersAddedUserCell.swift; sourceTree = "<group>"; };
 		1628DCF41B30BE89005E0841 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		1628DCFA1B31F86B005E0841 /* CustomLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLoginViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +101,9 @@
 		1684BBFB1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumGeneralViewController.swift; sourceTree = "<group>"; };
 		1684BBFE1B3391F400CBCDC1 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		1684BC001B33B88D00CBCDC1 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		169C9A031B4B0A8A00F3CBC4 /* AddEventPrivacyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventPrivacyCell.swift; sourceTree = "<group>"; };
+		169C9A051B4B0AB100F3CBC4 /* AddEventLocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventLocationCell.swift; sourceTree = "<group>"; };
+		169C9A071B4B103700F3CBC4 /* CreateEventAddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventAddLocationViewController.swift; sourceTree = "<group>"; };
 		16B286A61B371EAE00F540AF /* EventCreatedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCreatedView.xib; sourceTree = "<group>"; };
 		16B286A81B371F2900F540AF /* EventCreatedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCreatedView.swift; sourceTree = "<group>"; };
 		16D3AA311B2E475A00934948 /* AddEventPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventPhotoCell.swift; sourceTree = "<group>"; };
@@ -162,7 +168,8 @@
 				FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */,
 				163692081B39DDBA006606A2 /* SinglePhotoViewController.swift */,
 				16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */,
-				1628DCEE1B2E73D4005E0841 /* AddUsersToEventViewController.swift */,
+				169C9A071B4B103700F3CBC4 /* CreateEventAddLocationViewController.swift */,
+				1628DCEE1B2E73D4005E0841 /* CreateEventAddUsersViewController.swift */,
 				FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */,
 				1628DCFA1B31F86B005E0841 /* CustomLoginViewController.swift */,
 				1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */,
@@ -225,6 +232,8 @@
 				16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */,
 				16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */,
 				1628DCF01B2E7B15005E0841 /* AddUsersAddedUserCell.swift */,
+				169C9A031B4B0A8A00F3CBC4 /* AddEventPrivacyCell.swift */,
+				169C9A051B4B0AB100F3CBC4 /* AddEventLocationCell.swift */,
 				16B286A81B371F2900F540AF /* EventCreatedView.swift */,
 				16B286A61B371EAE00F540AF /* EventCreatedView.xib */,
 			);
@@ -496,11 +505,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				169C9A081B4B103700F3CBC4 /* CreateEventAddLocationViewController.swift in Sources */,
 				1628DCF51B30BE89005E0841 /* EventManager.swift in Sources */,
 				606748D21B37765400B33AAB /* RequestCell.swift in Sources */,
 				1684BBFF1B3391F400CBCDC1 /* Appearance.swift in Sources */,
 				16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */,
-				1628DCEF1B2E73D4005E0841 /* AddUsersToEventViewController.swift in Sources */,
+				1628DCEF1B2E73D4005E0841 /* CreateEventAddUsersViewController.swift in Sources */,
 				FE45EEAE1B23CEC900F39BF8 /* Photo.swift in Sources */,
 				16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */,
 				163692091B39DDBA006606A2 /* SinglePhotoViewController.swift in Sources */,
@@ -535,8 +545,10 @@
 				1684BC011B33B88D00CBCDC1 /* IntroViewController.swift in Sources */,
 				1684BBFA1B334F4500CBCDC1 /* AlbumGeneralViewCell.swift in Sources */,
 				1649D9E61B386DB000EEA0DD /* ThirdIntroView.swift in Sources */,
+				169C9A061B4B0AB100F3CBC4 /* AddEventLocationCell.swift in Sources */,
 				1628DCFD1B31F87E005E0841 /* CustomSignUpViewController.swift in Sources */,
 				1628DCF11B2E7B15005E0841 /* AddUsersAddedUserCell.swift in Sources */,
+				169C9A041B4B0A8A00F3CBC4 /* AddEventPrivacyCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

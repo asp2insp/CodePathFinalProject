@@ -1,5 +1,5 @@
 //
-//  AddUsersToEventViewController.swift
+//  CreateEventAddUsersViewController.swift
 //  Pretto
 //
 //  Created by Francisco de la Pena on 6/14/15.
@@ -13,7 +13,7 @@ import Social
 
 let AddedUserCellReuseIdentifier = "AddedUserCell"
 
-class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UITextFieldDelegate, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate {
+class CreateEventAddUsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UITextFieldDelegate, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate {
     
     var locationManager = CLLocationManager()
     var location : CLLocation?
@@ -159,7 +159,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     deinit {
-        println("AddUsersToEventViewController : deinit")
+        println("CreateEventAddUsersViewController : deinit")
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kShareOnFacebookNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kShareOnTwitterNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kShareByEmailNotification, object: nil)
@@ -199,7 +199,7 @@ class AddUsersToEventViewController: UIViewController, UITableViewDelegate, UITa
 
 //MARK: UITableViewDelegate
 
-extension AddUsersToEventViewController: UITableViewDelegate {
+extension CreateEventAddUsersViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.tag == 1 {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddUsersAddedUserCell
@@ -249,7 +249,7 @@ extension AddUsersToEventViewController: UITableViewDelegate {
 
 //MARK: UITableViewDataSource
 
-extension AddUsersToEventViewController: UITableViewDataSource {
+extension CreateEventAddUsersViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -280,7 +280,7 @@ extension AddUsersToEventViewController: UITableViewDataSource {
 
 // MARK: UITextFieldDelegate
 
-extension AddUsersToEventViewController : UITextFieldDelegate {
+extension CreateEventAddUsersViewController : UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 //        autocompleteTableView.hidden = false
         var substring: NSString = searchUserTextField.text
@@ -291,7 +291,7 @@ extension AddUsersToEventViewController : UITextFieldDelegate {
 }
 
 // MARK: CLLocationManagerDelegate
-extension AddUsersToEventViewController : CLLocationManagerDelegate {
+extension CreateEventAddUsersViewController : CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         let newLocation = locations.last as! CLLocation
         println("Got location \(newLocation)")
@@ -302,13 +302,13 @@ extension AddUsersToEventViewController : CLLocationManagerDelegate {
 
 
 // MARK: MFMailComposeViewControllerDelegate
-extension AddUsersToEventViewController : MFMailComposeViewControllerDelegate {
+extension CreateEventAddUsersViewController : MFMailComposeViewControllerDelegate {
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 //MARK: Aux Funtions
-extension AddUsersToEventViewController {
+extension CreateEventAddUsersViewController {
     
     func shareOnFacebook() {
         println("Notification received, sharing on Facebook")

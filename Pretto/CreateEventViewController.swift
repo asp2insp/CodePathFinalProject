@@ -12,6 +12,8 @@ private let AddEventPhotoCellReuseIdentifier = "AddEventPhotoCell"
 private let AddEventTitleCellReuseIdentifier = "AddEventTitleCell"
 private let AddEventDateCellReuseIdentifier = "AddEventDateCell"
 private let AddEventDatePickerCellReuseIdentifier = "AddEventDatePickerCell"
+private let AddEventLocationCellReuseIdentifier = "AddEventLocationCell"
+private let AddEventPrivacyCellReuseIdentifier = "AddEventPrivacyCell"
 
 class CreateEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddEventPhotoCellDelegate, AddEventTitleCellDelegate, AddEventDatePickerCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -36,7 +38,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func unwindFromAddUsers(segue: UIStoryboardSegue) {
 
-        var sourceVC = segue.sourceViewController as! AddUsersToEventViewController
+        var sourceVC = segue.sourceViewController as! CreateEventAddUsersViewController
         
         if sourceVC.startDate != nil {
             self.startDate = sourceVC.startDate
@@ -53,6 +55,9 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
         if sourceVC.eventPhoto != nil {
             self.eventPhoto = sourceVC.eventPhoto
         }
+    }
+    
+    @IBAction func unwindFromAddLocation(segue: UIStoryboardSegue) {
         
     }
     
@@ -83,7 +88,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AddUsersSegue" {
-            var destinationVC = segue.destinationViewController as! AddUsersToEventViewController
+            var destinationVC = segue.destinationViewController as! CreateEventAddUsersViewController
             destinationVC.startDate = self.startDate ?? NSDate()
             destinationVC.endDate = self.endDate ?? NSDate()
             destinationVC.eventTitle = self.eventTitle
@@ -158,7 +163,7 @@ extension CreateEventViewController: UITableViewDelegate {
 
 extension CreateEventViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -210,6 +215,14 @@ extension CreateEventViewController: UITableViewDataSource {
             cell.isStartDate = indexPath.section == 1 ? true : false
             cell.currentDate = indexPath.section == 1 ? (startDate ?? NSDate().dateByAddingTimeInterval(3600)) : (endDate ?? NSDate().dateByAddingTimeInterval(3600))
             cell.minimunDate = self.minimunDate
+            return cell
+            
+        case (3, 0):
+            let cell = tableView.dequeueReusableCellWithIdentifier(AddEventLocationCellReuseIdentifier, forIndexPath: indexPath) as! AddEventLocationCell
+            return cell
+            
+        case (3, 1):
+            let cell = tableView.dequeueReusableCellWithIdentifier(AddEventPrivacyCellReuseIdentifier, forIndexPath: indexPath) as! AddEventPrivacyCell
             return cell
             
         default:

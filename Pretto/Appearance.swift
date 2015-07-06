@@ -59,11 +59,16 @@ class GlobalAppearance {
         UISearchBar.appearance().setImage(UIImage(named: "CancelSearchButton"), forSearchBarIcon: UISearchBarIcon.Clear, state: UIControlState.Highlighted)
     }
     
+    class func setSwitchAppearance() {
+        UISwitch.appearance().onTintColor = UIColor.prettoBlue()
+    }
+    
     class func setAll() {
         setNavBarAppearance()
         setTabBarAppearance()
         setTableViewAppearance()
         setSearchBarAppearance()
+        setSwitchAppearance()
     }
 }
 

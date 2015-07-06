@@ -56,11 +56,11 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         }
         
         segmentedControl.tintColor = UIColor.clearColor()
-        segmentedControl.backgroundColor = UIColor.prettoLightGrey()
-        segmentedControlContainerView.backgroundColor = UIColor.prettoLightGrey()
+        segmentedControl.backgroundColor = UIColor.prettoBlue()
+        segmentedControlContainerView.backgroundColor = UIColor.prettoBlue()
         segmentedControl.addTarget(self, action: "segmentedControlValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
-        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.prettoBlue()], forState: UIControlState.Normal)
-        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.prettoBlue(), NSUnderlineStyleAttributeName:NSUnderlineStyle.StyleThick.rawValue], forState: UIControlState.Selected)
+        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: UIControlState.Normal)
+        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor(), NSUnderlineStyleAttributeName:NSUnderlineStyle.StyleThick.rawValue], forState: UIControlState.Selected)
 
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
@@ -300,7 +300,9 @@ extension AlbumGeneralViewController : UITableViewDataSource {
             headerView.contentView.backgroundColor = UIColor.prettoLightGrey()
             return headerView
         } else {
-            return nil
+            var headerView = UITableViewHeaderFooterView(frame: CGRectZero)
+            headerView.contentView.backgroundColor = UIColor.prettoLightGrey()
+            return headerView
         }
         
     }
