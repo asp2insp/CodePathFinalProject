@@ -46,11 +46,21 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
         self.navigationItem.titleView = searchBar
         
-        segmentedControl.tintColor = UIColor.prettoBlue()
-        segmentedControlContainerView.backgroundColor = UIColor.prettoBlue()
+        for firstLevelSubView in searchBar.subviews {
+            for secondLevelSubView in firstLevelSubView.subviews! {
+                if secondLevelSubView.isKindOfClass(UITextField) {
+                    var searchText: UITextField = secondLevelSubView as! UITextField
+                    searchText.textColor = UIColor.whiteColor()
+                }
+            }
+        }
+        
+        segmentedControl.tintColor = UIColor.clearColor()
+        segmentedControl.backgroundColor = UIColor.prettoLightGrey()
+        segmentedControlContainerView.backgroundColor = UIColor.prettoLightGrey()
         segmentedControl.addTarget(self, action: "segmentedControlValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
-        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: UIControlState.Normal)
-        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: UIControlState.Selected)
+        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.prettoBlue()], forState: UIControlState.Normal)
+        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.prettoBlue(), NSUnderlineStyleAttributeName:NSUnderlineStyle.StyleThick.rawValue], forState: UIControlState.Selected)
 
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
@@ -164,13 +174,13 @@ extension AlbumGeneralViewController {
     
     func segmentedControlValueChanged(sender: UISegmentedControl) {
         if segmentedControl.selectedSegmentIndex == 0 {
-            segmentedControl.setTitle("> Live & Past", forSegmentAtIndex: 0)
-            segmentedControl.setTitle("Upcoming", forSegmentAtIndex: 1)
+//            segmentedControl.setTitle("> Live & Past", forSegmentAtIndex: 0)
+//            segmentedControl.setTitle("Upcoming", forSegmentAtIndex: 1)
             shouldPresentFutureEvents = false
             tableView.separatorColor = UIColor.clearColor()
         } else {
-            segmentedControl.setTitle("Live & Past", forSegmentAtIndex: 0)
-            segmentedControl.setTitle("> Upcoming", forSegmentAtIndex: 1)
+//            segmentedControl.setTitle("Live & Past", forSegmentAtIndex: 0)
+//            segmentedControl.setTitle("> Upcoming", forSegmentAtIndex: 1)
             shouldPresentFutureEvents = true
             tableView.separatorColor = UIColor.prettoBlue()
         }
@@ -279,9 +289,20 @@ extension AlbumGeneralViewController : UITableViewDataSource {
             case 1:
                 return pastInvitations.count > 0 ? "Past Events" : nil
             default:
-                return ""
+                return nil
             }
         }
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if shouldPresentFutureEvents! {
+            var headerView = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 30))
+            headerView.contentView.backgroundColor = UIColor.prettoLightGrey()
+            return headerView
+        } else {
+            return nil
+        }
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

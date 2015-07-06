@@ -11,18 +11,32 @@ import MapKit
 
 class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate {
 
-    @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var mapView: MKMapView!
     
-    let latitude: Double = 37.771052
-    let longitude: Double = -122.403891
-    let latDelta: Double = 0.01
-    let longDelta: Double = 0.01
+    private var searchBar: UISearchBar!
+    
+    private let latitude: Double = 37.771052
+    private let longitude: Double = -122.403891
+    private let latDelta: Double = 0.01
+    private let longDelta: Double = 0.01
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        searchBar.barTintColor = UIColor.prettoBlue()
+        searchBar = UISearchBar()
         searchBar.delegate = self
-        searchBar.barTintColor = UIColor.prettoBlue()
+        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        self.navigationItem.titleView = searchBar
+        
+        for firstLevelSubView in searchBar.subviews {
+            for secondLevelSubView in firstLevelSubView.subviews! {
+                if secondLevelSubView.isKindOfClass(UITextField) {
+                    var searchText: UITextField = secondLevelSubView as! UITextField
+                    searchText.textColor = UIColor.whiteColor()
+                }
+            }
+        }
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "didTapOnView")
         self.view.addGestureRecognizer(tapRecognizer)

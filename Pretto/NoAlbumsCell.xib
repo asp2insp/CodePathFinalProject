@@ -108,6 +108,7 @@
                     <constraint firstAttribute="trailing" secondItem="Tdj-Wx-qpf" secondAttribute="trailing" constant="10" id="lbF-HC-4wI"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="arrow" destination="6p8-Kv-SKI" id="NA2-AD-8ia"/>
                 <outlet property="cardView" destination="Tdj-Wx-qpf" id="02V-GL-oTJ"/>

@@ -42,10 +42,12 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     func refreshData() {
         refreshCount += 3
         Notification.getAll() {notifications in
-            self.notifications = notifications
-            if --self.refreshCount == 0 {
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
+            if let notifications = notifications {
+                self.notifications = notifications
+                if --self.refreshCount == 0 {
+                    self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
             }
         }
         Invitation.getAllLiveAndFutureNonAcceptedEvents() {invites in
@@ -56,10 +58,12 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             }
         }
         Request.getAllPendingRequests() {requests in
-            self.requests = self.groupByRequester(requests)
-            if --self.refreshCount == 0 {
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
+            if let requests = requests {
+                self.requests = self.groupByRequester(requests)
+                if --self.refreshCount == 0 {
+                    self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
             }
         }
     }

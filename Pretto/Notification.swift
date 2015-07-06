@@ -31,11 +31,11 @@ class Notification : PFObject, PFSubclassing {
     @NSManaged var hasBeenRead : Bool
     @NSManaged var type : String
     
-    static func getAll(completion: ([Notification] -> Void)) {
+    static func getAll(completion: ([Notification]? -> Void)) {
         let query = PFQuery(className: kClassName)
         query.whereKey("user", equalTo: PFUser.currentUser()!)
         query.findObjectsInBackgroundWithBlock { (results, err) -> Void in
-            completion(results as! [Notification])
+            completion(results as? [Notification])
         }
     }
 }

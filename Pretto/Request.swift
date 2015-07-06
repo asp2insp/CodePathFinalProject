@@ -78,12 +78,12 @@ class Request : PFObject, PFSubclassing {
         self.saveInBackground()
     }
     
-    static func getAllPendingRequests(completion: ([Request] -> Void)) {
+    static func getAllPendingRequests(completion: ([Request]? -> Void)) {
         let query = PFQuery(className: kClassName)
         query.whereKey("requestee", equalTo: PFUser.currentUser()!)
         query.whereKey("status", equalTo: "pending")
         query.findObjectsInBackgroundWithBlock { (results, err) -> Void in
-            completion(results as! [Request])
+            completion(results as? [Request])
         }
     }
 }
