@@ -17,6 +17,9 @@ class EventCreatedView: UIView {
     @IBOutlet var eventStartDate: UILabel!
     @IBOutlet var eventEndDate: UILabel!
     @IBOutlet var eventLocation: UILabel!
+    @IBOutlet weak var shareOnFacebook: UIButton!
+    @IBOutlet weak var shareOnTwitter: UIButton!
+    @IBOutlet weak var shareByEmail: UIButton!
     
     @IBAction func onShareOnFacebook(sender: UIButton) {
         println("Share on Facebook")
@@ -65,24 +68,28 @@ class EventCreatedView: UIView {
     private func commonInit() {
         NSBundle.mainBundle().loadNibNamed("EventCreatedView", owner: self, options: nil)
         mainView.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
-//        innerView.frame = CGRect(x: mainView.frame.origin.x - 2, y: mainView.frame.origin.y - 2, width: mainView.bounds.width + 2, height: mainView.bounds.height + 2)
-        let cornerRadius = CGFloat(5.0)
-        let bounds = CGRect(x: innerView.bounds.origin.x - 2, y: innerView.bounds.origin.y - 2, width: innerView.bounds.width + 2, height: innerView.bounds.height + 2)
-        let shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
-        innerView.layer.masksToBounds = false
-        innerView.layer.cornerRadius = cornerRadius
-        innerView.layer.borderColor = UIColor.lightGrayColor().CGColor
-        innerView.layer.borderWidth = 0
-        innerView.layer.shadowColor = UIColor.lightGrayColor().CGColor
-        innerView.layer.shadowOffset = CGSize(width: 4, height: 4)
-        innerView.layer.shadowOpacity = 0.5
-        innerView.layer.shadowPath = shadowPath.CGPath
+//        let cornerRadius = CGFloat(5.0)
+//        let bounds = CGRect(x: innerView.bounds.origin.x - 2, y: innerView.bounds.origin.y - 2, width: innerView.bounds.width + 2, height: innerView.bounds.height + 2)
+//        let shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
+//        innerView.layer.masksToBounds = false
+//        innerView.layer.cornerRadius = cornerRadius
+//        innerView.layer.borderColor = UIColor.lightGrayColor().CGColor
+//        innerView.layer.borderWidth = 0
+//        innerView.layer.shadowColor = UIColor.lightGrayColor().CGColor
+//        innerView.layer.shadowOffset = CGSize(width: 4, height: 4)
+//        innerView.layer.shadowOpacity = 0.5
+//        innerView.layer.shadowPath = shadowPath.CGPath
         
         okButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         okButton.backgroundColor = UIColor.prettoOrange()
-        okButton.layer.cornerRadius = 25
+        okButton.layer.cornerRadius = 3
         
-        
+        shareOnFacebook.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        shareOnFacebook.layer.cornerRadius = 25
+        shareOnTwitter.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        shareOnTwitter.layer.cornerRadius = 25
+        shareByEmail.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        shareByEmail.layer.cornerRadius = 25
 
         
         
