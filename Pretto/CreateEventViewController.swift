@@ -29,8 +29,29 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     var minimunDate: NSDate?
     var eventTitle: String!
     var eventPhoto: UIImage?
+    var locationString : String? = "Location TBD"
     
-    var location : CLLocationCoordinate2D?
+    var location : CLLocationCoordinate2D? {
+        didSet {
+            // Add Data to Summary Card
+            if self.location != nil {
+                CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: self.location!.latitude, longitude: self.location!.longitude), completionHandler: { (markers, error) -> Void in
+                    if markers.count > 0 {
+                        let marker = markers[0] as! CLPlacemark
+                        let locality = marker.locality ?? ""
+                        if let sublocality = marker.subLocality {
+                            self.locationString = locality + ", " + sublocality
+                        } else {
+                            self.locationString = locality
+                        }
+                    }
+                    self.tableView.reloadData()
+                })
+            } else {
+                self.locationString = "Location TBD"
+            }
+        }
+    }
     
     var titleTextField: UITextField?
     
@@ -100,7 +121,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
             destinationVC.eventTitle = self.eventTitle
             destinationVC.eventPhoto = self.eventPhoto
             destinationVC.location = self.location
-        case "SetLocationSegue":
+        case "AddLocationSegue":
             var destinationVC = segue.destinationViewController as! CreateEventAddLocationViewController
             destinationVC.parent = self
         default:
@@ -231,6 +252,7 @@ extension CreateEventViewController: UITableViewDataSource {
             
         case (3, 0):
             let cell = tableView.dequeueReusableCellWithIdentifier(AddEventLocationCellReuseIdentifier, forIndexPath: indexPath) as! AddEventLocationCell
+            cell.cellContent.text = self.locationString
             return cell
             
         case (3, 1):

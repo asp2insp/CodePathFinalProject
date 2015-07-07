@@ -11,6 +11,7 @@ import UIKit
 class AddEventLocationCell: UITableViewCell {
 
     @IBOutlet weak var cellTitle: UILabel!
+    @IBOutlet weak var cellContent: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

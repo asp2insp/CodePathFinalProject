@@ -28,8 +28,6 @@ class CreateEventAddLocationViewController: UIViewController, CLLocationManagerD
     
     var parent : CreateEventViewController?
     
-    var locationString: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,6 +50,7 @@ class CreateEventAddLocationViewController: UIViewController, CLLocationManagerD
 
     @IBAction func didTapSetLocation() {
         parent?.location = mapView.centerCoordinate
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
 
