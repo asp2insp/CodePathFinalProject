@@ -194,6 +194,10 @@ class CreateEventAddUsersViewController: UIViewController, UITableViewDelegate, 
 //MARK: UITableViewDelegate
 
 extension CreateEventAddUsersViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 50
+    }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.tag == 1 {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddUsersAddedUserCell

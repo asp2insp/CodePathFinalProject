@@ -37,7 +37,7 @@ class AddEventPhotoCell: UITableViewCell {
         eventPhoto.userInteractionEnabled = true
         eventPhoto.layer.borderWidth = 1
         eventPhoto.layer.borderColor = UIColor.lightGrayColor().CGColor
-        eventPhoto.layer.cornerRadius = 30
+        eventPhoto.layer.cornerRadius = 35
         eventPhoto.clipsToBounds = true
         eventPhoto.contentMode = UIViewContentMode.ScaleAspectFill
         

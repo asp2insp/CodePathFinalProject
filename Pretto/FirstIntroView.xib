@@ -38,17 +38,17 @@
                     <rect key="frame" x="20" y="236" width="84" height="82"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create an event" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWn-Eh-BAs">
-                    <rect key="frame" x="94" y="389" width="132" height="22"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                    <rect key="frame" x="70" y="374" width="181" height="30"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pretto will automatically create a shared album to store all the pictures that you and your friends take" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJM-Xu-KMj">
-                    <rect key="frame" x="35" y="421" width="250" height="47"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pretto automatically creates an album to collect all the photos and videos shot during the event" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJM-Xu-KMj">
+                    <rect key="frame" x="30" y="414" width="260" height="54"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="250" id="cYt-gJ-5k5"/>
+                        <constraint firstAttribute="width" constant="260" id="cYt-gJ-5k5"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -58,11 +58,11 @@
                 <constraint firstItem="zHL-oG-Izk" firstAttribute="top" secondItem="uaa-xA-7sj" secondAttribute="bottom" constant="-43" id="0KG-EO-fXA"/>
                 <constraint firstItem="OeK-uT-slr" firstAttribute="leading" secondItem="zHL-oG-Izk" secondAttribute="trailing" constant="-55" id="1KJ-lt-czh"/>
                 <constraint firstItem="7xU-hO-h1G" firstAttribute="top" secondItem="zHL-oG-Izk" secondAttribute="bottom" constant="-105" id="6nh-ye-Goj"/>
-                <constraint firstAttribute="bottom" secondItem="MJM-Xu-KMj" secondAttribute="bottom" constant="100" id="EOq-yv-okh"/>
                 <constraint firstAttribute="centerY" secondItem="zHL-oG-Izk" secondAttribute="centerY" constant="30" id="HEe-jh-rVj"/>
                 <constraint firstItem="zHL-oG-Izk" firstAttribute="top" secondItem="OeK-uT-slr" secondAttribute="bottom" constant="-18" id="SBa-gR-2hz"/>
                 <constraint firstItem="MJM-Xu-KMj" firstAttribute="top" secondItem="WWn-Eh-BAs" secondAttribute="bottom" constant="10" id="UWj-Q2-7q1"/>
                 <constraint firstItem="xoG-gQ-vVR" firstAttribute="leading" secondItem="zHL-oG-Izk" secondAttribute="trailing" constant="2" id="aHW-hc-LUW"/>
+                <constraint firstAttribute="bottom" secondItem="WWn-Eh-BAs" secondAttribute="bottom" constant="164" id="csO-L5-oMm"/>
                 <constraint firstAttribute="centerX" secondItem="MJM-Xu-KMj" secondAttribute="centerX" id="dJV-Y6-LQ9"/>
                 <constraint firstItem="zHL-oG-Izk" firstAttribute="top" secondItem="xoG-gQ-vVR" secondAttribute="bottom" constant="-146" id="gA8-6M-Brr"/>
                 <constraint firstAttribute="centerX" secondItem="WWn-Eh-BAs" secondAttribute="centerX" id="sHg-bC-ID9"/>

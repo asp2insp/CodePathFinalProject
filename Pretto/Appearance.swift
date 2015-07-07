@@ -36,7 +36,7 @@ class GlobalAppearance {
        UITabBar.appearance().backgroundImage = UIImage()
 //        UITabBar.appearance().backgroundColor = UIColor.orangeColor()
 //        UITabBar.appearance().shadowImage = UIImage()
-        UITabBar.appearance().selectionIndicatorImage = UIImage(named: "TabBarSelectedBlue")
+//        UITabBar.appearance().selectionIndicatorImage = UIImage(named: "TabBarSelectedBlue")
 
     }
     

@@ -34,6 +34,7 @@ class AddUsersAddedUserCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.None
+        userNameLabel.textColor = UIColor.darkGrayColor()
 
     }
 

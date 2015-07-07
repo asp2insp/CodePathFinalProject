@@ -17,7 +17,8 @@ class AddEventLocationCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        cellTitle.textColor = UIColor.lightGrayColor()
+        cellTitle.textColor = UIColor.prettoOrange()
+        cellContent.textColor = UIColor.darkGrayColor()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -138,11 +138,11 @@ extension CreateEventViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            return 100
+            return 120
         case (1, 1), (2, 1):
             return 180
         default:
-            return 58
+            return 70
         }
     }
     
@@ -159,6 +159,7 @@ extension CreateEventViewController: UITableViewDelegate {
                     tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Top)
                 }
                 tableView.endUpdates()
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 3), atScrollPosition: .Bottom, animated: true)
             } else {
                 self.shouldDisplayPickerForStartDate = false
                 tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: .Top)
@@ -175,6 +176,7 @@ extension CreateEventViewController: UITableViewDelegate {
                     tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: .Top)
                 }
                 tableView.endUpdates()
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 3), atScrollPosition: .Bottom, animated: true)
             } else {
                 self.shouldDisplayPickerForEndDate = false
                 tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Top)
