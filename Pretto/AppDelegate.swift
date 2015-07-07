@@ -44,8 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         // Initialize Parse.
         Parse.enableLocalDatastore()
         Parse.setApplicationId("EwtAHVSdrZseylxvkalCaMQ3aTWknFUgnhJRcozx", clientKey: "kA7v5dqEEndRpZgcOsL2G4jitdGuPzj63xmYm7xZ")
+        PFUser.enableRevocableSessionInBackground()
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-        
+
         if application.applicationState != UIApplicationState.Background {
             // Track an app open here if we launch with a push, unless
             // "content_available" was used to trigger a background push (introduced in iOS 7).
@@ -60,10 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
             }
             
             if (preBackgroundPush || oldPushHandlerOnly || pushPayload) {
-                PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+                PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: { (success:Bool, error:NSError?) -> Void in
+                    if !success {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    }
+                })
             }
         }
-        
+
         if application.respondsToSelector("registerUserNotificationSettings:") {
             let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
             let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
@@ -73,8 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
             application.registerForRemoteNotifications()
         }
         
-//        // Register for Push Notitications
-//        application.registerForRemoteNotifications()
         application.setMinimumBackgroundFetchInterval(30)
         
         // check user and start a storyboard accordingly
@@ -233,7 +236,7 @@ extension AppDelegate {
     }
     
     func showIntroWindow() {
-        println("showIntroWindow")
+        println("AppDelegate : showIntroWindow")
         var introViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IntroViewController") as! IntroViewController
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = introViewController
@@ -241,7 +244,7 @@ extension AppDelegate {
     }
     
     func showLandingWindow() {
-        println("Show Landing Notification Received")
+        println("AppDelegate : Show Landing Notification Received")
         var landingViewController = CustomLandingViewController()
         landingViewController.fields = .Facebook | .SignUpButton
         landingViewController.delegate = self
@@ -251,7 +254,7 @@ extension AppDelegate {
     }
     
     func showLoginWindow() {
-        println("Show Login Notification Received")
+        println("AppDelegate : Show Login Notification Received")
         var logInViewController = CustomLoginViewController()
         logInViewController.fields = .Facebook | .UsernameAndPassword | .PasswordForgotten | .LogInButton | .DismissButton
         logInViewController.delegate = self
@@ -262,7 +265,7 @@ extension AppDelegate {
     }
     
     func startMainStoryBoard() {
-        println("startMainStoryBoard")
+        println("AppDelegate : startMainStoryBoard")
         self.window = UIWindow(frame:UIScreen.mainScreen().bounds)
         var mainSB = UIStoryboard(name: "Main", bundle: nil)
         let viewController = mainSB.instantiateInitialViewController() as! UITabBarController

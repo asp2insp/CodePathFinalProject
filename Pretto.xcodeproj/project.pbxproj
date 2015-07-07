@@ -42,6 +42,7 @@
 		16D3AA341B2E476E00934948 /* AddEventTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */; };
 		16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */; };
 		16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */; };
+		16EF4CDF1B4C4DF600A93A8A /* ParseErrorHandlingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EF4CDE1B4C4DF600A93A8A /* ParseErrorHandlingController.swift */; };
 		605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FBBBC1B2E571F002E7A75 /* Friend.swift */; };
 		606748D21B37765400B33AAB /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606748D11B37765400B33AAB /* RequestCell.swift */; };
 		606748D41B37864300B33AAB /* InvitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606748D31B37864300B33AAB /* InvitationCell.swift */; };
@@ -110,6 +111,7 @@
 		16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventTitleCell.swift; sourceTree = "<group>"; };
 		16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDateCell.swift; sourceTree = "<group>"; };
 		16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDatePickerCell.swift; sourceTree = "<group>"; };
+		16EF4CDE1B4C4DF600A93A8A /* ParseErrorHandlingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseErrorHandlingController.swift; sourceTree = "<group>"; };
 		605FBBBA1B2E4BD7002E7A75 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		605FBBBC1B2E571F002E7A75 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		606748D11B37765400B33AAB /* RequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 		FE45EE3A1B1FE5DF00F39BF8 /* Pretto */ = {
 			isa = PBXGroup;
 			children = (
+				16EF4CDE1B4C4DF600A93A8A /* ParseErrorHandlingController.swift */,
 				1636920A1B3A6772006606A2 /* Utils.swift */,
 				1684BBFD1B3391D000CBCDC1 /* Appearance */,
 				1628DCF31B30BE63005E0841 /* EventManager */,
@@ -534,6 +537,7 @@
 				FE1D2D0F1B34B5E000D4485F /* ModelsIndex.swift in Sources */,
 				FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */,
 				FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */,
+				16EF4CDF1B4C4DF600A93A8A /* ParseErrorHandlingController.swift in Sources */,
 				606748D41B37864300B33AAB /* InvitationCell.swift in Sources */,
 				1636920D1B3A913B006606A2 /* FutureEventCell.swift in Sources */,
 				1628DCFF1B321477005E0841 /* CustomLandingViewController.swift in Sources */,

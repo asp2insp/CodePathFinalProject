@@ -31,6 +31,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cameraView.hidden = true
         shouldPresentFutureEvents = false
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "tappedOnCamera", name: kUserDidPressCameraNotification, object: nil)
@@ -76,7 +77,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        cameraView.hidden = false
+        cameraView.hidden = true
         shouldPresentFutureEvents = false
         photoPicker = UIImagePickerController()
         self.observer = NSNotificationCenter.defaultCenter().addObserverForName(kNewPhotoForEventNotification, object: nil, queue: nil) { (note) -> Void in
@@ -116,6 +117,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             Invitation.getAllLiveEvents() { (invites) -> Void in
                 self.liveInvitations = invites
                 if self.liveInvitations.count > 0 {
+                    cameraView.hidden = false
                     for invite in self.liveInvitations {
                         invite.pinInBackground()
                         invite.updateFromCameraRoll()

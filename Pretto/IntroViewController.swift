@@ -42,7 +42,7 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewDidLoad() {
-        println("viewDidLoad")
+        println("IntroViewController : viewDidLoad")
         super.viewDidLoad()
         //scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
         scrollView.delegate = self
