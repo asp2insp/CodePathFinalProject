@@ -36,7 +36,6 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        cameraView.hidden = false
         // Scale up to maximum
         flowLayout.itemSize = aspectScaleWithConstraints(flowLayout.itemSize, scale: 10, max: maxSize, min: minSize)
         self.refreshControl.beginRefreshing()
@@ -97,7 +96,6 @@ extension EventDetailViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         println("Preparing for Segue with image index \(selectedIndex)")
-        cameraView.hidden = true
         let singlePhotoVC = segue.destinationViewController as! SinglePhotoViewController
         singlePhotoVC.photos = self.photos
         singlePhotoVC.initialIndex = self.selectedIndex ?? 0
