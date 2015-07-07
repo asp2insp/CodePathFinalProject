@@ -30,6 +30,8 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     var eventTitle: String!
     var eventPhoto: UIImage?
     
+    var location : CLLocationCoordinate2D?
+    
     var titleTextField: UITextField?
     
     @IBAction func onCancel(sender: UIBarButtonItem) {
@@ -87,12 +89,22 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "AddUsersSegue" {
+        if segue.identifier == nil {
+            return
+        }
+        switch segue.identifier! {
+        case "AddUsersSegue":
             var destinationVC = segue.destinationViewController as! CreateEventAddUsersViewController
             destinationVC.startDate = self.startDate ?? NSDate()
             destinationVC.endDate = self.endDate ?? NSDate()
             destinationVC.eventTitle = self.eventTitle
             destinationVC.eventPhoto = self.eventPhoto
+            destinationVC.location = self.location
+        case "SetLocationSegue":
+            var destinationVC = segue.destinationViewController as! CreateEventAddLocationViewController
+            destinationVC.parent = self
+        default:
+            break
         }
     }
 

@@ -13,10 +13,9 @@ import Social
 
 let AddedUserCellReuseIdentifier = "AddedUserCell"
 
-class CreateEventAddUsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UITextFieldDelegate, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate {
+class CreateEventAddUsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UITextFieldDelegate, MFMailComposeViewControllerDelegate {
     
-    var locationManager = CLLocationManager()
-    var location : CLLocation?
+    var location : CLLocationCoordinate2D?
     var locationString: String?
     
     var startDate: NSDate!
@@ -59,8 +58,8 @@ class CreateEventAddUsersViewController: UIViewController, UITableViewDelegate, 
         newEvent.pincode = "1111"
         newEvent.startDate = self.startDate
         newEvent.endDate = self.endDate
-        newEvent.latitude = self.location?.coordinate.latitude ?? 37.770789
-        newEvent.longitude = self.location?.coordinate.longitude ?? -122.403918
+        newEvent.latitude = self.location?.latitude ?? 37.770789
+        newEvent.longitude = self.location?.longitude ?? -122.403918
         newEvent.locationName = "TODO"
         newEvent.admins = [PFUser.currentUser()!]
         newEvent.guests = [PFUser.currentUser()!]
@@ -176,11 +175,6 @@ class CreateEventAddUsersViewController: UIViewController, UITableViewDelegate, 
     
     override func viewDidAppear(animated: Bool) {
         cameraView.hidden = true
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.delegate = self
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
     }
 
     override func didReceiveMemoryWarning() {
@@ -290,16 +284,6 @@ extension CreateEventAddUsersViewController : UITextFieldDelegate {
     }
 }
 
-// MARK: CLLocationManagerDelegate
-extension CreateEventAddUsersViewController : CLLocationManagerDelegate {
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        let newLocation = locations.last as! CLLocation
-        println("Got location \(newLocation)")
-        self.location = newLocation
-        locationManager.stopUpdatingLocation()
-    }
-}
-
 
 // MARK: MFMailComposeViewControllerDelegate
 extension CreateEventAddUsersViewController : MFMailComposeViewControllerDelegate {
@@ -371,7 +355,7 @@ extension CreateEventAddUsersViewController {
         
         // Add Data to Summary Card
         if self.location != nil {
-            CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: self.location!.coordinate.latitude, longitude: self.location!.coordinate.longitude), completionHandler: { (markers, error) -> Void in
+            CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: self.location!.latitude, longitude: self.location!.longitude), completionHandler: { (markers, error) -> Void in
                 if markers.count > 0 {
                     let marker = markers[0] as! CLPlacemark
                     let locality = marker.locality ?? ""

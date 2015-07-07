@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Sin-eM-ad7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Sin-eM-ad7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -766,7 +766,44 @@
                     <view key="view" contentMode="scaleToFill" id="pth-rK-LlU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Z2s-MQ-SNp">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="554"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFb-n8-LNo">
+                                <rect key="frame" x="277" y="562" width="87" height="30"/>
+                                <state key="normal" title="Set Location">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapSetLocation" destination="V6F-ps-Sio" eventType="touchUpInside" id="04p-Ao-bN2"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pin" translatesAutoresizingMaskIntoConstraints="NO" id="hav-oE-CXb">
+                                <rect key="frame" x="288" y="253" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="RGh-PK-8mw"/>
+                                    <constraint firstAttribute="height" constant="24" id="zKE-DT-tl2"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Z2s-MQ-SNp" firstAttribute="centerX" secondItem="hav-oE-CXb" secondAttribute="centerX" id="2tA-uw-2PN"/>
+                            <constraint firstItem="QFb-n8-LNo" firstAttribute="top" secondItem="Z2s-MQ-SNp" secondAttribute="bottom" constant="8" id="7uv-Mp-6Oe"/>
+                            <constraint firstItem="zB9-tr-Cx0" firstAttribute="top" secondItem="Z2s-MQ-SNp" secondAttribute="bottom" id="EAl-13-wiy"/>
+                            <constraint firstItem="Z2s-MQ-SNp" firstAttribute="centerY" secondItem="hav-oE-CXb" secondAttribute="centerY" constant="12" id="HhO-h0-AG1"/>
+                            <constraint firstItem="Z2s-MQ-SNp" firstAttribute="top" secondItem="pth-rK-LlU" secondAttribute="top" id="J8p-7M-P09"/>
+                            <constraint firstItem="zB9-tr-Cx0" firstAttribute="top" secondItem="QFb-n8-LNo" secondAttribute="bottom" constant="8" id="g3l-Ml-rbm"/>
+                            <constraint firstItem="Z2s-MQ-SNp" firstAttribute="leading" secondItem="pth-rK-LlU" secondAttribute="leading" id="nkb-Vb-YJ8"/>
+                            <constraint firstAttribute="trailing" secondItem="Z2s-MQ-SNp" secondAttribute="trailing" id="ymm-Sa-Ye4"/>
+                            <constraint firstAttribute="centerX" secondItem="QFb-n8-LNo" secondAttribute="centerX" constant="-20.5" id="yo8-O6-0Pj"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="EAl-13-wiy"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Add Location" id="Xl8-3G-GJW">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="pcc-gx-eY9">
@@ -775,6 +812,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="Z2s-MQ-SNp" id="qY0-mE-2z1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofd-vK-Nff" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="UGv-Fc-QGE" userLabel="Exit" sceneMemberID="exit"/>
@@ -1313,6 +1353,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Pin" width="48" height="86"/>
         <image name="TabBarPhotosIcon" width="44" height="35"/>
         <image name="TabBarSearchIcon" width="23" height="24"/>
         <image name="TabBarStuffIconWide" width="23" height="19"/>
