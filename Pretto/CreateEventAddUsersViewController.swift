@@ -379,7 +379,7 @@ extension CreateEventAddUsersViewController {
             completionView.eventLocation.text = "Location TBD"
         }
         completionView.eventTItle.text = self.eventTitle
-        dateFormatter.dateFormat = "MMM dd, yyyy - hh:mm a"
+        dateFormatter.dateFormat = "MMM dd, hh:mm a"
         completionView.eventStartDate.text = dateFormatter.stringFromDate(startDate)
         completionView.eventEndDate.text = dateFormatter.stringFromDate(endDate)
         

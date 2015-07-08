@@ -22,8 +22,17 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     var refreshControl : UIRefreshControl!
     var refreshCount = 0
     
+    private let emptyBackgroundView = UIView(frame: UIScreen.mainScreen().bounds)
+    private let emptyNotificationsView = UIImageView(image: UIImage(named: "NotificationsEmptyCircle2"))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        emptyNotificationsView.frame = CGRect(x: 0, y: 0, width: 240, height: 240)
+        emptyBackgroundView.addSubview(emptyNotificationsView)
+        emptyBackgroundView.bringSubviewToFront(emptyNotificationsView)
+        emptyNotificationsView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2 - 50)
+        tableView.backgroundView = emptyBackgroundView
         
         self.tableView.estimatedRowHeight = 78
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -31,11 +40,12 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
-        refreshData()
+//        refreshData()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+        refreshData()
     }
     
     func refreshData() {
@@ -44,6 +54,12 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
             if let notifications = notifications {
                 self.notifications = notifications
                 if --self.refreshCount == 0 {
+                    println("Notifications \(self.notifications.count)")
+                    if self.notifications.count > 0 || self.upcomingInvitations.count > 0 || self.requests.count > 0 {
+                        self.emptyNotificationsView.hidden = true
+                    } else {
+                        self.emptyNotificationsView.hidden = false
+                    }
                     self.tableView.reloadData()
                     self.refreshControl.endRefreshing()
                 }
@@ -52,14 +68,27 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
         Invitation.getAllLiveAndFutureNonAcceptedEvents() {invites in
             self.upcomingInvitations = invites
             if --self.refreshCount == 0 {
+                println("upcomingInvitations \(self.upcomingInvitations.count)")
+                if self.notifications.count > 0 || self.upcomingInvitations.count > 0 || self.requests.count > 0 {
+                    self.emptyNotificationsView.hidden = true
+                } else {
+                    self.emptyNotificationsView.hidden = false
+                }
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
             }
         }
+        
         Request.getAllPendingRequests() {requests in
             if let requests = requests {
                 self.requests = self.groupByRequester(requests)
                 if --self.refreshCount == 0 {
+                    println("requests \(self.requests.count)")
+                    if self.notifications.count > 0 || self.upcomingInvitations.count > 0 || self.requests.count > 0 {
+                        self.emptyNotificationsView.hidden = true
+                    } else {
+                        self.emptyNotificationsView.hidden = false
+                    }
                     self.tableView.reloadData()
                     self.refreshControl.endRefreshing()
                 }

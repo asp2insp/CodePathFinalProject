@@ -28,11 +28,15 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     private var searchBar: UISearchBar!
     private var shouldPresentFutureEvents: Bool!
     
+    private let emptyBackgroundView = UIView(frame: UIScreen.mainScreen().bounds)
+    private let emptyNotificationsView = UIImageView(image: UIImage(named: "UpcomingEmptyCircle"))
+    
     private var photoPicker: UIImagePickerController!
     var observer : NSObjectProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = UIColor.prettoLightGrey()
         cameraView.hidden = true
         shouldPresentFutureEvents = false
@@ -45,6 +49,14 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         tableView.backgroundColor = UIColor.prettoLightGrey()
         tableView.separatorColor = UIColor.clearColor()
         tableView.registerNib(UINib(nibName: "NoAlbumsCell", bundle: nil), forCellReuseIdentifier: noAlbumsCellReuseIdentifier)
+        
+        
+        emptyNotificationsView.frame = CGRect(x: 0, y: 0, width: 240, height: 240)
+        emptyBackgroundView.addSubview(emptyNotificationsView)
+        emptyBackgroundView.bringSubviewToFront(emptyNotificationsView)
+        emptyNotificationsView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2 - 90)
+        tableView.backgroundView = emptyBackgroundView
+        emptyNotificationsView.hidden = true
         
         searchBar = UISearchBar()
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
@@ -108,13 +120,19 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     func refreshData() {
         if shouldPresentFutureEvents! {
-            Invitation.getAllLiveAndFutureNonAcceptedEvents { (invites) -> Void in
+            Invitation.getAllFutureEvents { (invites) -> Void in
                 self.futureInvitations = invites
+                if self.futureInvitations.count > 0 {
+                    self.emptyNotificationsView.hidden = true
+                } else {
+                    self.emptyNotificationsView.hidden = false
+                }
+                self.tableView.reloadData()
             }
         } else {
-            
             Invitation.getAllPastEvents() { (invites) -> Void in
                 self.pastInvitations = invites
+                self.tableView.reloadData()
             }
             
             Invitation.getAllLiveEvents() { (invites) -> Void in
@@ -158,7 +176,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             var eventToEdit: Event = eventInvite.event
             destination.startDate = eventToEdit.startDate
             destination.endDate = eventToEdit.endDate
-            destination.eventPhoto = UIImage(data: eventToEdit.coverPhoto!.getData()!) ?? nil
+            destination.eventPhoto = eventToEdit.coverPhoto != nil ? UIImage(data: eventToEdit.coverPhoto!.getData()!) : nil
             destination.eventTitle = eventToEdit.title
         } else if segue.identifier == "CreateEventSegue" {
             cameraView.hidden = true
@@ -189,14 +207,18 @@ extension AlbumGeneralViewController {
             })
             shouldPresentFutureEvents = false
             tableView.separatorColor = UIColor.clearColor()
+            self.emptyNotificationsView.hidden = true
+            tableView.reloadData()
         } else {
             UIView.animateWithDuration(0.2, animations: { () -> Void in
                 self.segmentedControlUnderlineView.frame.origin.x = self.view.center.x
             })
             shouldPresentFutureEvents = true
             tableView.separatorColor = futureInvitations.count > 0 ?  UIColor.prettoBlue() : UIColor.clearColor()
+            
+            self.refreshData()
         }
-        tableView.reloadData()
+        
     }
 
 }
@@ -304,21 +326,6 @@ extension AlbumGeneralViewController : UITableViewDataSource {
             }
         }
     }
-    
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if shouldPresentFutureEvents! {
-//            return nil
-//        } else {
-//            switch section {
-//            case 0:
-//                return liveInvitations.count > 0 ? "Live Events" : nil
-//            case 1:
-//                return pastInvitations.count > 0 ? "Past Events" : nil
-//            default:
-//                return nil
-//            }
-//        }
-//    }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var headerView = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 30))

@@ -182,6 +182,9 @@ extension CreateEventViewController: UITableViewDelegate {
                 tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Top)
                 
             }
+        case (3, 1):
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddEventPrivacyCell
+            cell.isPublicSwitch.setOn(!cell.isPublicSwitch.on, animated: true)
 
         default:
             self.titleTextField?.resignFirstResponder()
