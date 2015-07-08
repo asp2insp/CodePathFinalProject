@@ -31,7 +31,7 @@ class SinglePhotoViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        cameraView.hidden = true
         activityIndicator.center = self.view.center
         let pageCount = photos.count
         

@@ -36,6 +36,7 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        cameraView.hidden = true
         // Scale up to maximum
         flowLayout.itemSize = aspectScaleWithConstraints(flowLayout.itemSize, scale: 10, max: maxSize, min: minSize)
         self.refreshControl.beginRefreshing()

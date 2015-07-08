@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--NOTIFICATIONS-->
@@ -388,14 +389,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l6K-jb-CAb">
-                                                    <rect key="frame" x="16" y="3" width="549" height="30"/>
+                                                    <rect key="frame" x="16" y="3" width="552" height="30"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hz-kL-74K">
-                                                    <rect key="frame" x="569" y="6" width="23" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                                    <rect key="frame" x="573" y="10" width="19" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -617,6 +618,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="f1N-n7-lXG">
+                                <rect key="frame" x="280" y="555" width="39" height="37"/>
+                            </pageControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCN-9R-PYJ">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <connections>
+                                    <outlet property="delegate" destination="opu-8P-OrL" id="dYt-7K-HaY"/>
+                                </connections>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zk3-de-Cb7">
                                 <rect key="frame" x="547" y="28" width="37" height="30"/>
                                 <state key="normal" title="Done">
@@ -627,15 +637,6 @@
                                     <action selector="onDone:" destination="opu-8P-OrL" eventType="touchUpInside" id="LKu-Rc-agD"/>
                                 </connections>
                             </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="f1N-n7-lXG">
-                                <rect key="frame" x="280" y="555" width="39" height="37"/>
-                            </pageControl>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCN-9R-PYJ">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <connections>
-                                    <outlet property="delegate" destination="opu-8P-OrL" id="dYt-7K-HaY"/>
-                                </connections>
-                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -841,6 +842,7 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="yRa-am-4em">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1001,7 +1003,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2hf-QG-AMI">
-                                <rect key="frame" x="0.0" y="97" width="600" height="459"/>
+                                <rect key="frame" x="0.0" y="104" width="600" height="452"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1166,7 +1168,7 @@
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="MARY'S BIRTHDAY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dU-vF-K76">
                                                             <rect key="frame" x="56" y="8" width="206" height="16"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1268,7 +1270,7 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="MARY'S BIRTHDAY IN THE JUNGLE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZE-Sp-VMH">
                                                             <rect key="frame" x="60" y="15" width="491" height="16"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1306,11 +1308,21 @@
                                 </prototypes>
                             </tableView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8b1-qQ-tHm">
-                                <rect key="frame" x="0.0" y="64" width="600" height="28"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="35"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L9g-iY-cOC">
+                                        <rect key="frame" x="0.0" y="32" width="300" height="3"/>
+                                        <color key="backgroundColor" red="0.96078431372549022" green="0.65098039215686276" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="3" id="UHW-v6-ajA"/>
+                                        </constraints>
+                                    </view>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="O7l-GV-A4G">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="29"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="D5z-MM-Uro"/>
+                                        </constraints>
                                         <segments>
                                             <segment title="ALBUMS"/>
                                             <segment title="UPCOMING"/>
@@ -1319,22 +1331,35 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="L9g-iY-cOC" firstAttribute="leading" secondItem="8b1-qQ-tHm" secondAttribute="leading" id="1tp-Ej-Z2O"/>
                                     <constraint firstItem="O7l-GV-A4G" firstAttribute="leading" secondItem="8b1-qQ-tHm" secondAttribute="leading" id="CXr-o9-wsM"/>
+                                    <constraint firstAttribute="bottom" secondItem="L9g-iY-cOC" secondAttribute="bottom" id="FLj-uz-SLp"/>
                                     <constraint firstItem="O7l-GV-A4G" firstAttribute="top" secondItem="8b1-qQ-tHm" secondAttribute="top" id="IPi-Zy-1OX"/>
                                     <constraint firstAttribute="bottom" secondItem="O7l-GV-A4G" secondAttribute="bottom" id="icG-6s-XmY"/>
+                                    <constraint firstItem="L9g-iY-cOC" firstAttribute="width" secondItem="O7l-GV-A4G" secondAttribute="width" multiplier="0.5" id="oDe-Lt-ETe"/>
                                     <constraint firstAttribute="trailing" secondItem="O7l-GV-A4G" secondAttribute="trailing" id="pRE-1l-XAV"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BvO-1Z-VJ9">
+                                <rect key="frame" x="0.0" y="99" width="600" height="5"/>
+                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="fo0-jn-kZx"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="8b1-qQ-tHm" secondAttribute="trailing" id="0ID-gq-hoT"/>
+                            <constraint firstItem="BvO-1Z-VJ9" firstAttribute="top" secondItem="8b1-qQ-tHm" secondAttribute="bottom" id="2Jh-gf-GZ3"/>
                             <constraint firstItem="IDH-fS-Buu" firstAttribute="top" secondItem="2hf-QG-AMI" secondAttribute="bottom" id="CAw-51-Ee2"/>
                             <constraint firstItem="8b1-qQ-tHm" firstAttribute="leading" secondItem="Vl0-lf-H1I" secondAttribute="leading" id="Dn3-x1-I5Z"/>
                             <constraint firstItem="8b1-qQ-tHm" firstAttribute="top" secondItem="twd-Dv-gmJ" secondAttribute="bottom" id="Kd3-IK-1DL"/>
-                            <constraint firstItem="2hf-QG-AMI" firstAttribute="top" secondItem="8b1-qQ-tHm" secondAttribute="bottom" constant="5" id="Tkd-im-mLo"/>
+                            <constraint firstAttribute="trailing" secondItem="BvO-1Z-VJ9" secondAttribute="trailing" id="aKg-XE-lwV"/>
                             <constraint firstAttribute="trailing" secondItem="2hf-QG-AMI" secondAttribute="trailing" id="cja-er-6bd"/>
+                            <constraint firstItem="2hf-QG-AMI" firstAttribute="top" secondItem="BvO-1Z-VJ9" secondAttribute="bottom" id="mYZ-T6-rDK"/>
                             <constraint firstItem="2hf-QG-AMI" firstAttribute="leading" secondItem="Vl0-lf-H1I" secondAttribute="leading" id="ndd-L0-pQ7"/>
+                            <constraint firstItem="BvO-1Z-VJ9" firstAttribute="leading" secondItem="Vl0-lf-H1I" secondAttribute="leading" id="oLk-Zy-Zbf"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -1349,6 +1374,8 @@
                     <connections>
                         <outlet property="segmentedControl" destination="O7l-GV-A4G" id="DgN-Qo-ovE"/>
                         <outlet property="segmentedControlContainerView" destination="8b1-qQ-tHm" id="wZI-OJ-GpY"/>
+                        <outlet property="segmentedControlUnderlineView" destination="L9g-iY-cOC" id="k17-w6-xVe"/>
+                        <outlet property="separatorView" destination="BvO-1Z-VJ9" id="NOJ-uM-per"/>
                         <outlet property="tableView" destination="2hf-QG-AMI" id="tgM-DB-UGi"/>
                         <segue destination="QHM-MY-pEb" kind="show" identifier="AlbumDetailSegue" id="iU5-IK-ejn"/>
                     </connections>
@@ -1365,6 +1392,6 @@
         <image name="TabBarStuffIconWide" width="23" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JfU-Cb-Zvt"/>
+        <segue reference="BF4-eI-bfI"/>
     </inferredMetricsTieBreakers>
 </document>

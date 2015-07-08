@@ -17,6 +17,8 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet var tableView: UITableView!
     @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var segmentedControlContainerView: UIView!
+    @IBOutlet weak var segmentedControlUnderlineView: UIView!
+    @IBOutlet weak var separatorView: UIView!
     
     private var refreshControl : UIRefreshControl!
     private var liveInvitations : [Invitation] = []
@@ -31,6 +33,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.prettoLightGrey()
         cameraView.hidden = true
         shouldPresentFutureEvents = false
         
@@ -56,12 +59,13 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
         
+        separatorView.backgroundColor = UIColor.prettoLightGrey()
         segmentedControl.tintColor = UIColor.clearColor()
-        segmentedControl.backgroundColor = UIColor.prettoBlue()
-        segmentedControlContainerView.backgroundColor = UIColor.prettoBlue()
+        segmentedControl.backgroundColor = UIColor.clearColor()
+        segmentedControlContainerView.backgroundColor = UIColor.prettoLightGrey()
         segmentedControl.addTarget(self, action: "segmentedControlValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
-        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: UIControlState.Normal)
-        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor(), NSUnderlineStyleAttributeName:NSUnderlineStyle.StyleThick.rawValue], forState: UIControlState.Selected)
+        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.prettoBlue()], forState: UIControlState.Normal)
+        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.prettoOrange()], forState: UIControlState.Selected)
 
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
@@ -137,6 +141,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func createEvent() {
+        
         self.performSegueWithIdentifier("CreateEventSegue", sender: nil)
     }
 
@@ -155,6 +160,8 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             destination.endDate = eventToEdit.endDate
             destination.eventPhoto = UIImage(data: eventToEdit.coverPhoto!.getData()!) ?? nil
             destination.eventTitle = eventToEdit.title
+        } else if segue.identifier == "CreateEventSegue" {
+            cameraView.hidden = true
         }
     }
 
@@ -175,20 +182,25 @@ extension AlbumGeneralViewController {
     }
     
     func segmentedControlValueChanged(sender: UISegmentedControl) {
+        searchBar.resignFirstResponder()
         if segmentedControl.selectedSegmentIndex == 0 {
-//            segmentedControl.setTitle("> Live & Past", forSegmentAtIndex: 0)
-//            segmentedControl.setTitle("Upcoming", forSegmentAtIndex: 1)
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                self.segmentedControlUnderlineView.frame.origin.x = 0
+            })
             shouldPresentFutureEvents = false
             tableView.separatorColor = UIColor.clearColor()
         } else {
-//            segmentedControl.setTitle("Live & Past", forSegmentAtIndex: 0)
-//            segmentedControl.setTitle("> Upcoming", forSegmentAtIndex: 1)
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                self.segmentedControlUnderlineView.frame.origin.x = self.view.center.x
+            })
             shouldPresentFutureEvents = true
-            tableView.separatorColor = UIColor.prettoBlue()
+            tableView.separatorColor = futureInvitations.count > 0 ?  UIColor.prettoBlue() : UIColor.clearColor()
         }
         tableView.reloadData()
     }
+
 }
+
 
 // MARK: UIImagePickerControllerDelegate
 extension AlbumGeneralViewController: UIImagePickerControllerDelegate {
@@ -203,6 +215,10 @@ extension AlbumGeneralViewController: UIImagePickerControllerDelegate {
 // MARK: UITableViewDelegate
 
 extension AlbumGeneralViewController: UITableViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if shouldPresentFutureEvents! {
             if futureInvitations.count > 0 {
@@ -216,6 +232,14 @@ extension AlbumGeneralViewController: UITableViewDelegate {
             } else {
                 return 420
             }
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if shouldPresentFutureEvents! {
+            return 0
+        } else {
+            return 30
         }
     }
     
@@ -281,32 +305,54 @@ extension AlbumGeneralViewController : UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        if shouldPresentFutureEvents! {
+//            return nil
+//        } else {
+//            switch section {
+//            case 0:
+//                return liveInvitations.count > 0 ? "Live Events" : nil
+//            case 1:
+//                return pastInvitations.count > 0 ? "Past Events" : nil
+//            default:
+//                return nil
+//            }
+//        }
+//    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var headerView = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 30))
+        headerView.contentView.backgroundColor = UIColor.prettoLightGrey()
+        let headerTitle = UILabel(frame: CGRect(x: headerView.frame.origin.x +  12, y: headerView.frame.origin.y, width: headerView.frame.width - 16, height: headerView.frame.height))
+        headerTitle.backgroundColor = UIColor.clearColor()
+        headerTitle.font = UIFont.systemFontOfSize(17, weight: UIFontWeightLight)
+        headerTitle.textColor = UIColor.prettoBlue()
+        headerView.addSubview(headerTitle)
+        headerView.bringSubviewToFront(headerTitle)
+        
         if shouldPresentFutureEvents! {
-            return "Upcoming Events"
+            return nil
+//            headerView = UITableViewHeaderFooterView(frame: CGRectZero)
+//            headerView.contentView.backgroundColor = UIColor.prettoLightGrey()
         } else {
             switch section {
             case 0:
-                return liveInvitations.count > 0 ? "Live Events" : nil
+                if liveInvitations.count > 0 {
+                    headerTitle.text = "Live Events"
+                } else {
+                    return nil
+                }
             case 1:
-                return pastInvitations.count > 0 ? "Past Events" : nil
+                if pastInvitations.count > 0 {
+                    headerTitle.text = "Past Events"
+                } else {
+                    return nil
+                }
             default:
                 return nil
             }
         }
-    }
-    
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if shouldPresentFutureEvents! {
-            var headerView = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 30))
-            headerView.contentView.backgroundColor = UIColor.prettoLightGrey()
-            return headerView
-        } else {
-            var headerView = UITableViewHeaderFooterView(frame: CGRectZero)
-            headerView.contentView.backgroundColor = UIColor.prettoLightGrey()
-            return headerView
-        }
-        
+        return headerView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

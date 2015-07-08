@@ -38,7 +38,7 @@ class AddEventDateCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.None
-        self.dateLabel.textColor = UIColor.darkGrayColor()
+        self.dateLabel.textColor = UIColor.lightGrayColor()
         self.startOrEndLabel.textColor = UIColor.prettoOrange()
         self.tintColor = UIColor.whiteColor()
     }

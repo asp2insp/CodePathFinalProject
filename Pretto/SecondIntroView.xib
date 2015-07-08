@@ -29,7 +29,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flash2" translatesAutoresizingMaskIntoConstraints="NO" id="bsl-lD-rLx">
                     <rect key="frame" x="74" y="166" width="23" height="22"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prepare your best smile and pose without having to worry about WHO is taking every picture and video" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="936-KJ-uUH">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prepare your best smile and pose without having to worry about who is taking every picture and video" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="936-KJ-uUH">
                     <rect key="frame" x="30" y="414" width="260" height="54"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="260" id="UhL-qc-qbU"/>

@@ -56,6 +56,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     var titleTextField: UITextField?
     
     @IBAction func onCancel(sender: UIBarButtonItem) {
+        cameraView.hidden = false
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -100,7 +101,6 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         cameraView.hidden = true
-        
         tableView.reloadData()
     }
 
