@@ -131,6 +131,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
 
     func applicationDidEnterBackground(application: UIApplication) {
         println("AppDelegate : applicationDidEnterBackground")
+        var currentInstallation = PFInstallation.currentInstallation()
+        if (currentInstallation.badge != 0) {
+            currentInstallation.badge = 0
+            currentInstallation.saveEventually()
+        }
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -152,6 +157,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kShowLandingWindowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kIntroDidFinishNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kUserDidLogOutNotification, object: nil)
+        var currentInstallation = PFInstallation.currentInstallation()
+        if (currentInstallation.badge != 0) {
+            currentInstallation.badge = 0
+            currentInstallation.saveEventually()
+        }
         
     }
     
