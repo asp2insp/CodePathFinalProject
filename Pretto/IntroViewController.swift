@@ -34,11 +34,9 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
         println("onSkip")
         var notification = NSNotification(name: kIntroDidFinishNotification, object: nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)
+        
         self.dismissViewControllerAnimated(true, completion: nil)
         
-//        var notification = NSNotification(name: kShowLandingWindowNotification, object: nil)
-//        NSNotificationCenter.defaultCenter().postNotification(notification)
-//        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {

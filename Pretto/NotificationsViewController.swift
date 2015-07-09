@@ -9,10 +9,7 @@
 import Foundation
 
 class NotificationsViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, InvitationActionDelegate, RequestActionDelegate {
-    @IBAction func onLogOut(sender: UIBarButtonItem) {
-        var notification = NSNotification(name: kUserDidLogOutNotification, object: nil)
-        NSNotificationCenter.defaultCenter().postNotification(notification)
-    }
+
     @IBOutlet weak var tableView: UITableView!
     var notifications : [Notification] = []
     var upcomingInvitations : [Invitation] = []
@@ -24,6 +21,36 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     
     private let emptyBackgroundView = UIView(frame: UIScreen.mainScreen().bounds)
     private let emptyNotificationsView = UIImageView(image: UIImage(named: "NotificationsEmptyCircle2"))
+    
+    @IBAction func onSettingsButton(sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let settingsVC = storyboard.instantiateViewControllerWithIdentifier("SettingsGeneralViewController") as! SettingsGeneralViewController
+        let snapshotOut = UIApplication.sharedApplication().keyWindow!.snapshotViewAfterScreenUpdates(true)
+        let snapshotIn = settingsVC.view.snapshotViewAfterScreenUpdates(true)
+        snapshotOut.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+        snapshotIn.frame = CGRect(x: UIScreen.mainScreen().bounds.width, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+        UIApplication.sharedApplication().keyWindow!.addSubview(snapshotOut)
+        UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(snapshotOut)
+        UIApplication.sharedApplication().keyWindow!.addSubview(snapshotIn)
+        UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(snapshotIn)
+        
+        UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+            snapshotOut.center = CGPoint(x: -(UIScreen.mainScreen().bounds.width / 2), y: UIScreen.mainScreen().bounds.height / 2)
+            snapshotIn.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2)
+            }) { (success:Bool) -> Void in
+                if success {
+                    self.presentViewController(settingsVC, animated: false, completion: { () -> Void in
+                        snapshotOut.removeFromSuperview()
+                        snapshotIn.removeFromSuperview()
+                    })
+                }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

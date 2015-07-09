@@ -16,7 +16,8 @@ class User {
     
     init(innerUser:PFUser!) {
         inner = innerUser
-        inner.fetchIfNeeded()
+//        inner.fetchIfNeeded()
+        inner.fetchIfNeededInBackground()
     }
     
     var email:String? {
@@ -121,6 +122,7 @@ class User {
     }
     
     class func checkCurrentUser(onValidUser:((User)->Void), otherwise:((PFUser?)->Void)) {
+        println("User : checkCurrentUser")
         var currentUser = PFUser.currentUser()
         if currentUser != nil {
             if PFFacebookUtils.isLinkedWithUser(currentUser!) {
@@ -140,6 +142,7 @@ class User {
     }
     
     class func getMe(onComplete:((User?)->Void)){
+        println("User : getMe")
         var request = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         request.startWithCompletionHandler { (conn:FBSDKGraphRequestConnection!, res:AnyObject!, err:NSError!) -> Void in
             if err == nil && res != nil {
