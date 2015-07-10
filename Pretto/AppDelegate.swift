@@ -287,7 +287,6 @@ extension AppDelegate {
         if let transitionViewController = self.window!.rootViewController as? TransitionViewController {
             transitionViewController.startAnimation { (success) -> Void in
                 if success {
-                    println("MARCA 2")
                     let snapshotOut = UIApplication.sharedApplication().keyWindow!.snapshotViewAfterScreenUpdates(true)
                     let snapshotIn = destinationVC.view.snapshotViewAfterScreenUpdates(true)
                     

@@ -389,13 +389,12 @@ extension AlbumGeneralViewController : UITableViewDataSource {
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier(noAlbumsCellReuseIdentifier, forIndexPath: indexPath) as? NoAlbumsCell
-                let originalCenter = cell!.arrow.center
-                
-                UIView.animateWithDuration(0.6, delay: 0.0, options: .Autoreverse | .Repeat | .CurveEaseOut, animations: { () -> Void in
-                    cell!.arrow.center.y = cell!.arrow.center.y - 10
-                    }, completion: { (sucees:Bool) -> Void in
-                    cell!.arrow.center = originalCenter
-                })
+//                let originalCenter = cell!.arrow.center                
+//                UIView.animateWithDuration(0.6, delay: 0.0, options: .Autoreverse | .Repeat | .CurveEaseOut, animations: { () -> Void in
+//                    cell!.arrow.center.y = cell!.arrow.center.y - 10
+//                    }, completion: { (sucees:Bool) -> Void in
+//                    cell!.arrow.center = originalCenter
+//                })
                 
                 return cell!
             }
