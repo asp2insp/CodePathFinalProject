@@ -178,7 +178,15 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             var eventToEdit: Event = eventInvite.event
             destination.startDate = eventToEdit.startDate
             destination.endDate = eventToEdit.endDate
-            destination.eventPhoto = eventToEdit.coverPhoto != nil ? UIImage(data: eventToEdit.coverPhoto!.getData()!) : nil
+            if eventToEdit.coverPhoto != nil {
+                eventToEdit.coverPhoto!.getDataInBackgroundWithBlock({ (data:NSData?, error:NSError?) -> Void in
+                    destination.eventPhoto = error == nil ? UIImage(data: data!) : nil
+                })
+                
+            } else {
+                destination.eventPhoto = nil
+            }
+
             destination.eventTitle = eventToEdit.title
         } else if segue.identifier == "CreateEventSegue" {
             cameraView.hidden = true
@@ -216,7 +224,7 @@ extension AlbumGeneralViewController {
                 self.segmentedControlUnderlineView.frame.origin.x = self.view.center.x
             })
             shouldPresentFutureEvents = true
-            tableView.separatorColor = futureInvitations.count > 0 ?  UIColor.prettoBlue() : UIColor.clearColor()
+            tableView.separatorColor = futureInvitations.count > 0 ?  UIColor.clearColor() : UIColor.clearColor()
             
             self.refreshData()
         }
@@ -380,6 +388,13 @@ extension AlbumGeneralViewController : UITableViewDataSource {
                 case 0:
 //                    cell.event = liveInvitations[indexPath.row].event
                     cell.invite = liveInvitations[indexPath.row]
+                    if cell.invite!.paused {
+                        cell.statusButton.backgroundColor = UIColor.prettoRed()
+                        cell.statusButton.setTitle("PAUSED", forState: .Normal)
+                    } else {
+                        cell.statusButton.backgroundColor = UIColor.prettoBlue()
+                        cell.statusButton.setTitle("SHARING", forState: .Normal)
+                    }
                 case 1:
 //                    cell.event = pastInvitations[indexPath.row].event
                     cell.invite = pastInvitations[indexPath.row]
