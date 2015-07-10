@@ -311,9 +311,31 @@ extension AppDelegate {
                 }
             }
         } else {
-            self.window!.rootViewController = destinationVC
-            self.window!.makeKeyAndVisible()
-            self.addCameraOverlay()
+            let snapshotOut = UIApplication.sharedApplication().keyWindow!.snapshotViewAfterScreenUpdates(true)
+            let snapshotIn = destinationVC.view.snapshotViewAfterScreenUpdates(true)
+            snapshotOut.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+            snapshotIn.frame = CGRect(x: UIScreen.mainScreen().bounds.width, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+            UIApplication.sharedApplication().keyWindow!.addSubview(snapshotOut)
+            UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(snapshotOut)
+            UIApplication.sharedApplication().keyWindow!.addSubview(snapshotIn)
+            UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(snapshotIn)
+            
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                snapshotOut.center = CGPoint(x: -(UIScreen.mainScreen().bounds.width / 2), y: UIScreen.mainScreen().bounds.height / 2)
+                snapshotIn.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2)
+                }) { (success:Bool) -> Void in
+                    if success {
+                        snapshotOut.removeFromSuperview()
+                        snapshotIn.removeFromSuperview()
+                        self.window!.rootViewController = destinationVC
+                        self.window!.makeKeyAndVisible()
+                        self.addCameraOverlay()
+                    }
+            }
+            
+//            self.window!.rootViewController = destinationVC
+//            self.window!.makeKeyAndVisible()
+//            self.addCameraOverlay()
         }
     }
 }
