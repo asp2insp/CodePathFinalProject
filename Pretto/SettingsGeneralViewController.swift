@@ -29,7 +29,7 @@ class SettingsGeneralViewController: UIViewController {
         UIApplication.sharedApplication().keyWindow!.addSubview(snapshotIn)
         UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(snapshotIn)
         
-        UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
             snapshotOut.center = CGPoint(x: UIScreen.mainScreen().bounds.width * 1.5, y: UIScreen.mainScreen().bounds.height / 2)
             snapshotIn.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2)
             }) { (success:Bool) -> Void in

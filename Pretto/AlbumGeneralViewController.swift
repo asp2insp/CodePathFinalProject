@@ -103,7 +103,9 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self.observer)
+        if self.observer != nil {
+            NSNotificationCenter.defaultCenter().removeObserver(self.observer)
+        }
     }
     
     deinit {

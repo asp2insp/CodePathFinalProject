@@ -28,7 +28,8 @@ let cameraView: UIImageView = UIImageView()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
 
-    var window: UIWindow?
+    var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
+    let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     private var isTheFirstTimeEver = false
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -82,10 +83,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         
         // check user and start a storyboard accordingly
         let isFirstTime: Bool? = NSUserDefaults.standardUserDefaults().objectForKey(kFirstTimeRunningPretto) as? Bool
-        
         if  isFirstTime == nil || isFirstTime == true {
             self.showIntroWindow()
         } else {
+            self.showTransitionScreen()
             self.checkCurrentUser()
         }
         return true
@@ -108,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        println("didReceiveRemoteNotification")
+        println("AppDelegate : didReceiveRemoteNotification")
         PFPush.handlePush(userInfo)
         if application.applicationState == UIApplicationState.Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayloadInBackground(userInfo, block: nil)
@@ -116,13 +117,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-            println("openURL")
+            println("AppDelegate : openURL")
             return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         // TODO - upload new pictures here
         println("AppDelegate : performFetchWithCompletionHandler")
+        completionHandler(UIBackgroundFetchResult.NewData)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -245,10 +247,15 @@ extension AppDelegate {
         self.checkCurrentUser()
     }
     
+    func showTransitionScreen() {
+        var transitionViewController = storyboard.instantiateViewControllerWithIdentifier("TransitionViewController") as! TransitionViewController
+        self.window!.rootViewController = transitionViewController
+        self.window!.makeKeyAndVisible()
+    }
+    
     func showIntroWindow() {
         println("AppDelegate : showIntroWindow")
-        var introViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IntroViewController") as! IntroViewController
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        var introViewController = storyboard.instantiateViewControllerWithIdentifier("IntroViewController") as! IntroViewController
         self.window!.rootViewController = introViewController
         self.window!.makeKeyAndVisible()
     }
@@ -258,7 +265,6 @@ extension AppDelegate {
         var landingViewController = CustomLandingViewController()
         landingViewController.fields = .Facebook | .SignUpButton
         landingViewController.delegate = self
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = landingViewController
         self.window!.makeKeyAndVisible()
     }
@@ -269,20 +275,46 @@ extension AppDelegate {
         logInViewController.fields = .Facebook | .UsernameAndPassword | .PasswordForgotten | .LogInButton | .DismissButton
         logInViewController.delegate = self
         logInViewController.emailAsUsername = true
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = logInViewController
         self.window!.makeKeyAndVisible()
     }
     
     func startMainStoryBoard() {
         println("AppDelegate : startMainStoryBoard")
-        self.window = UIWindow(frame:UIScreen.mainScreen().bounds)
-        var mainSB = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = mainSB.instantiateInitialViewController() as! UITabBarController
-        viewController.selectedIndex = 1
-        self.window!.rootViewController = viewController
-        self.window!.makeKeyAndVisible()
-        self.addCameraOverlay()
+        let destinationVC = storyboard.instantiateInitialViewController() as! UITabBarController
+        destinationVC.selectedIndex = 1
+        
+        if let transitionViewController = self.window!.rootViewController as? TransitionViewController {
+            transitionViewController.startAnimation { (success) -> Void in
+                if success {
+                    println("MARCA 2")
+                    let snapshotOut = UIApplication.sharedApplication().keyWindow!.snapshotViewAfterScreenUpdates(true)
+                    let snapshotIn = destinationVC.view.snapshotViewAfterScreenUpdates(true)
+                    snapshotOut.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+                    snapshotIn.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+                    UIApplication.sharedApplication().keyWindow!.addSubview(snapshotIn)
+                    UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(snapshotIn)
+                    UIApplication.sharedApplication().keyWindow!.addSubview(snapshotOut)
+                    UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(snapshotOut)
+                    
+                    UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                            snapshotOut.transform = CGAffineTransformMakeScale(0.01, 0.01)
+                        }) { (success:Bool) -> Void in
+                            if success {
+                                snapshotOut.removeFromSuperview()
+                                snapshotIn.removeFromSuperview()
+                                self.window!.rootViewController = destinationVC
+                                self.window!.makeKeyAndVisible()
+                                self.addCameraOverlay()
+                            }
+                    }
+                }
+            }
+        } else {
+            self.window!.rootViewController = destinationVC
+            self.window!.makeKeyAndVisible()
+            self.addCameraOverlay()
+        }
     }
 }
 

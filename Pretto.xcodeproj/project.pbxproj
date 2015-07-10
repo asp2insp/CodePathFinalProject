@@ -43,6 +43,9 @@
 		16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */; };
 		16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */; };
 		16ED51241B4EF751005DB0A9 /* SettingsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ED51231B4EF751005DB0A9 /* SettingsGeneralViewController.swift */; };
+		16ED512E1B4F3D0A005DB0A9 /* TransitionScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16ED512D1B4F3D0A005DB0A9 /* TransitionScreen.xib */; };
+		16ED51301B4F3D31005DB0A9 /* TransitionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ED512F1B4F3D31005DB0A9 /* TransitionScreen.swift */; };
+		16ED51321B4F4293005DB0A9 /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ED51311B4F4293005DB0A9 /* TransitionViewController.swift */; };
 		16EF4CDF1B4C4DF600A93A8A /* ParseErrorHandlingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EF4CDE1B4C4DF600A93A8A /* ParseErrorHandlingController.swift */; };
 		605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FBBBC1B2E571F002E7A75 /* Friend.swift */; };
 		606748D21B37765400B33AAB /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606748D11B37765400B33AAB /* RequestCell.swift */; };
@@ -113,6 +116,9 @@
 		16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDateCell.swift; sourceTree = "<group>"; };
 		16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDatePickerCell.swift; sourceTree = "<group>"; };
 		16ED51231B4EF751005DB0A9 /* SettingsGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsGeneralViewController.swift; sourceTree = "<group>"; };
+		16ED512D1B4F3D0A005DB0A9 /* TransitionScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransitionScreen.xib; sourceTree = "<group>"; };
+		16ED512F1B4F3D31005DB0A9 /* TransitionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionScreen.swift; sourceTree = "<group>"; };
+		16ED51311B4F4293005DB0A9 /* TransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
 		16EF4CDE1B4C4DF600A93A8A /* ParseErrorHandlingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseErrorHandlingController.swift; sourceTree = "<group>"; };
 		605FBBBA1B2E4BD7002E7A75 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		605FBBBC1B2E571F002E7A75 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
@@ -196,6 +202,9 @@
 				1649D9E11B38661C00EEA0DD /* FirstIntroView.swift */,
 				1649D9E31B386D9B00EEA0DD /* SecondIntroView.swift */,
 				1649D9E51B386DB000EEA0DD /* ThirdIntroView.swift */,
+				16ED512D1B4F3D0A005DB0A9 /* TransitionScreen.xib */,
+				16ED512F1B4F3D31005DB0A9 /* TransitionScreen.swift */,
+				16ED51311B4F4293005DB0A9 /* TransitionViewController.swift */,
 			);
 			name = Intro;
 			sourceTree = "<group>";
@@ -520,6 +529,7 @@
 				FE45EE481B1FE5DF00F39BF8 /* LaunchScreen.xib in Resources */,
 				1649D9E81B386DC300EEA0DD /* SecondIntroView.xib in Resources */,
 				FE45EE451B1FE5DF00F39BF8 /* Images.xcassets in Resources */,
+				16ED512E1B4F3D0A005DB0A9 /* TransitionScreen.xib in Resources */,
 				1683557E1B35F56A00264F6B /* NoAlbumsCell.xib in Resources */,
 				16354F431B2E6613003D2A2B /* Main.storyboard in Resources */,
 				1649D9EA1B386DCE00EEA0DD /* ThirdIntroView.xib in Resources */,
@@ -594,6 +604,7 @@
 				16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */,
 				1636920B1B3A6772006606A2 /* Utils.swift in Sources */,
 				163692071B38D9FB006606A2 /* ExploreViewController.swift in Sources */,
+				16ED51321B4F4293005DB0A9 /* TransitionViewController.swift in Sources */,
 				1683557C1B35EEC000264F6B /* NoAlbumsCell.swift in Sources */,
 				605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */,
 				FE45EEC21B2E774600F39BF8 /* Invitation.swift in Sources */,
@@ -618,6 +629,7 @@
 				1684BBFA1B334F4500CBCDC1 /* AlbumGeneralViewCell.swift in Sources */,
 				1649D9E61B386DB000EEA0DD /* ThirdIntroView.swift in Sources */,
 				169C9A061B4B0AB100F3CBC4 /* AddEventLocationCell.swift in Sources */,
+				16ED51301B4F3D31005DB0A9 /* TransitionScreen.swift in Sources */,
 				1628DCFD1B31F87E005E0841 /* CustomSignUpViewController.swift in Sources */,
 				1628DCF11B2E7B15005E0841 /* AddUsersAddedUserCell.swift in Sources */,
 				169C9A041B4B0A8A00F3CBC4 /* AddEventPrivacyCell.swift in Sources */,
