@@ -22,23 +22,11 @@ class SettingsGeneralViewController: UIViewController {
         let destinationVC = self.presentingViewController as! UITabBarController
         let snapshotOut = UIApplication.sharedApplication().keyWindow!.snapshotViewAfterScreenUpdates(true)
         let snapshotIn = destinationVC.view.snapshotViewAfterScreenUpdates(true)
-        snapshotOut.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
-        snapshotIn.frame = CGRect(x: -UIScreen.mainScreen().bounds.width, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
-        UIApplication.sharedApplication().keyWindow!.addSubview(snapshotOut)
-        UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(snapshotOut)
-        UIApplication.sharedApplication().keyWindow!.addSubview(snapshotIn)
-        UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(snapshotIn)
-        
-        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-            snapshotOut.center = CGPoint(x: UIScreen.mainScreen().bounds.width * 1.5, y: UIScreen.mainScreen().bounds.height / 2)
-            snapshotIn.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2)
-            }) { (success:Bool) -> Void in
-                if success {
-                    self.dismissViewControllerAnimated(false, completion: { () -> Void in
-                        snapshotOut.removeFromSuperview()
-                        snapshotIn.removeFromSuperview()
-                    })
-                }
+        animateFromLeftToRight(destinationVC, snapshotOut, snapshotIn) { (success) -> () in
+            self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                snapshotIn.removeFromSuperview()
+                snapshotOut.removeFromSuperview()
+            })
         }
     }
     

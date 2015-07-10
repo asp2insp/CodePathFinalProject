@@ -123,12 +123,11 @@ class User {
     
     class func checkCurrentUser(onValidUser:((User)->Void), otherwise:((PFUser?)->Void)) {
         println("User : checkCurrentUser")
-        var currentUser = PFUser.currentUser()
-        if currentUser != nil {
-            if PFFacebookUtils.isLinkedWithUser(currentUser!) {
+        if let currentUser = PFUser.currentUser() {
+            if PFFacebookUtils.isLinkedWithUser(currentUser) {
                 User.getMe({ (me:User?) -> Void in
-                    if me != nil {
-                        onValidUser(me!)
+                    if let me = me {
+                        onValidUser(me)
                     } else {
                         otherwise(currentUser)
                     }
@@ -146,9 +145,9 @@ class User {
         var request = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         request.startWithCompletionHandler { (conn:FBSDKGraphRequestConnection!, res:AnyObject!, err:NSError!) -> Void in
             if err == nil && res != nil {
-                var userData = res as! NSDictionary
+                let userData = res as! NSDictionary
     
-                var user = User(innerUser: PFUser.currentUser())
+                let user = User(innerUser: PFUser.currentUser())
                 user.email = userData["email"] as? String
                 user.name = userData["name"] as? String
                 user.firstName = userData["first_name"] as? String
@@ -160,8 +159,8 @@ class User {
                 
                 User.currentUser = user
                 onComplete(user)
-            }
-            else {
+            
+            } else {
                 onComplete(nil)
             }
         }

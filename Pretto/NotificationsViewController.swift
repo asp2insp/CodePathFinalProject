@@ -24,26 +24,14 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     
     @IBAction func onSettingsButton(sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let settingsVC = storyboard.instantiateViewControllerWithIdentifier("SettingsGeneralViewController") as! SettingsGeneralViewController
+        let destinationVC = storyboard.instantiateViewControllerWithIdentifier("SettingsGeneralViewController") as! SettingsGeneralViewController
         let snapshotOut = UIApplication.sharedApplication().keyWindow!.snapshotViewAfterScreenUpdates(true)
-        let snapshotIn = settingsVC.view.snapshotViewAfterScreenUpdates(true)
-        snapshotOut.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
-        snapshotIn.frame = CGRect(x: UIScreen.mainScreen().bounds.width, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
-        UIApplication.sharedApplication().keyWindow!.addSubview(snapshotOut)
-        UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(snapshotOut)
-        UIApplication.sharedApplication().keyWindow!.addSubview(snapshotIn)
-        UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(snapshotIn)
-        
-        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-            snapshotOut.center = CGPoint(x: -(UIScreen.mainScreen().bounds.width / 2), y: UIScreen.mainScreen().bounds.height / 2)
-            snapshotIn.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2)
-            }) { (success:Bool) -> Void in
-                if success {
-                    self.presentViewController(settingsVC, animated: false, completion: { () -> Void in
-                        snapshotOut.removeFromSuperview()
-                        snapshotIn.removeFromSuperview()
-                    })
-                }
+        let snapshotIn = destinationVC.view.snapshotViewAfterScreenUpdates(true)
+        animateFromRightToLeft(destinationVC, snapshotOut, snapshotIn) { (success) -> () in
+            self.presentViewController(destinationVC, animated: false, completion: { () -> Void in
+                snapshotOut.removeFromSuperview()
+                snapshotIn.removeFromSuperview()
+            })
         }
     }
     

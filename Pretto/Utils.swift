@@ -70,3 +70,62 @@ func printBackgroundRefreshStatus() {
 func printBackgroundRemainingTime() {
     println("Application BackgroundTimeRemaining: \(UIApplication.sharedApplication().backgroundTimeRemaining)")
 }
+
+// Animated Transitions
+
+// Remember to remove snapshots from supperview in the completion block when calling this methods:
+//
+// animateFromLeftToRight(destinationVC, snapshotOut, snapshotIn) { (success) -> () in
+//      self.dismissViewControllerAnimated(false, completion: { () -> Void in
+//          snapshotIn.removeFromSuperview()
+//          snapshotOut.removeFromSuperview()
+//      }
+// }
+//
+func animateFromRightToLeft(destinationViewController: UIViewController, initialSnapshot: UIView, finalSnapShot: UIView, completion: (success: Bool) -> ()) {
+    initialSnapshot.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+    finalSnapShot.frame = CGRect(x: UIScreen.mainScreen().bounds.width, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+    UIApplication.sharedApplication().keyWindow!.addSubview(initialSnapshot)
+    UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(initialSnapshot)
+    UIApplication.sharedApplication().keyWindow!.addSubview(finalSnapShot)
+    UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(finalSnapShot)
+    
+    UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+        initialSnapshot.center = CGPoint(x: -(UIScreen.mainScreen().bounds.width / 2), y: UIScreen.mainScreen().bounds.height / 2)
+        finalSnapShot.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2)
+        }) { (success:Bool) -> Void in
+            completion(success: success)
+    }
+}
+
+func animateFromLeftToRight(destinationViewController: UIViewController, initialSnapshot: UIView, finalSnapShot: UIView, completion: (success: Bool) -> ()) {
+    initialSnapshot.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+    finalSnapShot.frame = CGRect(x: -UIScreen.mainScreen().bounds.width, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+    UIApplication.sharedApplication().keyWindow!.addSubview(initialSnapshot)
+    UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(initialSnapshot)
+    UIApplication.sharedApplication().keyWindow!.addSubview(finalSnapShot)
+    UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(finalSnapShot)
+    
+    UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+        initialSnapshot.center = CGPoint(x: UIScreen.mainScreen().bounds.width * 1.5, y: UIScreen.mainScreen().bounds.height / 2)
+        finalSnapShot.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2)
+        }) { (success:Bool) -> Void in
+            completion(success: success)
+    }
+}
+
+func animateShrink(destinationViewController: UIViewController, initialSnapshot: UIView, finalSnapShot: UIView, completion: (success: Bool) -> ()) {
+    initialSnapshot.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+    finalSnapShot.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+    UIApplication.sharedApplication().keyWindow!.addSubview(finalSnapShot)
+    UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(finalSnapShot)
+    UIApplication.sharedApplication().keyWindow!.addSubview(initialSnapshot)
+    UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(initialSnapshot)
+
+    
+    UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+        initialSnapshot.transform = CGAffineTransformMakeScale(0.01, 0.01)
+        }) { (success:Bool) -> Void in
+            completion(success: success)
+    }
+}
