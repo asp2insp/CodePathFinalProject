@@ -58,7 +58,6 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        cameraView.hidden = false
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

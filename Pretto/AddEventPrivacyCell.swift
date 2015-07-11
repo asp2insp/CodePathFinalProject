@@ -17,7 +17,7 @@ class AddEventPrivacyCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.accessoryType = UITableViewCellAccessoryType.None
-        cellTitle.textColor = UIColor.lightGrayColor()
+        cellTitle.textColor = UIColor.prettoOrange()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

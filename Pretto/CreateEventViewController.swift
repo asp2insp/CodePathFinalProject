@@ -111,7 +111,6 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         cameraView.hidden = true
-        
         tableView.reloadData()
     }
 
@@ -151,15 +150,19 @@ extension CreateEventViewController: UITableViewDelegate {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             return 100
+        case (0, 1):
+            return 90
         case (1, 1), (2, 1):
             return 180
         default:
-            return 58
+            return 70
         }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch (indexPath.section, indexPath.row){
+        case (0, 1):
+            self.titleTextField?.becomeFirstResponder()
         case (1,0):
             self.titleTextField?.resignFirstResponder()
             if !self.shouldDisplayPickerForStartDate {
@@ -171,6 +174,7 @@ extension CreateEventViewController: UITableViewDelegate {
                     tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Top)
                 }
                 tableView.endUpdates()
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 3), atScrollPosition: .Bottom, animated: true)
             } else {
                 self.shouldDisplayPickerForStartDate = false
                 tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: .Top)
@@ -187,11 +191,15 @@ extension CreateEventViewController: UITableViewDelegate {
                     tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: .Top)
                 }
                 tableView.endUpdates()
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 3), atScrollPosition: .Bottom, animated: true)
             } else {
                 self.shouldDisplayPickerForEndDate = false
                 tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Top)
                 
             }
+        case (3, 1):
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddEventPrivacyCell
+            cell.isPublicSwitch.setOn(!cell.isPublicSwitch.on, animated: true)
 
         default:
             self.titleTextField?.resignFirstResponder()
@@ -286,6 +294,12 @@ extension CreateEventViewController: AddEventTitleCellDelegate {
         nextButton.enabled = (title == "") || (title == "Event Title") ? false : true
         self.eventTitle = title
     }
+    
+    func addEventTitleCell(addEventTitleCell: AddEventTitleCell, didBecameFirstResponder: Bool) {
+        if didBecameFirstResponder {
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0), atScrollPosition: .Middle, animated: true)
+        }
+    }
 }
 
 // MARK: AddEventTitleCellDelegate
@@ -351,8 +365,15 @@ extension CreateEventViewController: AddEventPhotoCellDelegate {
 extension CreateEventViewController: UIImagePickerControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         println("Photo Taken or Picked")
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         self.eventPhoto = image
         tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+        println("Media Picker Cancelled")
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
 }

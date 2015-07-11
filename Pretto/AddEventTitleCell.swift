@@ -10,6 +10,7 @@ import UIKit
 
 @objc protocol AddEventTitleCellDelegate {
     optional func addEventTitleCell(addEventTitleCell: AddEventTitleCell, titleDidChange title: String)
+    optional func addEventTitleCell(addEventTitleCell: AddEventTitleCell, didBecameFirstResponder: Bool)
 }
 
 class AddEventTitleCell: UITableViewCell, UITextFieldDelegate {
@@ -48,8 +49,12 @@ class AddEventTitleCell: UITableViewCell, UITextFieldDelegate {
         // Configure the view for the selected state
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        delegate?.addEventTitleCell!(self, didBecameFirstResponder: true)
+    }
+    
     func textFieldDidChange(notification: NSNotification) {
-        titleCharCounter.textColor = (titleCharCounter.text)!.toInt() != 50 ? UIColor.darkGrayColor() : UIColor.lightGrayColor()
+        titleCharCounter.textColor = (titleCharCounter.text)!.toInt() != 0 ? UIColor.lightGrayColor() : UIColor.prettoRed()
         titleCharCounter.text = "\(50 - count(eventTitle.text))"
         if (titleCharCounter.text)!.toInt() == 0 {
             eventTitle.text = eventTitle.text.substringToIndex(eventTitle.text.endIndex.predecessor())

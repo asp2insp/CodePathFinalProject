@@ -17,6 +17,8 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet var tableView: UITableView!
     @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var segmentedControlContainerView: UIView!
+    @IBOutlet weak var segmentedControlUnderlineView: UIView!
+    @IBOutlet weak var separatorView: UIView!
     
     private var refreshControl : UIRefreshControl!
     private var liveInvitations : [Invitation] = []
@@ -26,11 +28,17 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     private var searchBar: UISearchBar!
     private var shouldPresentFutureEvents: Bool!
     
+    private let emptyBackgroundView = UIView(frame: UIScreen.mainScreen().bounds)
+    private let emptyNotificationsView = UIImageView(image: UIImage(named: "UpcomingEmptyCircle"))
+    
     private var photoPicker: UIImagePickerController!
     var observer : NSObjectProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.prettoLightGrey()
+        cameraView.hidden = true
         shouldPresentFutureEvents = false
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "tappedOnCamera", name: kUserDidPressCameraNotification, object: nil)
@@ -41,6 +49,14 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         tableView.backgroundColor = UIColor.prettoLightGrey()
         tableView.separatorColor = UIColor.clearColor()
         tableView.registerNib(UINib(nibName: "NoAlbumsCell", bundle: nil), forCellReuseIdentifier: noAlbumsCellReuseIdentifier)
+        
+        
+        emptyNotificationsView.frame = CGRect(x: 0, y: 0, width: 240, height: 240)
+        emptyBackgroundView.addSubview(emptyNotificationsView)
+        emptyBackgroundView.bringSubviewToFront(emptyNotificationsView)
+        emptyNotificationsView.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2 - 90)
+        tableView.backgroundView = emptyBackgroundView
+        emptyNotificationsView.hidden = true
         
         searchBar = UISearchBar()
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
@@ -55,12 +71,13 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
         
+        separatorView.backgroundColor = UIColor.prettoLightGrey()
         segmentedControl.tintColor = UIColor.clearColor()
-        segmentedControl.backgroundColor = UIColor.prettoBlue()
-        segmentedControlContainerView.backgroundColor = UIColor.prettoBlue()
+        segmentedControl.backgroundColor = UIColor.clearColor()
+        segmentedControlContainerView.backgroundColor = UIColor.prettoLightGrey()
         segmentedControl.addTarget(self, action: "segmentedControlValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
-        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: UIControlState.Normal)
-        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor(), NSUnderlineStyleAttributeName:NSUnderlineStyle.StyleThick.rawValue], forState: UIControlState.Selected)
+        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.prettoBlue()], forState: UIControlState.Normal)
+        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.prettoOrange()], forState: UIControlState.Selected)
 
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
@@ -76,7 +93,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        cameraView.hidden = false
+        segmentedControl.selectedSegmentIndex = 0
         shouldPresentFutureEvents = false
         photoPicker = UIImagePickerController()
         self.observer = NSNotificationCenter.defaultCenter().addObserverForName(kNewPhotoForEventNotification, object: nil, queue: nil) { (note) -> Void in
@@ -87,7 +104,9 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self.observer)
+        if self.observer != nil {
+            NSNotificationCenter.defaultCenter().removeObserver(self.observer)
+        }
     }
     
     deinit {
@@ -104,27 +123,37 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     func refreshData() {
         if shouldPresentFutureEvents! {
-            Invitation.getAllLiveAndFutureNonAcceptedEvents { (invites) -> Void in
+            Invitation.getAllFutureEvents { (invites) -> Void in
                 self.futureInvitations = invites
+                if self.futureInvitations.count > 0 {
+                    self.emptyNotificationsView.hidden = true
+                } else {
+                    self.emptyNotificationsView.hidden = false
+                }
+                self.tableView.reloadData()
             }
         } else {
-            
             Invitation.getAllPastEvents() { (invites) -> Void in
                 self.pastInvitations = invites
+                self.tableView.reloadData()
             }
             
             Invitation.getAllLiveEvents() { (invites) -> Void in
                 self.liveInvitations = invites
                 if self.liveInvitations.count > 0 {
+                    cameraView.hidden = false
                     for invite in self.liveInvitations {
                         invite.pinInBackground()
                         invite.updateFromCameraRoll()
                     }
                     self.tableView.reloadData()
                     for cell in self.tableView.visibleCells() {
-                        (cell as! AlbumGeneralViewCell).updateData()
+                        if cell.isKindOfClass(AlbumGeneralViewCell) {
+                            (cell as! AlbumGeneralViewCell).updateData()
+                        }
                     }
                 } else {
+                    cameraView.hidden = true
                     self.tableView.reloadData()
                 }
                 
@@ -135,6 +164,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func createEvent() {
+        
         self.performSegueWithIdentifier("CreateEventSegue", sender: nil)
     }
 
@@ -151,8 +181,18 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             var eventToEdit: Event = eventInvite.event
             destination.startDate = eventToEdit.startDate
             destination.endDate = eventToEdit.endDate
-            destination.eventPhoto = UIImage(data: eventToEdit.coverPhoto!.getData()!) ?? nil
+            if eventToEdit.coverPhoto != nil {
+                eventToEdit.coverPhoto!.getDataInBackgroundWithBlock({ (data:NSData?, error:NSError?) -> Void in
+                    destination.eventPhoto = error == nil ? UIImage(data: data!) : nil
+                })
+                
+            } else {
+                destination.eventPhoto = nil
+            }
+
             destination.eventTitle = eventToEdit.title
+        } else if segue.identifier == "CreateEventSegue" {
+            cameraView.hidden = true
         }
     }
 
@@ -173,20 +213,29 @@ extension AlbumGeneralViewController {
     }
     
     func segmentedControlValueChanged(sender: UISegmentedControl) {
+        searchBar.resignFirstResponder()
         if segmentedControl.selectedSegmentIndex == 0 {
-//            segmentedControl.setTitle("> Live & Past", forSegmentAtIndex: 0)
-//            segmentedControl.setTitle("Upcoming", forSegmentAtIndex: 1)
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                self.segmentedControlUnderlineView.frame.origin.x = 0
+            })
             shouldPresentFutureEvents = false
             tableView.separatorColor = UIColor.clearColor()
+            self.emptyNotificationsView.hidden = true
+            tableView.reloadData()
         } else {
-//            segmentedControl.setTitle("Live & Past", forSegmentAtIndex: 0)
-//            segmentedControl.setTitle("> Upcoming", forSegmentAtIndex: 1)
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                self.segmentedControlUnderlineView.frame.origin.x = self.view.center.x
+            })
             shouldPresentFutureEvents = true
-            tableView.separatorColor = UIColor.prettoBlue()
+            tableView.separatorColor = futureInvitations.count > 0 ?  UIColor.clearColor() : UIColor.clearColor()
+            
+            self.refreshData()
         }
-        tableView.reloadData()
+        
     }
+
 }
+
 
 // MARK: UIImagePickerControllerDelegate
 extension AlbumGeneralViewController: UIImagePickerControllerDelegate {
@@ -201,6 +250,10 @@ extension AlbumGeneralViewController: UIImagePickerControllerDelegate {
 // MARK: UITableViewDelegate
 
 extension AlbumGeneralViewController: UITableViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if shouldPresentFutureEvents! {
             if futureInvitations.count > 0 {
@@ -214,6 +267,14 @@ extension AlbumGeneralViewController: UITableViewDelegate {
             } else {
                 return 420
             }
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if shouldPresentFutureEvents! {
+            return 0
+        } else {
+            return 30
         }
     }
     
@@ -279,32 +340,39 @@ extension AlbumGeneralViewController : UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var headerView = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 30))
+        headerView.contentView.backgroundColor = UIColor.prettoLightGrey()
+        let headerTitle = UILabel(frame: CGRect(x: headerView.frame.origin.x +  12, y: headerView.frame.origin.y, width: headerView.frame.width - 16, height: headerView.frame.height))
+        headerTitle.backgroundColor = UIColor.clearColor()
+        headerTitle.font = UIFont.systemFontOfSize(17, weight: UIFontWeightLight)
+        headerTitle.textColor = UIColor.prettoBlue()
+        headerView.addSubview(headerTitle)
+        headerView.bringSubviewToFront(headerTitle)
+        
         if shouldPresentFutureEvents! {
-            return "Upcoming Events"
+            return nil
+//            headerView = UITableViewHeaderFooterView(frame: CGRectZero)
+//            headerView.contentView.backgroundColor = UIColor.prettoLightGrey()
         } else {
             switch section {
             case 0:
-                return liveInvitations.count > 0 ? "Live Events" : nil
+                if liveInvitations.count > 0 {
+                    headerTitle.text = "Live Events"
+                } else {
+                    return nil
+                }
             case 1:
-                return pastInvitations.count > 0 ? "Past Events" : nil
+                if pastInvitations.count > 0 {
+                    headerTitle.text = "Past Events"
+                } else {
+                    return nil
+                }
             default:
                 return nil
             }
         }
-    }
-    
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if shouldPresentFutureEvents! {
-            var headerView = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 30))
-            headerView.contentView.backgroundColor = UIColor.prettoLightGrey()
-            return headerView
-        } else {
-            var headerView = UITableViewHeaderFooterView(frame: CGRectZero)
-            headerView.contentView.backgroundColor = UIColor.prettoLightGrey()
-            return headerView
-        }
-        
+        return headerView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -323,6 +391,13 @@ extension AlbumGeneralViewController : UITableViewDataSource {
                 case 0:
 //                    cell.event = liveInvitations[indexPath.row].event
                     cell.invite = liveInvitations[indexPath.row]
+                    if cell.invite!.paused {
+                        cell.statusButton.backgroundColor = UIColor.prettoRed()
+                        cell.statusButton.setTitle("PAUSED", forState: .Normal)
+                    } else {
+                        cell.statusButton.backgroundColor = UIColor.prettoBlue()
+                        cell.statusButton.setTitle("SHARING", forState: .Normal)
+                    }
                 case 1:
 //                    cell.event = pastInvitations[indexPath.row].event
                     cell.invite = pastInvitations[indexPath.row]
@@ -332,13 +407,12 @@ extension AlbumGeneralViewController : UITableViewDataSource {
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier(noAlbumsCellReuseIdentifier, forIndexPath: indexPath) as? NoAlbumsCell
-                let originalCenter = cell!.arrow.center
-                
-                UIView.animateWithDuration(0.6, delay: 0.0, options: .Autoreverse | .Repeat | .CurveEaseOut, animations: { () -> Void in
-                    cell!.arrow.center.y = cell!.arrow.center.y - 10
-                    }, completion: { (sucees:Bool) -> Void in
-                    cell!.arrow.center = originalCenter
-                })
+//                let originalCenter = cell!.arrow.center                
+//                UIView.animateWithDuration(0.6, delay: 0.0, options: .Autoreverse | .Repeat | .CurveEaseOut, animations: { () -> Void in
+//                    cell!.arrow.center.y = cell!.arrow.center.y - 10
+//                    }, completion: { (sucees:Bool) -> Void in
+//                    cell!.arrow.center = originalCenter
+//                })
                 
                 return cell!
             }

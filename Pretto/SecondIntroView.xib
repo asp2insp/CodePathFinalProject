@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -29,18 +29,18 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flash2" translatesAutoresizingMaskIntoConstraints="NO" id="bsl-lD-rLx">
                     <rect key="frame" x="74" y="166" width="23" height="22"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite your friends and enjoy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSh-7x-A9I">
-                    <rect key="frame" x="43" y="390" width="235" height="22"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prepare your best smile and pose without having to worry about who is taking every picture and video" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="936-KJ-uUH">
+                    <rect key="frame" x="30" y="414" width="260" height="54"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="260" id="UhL-qc-qbU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prepare your best smile and pose without having to worry about WHO is taking the picture " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="936-KJ-uUH">
-                    <rect key="frame" x="35" y="421" width="250" height="47"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="250" id="UhL-qc-qbU"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite your friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSh-7x-A9I">
+                    <rect key="frame" x="57" y="374" width="206" height="30"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -49,7 +49,6 @@
             <constraints>
                 <constraint firstItem="fwi-D9-WHr" firstAttribute="top" secondItem="cy9-CN-cPO" secondAttribute="bottom" constant="-126" id="5Iq-Ho-7Dw"/>
                 <constraint firstItem="fwi-D9-WHr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="70" id="KdR-80-gJx"/>
-                <constraint firstAttribute="bottom" secondItem="936-KJ-uUH" secondAttribute="bottom" constant="100" id="Mag-PE-Jkb"/>
                 <constraint firstItem="fwi-D9-WHr" firstAttribute="top" secondItem="bsl-lD-rLx" secondAttribute="bottom" constant="-118" id="QiN-00-LfI"/>
                 <constraint firstItem="fwi-D9-WHr" firstAttribute="leading" secondItem="bsl-lD-rLx" secondAttribute="trailing" constant="-61" id="YJQ-Te-b60"/>
                 <constraint firstItem="fwi-D9-WHr" firstAttribute="leading" secondItem="cy9-CN-cPO" secondAttribute="trailing" constant="-35" id="dVu-2i-QrA"/>
@@ -57,6 +56,7 @@
                 <constraint firstAttribute="centerX" secondItem="fwi-D9-WHr" secondAttribute="centerX" id="g5v-lu-juf"/>
                 <constraint firstAttribute="centerX" secondItem="936-KJ-uUH" secondAttribute="centerX" id="k7F-5m-8dQ"/>
                 <constraint firstItem="936-KJ-uUH" firstAttribute="top" secondItem="iSh-7x-A9I" secondAttribute="bottom" constant="10" id="oHI-gg-822"/>
+                <constraint firstAttribute="bottom" secondItem="iSh-7x-A9I" secondAttribute="bottom" constant="164" id="u92-Tv-AYN"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="290" y="516"/>

@@ -42,6 +42,11 @@
 		16D3AA341B2E476E00934948 /* AddEventTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */; };
 		16D3AA361B2E47AD00934948 /* AddEventDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */; };
 		16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */; };
+		16ED51241B4EF751005DB0A9 /* SettingsGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ED51231B4EF751005DB0A9 /* SettingsGeneralViewController.swift */; };
+		16ED512E1B4F3D0A005DB0A9 /* TransitionScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16ED512D1B4F3D0A005DB0A9 /* TransitionScreen.xib */; };
+		16ED51301B4F3D31005DB0A9 /* TransitionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ED512F1B4F3D31005DB0A9 /* TransitionScreen.swift */; };
+		16ED51321B4F4293005DB0A9 /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ED51311B4F4293005DB0A9 /* TransitionViewController.swift */; };
+		16EF4CDF1B4C4DF600A93A8A /* ParseErrorHandlingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EF4CDE1B4C4DF600A93A8A /* ParseErrorHandlingController.swift */; };
 		605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FBBBC1B2E571F002E7A75 /* Friend.swift */; };
 		606748D21B37765400B33AAB /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606748D11B37765400B33AAB /* RequestCell.swift */; };
 		606748D41B37864300B33AAB /* InvitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606748D31B37864300B33AAB /* InvitationCell.swift */; };
@@ -110,6 +115,11 @@
 		16D3AA331B2E476E00934948 /* AddEventTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventTitleCell.swift; sourceTree = "<group>"; };
 		16D3AA351B2E47AD00934948 /* AddEventDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDateCell.swift; sourceTree = "<group>"; };
 		16D3AA371B2E47C200934948 /* AddEventDatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventDatePickerCell.swift; sourceTree = "<group>"; };
+		16ED51231B4EF751005DB0A9 /* SettingsGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsGeneralViewController.swift; sourceTree = "<group>"; };
+		16ED512D1B4F3D0A005DB0A9 /* TransitionScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransitionScreen.xib; sourceTree = "<group>"; };
+		16ED512F1B4F3D31005DB0A9 /* TransitionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionScreen.swift; sourceTree = "<group>"; };
+		16ED51311B4F4293005DB0A9 /* TransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
+		16EF4CDE1B4C4DF600A93A8A /* ParseErrorHandlingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseErrorHandlingController.swift; sourceTree = "<group>"; };
 		605FBBBA1B2E4BD7002E7A75 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		605FBBBC1B2E571F002E7A75 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		606748D11B37765400B33AAB /* RequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
@@ -165,19 +175,11 @@
 		1628DCF21B30B946005E0841 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */,
-				163692081B39DDBA006606A2 /* SinglePhotoViewController.swift */,
-				16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */,
-				169C9A071B4B103700F3CBC4 /* CreateEventAddLocationViewController.swift */,
-				1628DCEE1B2E73D4005E0841 /* CreateEventAddUsersViewController.swift */,
-				FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */,
-				1628DCFA1B31F86B005E0841 /* CustomLoginViewController.swift */,
-				1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */,
-				1628DCFC1B31F87E005E0841 /* CustomSignUpViewController.swift */,
-				1684BBFB1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift */,
-				1684BC001B33B88D00CBCDC1 /* IntroViewController.swift */,
-				FE1D2D121B36583E00D4485F /* NotificationsViewController.swift */,
-				163692061B38D9FB006606A2 /* ExploreViewController.swift */,
+				16ED51261B4EF7D8005DB0A9 /* Intro */,
+				16ED512C1B4EF85B005DB0A9 /* Explore */,
+				16ED51271B4EF7DF005DB0A9 /* Events */,
+				16ED51291B4EF7F1005DB0A9 /* Notifications */,
+				16ED512A1B4EF7FD005DB0A9 /* Settings */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -200,20 +202,24 @@
 				1649D9E11B38661C00EEA0DD /* FirstIntroView.swift */,
 				1649D9E31B386D9B00EEA0DD /* SecondIntroView.swift */,
 				1649D9E51B386DB000EEA0DD /* ThirdIntroView.swift */,
+				16ED512D1B4F3D0A005DB0A9 /* TransitionScreen.xib */,
+				16ED512F1B4F3D31005DB0A9 /* TransitionScreen.swift */,
+				16ED51311B4F4293005DB0A9 /* TransitionViewController.swift */,
 			);
 			name = Intro;
 			sourceTree = "<group>";
 		};
-		1684BBF81B334F1D00CBCDC1 /* Albums */ = {
+		1684BBF81B334F1D00CBCDC1 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				16D3AA301B2E46B600934948 /* CreateEvent */,
 				FE45EEB41B2DF13F00F39BF8 /* ZoomableCollectionView.swift */,
 				1684BBF91B334F4500CBCDC1 /* AlbumGeneralViewCell.swift */,
 				1636920C1B3A913B006606A2 /* FutureEventCell.swift */,
 				1683557B1B35EEC000264F6B /* NoAlbumsCell.swift */,
 				1683557D1B35F56A00264F6B /* NoAlbumsCell.xib */,
 			);
-			name = Albums;
+			name = Events;
 			sourceTree = "<group>";
 		};
 		1684BBFD1B3391D000CBCDC1 /* Appearance */ = {
@@ -238,6 +244,77 @@
 				16B286A61B371EAE00F540AF /* EventCreatedView.xib */,
 			);
 			name = CreateEvent;
+			sourceTree = "<group>";
+		};
+		16ED51251B4EF7A7005DB0A9 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		16ED51261B4EF7D8005DB0A9 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				1684BC001B33B88D00CBCDC1 /* IntroViewController.swift */,
+				FE45EE3F1B1FE5DF00F39BF8 /* LoginViewController.swift */,
+				1628DCFA1B31F86B005E0841 /* CustomLoginViewController.swift */,
+				1628DCFE1B321477005E0841 /* CustomLandingViewController.swift */,
+				1628DCFC1B31F87E005E0841 /* CustomSignUpViewController.swift */,
+			);
+			name = Intro;
+			sourceTree = "<group>";
+		};
+		16ED51271B4EF7DF005DB0A9 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				16ED51281B4EF7E9005DB0A9 /* CreateEvent */,
+				FE45EEC01B2E4DE200F39BF8 /* EventDetailViewController.swift */,
+				163692081B39DDBA006606A2 /* SinglePhotoViewController.swift */,
+				1684BBFB1B3351CC00CBCDC1 /* AlbumGeneralViewController.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		16ED51281B4EF7E9005DB0A9 /* CreateEvent */ = {
+			isa = PBXGroup;
+			children = (
+				16354F3F1B2E4F4F003D2A2B /* CreateEventViewController.swift */,
+				169C9A071B4B103700F3CBC4 /* CreateEventAddLocationViewController.swift */,
+				1628DCEE1B2E73D4005E0841 /* CreateEventAddUsersViewController.swift */,
+			);
+			name = CreateEvent;
+			sourceTree = "<group>";
+		};
+		16ED51291B4EF7F1005DB0A9 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				FE1D2D121B36583E00D4485F /* NotificationsViewController.swift */,
+			);
+			name = Notifications;
+			sourceTree = "<group>";
+		};
+		16ED512A1B4EF7FD005DB0A9 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				16ED51231B4EF751005DB0A9 /* SettingsGeneralViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		16ED512B1B4EF851005DB0A9 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Explore;
+			sourceTree = "<group>";
+		};
+		16ED512C1B4EF85B005DB0A9 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				163692061B38D9FB006606A2 /* ExploreViewController.swift */,
+			);
+			name = Explore;
 			sourceTree = "<group>";
 		};
 		35D30FEEDFCFBC4EE1C87B8C /* Frameworks */ = {
@@ -291,6 +368,7 @@
 		FE45EE3A1B1FE5DF00F39BF8 /* Pretto */ = {
 			isa = PBXGroup;
 			children = (
+				16EF4CDE1B4C4DF600A93A8A /* ParseErrorHandlingController.swift */,
 				1636920A1B3A6772006606A2 /* Utils.swift */,
 				1684BBFD1B3391D000CBCDC1 /* Appearance */,
 				1628DCF31B30BE63005E0841 /* EventManager */,
@@ -352,9 +430,10 @@
 			isa = PBXGroup;
 			children = (
 				1649D9D01B37AAEF00EEA0DD /* Intro */,
+				16ED512B1B4EF851005DB0A9 /* Explore */,
+				1684BBF81B334F1D00CBCDC1 /* Events */,
 				606748D01B37762200B33AAB /* Notifications */,
-				1684BBF81B334F1D00CBCDC1 /* Albums */,
-				16D3AA301B2E46B600934948 /* CreateEvent */,
+				16ED51251B4EF7A7005DB0A9 /* Settings */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -450,6 +529,7 @@
 				FE45EE481B1FE5DF00F39BF8 /* LaunchScreen.xib in Resources */,
 				1649D9E81B386DC300EEA0DD /* SecondIntroView.xib in Resources */,
 				FE45EE451B1FE5DF00F39BF8 /* Images.xcassets in Resources */,
+				16ED512E1B4F3D0A005DB0A9 /* TransitionScreen.xib in Resources */,
 				1683557E1B35F56A00264F6B /* NoAlbumsCell.xib in Resources */,
 				16354F431B2E6613003D2A2B /* Main.storyboard in Resources */,
 				1649D9EA1B386DCE00EEA0DD /* ThirdIntroView.xib in Resources */,
@@ -511,6 +591,7 @@
 				1684BBFF1B3391F400CBCDC1 /* Appearance.swift in Sources */,
 				16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */,
 				1628DCEF1B2E73D4005E0841 /* CreateEventAddUsersViewController.swift in Sources */,
+				16ED51241B4EF751005DB0A9 /* SettingsGeneralViewController.swift in Sources */,
 				FE45EEAE1B23CEC900F39BF8 /* Photo.swift in Sources */,
 				16354F401B2E4F4F003D2A2B /* CreateEventViewController.swift in Sources */,
 				163692091B39DDBA006606A2 /* SinglePhotoViewController.swift in Sources */,
@@ -523,6 +604,7 @@
 				16D3AA321B2E475A00934948 /* AddEventPhotoCell.swift in Sources */,
 				1636920B1B3A6772006606A2 /* Utils.swift in Sources */,
 				163692071B38D9FB006606A2 /* ExploreViewController.swift in Sources */,
+				16ED51321B4F4293005DB0A9 /* TransitionViewController.swift in Sources */,
 				1683557C1B35EEC000264F6B /* NoAlbumsCell.swift in Sources */,
 				605FBBBD1B2E571F002E7A75 /* Friend.swift in Sources */,
 				FE45EEC21B2E774600F39BF8 /* Invitation.swift in Sources */,
@@ -534,6 +616,7 @@
 				FE1D2D0F1B34B5E000D4485F /* ModelsIndex.swift in Sources */,
 				FE45EEB01B2682AF00F39BF8 /* Album.swift in Sources */,
 				FE45EEAB1B23C6CA00F39BF8 /* Request.swift in Sources */,
+				16EF4CDF1B4C4DF600A93A8A /* ParseErrorHandlingController.swift in Sources */,
 				606748D41B37864300B33AAB /* InvitationCell.swift in Sources */,
 				1636920D1B3A913B006606A2 /* FutureEventCell.swift in Sources */,
 				1628DCFF1B321477005E0841 /* CustomLandingViewController.swift in Sources */,
@@ -546,6 +629,7 @@
 				1684BBFA1B334F4500CBCDC1 /* AlbumGeneralViewCell.swift in Sources */,
 				1649D9E61B386DB000EEA0DD /* ThirdIntroView.swift in Sources */,
 				169C9A061B4B0AB100F3CBC4 /* AddEventLocationCell.swift in Sources */,
+				16ED51301B4F3D31005DB0A9 /* TransitionScreen.swift in Sources */,
 				1628DCFD1B31F87E005E0841 /* CustomSignUpViewController.swift in Sources */,
 				1628DCF11B2E7B15005E0841 /* AddUsersAddedUserCell.swift in Sources */,
 				169C9A041B4B0A8A00F3CBC4 /* AddEventPrivacyCell.swift in Sources */,

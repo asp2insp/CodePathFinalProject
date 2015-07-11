@@ -22,15 +22,25 @@ class AlbumGeneralViewCell: UITableViewCell {
     @IBOutlet var statusButton: UIButton!
     @IBAction func onChangeStatus(sender: UIButton) {
         if invite!.paused {
-            invite?.paused = false
-            invite?.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
-                self.statusButton.backgroundColor = UIColor.prettoBlue()
+            invite!.paused = false
+            self.statusButton.backgroundColor = UIColor.prettoBlue()
+            self.statusButton.setTitle("SHARING", forState: .Normal)
+            invite!.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
+                if !success {
+                    self.statusButton.backgroundColor = UIColor.prettoRed()
+                    self.statusButton.setTitle("PAUSED", forState: .Normal)
+                }
             })
             
         } else {
-            invite?.paused = true
-            invite?.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
-                self.statusButton.backgroundColor = UIColor.prettoRed()
+            invite!.paused = true
+            self.statusButton.backgroundColor = UIColor.prettoRed()
+            self.statusButton.setTitle("PAUSED", forState: .Normal)
+            invite!.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
+                if !success {
+                    self.statusButton.backgroundColor = UIColor.prettoBlue()
+                    self.statusButton.setTitle("SHARING", forState: .Normal)
+                }
             })
 
         }
@@ -75,7 +85,8 @@ class AlbumGeneralViewCell: UITableViewCell {
         albumTitle.preferredMaxLayoutWidth = albumTitle.frame.size.width
         albumLocation.preferredMaxLayoutWidth = albumLocation.frame.size.width
         
-        statusButton.layer.cornerRadius = 15
+        statusButton.layer.cornerRadius = 3
+        statusButton.titleLabel?.textAlignment = .Center
         
         calendarSheet.layer.cornerRadius = 3
         
@@ -133,7 +144,14 @@ class AlbumGeneralViewCell: UITableViewCell {
         albumTitle.preferredMaxLayoutWidth = albumTitle.frame.size.width
         albumLocation.preferredMaxLayoutWidth = albumLocation.frame.size.width
         self.statusButton.hidden = !event!.isLive ? true : false
-        self.statusButton.backgroundColor = invite!.paused ? UIColor.prettoRed() : UIColor.prettoBlue()
+        if invite!.paused {
+            self.statusButton.backgroundColor = UIColor.prettoRed()
+            self.statusButton.setTitle("PAUSED", forState: .Normal)
+        } else {
+            self.statusButton.backgroundColor = UIColor.prettoBlue()
+            self.statusButton.setTitle("SHARING", forState: .Normal)
+        }
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

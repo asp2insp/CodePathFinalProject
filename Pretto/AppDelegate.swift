@@ -28,7 +28,8 @@ let cameraView: UIImageView = UIImageView()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
 
-    var window: UIWindow?
+    var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
+    let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     private var isTheFirstTimeEver = false
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -44,8 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         // Initialize Parse.
         Parse.enableLocalDatastore()
         Parse.setApplicationId("EwtAHVSdrZseylxvkalCaMQ3aTWknFUgnhJRcozx", clientKey: "kA7v5dqEEndRpZgcOsL2G4jitdGuPzj63xmYm7xZ")
+        PFUser.enableRevocableSessionInBackground()
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-        
+
         if application.applicationState != UIApplicationState.Background {
             // Track an app open here if we launch with a push, unless
             // "content_available" was used to trigger a background push (introduced in iOS 7).
@@ -60,10 +62,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
             }
             
             if (preBackgroundPush || oldPushHandlerOnly || pushPayload) {
-                PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+                PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: { (success:Bool, error:NSError?) -> Void in
+                    if !success {
+                        ParseErrorHandlingController.handleParseError(error!)
+                    }
+                })
             }
         }
-        
+
         if application.respondsToSelector("registerUserNotificationSettings:") {
             let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
             let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
@@ -73,16 +79,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
             application.registerForRemoteNotifications()
         }
         
-//        // Register for Push Notitications
-//        application.registerForRemoteNotifications()
         application.setMinimumBackgroundFetchInterval(30)
         
         // check user and start a storyboard accordingly
-        let isFirstTime: Bool? = true//NSUserDefaults.standardUserDefaults().objectForKey(kFirstTimeRunningPretto) as? Bool
-        
+        let isFirstTime: Bool? = NSUserDefaults.standardUserDefaults().objectForKey(kFirstTimeRunningPretto) as? Bool
         if  isFirstTime == nil || isFirstTime == true {
             self.showIntroWindow()
         } else {
+            self.showTransitionScreen()
             self.checkCurrentUser()
         }
         return true
@@ -105,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        println("didReceiveRemoteNotification")
+        println("AppDelegate : didReceiveRemoteNotification")
         PFPush.handlePush(userInfo)
         if application.applicationState == UIApplicationState.Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayloadInBackground(userInfo, block: nil)
@@ -113,13 +117,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-            println("openURL")
+            println("AppDelegate : openURL")
             return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         // TODO - upload new pictures here
         println("AppDelegate : performFetchWithCompletionHandler")
+        completionHandler(UIBackgroundFetchResult.NewData)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -128,6 +133,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
 
     func applicationDidEnterBackground(application: UIApplication) {
         println("AppDelegate : applicationDidEnterBackground")
+        var currentInstallation = PFInstallation.currentInstallation()
+        if (currentInstallation.badge != 0) {
+            currentInstallation.badge = 0
+            currentInstallation.saveEventually()
+        }
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -149,6 +159,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kShowLandingWindowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kIntroDidFinishNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kUserDidLogOutNotification, object: nil)
+        var currentInstallation = PFInstallation.currentInstallation()
+        if (currentInstallation.badge != 0) {
+            currentInstallation.badge = 0
+            currentInstallation.saveEventually()
+        }
         
     }
     
@@ -179,7 +194,7 @@ extension AppDelegate {
     
     func checkCurrentUser() {
         println("AppDelegate: checkCurrentUser")
-        User.checkCurrentUser({ (user:User) -> Void in
+        User.checkCurrentUser({ (user: User) -> Void in
             println("Saving user details...")
             user.save()
             user.printProperties()
@@ -187,10 +202,10 @@ extension AppDelegate {
             self.startMainStoryBoard()
 
             },
-            otherwise: { (pfUser:PFUser?) -> Void in
-                if pfUser != nil {
+            otherwise: { (pfUser: PFUser?) -> Void in
+                if let pfUser = pfUser {
                     println("Unlinking user from FB")
-                    PFFacebookUtils.unlinkUserInBackground(pfUser!)
+                    PFFacebookUtils.unlinkUserInBackground(pfUser)
                 }
                 self.showLandingWindow()
         })
@@ -232,44 +247,70 @@ extension AppDelegate {
         self.checkCurrentUser()
     }
     
+    func showTransitionScreen() {
+        var transitionViewController = storyboard.instantiateViewControllerWithIdentifier("TransitionViewController") as! TransitionViewController
+        self.window!.rootViewController = transitionViewController
+        self.window!.makeKeyAndVisible()
+    }
+    
     func showIntroWindow() {
-        println("showIntroWindow")
-        var introViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IntroViewController") as! IntroViewController
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        println("AppDelegate : showIntroWindow")
+        var introViewController = storyboard.instantiateViewControllerWithIdentifier("IntroViewController") as! IntroViewController
         self.window!.rootViewController = introViewController
         self.window!.makeKeyAndVisible()
     }
     
     func showLandingWindow() {
-        println("Show Landing Notification Received")
+        println("AppDelegate : Show Landing Notification Received")
         var landingViewController = CustomLandingViewController()
         landingViewController.fields = .Facebook | .SignUpButton
         landingViewController.delegate = self
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = landingViewController
         self.window!.makeKeyAndVisible()
     }
     
     func showLoginWindow() {
-        println("Show Login Notification Received")
+        println("AppDelegate : Show Login Notification Received")
         var logInViewController = CustomLoginViewController()
         logInViewController.fields = .Facebook | .UsernameAndPassword | .PasswordForgotten | .LogInButton | .DismissButton
         logInViewController.delegate = self
         logInViewController.emailAsUsername = true
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = logInViewController
         self.window!.makeKeyAndVisible()
     }
     
     func startMainStoryBoard() {
-        println("startMainStoryBoard")
-        self.window = UIWindow(frame:UIScreen.mainScreen().bounds)
-        var mainSB = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = mainSB.instantiateInitialViewController() as! UITabBarController
-        viewController.selectedIndex = 1
-        self.window!.rootViewController = viewController
-        self.window!.makeKeyAndVisible()
-        self.addCameraOverlay()
+        println("AppDelegate : startMainStoryBoard")
+        let destinationVC = storyboard.instantiateInitialViewController() as! UITabBarController
+        destinationVC.selectedIndex = 1
+        
+        if let transitionViewController = self.window!.rootViewController as? TransitionViewController {
+            transitionViewController.startAnimation { (success) -> Void in
+                if success {
+                    let snapshotOut = UIApplication.sharedApplication().keyWindow!.snapshotViewAfterScreenUpdates(true)
+                    let snapshotIn = destinationVC.view.snapshotViewAfterScreenUpdates(true)
+                    
+                    animateShrink(destinationVC, snapshotOut, snapshotIn, { (success) -> () in
+                        snapshotOut.removeFromSuperview()
+                        snapshotIn.removeFromSuperview()
+                        self.window!.rootViewController = destinationVC
+                        self.window!.makeKeyAndVisible()
+                        self.addCameraOverlay()
+                    })
+                }
+            }
+        } else {
+            let snapshotOut = UIApplication.sharedApplication().keyWindow!.snapshotViewAfterScreenUpdates(true)
+            let snapshotIn = destinationVC.view.snapshotViewAfterScreenUpdates(true)
+            
+            animateFromRightToLeft(destinationVC, snapshotOut, snapshotIn, { (success) -> () in
+                snapshotOut.removeFromSuperview()
+                snapshotIn.removeFromSuperview()
+                self.window!.rootViewController = destinationVC
+                self.window!.makeKeyAndVisible()
+                self.addCameraOverlay()
+            })
+        }
     }
 }
 

@@ -194,6 +194,10 @@ class CreateEventAddUsersViewController: UIViewController, UITableViewDelegate, 
 //MARK: UITableViewDelegate
 
 extension CreateEventAddUsersViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 50
+    }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.tag == 1 {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddUsersAddedUserCell
@@ -375,7 +379,7 @@ extension CreateEventAddUsersViewController {
             completionView.eventLocation.text = "Location TBD"
         }
         completionView.eventTItle.text = self.eventTitle
-        dateFormatter.dateFormat = "MMM dd, yyyy - hh:mm a"
+        dateFormatter.dateFormat = "MMM dd, hh:mm a"
         completionView.eventStartDate.text = dateFormatter.stringFromDate(startDate)
         completionView.eventEndDate.text = dateFormatter.stringFromDate(endDate)
         
