@@ -50,27 +50,31 @@ class InvitationCell: UITableViewCell {
     
     func renderInvite() {
         if self.invitation != nil {
-            let from = User(innerUser: self.invitation!.from)
-            if let userImageUrlText = from.profilePhotoUrl {
-                let userImageUrl = NSURL(string: userImageUrlText)
-                self.userImageView.setImageWithURL(userImageUrl)
-                self.userImageView.layer.cornerRadius = 25
-            }
-            
-            if let persona = from.firstName ?? from.email {
-                let cellDescription = "\(persona) has invited you to their event: \(self.invitation!.event.title)"
-                self.invitationDescriptionLabel.text = cellDescription
-            } else {
-                self.invitationDescriptionLabel.text = "loading..."
-            }
-            
-            if invitation!.accepted {
-                self.joinButton.enabled = false
-                self.backgroundColor = UIColor.prettoWindowBackground()
-            } else {
-                self.joinButton.enabled = true
-                self.backgroundColor = UIColor.whiteColor()
-            }
+            self.invitation!.from.fetchIfNeededInBackgroundWithBlock({ (fromUser:PFObject?, error:NSError?) -> Void in
+                if error == nil {
+                    let from = User(innerUser: self.invitation!.from)
+                    if let userImageUrlString = from.profilePhotoUrl {
+                        let userImageUrl = NSURL(string: userImageUrlString)
+                        self.userImageView.setImageWithURL(userImageUrl)
+                        self.userImageView.layer.cornerRadius = 25
+                    }
+                    
+                    if let persona = from.firstName ?? from.email {
+                        let cellDescription = "\(persona) has invited you to their event: \(self.invitation!.event.title)"
+                        self.invitationDescriptionLabel.text = cellDescription
+                    } else {
+                        self.invitationDescriptionLabel.text = "loading..."
+                    }
+                    
+                    if self.invitation!.accepted {
+                        self.joinButton.enabled = false
+                        self.backgroundColor = UIColor.prettoWindowBackground()
+                    } else {
+                        self.joinButton.enabled = true
+                        self.backgroundColor = UIColor.whiteColor()
+                    }
+                }
+            })
         }
     }
 

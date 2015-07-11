@@ -85,8 +85,7 @@ class User {
     
     var facebookId:String? {
         get {
-            let result = self.inner.valueForKey("facebookId") as! String?
-            return result
+            return self.inner.valueForKey("facebookId") as! String?
         }
         set {
             self.inner.setValue(newValue, forKey: "facebookId")

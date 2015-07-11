@@ -137,7 +137,9 @@ extension CreateEventViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            return 120
+            return 100
+        case (0, 1):
+            return 90
         case (1, 1), (2, 1):
             return 180
         default:
@@ -147,6 +149,8 @@ extension CreateEventViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch (indexPath.section, indexPath.row){
+        case (0, 1):
+            self.titleTextField?.becomeFirstResponder()
         case (1,0):
             self.titleTextField?.resignFirstResponder()
             if !self.shouldDisplayPickerForStartDate {
@@ -277,6 +281,12 @@ extension CreateEventViewController: AddEventTitleCellDelegate {
     func addEventTitleCell(addEventTitleCell: AddEventTitleCell, titleDidChange title: String) {
         nextButton.enabled = (title == "") || (title == "Event Title") ? false : true
         self.eventTitle = title
+    }
+    
+    func addEventTitleCell(addEventTitleCell: AddEventTitleCell, didBecameFirstResponder: Bool) {
+        if didBecameFirstResponder {
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0), atScrollPosition: .Middle, animated: true)
+        }
     }
 }
 

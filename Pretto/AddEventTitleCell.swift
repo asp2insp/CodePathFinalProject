@@ -10,6 +10,7 @@ import UIKit
 
 @objc protocol AddEventTitleCellDelegate {
     optional func addEventTitleCell(addEventTitleCell: AddEventTitleCell, titleDidChange title: String)
+    optional func addEventTitleCell(addEventTitleCell: AddEventTitleCell, didBecameFirstResponder: Bool)
 }
 
 class AddEventTitleCell: UITableViewCell, UITextFieldDelegate {
@@ -46,6 +47,10 @@ class AddEventTitleCell: UITableViewCell, UITextFieldDelegate {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        delegate?.addEventTitleCell!(self, didBecameFirstResponder: true)
     }
     
     func textFieldDidChange(notification: NSNotification) {
