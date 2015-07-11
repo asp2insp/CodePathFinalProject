@@ -112,6 +112,7 @@ extension IntroViewController: UIScrollViewDelegate {
         pageControl.currentPage = Int(pageIndex)
         
         if pageControl.currentPage == 3 {
+            self.scrollView.userInteractionEnabled = false
             skipButton.hidden = true
             awesomeButton.hidden = true
             pageControl.hidden = true
@@ -120,14 +121,13 @@ extension IntroViewController: UIScrollViewDelegate {
             UIView.animateWithDuration(1, animations: { () -> Void in
                 self.fourthScreen.logoImage.frame = CGRect(x: (self.view.frame.width - logoWidth) / 2.0, y: 50.0, width: logoWidth, height: logoHeight)
                 self.fourthScreen.thingyView.center = self.view.center
+                self.skipButton.center.y += 100
                 }, completion: { (success:Bool) -> Void in
                 var notification = NSNotification(name: kIntroDidFinishNotification, object: nil)
                 NSNotificationCenter.defaultCenter().postNotification(notification)
             })
             
-        }
-        
-        if pageControl.currentPage == 2 {
+        } else if pageControl.currentPage == 2 {
             skipButton.hidden = true
             awesomeButton.hidden = false
         } else {

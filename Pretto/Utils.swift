@@ -45,6 +45,10 @@ func delay(delay:Double, closure:()->()) {
         dispatch_get_main_queue(), closure)
 }
 
+func openWebsiteInSafari() {
+    UIApplication.sharedApplication().openURL(NSURL(string: "http://www.pretto.co")!)
+}
+
 func printAppStatus() {
     switch UIApplication.sharedApplication().applicationState {
     case .Active:
