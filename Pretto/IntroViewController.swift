@@ -13,11 +13,12 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var pageControl: UIPageControl!
     
-    private let numberOfPages: CGFloat = 3
+    private let numberOfPages: CGFloat = 4
     
     private var firstScreen: FirstIntroView!
     private var secondScreen: SecondIntroView!
     private var thirdScreen: ThirdIntroView!
+    private var fourthScreen: TransitionScreen!
     
     private var runFirstAnimation: Bool!
     private var runSecondAnimation: Bool!
@@ -60,9 +61,13 @@ class IntroViewController: UIViewController, UIScrollViewDelegate {
         thirdScreen.backgroundColor = UIColor.prettoIntroBlue()
 //        thirdScreen.mainView.backgroundColor = UIColor.prettoLightGrey()
         
+        let transitionView = TransitionScreen(frame: CGRect(x: screenWidth * 3, y: 0, width: screenWidth, height: screenHeight))
+        fourthScreen = transitionView
+        
         self.scrollView.addSubview(firstScreen)
         self.scrollView.addSubview(secondScreen)
         self.scrollView.addSubview(thirdScreen)
+        self.scrollView.addSubview(fourthScreen)
         
         runFirstAnimation = true
         runSecondAnimation = true
@@ -105,6 +110,22 @@ extension IntroViewController: UIScrollViewDelegate {
         var pageIndex = floor(scrollView.contentOffset.x / scrollView.frame.width)
 //        println("Scrolling Page Index: \(Int(pageIndex))")
         pageControl.currentPage = Int(pageIndex)
+        
+        if pageControl.currentPage == 3 {
+            skipButton.hidden = true
+            awesomeButton.hidden = true
+            pageControl.hidden = true
+            var logoHeight = CGFloat(98.0)
+            var logoWidth = CGFloat(168.0)
+            UIView.animateWithDuration(1, animations: { () -> Void in
+                self.fourthScreen.logoImage.frame = CGRect(x: (self.view.frame.width - logoWidth) / 2.0, y: 50.0, width: logoWidth, height: logoHeight)
+                self.fourthScreen.thingyView.center = self.view.center
+                }, completion: { (success:Bool) -> Void in
+                var notification = NSNotification(name: kIntroDidFinishNotification, object: nil)
+                NSNotificationCenter.defaultCenter().postNotification(notification)
+            })
+            
+        }
         
         if pageControl.currentPage == 2 {
             skipButton.hidden = true

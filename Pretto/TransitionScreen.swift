@@ -33,6 +33,7 @@ class TransitionScreen: UIView {
         
         // 2. Some setup
         self.mainView.frame = UIScreen.mainScreen().bounds
+        self.mainView.backgroundColor = UIColor.prettoBlue()
         
         // 3. Add as a subview
         self.addSubview(self.mainView)

@@ -90,7 +90,7 @@ func animateFromRightToLeft(destinationViewController: UIViewController, initial
     UIApplication.sharedApplication().keyWindow!.addSubview(finalSnapShot)
     UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(finalSnapShot)
     
-    UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+    UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
         initialSnapshot.center = CGPoint(x: -(UIScreen.mainScreen().bounds.width / 2), y: UIScreen.mainScreen().bounds.height / 2)
         finalSnapShot.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2)
         }) { (success:Bool) -> Void in
@@ -106,7 +106,7 @@ func animateFromLeftToRight(destinationViewController: UIViewController, initial
     UIApplication.sharedApplication().keyWindow!.addSubview(finalSnapShot)
     UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(finalSnapShot)
     
-    UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+    UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
         initialSnapshot.center = CGPoint(x: UIScreen.mainScreen().bounds.width * 1.5, y: UIScreen.mainScreen().bounds.height / 2)
         finalSnapShot.center = CGPoint(x: UIScreen.mainScreen().bounds.width / 2, y: UIScreen.mainScreen().bounds.height / 2)
         }) { (success:Bool) -> Void in
@@ -123,7 +123,7 @@ func animateShrink(destinationViewController: UIViewController, initialSnapshot:
     UIApplication.sharedApplication().keyWindow!.bringSubviewToFront(initialSnapshot)
 
     
-    UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+    UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
         initialSnapshot.transform = CGAffineTransformMakeScale(0.01, 0.01)
         }) { (success:Bool) -> Void in
             completion(success: success)

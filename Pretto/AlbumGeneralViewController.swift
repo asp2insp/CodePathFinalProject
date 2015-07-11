@@ -93,6 +93,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        segmentedControl.selectedSegmentIndex = 0
         shouldPresentFutureEvents = false
         photoPicker = UIImagePickerController()
         self.observer = NSNotificationCenter.defaultCenter().addObserverForName(kNewPhotoForEventNotification, object: nil, queue: nil) { (note) -> Void in
@@ -147,7 +148,9 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
                     }
                     self.tableView.reloadData()
                     for cell in self.tableView.visibleCells() {
-                        (cell as! AlbumGeneralViewCell).updateData()
+                        if cell.isKindOfClass(AlbumGeneralViewCell) {
+                            (cell as! AlbumGeneralViewCell).updateData()
+                        }
                     }
                 } else {
                     cameraView.hidden = true
