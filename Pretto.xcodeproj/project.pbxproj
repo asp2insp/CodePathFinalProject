@@ -26,6 +26,8 @@
 		1649D9E61B386DB000EEA0DD /* ThirdIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649D9E51B386DB000EEA0DD /* ThirdIntroView.swift */; };
 		1649D9E81B386DC300EEA0DD /* SecondIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649D9E71B386DC300EEA0DD /* SecondIntroView.xib */; };
 		1649D9EA1B386DCE00EEA0DD /* ThirdIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649D9E91B386DCE00EEA0DD /* ThirdIntroView.xib */; };
+		16689F0D1B517E000052AE84 /* SettingsGeneralCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16689F0C1B517E000052AE84 /* SettingsGeneralCell.swift */; };
+		16689F0F1B5183A90052AE84 /* SettingsLogOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16689F0E1B5183A90052AE84 /* SettingsLogOutCell.swift */; };
 		1683557A1B34DED400264F6B /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168355791B34DED400264F6B /* PushManager.swift */; };
 		1683557C1B35EEC000264F6B /* NoAlbumsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1683557B1B35EEC000264F6B /* NoAlbumsCell.swift */; };
 		1683557E1B35F56A00264F6B /* NoAlbumsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1683557D1B35F56A00264F6B /* NoAlbumsCell.xib */; };
@@ -99,6 +101,8 @@
 		1649D9E51B386DB000EEA0DD /* ThirdIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdIntroView.swift; sourceTree = "<group>"; };
 		1649D9E71B386DC300EEA0DD /* SecondIntroView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondIntroView.xib; sourceTree = "<group>"; };
 		1649D9E91B386DCE00EEA0DD /* ThirdIntroView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThirdIntroView.xib; sourceTree = "<group>"; };
+		16689F0C1B517E000052AE84 /* SettingsGeneralCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsGeneralCell.swift; sourceTree = "<group>"; };
+		16689F0E1B5183A90052AE84 /* SettingsLogOutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLogOutCell.swift; sourceTree = "<group>"; };
 		168355791B34DED400264F6B /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		1683557B1B35EEC000264F6B /* NoAlbumsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAlbumsCell.swift; sourceTree = "<group>"; };
 		1683557D1B35F56A00264F6B /* NoAlbumsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoAlbumsCell.xib; sourceTree = "<group>"; };
@@ -249,6 +253,8 @@
 		16ED51251B4EF7A7005DB0A9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				16689F0C1B517E000052AE84 /* SettingsGeneralCell.swift */,
+				16689F0E1B5183A90052AE84 /* SettingsLogOutCell.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -587,8 +593,10 @@
 			files = (
 				169C9A081B4B103700F3CBC4 /* CreateEventAddLocationViewController.swift in Sources */,
 				1628DCF51B30BE89005E0841 /* EventManager.swift in Sources */,
+				16689F0F1B5183A90052AE84 /* SettingsLogOutCell.swift in Sources */,
 				606748D21B37765400B33AAB /* RequestCell.swift in Sources */,
 				1684BBFF1B3391F400CBCDC1 /* Appearance.swift in Sources */,
+				16689F0D1B517E000052AE84 /* SettingsGeneralCell.swift in Sources */,
 				16D3AA381B2E47C200934948 /* AddEventDatePickerCell.swift in Sources */,
 				1628DCEF1B2E73D4005E0841 /* CreateEventAddUsersViewController.swift in Sources */,
 				16ED51241B4EF751005DB0A9 /* SettingsGeneralViewController.swift in Sources */,

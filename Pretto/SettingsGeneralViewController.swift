@@ -71,8 +71,10 @@ class SettingsGeneralViewController: UIViewController, UITableViewDataSource, UI
 
 extension SettingsGeneralViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 6 {
-            
+        switch (indexPath.section, indexPath.row) {
+        case (4, 0), (4, 1):
+            openWebsiteInSafari()
+        case (5, 0):
             let alert: UIAlertController = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
             alert.view.tintColor = UIColor.prettoOrange()
             let actionLogOut: UIAlertAction = UIAlertAction(title: "Yes, log me out!", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
@@ -83,7 +85,8 @@ extension SettingsGeneralViewController : UITableViewDelegate {
             alert.addAction(actionLogOut)
             alert.addAction(actionCancel)
             self.presentViewController(alert, animated: true, completion: nil)
-
+        default:
+            break
         }
     }
 }
@@ -92,23 +95,21 @@ extension SettingsGeneralViewController : UITableViewDelegate {
 
 extension SettingsGeneralViewController : UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 7
+        return 6
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 3
-        case 1:
-            return 3
-        case 2:
-            return 1
-        case 3:
-            return 1
-        case 4:
             return 2
-        case 5:
-            return 3
+        case 1:
+            return 2
+        case 2:
+            return 2
+        case 3:
+            return 2
+        case 4:
+            return 4
         default:
             return 1
         }
@@ -121,12 +122,10 @@ extension SettingsGeneralViewController : UITableViewDataSource {
         case 1:
             return "GENERAL"
         case 2:
-            return "NOTIFICATIONS"
-        case 3:
             return "PRIVACY"
-        case 4:
+        case 3:
             return "SUPPORT"
-        case 5:
+        case 4:
             return "ABOUT"
         default:
             return nil
@@ -134,27 +133,57 @@ extension SettingsGeneralViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         switch indexPath.section {
-//        case 0:
-//            return 3
-//        case 1:
-//            return 3
-//        case 2:
-//            return 1
-//        case 3:
-//            return 1
-//        case 4:
-//            return 2
-//        case 5:
-//            return 3
-        case 6:
+        case 0:
+            let cell = tableView.dequeueReusableCellWithIdentifier(settingsCellReuseIdentifier, forIndexPath: indexPath) as! SettingsGeneralCell
+            if indexPath.row == 0 {
+                cell.title = "Edit Profile"
+            } else if indexPath.row == 1 {
+                cell.title = "Contacts"
+            }
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCellWithIdentifier(settingsCellReuseIdentifier, forIndexPath: indexPath) as! SettingsGeneralCell
+            if indexPath.row == 0 {
+                cell.title = "Cellular Data Use"
+            } else if indexPath.row == 1 {
+                cell.title = "Notifications"
+            }
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCellWithIdentifier(settingsCellReuseIdentifier, forIndexPath: indexPath) as! SettingsGeneralCell
+            if indexPath.row == 0 {
+                cell.title = "Sharing Options"
+            } else if indexPath.row == 1 {
+                cell.title = "Visibility"
+            }
+            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCellWithIdentifier(settingsCellReuseIdentifier, forIndexPath: indexPath) as! SettingsGeneralCell
+            if indexPath.row == 0 {
+                cell.title = "Help Center"
+            } else if indexPath.row == 1 {
+                cell.title = "Report a Problem"
+            }
+            return cell
+        case 4:
+            let cell = tableView.dequeueReusableCellWithIdentifier(settingsCellReuseIdentifier, forIndexPath: indexPath) as! SettingsGeneralCell
+            if indexPath.row == 0 {
+                cell.title = "Website"
+            } else if indexPath.row == 1 {
+                cell.title = "Blog"
+            } else if indexPath.row == 2 {
+                cell.title = "Privacy Policy"
+            } else if indexPath.row == 3 {
+                cell.title = "Terms"
+            }
+            return cell
+        case 5:
             let cell = tableView.dequeueReusableCellWithIdentifier(logOutCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         default:
-            let cell = tableView.dequeueReusableCellWithIdentifier(settingsCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            let cell = tableView.dequeueReusableCellWithIdentifier(settingsCellReuseIdentifier, forIndexPath: indexPath) as! SettingsLogOutCell
             return cell
         }
     }
