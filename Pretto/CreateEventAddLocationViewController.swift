@@ -15,12 +15,12 @@ class CreateEventAddLocationViewController: UIViewController, CLLocationManagerD
     private let longDelta: Double = 0.01
     @IBOutlet weak var mapView: MKMapView!
     var locationManager = CLLocationManager()
-    var location : CLLocation? {
+    var location : CLLocationCoordinate2D? {
         didSet {
             if let location = location {
                 let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
-                let region = MKCoordinateRegion(center: location.coordinate, span: span)
-                mapView.setRegion(region, animated: true)
+                let region = MKCoordinateRegion(center: location, span: span)
+                mapView?.setRegion(region, animated: true)
             }
         }
     }
@@ -59,7 +59,7 @@ extension CreateEventAddLocationViewController : CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         let newLocation = locations.last as! CLLocation
         println("Got location \(newLocation)")
-        self.location = newLocation
+        self.location = newLocation.coordinate
         locationManager.stopUpdatingLocation()
     }
 }

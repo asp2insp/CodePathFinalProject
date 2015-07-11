@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AddressBookUI
 
 private let AddEventPhotoCellReuseIdentifier = "AddEventPhotoCell"
 private let AddEventTitleCellReuseIdentifier = "AddEventTitleCell"
@@ -15,7 +16,7 @@ private let AddEventDatePickerCellReuseIdentifier = "AddEventDatePickerCell"
 private let AddEventLocationCellReuseIdentifier = "AddEventLocationCell"
 private let AddEventPrivacyCellReuseIdentifier = "AddEventPrivacyCell"
 
-class CreateEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddEventPhotoCellDelegate, AddEventTitleCellDelegate, AddEventDatePickerCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddEventPhotoCellDelegate, AddEventTitleCellDelegate, AddEventDatePickerCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
 
     @IBOutlet var nextButton: UIBarButtonItem!
     
@@ -31,6 +32,8 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     var eventPhoto: UIImage?
     var locationString : String? = "Location TBD"
     
+    var locationManager = CLLocationManager()
+    
     var location : CLLocationCoordinate2D? {
         didSet {
             // Add Data to Summary Card
@@ -38,12 +41,8 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
                 CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: self.location!.latitude, longitude: self.location!.longitude), completionHandler: { (markers, error) -> Void in
                     if markers.count > 0 {
                         let marker = markers[0] as! CLPlacemark
-                        let locality = marker.locality ?? ""
-                        if let sublocality = marker.subLocality {
-                            self.locationString = locality + ", " + sublocality
-                        } else {
-                            self.locationString = locality
-                        }
+                        self.locationString = ABCreateStringWithAddressDictionary(marker.addressDictionary, false)
+                        
                     }
                     self.tableView.reloadData()
                 })
@@ -52,6 +51,12 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
     }
+
+// TODO
+//    Address for choose location
+//    Make location center on chosen location
+//    Make location default to current location
+//    Add natural language search for location
     
     var titleTextField: UITextField?
     
@@ -95,6 +100,12 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.startDate = self.startDate ?? NSDate()
         self.endDate = self.startDate.dateByAddingTimeInterval(3600)
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -124,6 +135,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
         case "AddLocationSegue":
             var destinationVC = segue.destinationViewController as! CreateEventAddLocationViewController
             destinationVC.parent = self
+            destinationVC.location = self.location
         default:
             break
         }
@@ -342,5 +354,15 @@ extension CreateEventViewController: UIImagePickerControllerDelegate {
         self.eventPhoto = image
         tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
         picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+// MARK: CLLocationManagerDelegate
+extension CreateEventViewController : CLLocationManagerDelegate {
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        let newLocation = locations.last as! CLLocation
+        println("Got location \(newLocation)")
+        self.location = newLocation.coordinate
+        locationManager.stopUpdatingLocation()
     }
 }
