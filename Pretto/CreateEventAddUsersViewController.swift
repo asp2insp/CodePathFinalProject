@@ -63,6 +63,9 @@ class CreateEventAddUsersViewController: UIViewController, UITableViewDelegate, 
         newEvent.locationName = "TODO"
         newEvent.admins = [PFUser.currentUser()!]
         newEvent.guests = [PFUser.currentUser()!]
+//        newEvent.isPublic = true
+        newEvent.geoPoint = PFGeoPoint(latitude: newEvent.latitude, longitude: newEvent.longitude)
+        
         let album = Album()
         album.saveInBackground()
         newEvent.albums = [album]

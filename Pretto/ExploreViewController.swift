@@ -7,14 +7,27 @@
 //
 
 import UIKit
+import CoreLocation
 import MapKit
 
-class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate {
+class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet var mapView: MKMapView!
     
     private var searchBar: UISearchBar!
-    
+    var location : CLLocationCoordinate2D? {
+        didSet {
+            if let location = location {
+                let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
+                let region = MKCoordinateRegion(center: location, span: span)
+                mapView?.setRegion(region, animated: true)
+                updateNearbyEvents()
+            }
+        }
+    }
+    var locationManager = CLLocationManager()
+
+    var mapEvents : [String:MKAnnotation] = [:]
     private let latitude: Double = 37.771052
     private let longitude: Double = -122.403891
     private let latDelta: Double = 0.01
@@ -56,8 +69,28 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
         self.searchBar.resignFirstResponder()
     }
     
+    func updateNearbyEvents() {
+        Event.getNearbyEvents(self.location!, callback: { (events) -> Void in
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            self.mapEvents.removeAll(keepCapacity: true)
+            for event : Event in events {
+                let annotation = MKPointAnnotation()
+                let locationCoordinate = CLLocationCoordinate2DMake(event.latitude, event.longitude)
+                annotation.coordinate = locationCoordinate
+                annotation.title = event.title
+                self.mapView.addAnnotation(annotation)
+                self.mapEvents[event.title] = annotation
+            }
+        })
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -108,3 +141,35 @@ extension ExploreViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: CLLocationManagerDelegate
+extension ExploreViewController : CLLocationManagerDelegate {
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        let newLocation = locations.last as! CLLocation
+        println("Got location \(newLocation)")
+        self.location = newLocation.coordinate
+        locationManager.stopUpdatingLocation()
+    }
+}
+
+// MARK: MapViewDelegate
+extension ExploreViewController : MKMapViewDelegate {
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        
+    }
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        let reuseID = "myAnnotationView"
+        
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseID)
+        if (annotationView == nil) {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+            annotationView.canShowCallout = true
+            annotationView.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
+            let detailButton = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
+            annotationView.rightCalloutAccessoryView = detailButton
+        }
+//        let imageView = annotationView.leftCalloutAccessoryView as! UIImageView
+//        imageView.image = images[annotation.title!]
+        return annotationView
+    }
+}

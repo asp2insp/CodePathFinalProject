@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 private let kClassName = "Event"
 
@@ -23,6 +24,7 @@ private let kEventLocationNameKey = "locationName"
 private let kEventAdminsKey = "admins"
 private let kEventGuestsKey = "guests"
 private let kEventChannelKey = "channel"
+internal let kEventIsPublicKey = "isPublic"
 
 
 class Event : PFObject, PFSubclassing {
@@ -48,12 +50,14 @@ class Event : PFObject, PFSubclassing {
     @NSManaged var owner : PFUser?
     @NSManaged var pincode : String?
 
+    @NSManaged var geoPoint : PFGeoPoint
     @NSManaged var latitude : Double
     @NSManaged var longitude : Double
     @NSManaged var locationName : String?
     @NSManaged var admins : [PFUser]?
     @NSManaged var guests : [PFUser]?
     @NSManaged var channel : String?
+//    @NSManaged var isPublic : Bool
     
     // TODO - support more than one album per event, right now we're going
     // to have a 1:1 mapping
@@ -101,10 +105,11 @@ class Event : PFObject, PFSubclassing {
         self.pincode = dictionary[kEventPincodeKey] as? String
         self.latitude = dictionary[kEventLatitudeKey] as! Double
         self.longitude = dictionary[kEventLongitudeKey] as! Double
+        self.geoPoint = PFGeoPoint(latitude: self.latitude, longitude: self.longitude)
         self.admins = dictionary[kEventAdminsKey] as? [PFUser]
         self.guests = dictionary[kEventGuestsKey] as? [PFUser]
         self.channel = dictionary[kEventChannelKey] as? String
-
+//        self.isPublic = dictionary[kEventIsPublicKey] as? Bool ?? true
     }
 
     func getAllPhotosInEvent(orderedBy: String?, block: ([Photo] -> Void)) {
@@ -173,6 +178,22 @@ class Event : PFObject, PFSubclassing {
             push.setData(data)
             push.setQuery(pushQuery)
             push.sendPushInBackground()
+        }
+    }
+    
+    class func getNearbyEvents(location: CLLocationCoordinate2D, callback:([Event]->Void)) {
+        let userGeoPoint = PFGeoPoint(latitude: location.latitude, longitude: location.longitude)
+        var query = PFQuery(className: kClassName)
+        query.whereKey("geoPoint", nearGeoPoint: userGeoPoint, withinMiles:1.0)
+//        query.whereKey("isPublic", equalTo: true)
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil {
+                if let events = objects as? [Event] {
+                    callback(events)
+                    return
+                }
+            }
+            callback([])
         }
     }
     
