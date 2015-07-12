@@ -13,7 +13,7 @@ import MapKit
 class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet var mapView: MKMapView!
-    
+    private var invitationToSelectedEvent : Invitation?
     private var searchBar: UISearchBar!
     var location : CLLocationCoordinate2D? {
         didSet {
@@ -29,6 +29,7 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
 
     var mapEvents : [String:Event] = [:]
     var attendingEvents : [String] = []
+    var invites :[String:Invitation] = [:]
     private let latitude: Double = 37.771052
     private let longitude: Double = -122.403891
     private let latDelta: Double = 0.01
@@ -54,7 +55,6 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "didTapOnView")
         self.view.addGestureRecognizer(tapRecognizer)
         
-        mapView.scrollEnabled = false
         mapView.delegate = self
         let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
@@ -72,8 +72,10 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
     func refreshEvents() {
         Invitation.getAllLiveEvents { invitations in
             self.attendingEvents.removeAll(keepCapacity: true)
+            self.invites.removeAll(keepCapacity: true)
             for invite in invitations {
                 self.attendingEvents.append(invite.event.objectId!)
+                self.invites[invite.event.objectId!] = invite
             }
             self.displayNearbyEvents()
         }
@@ -105,6 +107,11 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destinationController = segue.destinationViewController as! EventDetailViewController
+        destinationController.invitation = self.invitationToSelectedEvent
     }
 
 }
@@ -158,6 +165,9 @@ extension ExploreViewController : MKMapViewDelegate {
             event.acceptFromMapView().saveInBackgroundWithBlock({ (success, err) -> Void in
                 self.refreshEvents()
             })
+        } else {
+            self.invitationToSelectedEvent = invites[event.objectId!]
+            self.performSegueWithIdentifier("ShowEventDetail", sender: self)
         }
     }
     
@@ -168,19 +178,18 @@ extension ExploreViewController : MKMapViewDelegate {
         if (annotationView == nil) {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             annotationView.canShowCallout = true
-            let detailButton = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
-            
-            annotationView.rightCalloutAccessoryView = detailButton
+            var button = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
+            annotationView.rightCalloutAccessoryView = button
         }
         let annView = annotationView as! MKPinAnnotationView
-        let button = annView.rightCalloutAccessoryView as! UIButton
+        let callToActionView = annView.rightCalloutAccessoryView as! UIButton
         let event = mapEvents[annotation.title!]!
         if contains(self.attendingEvents, event.objectId!) {
             annView.pinColor = MKPinAnnotationColor.Green
-            button.imageView?.image = UIImage(named: "checkmark")
+            callToActionView.setImage(nil, forState: UIControlState.Normal)
         } else {
             annView.pinColor = MKPinAnnotationColor.Red
-            button.imageView?.image = UIImage(named: "plus")
+            callToActionView.setImage(UIImage(named: "plus"), forState: UIControlState.Normal)
         }
         return annView
     }

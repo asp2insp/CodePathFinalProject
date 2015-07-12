@@ -198,6 +198,7 @@ class Event : PFObject, PFSubclassing {
         query.whereKey("geoPoint", nearGeoPoint: userGeoPoint, withinMiles:1.0)
         query.whereKey("visibility", equalTo: "public")
         query.whereKey(kEventEndDateKey, greaterThan: NSDate())
+        query.whereKey(kEventStartDateKey, lessThan: NSDate())
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
                 if let events = objects as? [Event] {

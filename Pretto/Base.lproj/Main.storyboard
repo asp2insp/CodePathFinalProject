@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Sin-eM-ad7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Sin-eM-ad7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1014,10 +1014,10 @@
             </objects>
             <point key="canvasLocation" x="3145" y="-45"/>
         </scene>
-        <!--Coming Soon-->
+        <!--Nearby-->
         <scene sceneID="qxG-WV-xvY">
             <objects>
-                <viewController id="72o-ap-9Lr" customClass="ExploreViewController" customModule="Pretto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="72o-ap-9Lr" userLabel="Nearby" customClass="ExploreViewController" customModule="Pretto" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T9p-jT-1n6"/>
                         <viewControllerLayoutGuide type="bottom" id="5dW-7u-n90"/>
@@ -1039,11 +1039,12 @@
                             <constraint firstItem="5dW-7u-n90" firstAttribute="top" secondItem="yRa-am-4em" secondAttribute="bottom" id="sUD-kf-hQU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Coming Soon" id="AhD-uG-MXt">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="bc7-cT-wwt"/>
+                    <navigationItem key="navigationItem" title="Nearby" id="AhD-uG-MXt">
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="bc7-cT-wwt"/>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="yRa-am-4em" id="qAL-72-L6F"/>
+                        <segue destination="QHM-MY-pEb" kind="show" identifier="ShowEventDetail" id="u8x-uK-fdA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o8c-so-quc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1587,5 +1588,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BF4-eI-bfI"/>
+        <segue reference="u8x-uK-fdA"/>
     </inferredMetricsTieBreakers>
 </document>
