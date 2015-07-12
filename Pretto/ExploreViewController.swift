@@ -106,17 +106,6 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -164,7 +153,12 @@ extension ExploreViewController : CLLocationManagerDelegate {
 // MARK: MapViewDelegate
 extension ExploreViewController : MKMapViewDelegate {
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        
+        let event = mapEvents[view.annotation.title!]!
+        if !contains(self.attendingEvents, event.objectId!) {
+            event.acceptFromMapView().saveInBackgroundWithBlock({ (success, err) -> Void in
+                self.refreshEvents()
+            })
+        }
     }
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -179,11 +173,14 @@ extension ExploreViewController : MKMapViewDelegate {
             annotationView.rightCalloutAccessoryView = detailButton
         }
         let annView = annotationView as! MKPinAnnotationView
+        let button = annView.rightCalloutAccessoryView as! UIButton
         let event = mapEvents[annotation.title!]!
         if contains(self.attendingEvents, event.objectId!) {
             annView.pinColor = MKPinAnnotationColor.Green
+            button.imageView?.image = UIImage(named: "checkmark")
         } else {
             annView.pinColor = MKPinAnnotationColor.Red
+            button.imageView?.image = UIImage(named: "plus")
         }
         return annView
     }

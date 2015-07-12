@@ -166,6 +166,17 @@ class Event : PFObject, PFSubclassing {
         return invitation
     }
     
+    func acceptFromMapView() -> Invitation {
+        let invitation = Invitation()
+        invitation.from = self.owner!
+        invitation.to = PFUser.currentUser()!
+        invitation.paused = false
+        invitation.event = self
+        invitation.accepted = true
+        invitation.lastUpdated = NSDate()
+        return invitation
+    }
+    
     func sendInvitationNotification(invite: Invitation) {
         println("Sending Push")
         if invite.from != invite.to {
