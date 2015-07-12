@@ -27,6 +27,7 @@ class CreateEventAddUsersViewController: UIViewController, UITableViewDelegate, 
     var selectedFriends: [Friend]?
     var selectedIndexes: [Int]?
     var autocompleteArray : [String]?
+    var privacy : String?
     
     private var autocompleteTableView: UITableView!
 
@@ -63,8 +64,8 @@ class CreateEventAddUsersViewController: UIViewController, UITableViewDelegate, 
         newEvent.locationName = "TODO"
         newEvent.admins = [PFUser.currentUser()!]
         newEvent.guests = [PFUser.currentUser()!]
-//        newEvent.isPublic = true
         newEvent.geoPoint = PFGeoPoint(latitude: newEvent.latitude, longitude: newEvent.longitude)
+        newEvent.visibility = self.privacy ?? "private"
         
         let album = Album()
         album.saveInBackground()

@@ -13,7 +13,7 @@ import MapKit
 class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet var mapView: MKMapView!
-    
+    private var invitationToSelectedEvent : Invitation?
     private var searchBar: UISearchBar!
     var location : CLLocationCoordinate2D? {
         didSet {
@@ -21,13 +21,15 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
                 let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
                 let region = MKCoordinateRegion(center: location, span: span)
                 mapView?.setRegion(region, animated: true)
-                updateNearbyEvents()
+                refreshEvents()
             }
         }
     }
     var locationManager = CLLocationManager()
 
-    var mapEvents : [String:MKAnnotation] = [:]
+    var mapEvents : [String:Event] = [:]
+    var attendingEvents : [String] = []
+    var invites :[String:Invitation] = [:]
     private let latitude: Double = 37.771052
     private let longitude: Double = -122.403891
     private let latDelta: Double = 0.01
@@ -36,7 +38,6 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        searchBar.barTintColor = UIColor.prettoBlue()
         searchBar = UISearchBar()
         searchBar.delegate = self
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
@@ -54,7 +55,6 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "didTapOnView")
         self.view.addGestureRecognizer(tapRecognizer)
         
-        
         mapView.delegate = self
         let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
@@ -69,7 +69,19 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
         self.searchBar.resignFirstResponder()
     }
     
-    func updateNearbyEvents() {
+    func refreshEvents() {
+        Invitation.getAllLiveEvents { invitations in
+            self.attendingEvents.removeAll(keepCapacity: true)
+            self.invites.removeAll(keepCapacity: true)
+            for invite in invitations {
+                self.attendingEvents.append(invite.event.objectId!)
+                self.invites[invite.event.objectId!] = invite
+            }
+            self.displayNearbyEvents()
+        }
+    }
+    
+    func displayNearbyEvents() {
         Event.getNearbyEvents(self.location!, callback: { (events) -> Void in
             self.mapView.removeAnnotations(self.mapView.annotations)
             self.mapEvents.removeAll(keepCapacity: true)
@@ -79,7 +91,7 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
                 annotation.coordinate = locationCoordinate
                 annotation.title = event.title
                 self.mapView.addAnnotation(annotation)
-                self.mapEvents[event.title] = annotation
+                self.mapEvents[event.title] = event
             }
         })
     }
@@ -97,16 +109,10 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let destinationController = segue.destinationViewController as! EventDetailViewController
+        destinationController.invitation = self.invitationToSelectedEvent
     }
-    */
 
 }
 
@@ -154,7 +160,15 @@ extension ExploreViewController : CLLocationManagerDelegate {
 // MARK: MapViewDelegate
 extension ExploreViewController : MKMapViewDelegate {
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        
+        let event = mapEvents[view.annotation.title!]!
+        if !contains(self.attendingEvents, event.objectId!) {
+            event.acceptFromMapView().saveInBackgroundWithBlock({ (success, err) -> Void in
+                self.refreshEvents()
+            })
+        } else {
+            self.invitationToSelectedEvent = invites[event.objectId!]
+            self.performSegueWithIdentifier("ShowEventDetail", sender: self)
+        }
     }
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -164,12 +178,19 @@ extension ExploreViewController : MKMapViewDelegate {
         if (annotationView == nil) {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             annotationView.canShowCallout = true
-            annotationView.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
-            let detailButton = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
-            annotationView.rightCalloutAccessoryView = detailButton
+            var button = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
+            annotationView.rightCalloutAccessoryView = button
         }
-//        let imageView = annotationView.leftCalloutAccessoryView as! UIImageView
-//        imageView.image = images[annotation.title!]
-        return annotationView
+        let annView = annotationView as! MKPinAnnotationView
+        let callToActionView = annView.rightCalloutAccessoryView as! UIButton
+        let event = mapEvents[annotation.title!]!
+        if contains(self.attendingEvents, event.objectId!) {
+            annView.pinColor = MKPinAnnotationColor.Green
+            callToActionView.setImage(nil, forState: UIControlState.Normal)
+        } else {
+            annView.pinColor = MKPinAnnotationColor.Red
+            callToActionView.setImage(UIImage(named: "plus"), forState: UIControlState.Normal)
+        }
+        return annView
     }
 }

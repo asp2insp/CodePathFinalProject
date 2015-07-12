@@ -20,6 +20,7 @@ class CreateEventAddLocationViewController: UIViewController, CLLocationManagerD
             if let location = location {
                 let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
                 let region = MKCoordinateRegion(center: location, span: span)
+                mapView?.setCenterCoordinate(location, animated: false)
                 mapView?.setRegion(region, animated: true)
             }
         }

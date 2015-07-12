@@ -57,7 +57,7 @@ class Event : PFObject, PFSubclassing {
     @NSManaged var admins : [PFUser]?
     @NSManaged var guests : [PFUser]?
     @NSManaged var channel : String?
-//    @NSManaged var isPublic : Bool
+    @NSManaged var visibility : String?
     
     // TODO - support more than one album per event, right now we're going
     // to have a 1:1 mapping
@@ -109,7 +109,7 @@ class Event : PFObject, PFSubclassing {
         self.admins = dictionary[kEventAdminsKey] as? [PFUser]
         self.guests = dictionary[kEventGuestsKey] as? [PFUser]
         self.channel = dictionary[kEventChannelKey] as? String
-//        self.isPublic = dictionary[kEventIsPublicKey] as? Bool ?? true
+        self.visibility = dictionary[kEventIsPublicKey] as? String ?? "private"
     }
 
     func getAllPhotosInEvent(orderedBy: String?, block: ([Photo] -> Void)) {
@@ -166,6 +166,17 @@ class Event : PFObject, PFSubclassing {
         return invitation
     }
     
+    func acceptFromMapView() -> Invitation {
+        let invitation = Invitation()
+        invitation.from = self.owner!
+        invitation.to = PFUser.currentUser()!
+        invitation.paused = false
+        invitation.event = self
+        invitation.accepted = true
+        invitation.lastUpdated = NSDate()
+        return invitation
+    }
+    
     func sendInvitationNotification(invite: Invitation) {
         println("Sending Push")
         if invite.from != invite.to {
@@ -185,7 +196,9 @@ class Event : PFObject, PFSubclassing {
         let userGeoPoint = PFGeoPoint(latitude: location.latitude, longitude: location.longitude)
         var query = PFQuery(className: kClassName)
         query.whereKey("geoPoint", nearGeoPoint: userGeoPoint, withinMiles:1.0)
-//        query.whereKey("isPublic", equalTo: true)
+        query.whereKey("visibility", equalTo: "public")
+        query.whereKey(kEventEndDateKey, greaterThan: NSDate())
+        query.whereKey(kEventStartDateKey, lessThan: NSDate())
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
                 if let events = objects as? [Event] {

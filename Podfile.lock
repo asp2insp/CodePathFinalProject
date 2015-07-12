@@ -53,16 +53,16 @@ PODS:
   - SwiftTryCatch (0.0.1)
 
 DEPENDENCIES:
-  - AFNetworking
+  - AFNetworking (= 2.5.4)
   - FBSDKCoreKit (= 4.2.0)
   - FBSDKLoginKit (= 4.2.0)
   - FBSDKShareKit (= 4.2.0)
-  - M13Checkbox
-  - MBProgressHUD
+  - M13Checkbox (= 1.1.2)
+  - MBProgressHUD (= 0.9.1)
   - Parse (= 1.7.4)
   - ParseFacebookUtilsV4 (= 1.7.4)
-  - ParseUI
-  - SwiftTryCatch
+  - ParseUI (= 1.1.4)
+  - SwiftTryCatch (= 0.0.1)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e

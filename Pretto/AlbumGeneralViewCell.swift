@@ -133,7 +133,9 @@ class AlbumGeneralViewCell: UITableViewCell {
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: event.latitude, longitude: event.longitude), completionHandler: { (markers, error) -> Void in
                 if markers.count > 0 {
                     let marker = markers[0] as! CLPlacemark
-                    self.albumLocation.text = "\(marker.locality), \(marker.subLocality)"
+                    var sub = marker.subLocality ?? marker.thoroughfare
+                    sub = sub ?? ""
+                    self.albumLocation.text = "\(marker.locality), \(sub!)"
                 }
             })
         }
