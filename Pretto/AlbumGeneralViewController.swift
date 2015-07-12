@@ -122,45 +122,60 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func refreshData() {
-        if shouldPresentFutureEvents! {
-            Invitation.getAllFutureEvents { (invites) -> Void in
-                self.futureInvitations = invites
-                if self.futureInvitations.count > 0 {
-                    self.emptyNotificationsView.hidden = true
-                } else {
-                    self.emptyNotificationsView.hidden = false
-                }
-                self.tableView.reloadData()
-            }
-        } else {
-            Invitation.getAllPastEvents() { (invites) -> Void in
-                self.pastInvitations = invites
-                self.tableView.reloadData()
-            }
-            
-            Invitation.getAllLiveEvents() { (invites) -> Void in
-                self.liveInvitations = invites
-                if self.liveInvitations.count > 0 {
-                    cameraView.hidden = false
-                    for invite in self.liveInvitations {
-                        invite.pinInBackground()
-                        invite.updateFromCameraRoll()
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.activityIndicatorColor = UIColor.whiteColor()
+        hud.color = UIColor.prettoBlue().colorWithAlphaComponent(0.75)
+
+        dispatch_async(GlobalMainQueue) {
+            if self.shouldPresentFutureEvents! {
+                Invitation.getAllFutureEvents { (invites) -> Void in
+                    self.futureInvitations = invites
+                    if self.futureInvitations.count > 0 {
+                        self.emptyNotificationsView.hidden = true
+                    } else {
+                        self.emptyNotificationsView.hidden = false
                     }
-                    self.tableView.reloadData()
-                    for cell in self.tableView.visibleCells() {
-                        if cell.isKindOfClass(AlbumGeneralViewCell) {
-                            (cell as! AlbumGeneralViewCell).updateData()
-                        }
+                    dispatch_async(dispatch_get_main_queue()) {
+                        MBProgressHUD.hideHUDForView(self.view, animated: true)
+                        self.tableView.reloadData()
                     }
-                } else {
-                    cameraView.hidden = true
-                    self.tableView.reloadData()
+                    
                 }
+            } else {
                 
+                Invitation.getAllLiveEvents() { (invites) -> Void in
+                    self.liveInvitations = invites
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if self.liveInvitations.count > 0 {
+                            cameraView.hidden = false
+                            for invite in self.liveInvitations {
+                                invite.pinInBackground()
+                                invite.updateFromCameraRoll()
+                            }
+                            self.tableView.reloadData()
+                            for cell in self.tableView.visibleCells() {
+                                if cell.isKindOfClass(AlbumGeneralViewCell) {
+                                    (cell as! AlbumGeneralViewCell).updateData()
+                                }
+                            }
+                        } else {
+                            cameraView.hidden = true
+                            self.tableView.reloadData()
+                        }
+                        MBProgressHUD.hideHUDForView(self.view, animated: true)
+                        self.refreshControl.endRefreshing()
+                    }
+                    Invitation.getAllPastEvents() { (invites) -> Void in
+                        self.pastInvitations = invites
+                        self.tableView.reloadData()
+                        
+                    }
+                }
+            }
+            dispatch_async(dispatch_get_main_queue()) {
                 self.refreshControl.endRefreshing()
             }
         }
-        self.refreshControl.endRefreshing()
     }
     
     func createEvent() {

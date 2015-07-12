@@ -45,11 +45,19 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
     }
     
     func refreshData() {
-        self.invitation?.event.getAllPhotosInEvent(kOrderedByNewestFirst) {photos in
-            self.photos = photos
-            self.collectionView.reloadData()
-            self.clearSelections()
-            self.refreshControl.endRefreshing()
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.activityIndicatorColor = UIColor.whiteColor()
+        hud.color = UIColor.prettoBlue().colorWithAlphaComponent(0.75)
+        dispatch_async(GlobalMainQueue) {
+            self.invitation?.event.getAllPhotosInEvent(kOrderedByNewestFirst) {photos in
+                self.photos = photos
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.collectionView.reloadData()
+                    self.clearSelections()
+                    self.refreshControl.endRefreshing()
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                }
+            }
         }
     }
     
