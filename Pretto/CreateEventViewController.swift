@@ -30,6 +30,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     var minimunDate: NSDate?
     var eventTitle: String!
     var eventPhoto: UIImage?
+    var privacySetting : String? = "public"
     var locationString : String? = "Location TBD"
     
     var locationManager = CLLocationManager()
@@ -53,9 +54,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
 // TODO
-//    Address for choose location
 //    Make location center on chosen location
-//    Make location default to current location
 //    Add natural language search for location
     
     var titleTextField: UITextField?
@@ -131,6 +130,7 @@ class CreateEventViewController: UIViewController, UITableViewDelegate, UITableV
             destinationVC.eventTitle = self.eventTitle
             destinationVC.eventPhoto = self.eventPhoto
             destinationVC.location = self.location
+            destinationVC.privacy = self.privacySetting
         case "AddLocationSegue":
             var destinationVC = segue.destinationViewController as! CreateEventAddLocationViewController
             destinationVC.parent = self
@@ -200,6 +200,7 @@ extension CreateEventViewController: UITableViewDelegate {
         case (3, 1):
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddEventPrivacyCell
             cell.isPublicSwitch.setOn(!cell.isPublicSwitch.on, animated: true)
+            cell.didSwitch()
 
         default:
             self.titleTextField?.resignFirstResponder()
@@ -277,6 +278,7 @@ extension CreateEventViewController: UITableViewDataSource {
             
         case (3, 1):
             let cell = tableView.dequeueReusableCellWithIdentifier(AddEventPrivacyCellReuseIdentifier, forIndexPath: indexPath) as! AddEventPrivacyCell
+            cell.delegate = self
             return cell
             
         default:
@@ -322,6 +324,13 @@ extension CreateEventViewController: AddEventDatePickerCellDelegate {
             self.endDate = date
         }
         tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)!,NSIndexPath(forRow: 0, inSection: 2)!], withRowAnimation: UITableViewRowAnimation.None)
+    }
+}
+
+// MARK: AddEventPrivacyCellDelegate
+extension CreateEventViewController : AddEventPrivacyCellDelegate {
+    func didSetPrivacy(privacy: String) {
+        self.privacySetting = privacy
     }
 }
 
@@ -384,6 +393,7 @@ extension CreateEventViewController : CLLocationManagerDelegate {
         let newLocation = locations.last as! CLLocation
         println("Got location \(newLocation)")
         self.location = newLocation.coordinate
+        tableView.reloadData()
         locationManager.stopUpdatingLocation()
     }
 }

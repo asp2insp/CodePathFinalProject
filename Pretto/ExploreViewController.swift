@@ -164,8 +164,9 @@ extension ExploreViewController : MKMapViewDelegate {
         if (annotationView == nil) {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             annotationView.canShowCallout = true
-            annotationView.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
+            //annotationView.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
             let detailButton = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
+            
             annotationView.rightCalloutAccessoryView = detailButton
         }
 //        let imageView = annotationView.leftCalloutAccessoryView as! UIImageView
