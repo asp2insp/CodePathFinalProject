@@ -64,48 +64,62 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
     }
     
     func refreshData() {
-        refreshCount += 3
-        Notification.getAll() {notifications in
-            if let notifications = notifications {
-                self.notifications = notifications
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.activityIndicatorColor = UIColor.whiteColor()
+        hud.color = UIColor.prettoBlue().colorWithAlphaComponent(0.75)
+        dispatch_async(GlobalMainQueue) {
+            self.refreshCount += 3
+            Notification.getAll() {notifications in
+                if let notifications = notifications {
+                    self.notifications = notifications
+                    if --self.refreshCount == 0 {
+                        println("Notifications \(self.notifications.count)")
+                        if self.notifications.count > 0 || self.upcomingInvitations.count > 0 || self.requests.count > 0 {
+                            self.emptyNotificationsView.hidden = true
+                        } else {
+                            self.emptyNotificationsView.hidden = false
+                        }
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.tableView.reloadData()
+                            self.refreshControl.endRefreshing()
+                            MBProgressHUD.hideHUDForView(self.view, animated: true)
+                        }
+                    }
+                }
+            }
+            Invitation.getAllLiveAndFutureNonAcceptedEvents() {invites in
+                self.upcomingInvitations = invites
                 if --self.refreshCount == 0 {
-                    println("Notifications \(self.notifications.count)")
+                    println("upcomingInvitations \(self.upcomingInvitations.count)")
                     if self.notifications.count > 0 || self.upcomingInvitations.count > 0 || self.requests.count > 0 {
                         self.emptyNotificationsView.hidden = true
                     } else {
                         self.emptyNotificationsView.hidden = false
                     }
-                    self.tableView.reloadData()
-                    self.refreshControl.endRefreshing()
-                }
-            }
-        }
-        Invitation.getAllLiveAndFutureNonAcceptedEvents() {invites in
-            self.upcomingInvitations = invites
-            if --self.refreshCount == 0 {
-                println("upcomingInvitations \(self.upcomingInvitations.count)")
-                if self.notifications.count > 0 || self.upcomingInvitations.count > 0 || self.requests.count > 0 {
-                    self.emptyNotificationsView.hidden = true
-                } else {
-                    self.emptyNotificationsView.hidden = false
-                }
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
-            }
-        }
-        
-        Request.getAllPendingRequests() {requests in
-            if let requests = requests {
-                self.requests = self.groupByRequester(requests)
-                if --self.refreshCount == 0 {
-                    println("requests \(self.requests.count)")
-                    if self.notifications.count > 0 || self.upcomingInvitations.count > 0 || self.requests.count > 0 {
-                        self.emptyNotificationsView.hidden = true
-                    } else {
-                        self.emptyNotificationsView.hidden = false
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                        self.refreshControl.endRefreshing()
+                        MBProgressHUD.hideHUDForView(self.view, animated: true)
                     }
-                    self.tableView.reloadData()
-                    self.refreshControl.endRefreshing()
+                }
+            }
+            
+            Request.getAllPendingRequests() {requests in
+                if let requests = requests {
+                    self.requests = self.groupByRequester(requests)
+                    if --self.refreshCount == 0 {
+                        println("requests \(self.requests.count)")
+                        if self.notifications.count > 0 || self.upcomingInvitations.count > 0 || self.requests.count > 0 {
+                            self.emptyNotificationsView.hidden = true
+                        } else {
+                            self.emptyNotificationsView.hidden = false
+                        }
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.tableView.reloadData()
+                            self.refreshControl.endRefreshing()
+                            MBProgressHUD.hideHUDForView(self.view, animated: true)
+                        }
+                    }
                 }
             }
         }

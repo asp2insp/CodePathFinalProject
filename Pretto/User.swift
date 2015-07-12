@@ -102,6 +102,15 @@ class User {
         }
     }
     
+    var numberOfConnections: Int? {
+        get {
+            return self.inner.valueForKey("numberOfConnections") as! Int?
+        }
+        set {
+            self.inner.setValue(newValue, forKey: "numberOfConnections")
+        }
+    }
+    
     
     func printProperties() {
         println("facebookId: \(self.facebookId!)")
@@ -157,6 +166,9 @@ class User {
                 user.facebookId = userData["id"] as? String
                 
                 User.currentUser = user
+                Friend.getAllFriendsFromFacebook(user.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
+                    user.numberOfConnections = friends?.count ?? 0
+                })
                 onComplete(user)
             
             } else {
@@ -168,6 +180,6 @@ class User {
     
     
     class func getAllFacebookFriends(onComplete:(([Friend]?)->Void)){
-        
+
     }
 }
