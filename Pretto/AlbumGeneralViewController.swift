@@ -34,6 +34,8 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     private var photoPicker: UIImagePickerController!
     var observer : NSObjectProtocol!
     
+    private var hudCounter: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -122,7 +124,9 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func refreshData() {
+
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        println("Counter = \(++hudCounter)")
         hud.activityIndicatorColor = UIColor.whiteColor()
         hud.color = UIColor.prettoBlue().colorWithAlphaComponent(0.75)
 
@@ -137,6 +141,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
                     }
                     dispatch_async(dispatch_get_main_queue()) {
                         MBProgressHUD.hideHUDForView(self.view, animated: true)
+                        println("Counter = \(--self.hudCounter)")
                         self.tableView.reloadData()
                     }
                     
@@ -145,29 +150,40 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
                 
                 Invitation.getAllLiveEvents() { (invites) -> Void in
                     self.liveInvitations = invites
-                    dispatch_async(dispatch_get_main_queue()) {
-                        if self.liveInvitations.count > 0 {
-                            cameraView.hidden = false
-                            for invite in self.liveInvitations {
-                                invite.pinInBackground()
-                                invite.updateFromCameraRoll()
-                            }
+                    
+                    if self.liveInvitations.count > 0 {
+                        cameraView.hidden = false
+                        for invite in self.liveInvitations {
+                            invite.pinInBackground()
+                            invite.updateFromCameraRoll()
+                        }
+                        dispatch_async(dispatch_get_main_queue()) {
                             self.tableView.reloadData()
-                            for cell in self.tableView.visibleCells() {
-                                if cell.isKindOfClass(AlbumGeneralViewCell) {
+                        }
+                        for cell in self.tableView.visibleCells() {
+                            if cell.isKindOfClass(AlbumGeneralViewCell) {
+                                dispatch_async(dispatch_get_main_queue()) {
                                     (cell as! AlbumGeneralViewCell).updateData()
                                 }
                             }
-                        } else {
+                        }
+                    } else {
+                        dispatch_async(dispatch_get_main_queue()) {
                             cameraView.hidden = true
                             self.tableView.reloadData()
                         }
+                    }
+                    dispatch_async(dispatch_get_main_queue()) {
                         MBProgressHUD.hideHUDForView(self.view, animated: true)
+                        println("Counter = \(--self.hudCounter)")
                         self.refreshControl.endRefreshing()
                     }
+                    
                     Invitation.getAllPastEvents() { (invites) -> Void in
-                        self.pastInvitations = invites
-                        self.tableView.reloadData()
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.pastInvitations = invites
+                            self.tableView.reloadData()
+                        }
                         
                     }
                 }

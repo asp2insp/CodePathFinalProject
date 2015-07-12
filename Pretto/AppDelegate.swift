@@ -110,11 +110,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         println("AppDelegate : didReceiveRemoteNotification")
-        PFPush.handlePush(userInfo)
+//        PFPush.handlePush(userInfo)
         if application.applicationState == UIApplicationState.Inactive {
+            PFPush.handlePush(userInfo)
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayloadInBackground(userInfo, block: nil)
+        } else if application.applicationState == UIApplicationState.Active {
+            println("Remote Notification Received and IGNORED")
+            return
         }
     }
+    
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
             println("AppDelegate : openURL")

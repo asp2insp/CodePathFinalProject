@@ -107,6 +107,12 @@ class Invitation : PFObject, PFSubclassing {
                         NSNotificationCenter.defaultCenter().postNotificationName(kNewPhotoForEventNotification, object: self.event)
                         self.event.addImageToEvent(image)
                         self.event.saveInBackgroundWithBlock({ (success:Bool, erro:NSError?) -> Void in
+                            let push = PFPush()
+                            push.setChannel(self.event.channel!)
+                            let myString = "New content available!"
+                            let data = ["alert" : myString, "badge" : "Increment", "sound" : "" ]
+                            push.setData(data)
+                            push.sendPushInBackground()
                             self.saveInBackground()
                         })
                     })

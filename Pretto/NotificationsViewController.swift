@@ -249,6 +249,7 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
 
     // MARK: InvitationActionDelegate
     func onAcceptInvitation(invitation:Invitation, sender: InvitationCell) {
+        PFPush.subscribeToChannelInBackground(invitation.event.channel)
         var indexForRow = self.tableView.indexPathForCell(sender)
         if indexForRow == nil {
             return

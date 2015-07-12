@@ -122,6 +122,7 @@ class User {
         println("Gender: \(self.gender!)")
         println("locale: \(self.locale!)")
         println("Profile Image URL: \(self.profilePhotoUrl!)")
+        println("Number of Connections: \(self.numberOfConnections!)")
 
     }
     
@@ -165,12 +166,12 @@ class User {
                 user.locale = userData["locale"] as? String ?? ""
                 user.facebookId = userData["id"] as? String
                 
-                User.currentUser = user
                 Friend.getAllFriendsFromFacebook(user.facebookId!, onComplete: { (friends:[Friend]?) -> Void in
                     user.numberOfConnections = friends?.count ?? 0
+                    User.currentUser = user
+                    onComplete(user)
                 })
-                onComplete(user)
-            
+                
             } else {
                 onComplete(nil)
             }
