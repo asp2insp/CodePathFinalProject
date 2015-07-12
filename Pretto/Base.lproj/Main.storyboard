@@ -190,8 +190,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLF-Bg-NdL">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="112"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar1" translatesAutoresizingMaskIntoConstraints="NO" id="3Qf-x8-Pga">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Qf-x8-Pga">
                                         <rect key="frame" x="12" y="35" width="60" height="60"/>
+                                        <color key="backgroundColor" red="0.87843137250000003" green="0.8862745098" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Zka-Ip-gSN"/>
                                             <constraint firstAttribute="width" constant="60" id="lR3-OW-cgI"/>
@@ -247,9 +248,9 @@
                                 <color key="backgroundColor" red="0.31764705879999999" green="0.70196078429999997" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="BsW-5I-STG" firstAttribute="top" secondItem="RfQ-l0-55f" secondAttribute="bottom" id="6h5-Zk-eRj"/>
+                                    <constraint firstItem="VGD-53-W7F" firstAttribute="leading" secondItem="BsW-5I-STG" secondAttribute="trailing" constant="13" id="7TY-42-BPS"/>
                                     <constraint firstItem="BsW-5I-STG" firstAttribute="bottom" secondItem="3Qf-x8-Pga" secondAttribute="bottom" id="9Ep-0m-i42"/>
                                     <constraint firstItem="Xqc-t9-Ih4" firstAttribute="leading" secondItem="3Qf-x8-Pga" secondAttribute="trailing" constant="23" id="DXd-xu-gbp"/>
-                                    <constraint firstItem="M70-Zz-tDG" firstAttribute="leading" secondItem="RfQ-l0-55f" secondAttribute="trailing" constant="64" id="EEd-Pw-gLa"/>
                                     <constraint firstItem="Xqc-t9-Ih4" firstAttribute="top" secondItem="kLF-Bg-NdL" secondAttribute="top" constant="32" id="FaI-4T-wLy"/>
                                     <constraint firstItem="BsW-5I-STG" firstAttribute="bottom" secondItem="VGD-53-W7F" secondAttribute="bottom" id="J9S-Db-hPb"/>
                                     <constraint firstAttribute="bottom" secondItem="BsW-5I-STG" secondAttribute="bottom" constant="17" id="Kmb-6r-jh7"/>
@@ -331,6 +332,8 @@
                     </view>
                     <connections>
                         <outlet property="headerView" destination="kLF-Bg-NdL" id="KVL-0w-fhs"/>
+                        <outlet property="nameLabel" destination="Xqc-t9-Ih4" id="Meu-oo-7ri"/>
+                        <outlet property="numberOfConnectionsLabel" destination="RfQ-l0-55f" id="LxM-cT-WNA"/>
                         <outlet property="profileImage" destination="3Qf-x8-Pga" id="6Yc-UJ-4hY"/>
                         <outlet property="tableView" destination="6bC-Yc-HB3" id="jBE-k3-SL7"/>
                     </connections>
@@ -1581,7 +1584,6 @@
         <image name="TabBarPhotosIcon" width="44" height="35"/>
         <image name="TabBarSearchIcon" width="23" height="24"/>
         <image name="TabBarStuffIconWide" width="23" height="19"/>
-        <image name="avatar1" width="57" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BF4-eI-bfI"/>

@@ -16,6 +16,8 @@ class SettingsGeneralViewController: UIViewController, UITableViewDataSource, UI
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var numberOfConnectionsLabel: UILabel!
     
     @IBAction func onLogOut(sender: UIButton) {
         var notification = NSNotification(name: kUserDidLogOutNotification, object: nil)
@@ -38,6 +40,11 @@ class SettingsGeneralViewController: UIViewController, UITableViewDataSource, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let facebookId = User.currentUser?.facebookId {
+            self.profileImage.setImageWithURL(NSURL(string: "https://graph.facebook.com/\(facebookId)/picture?type=large&return_ssl_resources=1")!)
+        }
+        self.nameLabel.text = User.currentUser?.firstName?.uppercaseString ?? "NO NAME"
+        self.numberOfConnectionsLabel.text = "\(User.currentUser?.numberOfConnections ?? 0)"
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -81,7 +88,8 @@ extension SettingsGeneralViewController : UITableViewDelegate {
                 var notification = NSNotification(name: kUserDidLogOutNotification, object: nil)
                 NSNotificationCenter.defaultCenter().postNotification(notification)
             })
-            let actionCancel: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+            let actionCancel: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+//            let actionCancel: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
             alert.addAction(actionLogOut)
             alert.addAction(actionCancel)
             self.presentViewController(alert, animated: true, completion: nil)
