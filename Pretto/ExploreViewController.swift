@@ -70,6 +70,11 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
     }
     
     func refreshEvents() {
+        if let annotations = self.mapView.selectedAnnotations as? [MKAnnotation] {
+            for annotation in annotations {
+                self.mapView.deselectAnnotation(annotation, animated: false)
+            }
+        }
         Invitation.getAllLiveEvents { invitations in
             self.attendingEvents.removeAll(keepCapacity: true)
             self.invites.removeAll(keepCapacity: true)
@@ -83,9 +88,6 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
     
     func displayNearbyEvents() {
         Event.getNearbyEvents(self.mapView.centerCoordinate, callback: { (events) -> Void in
-            for annotation in self.mapView.selectedAnnotations {
-                self.mapView.deselectAnnotation(annotation as! MKAnnotation, animated: false)
-            }
             self.mapView.removeAnnotations(self.mapView.annotations)
             self.mapEvents.removeAll(keepCapacity: true)
             for event : Event in events {
