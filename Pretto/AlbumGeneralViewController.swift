@@ -84,13 +84,13 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
-        refreshData()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControlValueChanged(segmentedControl)
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -124,8 +124,8 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func refreshData() {
-
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.userInteractionEnabled = true
         println("Counter = \(++hudCounter)")
         hud.activityIndicatorColor = UIColor.whiteColor()
         hud.color = UIColor.prettoBlue().colorWithAlphaComponent(0.75)
@@ -140,6 +140,8 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
                         self.emptyNotificationsView.hidden = false
                     }
                     dispatch_async(dispatch_get_main_queue()) {
+                        self.refreshingData = false
+                        println("################################################## FALSE")
                         MBProgressHUD.hideHUDForView(self.view, animated: true)
                         println("Counter = \(--self.hudCounter)")
                         self.tableView.reloadData()
@@ -174,6 +176,8 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
                         }
                     }
                     dispatch_async(dispatch_get_main_queue()) {
+                        self.refreshingData = false
+                        println("################################################## FALSE")
                         MBProgressHUD.hideHUDForView(self.view, animated: true)
                         println("Counter = \(--self.hudCounter)")
                         self.refreshControl.endRefreshing()
@@ -190,6 +194,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             }
             dispatch_async(dispatch_get_main_queue()) {
                 self.refreshControl.endRefreshing()
+                self.refreshingData = false
             }
         }
     }
@@ -260,7 +265,12 @@ extension AlbumGeneralViewController {
             shouldPresentFutureEvents = true
             tableView.separatorColor = futureInvitations.count > 0 ?  UIColor.clearColor() : UIColor.clearColor()
             
-            self.refreshData()
+            if !self.refreshingData {
+                println("################################################## TRUE")
+                self.refreshingData = true
+                self.refreshData()
+            }
+            
         }
         
     }
