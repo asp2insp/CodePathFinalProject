@@ -83,6 +83,9 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
     
     func displayNearbyEvents() {
         Event.getNearbyEvents(self.mapView.centerCoordinate, callback: { (events) -> Void in
+            for annotation in self.mapView.selectedAnnotations {
+                self.mapView.deselectAnnotation(annotation as! MKAnnotation, animated: false)
+            }
             self.mapView.removeAnnotations(self.mapView.annotations)
             self.mapEvents.removeAll(keepCapacity: true)
             for event : Event in events {
