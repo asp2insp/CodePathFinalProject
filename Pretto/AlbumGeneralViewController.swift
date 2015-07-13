@@ -140,8 +140,6 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
                         self.emptyNotificationsView.hidden = false
                     }
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.refreshingData = false
-                        println("################################################## FALSE")
                         MBProgressHUD.hideHUDForView(self.view, animated: true)
                         println("Counter = \(--self.hudCounter)")
                         self.tableView.reloadData()
@@ -176,8 +174,6 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
                         }
                     }
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.refreshingData = false
-                        println("################################################## FALSE")
                         MBProgressHUD.hideHUDForView(self.view, animated: true)
                         println("Counter = \(--self.hudCounter)")
                         self.refreshControl.endRefreshing()
@@ -194,7 +190,6 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
             }
             dispatch_async(dispatch_get_main_queue()) {
                 self.refreshControl.endRefreshing()
-                self.refreshingData = false
             }
         }
     }
@@ -264,13 +259,7 @@ extension AlbumGeneralViewController {
             })
             shouldPresentFutureEvents = true
             tableView.separatorColor = futureInvitations.count > 0 ?  UIColor.clearColor() : UIColor.clearColor()
-            
-            if !self.refreshingData {
-                println("################################################## TRUE")
-                self.refreshingData = true
-                self.refreshData()
-            }
-            
+            self.refreshData()
         }
         
     }
