@@ -158,6 +158,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
                             invite.updateFromCameraRoll()
                         }
                         dispatch_async(dispatch_get_main_queue()) {
+                            MBProgressHUD.hideHUDForView(self.view, animated: true)
                             self.tableView.reloadData()
                         }
                         for cell in self.tableView.visibleCells() {
@@ -170,6 +171,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
                     } else {
                         dispatch_async(dispatch_get_main_queue()) {
                             cameraView.hidden = true
+                            MBProgressHUD.hideHUDForView(self.view, animated: true)
                             self.tableView.reloadData()
                         }
                     }
@@ -181,6 +183,7 @@ class AlbumGeneralViewController: UIViewController, UITableViewDelegate, UITable
                     
                     Invitation.getAllPastEvents() { (invites) -> Void in
                         dispatch_async(dispatch_get_main_queue()) {
+                            MBProgressHUD.hideHUDForView(self.view, animated: true)
                             self.pastInvitations = invites
                             self.tableView.reloadData()
                         }

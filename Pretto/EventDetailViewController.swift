@@ -90,7 +90,7 @@ class EventDetailViewController : ZoomableCollectionViewController, UICollection
             requestButton.setTitle("Select Photos", forState: UIControlState.Normal)
             requestButton.enabled = false
         } else {
-            requestButton.setTitle("Request \(selectionCount) Photos", forState: UIControlState.Normal)
+            requestButton.setTitle("Create Album with \(selectionCount) Photos", forState: UIControlState.Normal)
             requestButton.enabled = true
         }
     }
