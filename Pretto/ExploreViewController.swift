@@ -82,7 +82,7 @@ class ExploreViewController: UIViewController, UISearchBarDelegate, MKMapViewDel
     }
     
     func displayNearbyEvents() {
-        Event.getNearbyEvents(self.location!, callback: { (events) -> Void in
+        Event.getNearbyEvents(self.mapView.centerCoordinate, callback: { (events) -> Void in
             self.mapView.removeAnnotations(self.mapView.annotations)
             self.mapEvents.removeAll(keepCapacity: true)
             for event : Event in events {
@@ -169,6 +169,10 @@ extension ExploreViewController : MKMapViewDelegate {
             self.invitationToSelectedEvent = invites[event.objectId!]
             self.performSegueWithIdentifier("ShowEventDetail", sender: self)
         }
+    }
+    
+    func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
+        self.refreshEvents()
     }
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
