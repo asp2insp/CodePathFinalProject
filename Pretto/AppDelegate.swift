@@ -134,15 +134,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
 
     func applicationWillResignActive(application: UIApplication) {
         println("AppDelegate : applicationWillResignActive")
+        var currentInstallation = PFInstallation.currentInstallation()
+        currentInstallation.badge = 0
+        currentInstallation.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
+            if !success {
+                currentInstallation.saveEventually()
+            }
+        })
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
         println("AppDelegate : applicationDidEnterBackground")
-        var currentInstallation = PFInstallation.currentInstallation()
-        if (currentInstallation.badge != 0) {
-            currentInstallation.badge = 0
-            currentInstallation.saveEventually()
-        }
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -150,12 +152,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
+        println("AppDelegate : applicationDidBecomeActive")
         FBSDKAppEvents.activateApp()
         var currentInstallation = PFInstallation.currentInstallation()
-        if (currentInstallation.badge != 0) {
-            currentInstallation.badge = 0
-            currentInstallation.saveEventually()
-        }
+        currentInstallation.badge = 0
+        currentInstallation.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
+            if !success {
+                currentInstallation.saveEventually()
+            }
+        })
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -165,10 +170,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kIntroDidFinishNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kUserDidLogOutNotification, object: nil)
         var currentInstallation = PFInstallation.currentInstallation()
-        if (currentInstallation.badge != 0) {
-            currentInstallation.badge = 0
-            currentInstallation.saveEventually()
-        }
+        currentInstallation.badge = 0
+        currentInstallation.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
+            if !success {
+                currentInstallation.saveEventually()
+            }
+        })
         
     }
     

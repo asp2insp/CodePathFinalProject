@@ -58,6 +58,11 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, UIT
 //        refreshData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         refreshData()
