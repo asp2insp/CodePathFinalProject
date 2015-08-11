@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
 
         // Initialize Parse.
         Parse.enableLocalDatastore()
-        Parse.setApplicationId("EwtAHVSdrZseylxvkalCaMQ3aTWknFUgnhJRcozx", clientKey: "kA7v5dqEEndRpZgcOsL2G4jitdGuPzj63xmYm7xZ")
+        Parse.setApplicationId("", clientKey: "")
         PFUser.enableRevocableSessionInBackground()
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
 
